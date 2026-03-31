@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSDF Validator v8.0 COCREE 2.0 Strict Validator</title>
+<title>CSDF Validator v8.1 COCREE 2.0 Strict Validator</title>
 <style>
 :root{--p:#1a56db;--pd:#1e3a8a;--pl:#3b82f6;--bg:#f0f4ff;--c:#fff;--bd:#dbeafe;--t:#1e293b;--tl:#64748b;--ok:#059669;--okb:#d1fae5;--er:#dc2626;--erb:#fee2e2;--w:#d97706;--wb:#fef3c7;--sh:0 4px 24px rgba(30,58,138,.08);--r:12px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -56,12 +56,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .xv-header{padding:.75rem 1rem;background:#1e293b;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .xv-header span{color:#e2e8f0;font-size:.85rem;font-weight:600}
 .xv-body{overflow-y:auto;padding:0;flex:1}
-.xv-line{display:flex;align-items:flex-start;gap:.5rem;padding:1px 0;font-family:'Consolas',monospace;font-size:.74rem;line-height:1.6}
-.xv-line:hover{background:#1e293b}
-.xv-line.hl{background:#422006 !important;border-left:3px solid #d97706}
-.xv-line.hl-err{background:#450a0a !important;border-left:3px solid #dc2626}
 .xv-num{color:#4b5563;width:56px;text-align:right;flex-shrink:0;padding:0 .5rem;user-select:none;font-size:.7rem}
-.xv-txt{color:#e2e8f0;white-space:pre;flex:1;padding-right:.5rem;overflow-x:auto}
+.xv-txt{color:#e2e8f0;white-space:pre;flex:1;padding-right:.5rem;overflow-x:auto;font-family:Consolas,monospace;font-size:.74rem;line-height:1.55}
+.xv-line{display:flex;gap:.5rem}
+.xv-line.hl{background:#422006}
+.xv-line.hl-err{background:#450a0a}
 .xv-txt .xt-tag{color:#60a5fa}
 .xv-txt .xt-attr{color:#86efac}
 .xv-txt .xt-val{color:#fca5a5}
@@ -87,10 +86,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .fld-item .fn{font-weight:600;flex:1;font-size:.7rem}
 .legend{display:flex;gap:1rem;margin-bottom:.75rem;font-size:.74rem;flex-wrap:wrap}
 .exp-bar{background:#f1f5f9;border-radius:8px;padding:.65rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;font-size:.78rem;flex-wrap:wrap}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeIn .4s ease}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:#f1f5f9;border-radius:3px}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
 @media(max-width:768px){.ct{padding:.75rem}.sg{grid-template-columns:repeat(3,1fr)}}
-@media print{.nav,.tabs,.bg,.uz,.btn,.xv-wrap{display:none!important}.card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -108,38 +104,37 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </div>
 
 <nav class="nav">
-  <h1>CSDF Validator &amp; Corrector <span class="v">v8.0 STRICT COCREE 2.0 DD ver. 1.1</span></h1>
+  <h1>CSDF Validator &amp; Corrector <span class="v">v8.1 STRICT</span></h1>
   <span style="font-size:.68rem;opacity:.75">HD ID BD SL CI CN CC CA CV CF NE FT</span>
 </nav>
 
 <div class="ct">
-  <div id="upSec" class="card fade-in">
+  <div id="upSec" class="card">
     <div class="ch"><div class="ch-l">Upload CSDF Submission XML</div></div>
     <div class="cb">
-      <div class="uz" id="dz" onclick="document.getElementById('fi').click()">
+      <div class="uz" id="dz">
         <div class="ic">📄</div>
         <h3>Drop your CSDF XML file here</h3>
         <p>or click to browse • Accepts .xml files</p>
       </div>
-      <input type="file" id="fi" style="display:none" accept=".xml" onchange="handleFile(this.files[0])">
+      <input type="file" id="fi" style="display:none" accept=".xml">
     </div>
   </div>
 
-  <div id="fiSec" class="hidden fade-in">
+  <div id="fiSec" class="hidden">
     <div class="fi">
       <div class="ic">🧾</div>
       <div class="dt"><h4 id="fn">-</h4><p id="fs">-</p></div>
       <div style="margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap">
-        <button class="btn bo" onclick="openXV(0)" style="padding:.35rem .7rem">View XML</button>
-        <button class="btn bw" onclick="exportReport('excel')" style="padding:.35rem .7rem">CSV</button>
-        <button class="btn bw" onclick="exportReport('html')" style="padding:.35rem .7rem">HTML</button>
-        <button class="btn bo" onclick="window.print()" style="padding:.35rem .7rem">Print</button>
-        <button class="btn bo" onclick="resetTool()" style="padding:.35rem .7rem">New</button>
+        <button class="btn bo" onclick="openXV(0)">View XML</button>
+        <button class="btn bw" onclick="exportReport('excel')">CSV</button>
+        <button class="btn bw" onclick="exportReport('html')">HTML</button>
+        <button class="btn bo" onclick="resetTool()">New</button>
       </div>
     </div>
   </div>
 
-  <div id="stSec" class="hidden fade-in">
+  <div id="stSec" class="hidden">
     <div class="sg">
       <div class="sc"><div class="n" id="sS">0</div><div class="l">Subjects</div></div>
       <div class="sc"><div class="n" id="sCI">0</div><div class="l">CI</div></div>
@@ -155,7 +150,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     </div>
   </div>
 
-  <div id="rSec" class="hidden fade-in">
+  <div id="rSec" class="hidden">
     <div class="tabs">
       <button class="tb a" onclick="stab('chk',this)">Validation</button>
       <button class="tb" onclick="stab('fix',this)">Correct</button>
@@ -167,36 +162,34 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <div id="sBan"></div>
       <div class="exp-bar">
         Export:
-        <button class="btn bp" onclick="exportReport('excel')" style="padding:.3rem .7rem">Excel/CSV</button>
-        <button class="btn bw" onclick="exportReport('html')" style="padding:.3rem .7rem">HTML Report</button>
-        <button class="btn bo" onclick="window.print()" style="padding:.3rem .7rem">Print/PDF</button>
+        <button class="btn bp" onclick="exportReport('excel')">Excel/CSV</button>
+        <button class="btn bw" onclick="exportReport('html')">HTML Report</button>
       </div>
 
-      <div class="card"><div class="ch"><div class="ch-l">Header / Footer Errors</div><span id="hfCnt" class="eb cr"></span></div><div class="cb"><div id="hfE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CI Installment Contract Errors</div><span id="ciCnt" class="eb cr"></span></div><div class="cb"><div id="lpcE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CN Non-Installment Contract Errors</div><span id="cnCnt" class="eb wn"></span></div><div class="cb"><div id="cnE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CC Credit Card Errors</div><span id="ccCnt" class="eb inf"></span></div><div class="cb"><div id="ccE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CA Other Credit Accommodation Errors</div><span id="caCnt" class="eb cr"></span></div><div class="cb"><div id="caE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CV Investment Errors</div><span id="cvCnt" class="eb cr"></span></div><div class="cb"><div id="cvE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CF Off-Balance Sheet Errors</div><span id="cfCnt" class="eb cr"></span></div><div class="cb"><div id="cfE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">NE Negative Event Errors</div><span id="neCnt" class="eb wn"></span></div><div class="cb"><div id="neE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">SL Company Link Errors</div><span id="slCnt" class="eb cr"></span></div><div class="cb"><div id="slE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">ID/BD Subject Errors</div><span id="subCnt" class="eb cr"></span></div><div class="cb"><div id="subE">...</div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">Warnings</div><span id="wrnCnt" class="eb wn"></span></div><div class="cb"><div id="wrnE">...</div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">Header / Footer Errors</div><span id="hfCnt" class="eb cr"></span></div><div class="cb"><div id="hfE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CI Installment Errors</div><span id="ciCnt" class="eb cr"></span></div><div class="cb"><div id="ciE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CN Non-Installment Errors</div><span id="cnCnt" class="eb cr"></span></div><div class="cb"><div id="cnE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CC Credit Card Errors</div><span id="ccCnt" class="eb cr"></span></div><div class="cb"><div id="ccE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CA Other Credit Accommodation Errors</div><span id="caCnt" class="eb cr"></span></div><div class="cb"><div id="caE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CV Investment Errors</div><span id="cvCnt" class="eb cr"></span></div><div class="cb"><div id="cvE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CF Off Balance Errors</div><span id="cfCnt" class="eb cr"></span></div><div class="cb"><div id="cfE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">NE Negative Event Errors</div><span id="neCnt" class="eb cr"></span></div><div class="cb"><div id="neE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">SL Subject Link Errors</div><span id="slCnt" class="eb cr"></span></div><div class="cb"><div id="slE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">ID / BD Subject Errors</div><span id="subCnt" class="eb cr"></span></div><div class="cb"><div id="subE"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">Warnings</div><span id="wrnCnt" class="eb wn"></span></div><div class="cb"><div id="wrnE"></div></div></div>
     </div>
 
     <div id="t-fix" class="tc">
       <div class="card">
-        <div class="ch"><div class="ch-l">Auto-Correction COCREE 2.0 DD</div></div>
+        <div class="ch"><div class="ch-l">Auto-Correction</div></div>
         <div class="cb">
-          <p style="margin-bottom:1rem;color:var(--tl);font-size:.8rem">Applies conservative fixes only to common issues. Strict logical/date/type errors still require source correction.</p>
           <div class="chk-group" id="fixOpts"></div>
           <div class="bg">
             <button class="btn bp" onclick="applyFixes()">Apply All &amp; Download</button>
           </div>
         </div>
       </div>
-      <div class="card"><div class="ch"><div class="ch-l">Fix Results</div></div><div class="cb"><div id="fixRes" style="color:var(--tl);font-size:.85rem">Click Apply to see results.</div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">Fix Results</div></div><div class="cb"><div id="fixRes">Click Apply to see results.</div></div></div>
     </div>
 
     <div id="t-fld" class="tc">
@@ -214,14 +207,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <div class="card"><div class="ch"><div class="ch-l">CC Credit Card</div></div><div class="cb"><div id="fmapCC"></div></div></div>
       <div class="card"><div class="ch"><div class="ch-l">CA Other Credit Accommodation</div></div><div class="cb"><div id="fmapCA"></div></div></div>
       <div class="card"><div class="ch"><div class="ch-l">CV Investments</div></div><div class="cb"><div id="fmapCV"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CF Off-Balance Sheet</div></div><div class="cb"><div id="fmapCF"></div></div></div>
+      <div class="card"><div class="ch"><div class="ch-l">CF Off Balance</div></div><div class="cb"><div id="fmapCF"></div></div></div>
       <div class="card"><div class="ch"><div class="ch-l">NE Negative Events</div></div><div class="cb"><div id="fmapNE"></div></div></div>
       <div class="card"><div class="ch"><div class="ch-l">FT Footer</div></div><div class="cb"><div id="fmapFT"></div></div></div>
     </div>
 
     <div id="t-log" class="tc">
       <div class="card">
-        <div class="ch"><div class="ch-l">Log</div><button class="btn bo" onclick="clrLog()" style="padding:.22rem .55rem;font-size:.7rem">Clear</button></div>
+        <div class="ch"><div class="ch-l">Log</div><button class="btn bo" onclick="clrLog()">Clear</button></div>
         <div class="cb"><div class="la" id="logA">Ready...</div></div>
       </div>
     </div>
@@ -229,1601 +222,1158 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </div>
 
 <script>
-// ============================================================================
-// DOMAINS
-// ============================================================================
-const VALID={
+const VALID = {
   SubmissionType:['0','1'],
   Title:['10','11','12','13','14','15','16','17','18','19','20','21'],
   Gender:['M','F'],
   CivilStatus:['1','2','3','4','5'],
+  Resident:['0','1'],
   AnnualMonthly:['M','Y'],
   FirmSize:['1','2','3','4'],
   HouseOwnerLessee:['1','2','3','4'],
   ContactType:['1','2','3','4','5','6','7','8','9'],
   OccupationStatus:['1','2','3','4','5','6','7','8','9','10','11','12','13'],
   LegalForm:['10','11','17','20','21','22','23','24','25','26'],
-  CreditPurpose:[
-    '10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29',
-    '30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','60','61','62','63','64',
-    '65','66','67','68','69','70','71','72','73','74','75','76','77','80','81','82','83','84','99'
-  ],
-  PaymentPeriodicity:['D','W','F','M','B','Q','T','C','S','Y','I','P'],
-  MinPaymentIndicator:['0','1','2','3'],
-  GoodType:['10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34'],
-  GuaranteeCustomerType:['D','F'],
-  InstallmentType:['F','V'],
-  NewUsedCode:['N','U'],
-  FlagCardUsed:['0','1'],
-  YesNo:['0','1'],
-  CardPremium:['0','1'],
-  IdentificationType:['10','11','12','13','14','15','16','17','18','19'],
-  IDType:[
-    '10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29',
-    '30','31','32','33','34','35','36','37','38','39','40','41','42'
-  ],
-  ContractPhase:['AC','CL','CA'],
   Role:['B','C','G'],
   CompanyRole:['P','D','O','H','R','A','S','M'],
-  NegativeEventStatus:['AC','CL'],
-  NegativeEventCode:['U','E','N','Z','K','L','P','D','R','M','O','C'],
-  TransactionType:[
-    'NA','AL','BD','CAD','CAF','DB','LCF','LCD','DL','DC','EBP','EPC','FBP','IB','LCC','CLD','CLF','BUL','ML','MM','STT','QL',
-    'SBD','SBF','SLD','SLF','TRD','TRF','ULD','ULF','PCC','SCC','CCC'
-  ],
-  PaymentMethod:['CAD','BAR','DIR','ADD','CCR','CHQ','CAS','OTH'],
-  ContingentAccountType:['A','B','C','D','E','F','G'],
-  InterestSetting:['1','2'],
-  CreditClassification:['1','2','3','4','5'],
+  ContractPhase:['AC','CL','CA'],
   RegulatoryStatus:['CR','PD','NPL','ITL'],
   StageImpairmentPFRS9:['1','2','3','4'],
+  CreditClassification:['1','2','3','4','5'],
   RestructuredCreditCode:['1','2','3','4'],
-  Resident:['0','1'],
   DOSRI:['0','1','2','3','4'],
   RPT:['0','1','2','3','4','5','6'],
   PSIC:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'],
   Conglomerate:['N/A','NEC','ABG','ATG','AYL','CNJ','DEE','DNU','EYG','TYG','GKW','GTN','LPZ','LCG','LTG','MVP','VLL','RAZ','RCY','ROP','SMC','SYG','TTC','YGC'],
-  OtherCreditAccType:['3001','3002','3003','3004','3005'],
   BookType:['B','T'],
   BookCode:['11','12','20','30','41','42'],
   TrustType:['1','2','3','4'],
-  CreditRatingAgency:['S','M','F','P'],
-  CreditRating:[
-    '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20',
-    '21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45'
-  ],
-  InvestmentIssuerType:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18'],
-  NatureOfOffering:['PP','PO'],
+  InvestmentType:['A','B','C','D','E','F','G','H'],
+  OtherCreditAccType:['3001','3002','3003','3004','3005'],
+  ContingentAccountType:['A','B','C','D','E','F','G'],
+  InterestSetting:['1','2'],
   FrequencyRepricing:['1','2','3','4','5','6','7','8'],
-  Currency:[
-    'AED','AFN','ALL','AMD','ANG','AOA','ARS','AUD','AWG','AZN','BAM','BBD','BDT','BGN','BHD','BIF','BMD','BND','BOB','BOV','BRL','BSD','BTN','BWP','BYR','BZD','CAD','CDF','CHE','CHF','CHW','CLF','CLP','CNY','COP','COU','CRC','CUC','CUP','CVE','CZK','DJF','DKK','DOP','DZD','EEK','EGP','ERN','ETB','EUR','FJD','FKP','GBP',
-    'GEL','GHS','GIP','GMD','GNF','GTQ','GYD','HKD','HNL','HRK','HTG','HUF','IDR','ILS','INR','IQD','IRR','ISK','JMD','JOD','JPY','KES','KGS','KHR','KMF','KPW','KRW','KWD','KYD','KZT','LAK','LBP','LKR','LRD','LSL','LTL','LVL','LYD','MAD','MDL','MGA','MKD','MMK','MNT','MOP','MRO','MUR','MVR','MWK','MXN','MXV','MYR','MZN','NAD','NGN','NIO','NOK',
-    'NPR','NZD','OMR','PAB','PEN','PGK','PHP','PKR','PLN','PYG','QAR','RON','RSD','RUB','RWF','SAR','SBD','SCR','SDG','SEK','SGD','SHP','SLL','SOS','SRD','STD','SYP','SZL','THB','TJS','TMT','TND','TOP','TRY','TTD','TWD','TZS','UAH','UGX','USD','USN','USS','UYU','UZS','VEF','VND','VUV',
-    'WST','XAF','XAG','XAU','XBA','XBB','XBC','XBD','XCD','XDR','XFU','XOF','XPD','XPF','XPT','XXX','YER','ZAR','ZMK','ZWL'
-  ],
-  ContractType:[
-    '10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33',
-    '40','41','42','43','44','45','46','47','48','49','50','60','70'
-  ],
-  ContractStatus:[
-    'NN','DS','DA','NS','NP','PD','DI','CI','RP','FC','BR','CR','WO','LT','WC','MG','VS','PA','BC','BF','BL','CV','WF','PI'
-  ]
+  NegativeEventCode:['U','E','N','Z','K','L','P','D','R','M','O','C'],
+  NegativeEventStatus:['AC','CL'],
+  GuaranteeCustomerType:['D','F'],
+  InstallmentType:['F','V'],
+  NewUsedCode:['N','U'],
+  FlagCardUsed:['0','1'],
+  CardPremium:['0','1'],
+  YesNo:['0','1'],
+  IdentificationType:['10','11','12','13','14','15','16','17','18','19'],
+  IDType:['10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42'],
+  PaymentPeriodicity:['D','W','F','M','B','Q','T','C','S','Y','I','P'],
+  PaymentMethod:['CAD','BAR','DIR','ADD','CCR','CHQ','CAS','OTH'],
+  TransactionType:['NA','AL','BD','CAD','CAF','DB','LCF','LCD','DL','DC','EBP','EPC','FBP','IB','LCC','CLD','CLF','BUL','ML','MM','STT','QL','SBD','SBF','SLD','SLF','TRD','TRF','ULD','ULF','PCC','SCC','CCC'],
+  ContractType:['10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','40','41','42','43','44','45','46','47','48','49','50','60','70'],
+  ContractStatus:['NN','DS','DA','NS','NP','PD','DI','CI','RP','FC','BR','CR','WO','LT','WC','MG','VS','PA','BC','BF','BL','CV','WF','PI'],
+  Country:['AF','AX','AL','DZ','AS','AD','AO','AI','AQ','AG','AR','AM','AW','AU','AT','AZ','BS','BH','BD','BB','BY','BE','BZ','BJ','BM','BT','BO','BA','BW','BV','BR','IO','BN','BG','BF','BI','KH','CM','CA','CV','KY','CF','TD','CL','CN','CX','CC','CO','KM','CG','CD','CK','CR','CI','HR','CU','CY','CZ','DK','DJ','DM','DO','TP','EC','EG','SV','GQ','ER','EE','ET','FK','FO','FJ','FI','FR','GF','PF','TF','GA','GM','GE','DE','GH','GI','GR','GL','GD','GP','GU','GT','GG','GN','GW','GY','HT','HM','VA','HN','HK','HU','IS','IN','ID','IR','IQ','IE','IL','IT','JM','JP','JE','JO','KZ','KE','KI','KP','KR','KW','KG','LA','LV','LB','LS','LR','LY','LI','LT','LU','MO','MK','MG','MW','MY','MV','ML','MT','IM','MH','MQ','MR','MU','YT','ME','MX','FM','MD','MC','MN','MS','MA','MZ','MM','NA','NR','NP','NL','AN','NC','NZ','NI','NE','NG','NU','NF','MP','NO','OM','PK','PW','PS','PA','PG','PY','PE','PH','PN','PL','PT','PR','QA','RE','RO','RU','RW','BL','SH','KN','LC','MF','PM','VC','WS','SM','ST','SA','SN','CS','RS','SC','SL','SG','SK','SI','SB','SO','ZA','GS','ES','LK','SD','SR','SJ','SZ','SE','CH','SY','TW','TJ','TZ','TL','TH','TG','TK','TO','TT','TN','TR','TM','TC','TV','UG','UA','AE','GB','US','UY','UZ','VU','VE','VN','VG','VI','WF','EH','YE','YU','ZM','ZW','UM'],
+  Currency:['AED','AFN','ALL','AMD','ANG','AOA','ARS','AUD','AWG','AZN','BAM','BBD','BDT','BGN','BHD','BIF','BMD','BND','BOB','BOV','BRL','BSD','BTN','BWP','BYR','BZD','CAD','CDF','CHE','CHF','CHW','CLF','CLP','CNY','COP','COU','CRC','CUC','CUP','CVE','CZK','DJF','DKK','DOP','DZD','EEK','EGP','ERN','ETB','EUR','FJD','FKP','GBP','GEL','GHS','GIP','GMD','GNF','GTQ','GYD','HKD','HNL','HRK','HTG','HUF','IDR','ILS','INR','IQD','IRR','ISK','JMD','JOD','JPY','KES','KGS','KHR','KMF','KPW','KRW','KWD','KYD','KZT','LAK','LBP','LKR','LRD','LSL','LTL','LVL','LYD','MAD','MDL','MGA','MKD','MMK','MNT','MOP','MRO','MUR','MVR','MWK','MXN','MXV','MYR','MZN','NAD','NGN','NIO','NOK','NPR','NZD','OMR','PAB','PEN','PGK','PHP','PKR','PLN','PYG','QAR','RON','RSD','RUB','RWF','SAR','SBD','SCR','SDG','SEK','SGD','SHP','SLL','SOS','SRD','STD','SYP','SZL','THB','TJS','TMT','TND','TOP','TRY','TTD','TWD','TZS','UAH','UGX','USD','USN','USS','UYU','UZS','VEF','VND','VUV','WST','XAF','XAG','XAU','XBA','XBB','XBC','XBD','XCD','XDR','XFU','XOF','XPD','XPF','XPT','XXX','YER','ZAR','ZMK','ZWL'],
+  CreditRatingAgency:['S','M','F','P'],
+  CreditRating:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45'],
+  InvestmentIssuerType:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18'],
+  NatureOfOffering:['PP','PO']
 };
 
-// ============================================================================
-// PSGC from provided extracted pages only
-// ============================================================================
-const PSGC_SET=new Set([
-'203108000','203108000'.padStart(10,'0'),
-'012801000','012802000','012803000','012804000','012805000','012806000','012807000',
-'0102801000','0102802000','0102803000','0102804000','0102805000','0102806000','0102807000',
-'137404000','1381300000','1999901000','1999902000','1999903000','1999904000','1999905000','1999906000','1999907000','1999908000'
-]);
+const ERR_DESC = {
+  HD_MAND:'Header mandatory field empty',
+  HD_VER:'Header Version invalid',
+  HD_CNT:'Header count mismatch',
+  FT_MAND:'Footer mandatory field empty',
+  FT_CNT:'Footer count mismatch',
+  HF_PROV:'Header/Footer ProviderCode mismatch',
+  MAND:'Mandatory field empty',
+  LEN:'Field length exceeded',
+  DATE:'Invalid date format',
+  DATE_LOGIC:'Invalid date relationship',
+  NUM:'Invalid numeric format',
+  VAL:'Invalid domain value',
+  PSGC:'Invalid PSGC code',
+  PROV:'ProviderCode mismatch with header',
+  SUBREF:'Reference date greater than header FileReferenceDate',
+  BOOK:'BookType dependent field invalid',
+  '021':'No name provided',
+  '023':'Both names and FullName filled',
+  '044':'HouseOwnerLessee invalid',
+  '050':'TIN invalid',
+  '053':'SoleTraderTIN invalid',
+  '069':'ID mismatch',
+  '074':'Contact mismatch',
+  '089':'LastPaymentAmount mandatory',
+  '090':'DaysPastDue mandatory',
+  '113':'Current postal/PSGC missing',
+  '139':'CurrentAddress incomplete',
+  '141':'Sole trader address incomplete',
+  '168':'OutstandingPaymentsNumber not integer',
+  '195':'RestructuredCreditCode invalid/missing',
+  '296':'GuaranteedAmount / GuaranteeType mismatch',
+  '318':'Parent linked subject missing',
+  '319':'Child linked subject missing',
+  CC_NXT:'CC NextPayment mandatory',
+  CC_LPA:'CC LastPaymentAmount mandatory',
+  CC_DPD:'CC DaysPastDue mandatory',
+  CN_RCC:'CN RestructuredCreditCode invalid/missing',
+  CN_DPD:'CN DaysPastDue mandatory',
+  CN_LIM:'CN CreditLimitFinancedAmount mandatory',
+  CN_BAL:'CN UtilizationOutstandingBalance mandatory',
+  CA_MAND:'CA mandatory field missing',
+  CA_DPD:'CA DaysPastDue mandatory',
+  CV_MAND:'CV mandatory field missing',
+  CV_LCI:'CV LatestCreditRatingIssuer mandatory',
+  CF_MAND:'CF mandatory field missing',
+  NE_MAND:'NE mandatory field missing',
+  SL_ROLE:'SL CompanyRole invalid',
+  DUP:'Duplicate ProviderSubjectNumber'
+};
 
-// ============================================================================
-// FIELD MAPS
-// ============================================================================
+let xmlDoc=null, xmlStr='', xmlLines=[], fName='';
+let errs={}, warns={}, allIssues=[], logs=[];
+let headerProviderCode='', headerFileReferenceDate='';
+
 const FIELDS_HD={RecordType:'M',ProviderCode:'M',FileReferenceDate:'M',Version:'M',SubmissionType:'M',TotalSubjectRecords:'M',TotalContractRecords:'M',TotalNegativeEventRecords:'M',ProviderComments:'NM'};
-const FIELDS_ID={RecordType:'M',ProviderCode:'M',BranchCode:'NM',SubjectReferenceDate:'M',ProviderSubjectNumber:'M',Title:'NM',FirstName:'D',LastName:'D',MiddleName:'NM',FullName:'D',Suffix:'NM',PreviousLastName:'NM',Gender:'M',BirthDate:'M',BirthPlace:'M',BirthCountry:'M',Nationality:'M',Resident:'M',CivilStatus:'M',DependantsNo:'NM',DependentsNo:'NM',CarsOwnedNo:'NM',MotherMaidenFullName:'M',PermanentFullAddress:'D',PermanentStreetNo:'D',PermanentPostalCode:'D',PermanentPSGCode:'D',PermanentCity:'D',PermanentProvince:'D',PermanentCountry:'D',PermanentHouseOwnerLessee:'NM',CurrentFullAddress:'D',CurrentStreetNo:'D',CurrentPostalCode:'D',CurrentPSGCode:'D',CurrentCity:'D',CurrentProvince:'D',CurrentCountry:'D',CurrentHouseOwnerLessee:'NM',TIN:'D',IdentificationType2:'D',IdentificationNumber2:'D',IdentificationType3:'D',IdentificationNumber3:'D',IDType1:'D',IDNumber1:'D',IDIssueDate1:'NM',IDIssueCountry1:'NM',IDExpiryDate1:'NM',IDType2:'D',IDNumber2:'D',IDIssueDate2:'NM',IDIssueCountry2:'NM',IDExpiryDate2:'NM',IDType3:'D',IDNumber3:'D',IDIssueDate3:'NM',IDIssueCountry3:'NM',IDExpiryDate3:'NM',ContactType1:'M',ContactValue1:'M',ContactType2:'D',ContactValue2:'D',EmploymentTradeName:'M',EmploymentPSIC:'M',EmploymentGrossIncome:'M',EmploymentNetIncome:'M',EmploymentAnnualMonthlyIndicator:'M',EmploymentOccupationStatus:'M',EmploymentDateHiredFrom:'M',SoleTraderTradeName:'D',STCurrentFullAddress:'D',STCurrentStreetNo:'D',STCurrentPostalCode:'NM',STCurrentPSGCode:'D',STCurrentCity:'D',STCurrentProvince:'D',STCurrentCountry:'D',STCurrentHouseOwnerLessee:'NM',SoleTraderTIN:'M',STIdentificationType2:'D',STIdentificationNumber2:'D',STContactType1:'D',STContactValue1:'D',STContactType2:'D',STContactValue2:'D',LargeExposureIndicator:'M'};
+const FIELDS_ID={RecordType:'M',ProviderCode:'M',BranchCode:'NM',SubjectReferenceDate:'M',ProviderSubjectNumber:'M',Title:'NM',FirstName:'D',LastName:'D',MiddleName:'NM',FullName:'D',Suffix:'NM',PreviousLastName:'NM',Gender:'M',BirthDate:'M',BirthPlace:'M',BirthCountry:'M',Nationality:'M',Resident:'M',CivilStatus:'M',DependantsNo:'NM',CarsOwnedNo:'NM',MotherMaidenFullName:'M',PermanentFullAddress:'D',PermanentStreetNo:'D',PermanentPostalCode:'D',PermanentPSGCode:'D',PermanentCity:'D',PermanentProvince:'D',PermanentCountry:'D',PermanentHouseOwnerLessee:'NM',CurrentFullAddress:'D',CurrentStreetNo:'D',CurrentPostalCode:'D',CurrentPSGCode:'D',CurrentCity:'D',CurrentProvince:'D',CurrentCountry:'D',CurrentHouseOwnerLessee:'NM',TIN:'D',IdentificationType2:'D',IdentificationNumber2:'D',IdentificationType3:'D',IdentificationNumber3:'D',IDType1:'D',IDNumber1:'D',ContactType1:'M',ContactValue1:'M',ContactType2:'D',ContactValue2:'D',EmploymentTradeName:'M',EmploymentPSIC:'M',EmploymentGrossIncome:'M',EmploymentNetIncome:'M',EmploymentAnnualMonthlyIndicator:'M',EmploymentOccupationStatus:'M',EmploymentDateHiredFrom:'M',SoleTraderTradeName:'D',STCurrentFullAddress:'D',STCurrentStreetNo:'D',STCurrentPostalCode:'NM',STCurrentPSGCode:'D',STCurrentCity:'D',STCurrentProvince:'D',STCurrentCountry:'D',STCurrentHouseOwnerLessee:'NM',SoleTraderTIN:'M',STIdentificationType2:'D',STIdentificationNumber2:'D',STContactType1:'D',STContactValue1:'D',STContactType2:'D',STContactValue2:'D',LargeExposureIndicator:'M'};
 const FIELDS_BD={RecordType:'M',ProviderCode:'M',BranchCode:'NM',SubjectReferenceDate:'M',ProviderSubjectNumber:'M',TradeName:'M',OfficialRegisteredTradeName:'M',Nationality:'M',Resident:'M',LegalForm:'M',ExistenceTerm:'NM',NatureOfBusiness:'M',RegistrationDate:'M',EmployeesNo:'NM',FirmSize:'M',GrossAnnualIncome:'M',NetAnnualIncome:'M',MonthlyExpenses:'NM',Conglomerate:'M',CurrentFullAddress:'D',CurrentStreetNo:'D',CurrentPostalCode:'NM',CurrentPSGCode:'D',CurrentCity:'D',CurrentProvince:'D',CurrentCountry:'D',CurrentHouseOwnerLessee:'NM',TIN:'M',IdentificationType2:'D',IdentificationNumber2:'D',ContactType1:'M',ContactValue1:'M',ContactType2:'D',ContactValue2:'D',LargeExposureIndicator:'M'};
 const FIELDS_SL={RecordType:'M',ProviderCode:'M',BranchCode:'NM',CompanyLinkRefDate:'M',ParentProviderSubjectNo:'M',CompanyRole:'M',ChildProviderSubjectNo:'M'};
-const FIELDS_CI={
-  RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',FinancedAmount:'M',FinancedAmountOriginalCurrency:'M',InstallmentsNumber:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',PaymentPeriodicity:'M',PaymentMethod:'NM',MonthlyPaymentAmount:'D',FirstPaymentDate:'NM',LastPaymentAmount:'D',NextPaymentDate:'NM',NextPayment:'NM',OutstandingPaymentsNumber:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D',GoodType:'NM',GoodValue:'NM',NewUsedCode:'NM',GoodBrand:'NM',ManufacturingDate:'NM',RegistrationNumber:'NM'
-};
-const FIELDS_CN={
-  RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',CreditLimitFinancedAmount:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',UtilizationOutstandingBalance:'D',UtilizationOriginalCurrency:'D',OverallCreditLimit:'NM',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D'
-};
-const FIELDS_CC={
-  RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'NM',RegulatoryStatus:'NM',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'NM',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'NM',BookType:'M',CreditLimit:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CardReferenceNumber:'NM',CardReferenceCode:'NM',PaymentPeriodicity:'D',PaymentMethod:'NM',MonthlyPaymentAmount:'NM',NextPaymentDate:'NM',NextPayment:'D',LastPaymentAmount:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OutstandingBalanceUnbilled:'NM',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',InstallmentType:'D',ChargedAmount:'NM',LastChargeDate:'NM',FlagCardUsed:'NM',TimesCardUsed:'NM',MinPaymentIndicator:'NM',MinPaymentPercentage:'NM',PremiumCard:'NM',CancellationDate:'NM',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D'
-};
+const FIELDS_CI={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',FinancedAmount:'M',FinancedAmountOriginalCurrency:'M',InstallmentsNumber:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',PaymentPeriodicity:'M',PaymentMethod:'NM',MonthlyPaymentAmount:'D',FirstPaymentDate:'NM',LastPaymentAmount:'D',NextPaymentDate:'NM',NextPayment:'NM',OutstandingPaymentsNumber:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D'};
+const FIELDS_CN={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',CreditLimitFinancedAmount:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',UtilizationOutstandingBalance:'D',UtilizationOriginalCurrency:'D',OverallCreditLimit:'NM',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D'};
+const FIELDS_CC={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'NM',RegulatoryStatus:'NM',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'NM',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'NM',BookType:'M',CreditLimit:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CardReferenceNumber:'NM',PaymentPeriodicity:'D',PaymentMethod:'NM',MonthlyPaymentAmount:'NM',NextPaymentDate:'NM',NextPayment:'D',LastPaymentAmount:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OutstandingBalanceUnbilled:'NM',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',InstallmentType:'D',ChargedAmount:'NM',LastChargeDate:'NM',FlagCardUsed:'NM',TimesCardUsed:'NM',MinPaymentIndicator:'NM',MinPaymentPercentage:'NM',PremiumCard:'NM',CancellationDate:'NM',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D'};
 const FIELDS_CA={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',BookType:'M',OtherCreditAccType:'M',GrantDate:'M',MaturityDate:'D',RegulatoryStatus:'M',OriginalCurrency:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',AmountGrantedOriginalCurrency:'M',AmountGranted:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',NominalInterestRate:'M',StageImpairmentPFRS9:'M',CreditClassification:'D',ProbabilityDefault:'M',EffectiveInterestRate:'M',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',DaysPastDue:'M',RestructuredCreditCode:'NM',GuaranteeType:'NM',AssetAppraisedValue:'D',AssetAppraisalDate:'D'};
 const FIELDS_CV={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',BookType:'M',BookCode:'D',TrustType:'D',InvestmentType:'M',GrantDate:'M',MaturityDate:'D',OriginalCurrency:'M',AmountGrantedOriginalCurrency:'M',AmountGranted:'M',AccumulatedMarketGainsOriginalCurrency:'M',AccumulatedMarketGains:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',NominalInterestRate:'M',StageImpairmentPFRS9:'M',ProbabilityDefault:'M',EffectiveInterestRate:'M',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',DaysPastDue:'M',RestructuredCreditCode:'NM',GuaranteeType:'NM',CreditRatingAgencyUsed:'NM',CreditRatingIssuerLastInvestment:'NM',LatestCreditRatingIssuer:'M',NatureOfOffering:'NM'};
 const FIELDS_CF={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',ContingentAccountType:'M',OriginalCurrency:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',StageImpairmentPFRS9:'M',ProbabilityDefault:'M'};
 const FIELDS_NE={RecordType:'M',ProviderCode:'M',BranchCode:'NM',NegativeEventRefDate:'M',ProviderSubjectNo:'M',EventCode:'M',EventDetail:'NM',EventDate:'NM',EventStatus:'NM',EventStatusDate:'NM'};
 const FIELDS_FT={RecordType:'M',ProviderCode:'M',FileReferenceDate:'M',NumberOfRecords:'M'};
 
-// ============================================================================
-// STRICT FIELD RULES
-// type: X string, N number, D date
-// num: int / dec2 / pct4 / num
-// req: M / D / NM
-// ============================================================================
-const RULES={
- Header:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  FileReferenceDate:{type:'D',len:8,req:'M'},
-  Version:{type:'X',len:12,req:'M',enum:['1.0']},
-  SubmissionType:{type:'X',len:1,req:'M',enum:VALID.SubmissionType},
-  TotalSubjectRecords:{type:'N',len:15,req:'M',num:'int'},
-  TotalContractRecords:{type:'N',len:15,req:'M',num:'int'},
-  TotalNegativeEventRecords:{type:'N',len:15,req:'M',num:'int'},
-  ProviderComments:{type:'X',len:100,req:'NM'}
- },
- Footer:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  FileReferenceDate:{type:'D',len:8,req:'M'},
-  NumberOfRecords:{type:'N',len:8,req:'M',num:'int'}
- },
- Individuals:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  SubjectReferenceDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNumber:{type:'X',len:38,req:'M'},
-  Title:{type:'X',len:2,req:'NM',enum:VALID.Title},
-  FirstName:{type:'X',len:70,req:'D'},
-  LastName:{type:'X',len:70,req:'D'},
-  MiddleName:{type:'X',len:70,req:'NM'},
-  FullName:{type:'X',len:220,req:'D'},
-  Suffix:{type:'X',len:10,req:'NM'},
-  PreviousLastName:{type:'X',len:70,req:'NM'},
-  Gender:{type:'X',len:1,req:'M',enum:VALID.Gender},
-  BirthDate:{type:'D',len:8,req:'M'},
-  BirthPlace:{type:'X',len:100,req:'M'},
-  BirthCountry:{type:'X',len:2,req:'M'},
-  Nationality:{type:'X',len:2,req:'M'},
-  Resident:{type:'X',len:1,req:'M',enum:VALID.Resident},
-  CivilStatus:{type:'X',len:1,req:'M',enum:VALID.CivilStatus},
-  DependantsNo:{type:'N',len:2,req:'NM',num:'int'},
-  DependentsNo:{type:'N',len:2,req:'NM',num:'int'},
-  CarsOwnedNo:{type:'N',len:3,req:'NM',num:'int'},
-  MotherMaidenFullName:{type:'X',len:220,req:'M'},
-  PermanentFullAddress:{type:'X',len:400,req:'D'},
-  PermanentStreetNo:{type:'X',len:100,req:'D'},
-  PermanentPostalCode:{type:'X',len:4,req:'D'},
-  PermanentPSGCode:{type:'X',len:12,req:'D'},
-  PermanentCity:{type:'X',len:50,req:'D'},
-  PermanentProvince:{type:'X',len:50,req:'D'},
-  PermanentCountry:{type:'X',len:2,req:'D'},
-  PermanentHouseOwnerLessee:{type:'X',len:1,req:'NM',enum:VALID.HouseOwnerLessee},
-  CurrentFullAddress:{type:'X',len:400,req:'D'},
-  CurrentStreetNo:{type:'X',len:100,req:'D'},
-  CurrentPostalCode:{type:'X',len:4,req:'D'},
-  CurrentPSGCode:{type:'X',len:12,req:'D'},
-  CurrentCity:{type:'X',len:50,req:'D'},
-  CurrentProvince:{type:'X',len:50,req:'D'},
-  CurrentCountry:{type:'X',len:2,req:'D'},
-  CurrentHouseOwnerLessee:{type:'X',len:1,req:'NM',enum:VALID.HouseOwnerLessee},
-  TIN:{type:'X',len:12,req:'D'},
-  IdentificationType2:{type:'X',len:2,req:'D',enum:VALID.IdentificationType},
-  IdentificationNumber2:{type:'X',len:20,req:'D'},
-  IdentificationType3:{type:'X',len:2,req:'D',enum:VALID.IdentificationType},
-  IdentificationNumber3:{type:'X',len:20,req:'D'},
-  IDType1:{type:'X',len:2,req:'D',enum:VALID.IDType},
-  IDNumber1:{type:'X',len:25,req:'D'},
-  IDIssueDate1:{type:'D',len:8,req:'NM'},
-  IDIssueCountry1:{type:'X',len:2,req:'NM'},
-  IDExpiryDate1:{type:'D',len:8,req:'NM'},
-  IDType2:{type:'X',len:2,req:'D',enum:VALID.IDType},
-  IDNumber2:{type:'X',len:25,req:'D'},
-  IDIssueDate2:{type:'D',len:8,req:'NM'},
-  IDIssueCountry2:{type:'X',len:2,req:'NM'},
-  IDExpiryDate2:{type:'D',len:8,req:'NM'},
-  IDType3:{type:'X',len:2,req:'D',enum:VALID.IDType},
-  IDNumber3:{type:'X',len:20,req:'D'},
-  IDIssueDate3:{type:'D',len:8,req:'NM'},
-  IDIssueCountry3:{type:'X',len:2,req:'NM'},
-  IDExpiryDate3:{type:'D',len:8,req:'NM'},
-  ContactType1:{type:'X',len:1,req:'M',enum:VALID.ContactType},
-  ContactValue1:{type:'X',len:100,req:'M'},
-  ContactType2:{type:'X',len:1,req:'D',enum:VALID.ContactType},
-  ContactValue2:{type:'X',len:100,req:'D'},
-  EmploymentTradeName:{type:'X',len:120,req:'M'},
-  EmploymentPSIC:{type:'X',len:1,req:'M',enum:VALID.PSIC},
-  EmploymentGrossIncome:{type:'N',len:17,req:'M',num:'dec2'},
-  EmploymentNetIncome:{type:'N',len:17,req:'M',num:'dec2'},
-  EmploymentAnnualMonthlyIndicator:{type:'X',len:1,req:'M',enum:VALID.AnnualMonthly},
-  EmploymentOccupationStatus:{type:'X',len:2,req:'M',enum:VALID.OccupationStatus},
-  EmploymentDateHiredFrom:{type:'D',len:8,req:'M'},
-  SoleTraderTradeName:{type:'X',len:120,req:'D'},
-  STCurrentFullAddress:{type:'X',len:400,req:'D'},
-  STCurrentStreetNo:{type:'X',len:100,req:'D'},
-  STCurrentPostalCode:{type:'X',len:4,req:'NM'},
-  STCurrentPSGCode:{type:'X',len:12,req:'D'},
-  STCurrentCity:{type:'X',len:50,req:'D'},
-  STCurrentProvince:{type:'X',len:50,req:'D'},
-  STCurrentCountry:{type:'X',len:2,req:'D'},
-  STCurrentHouseOwnerLessee:{type:'X',len:1,req:'NM',enum:VALID.HouseOwnerLessee},
-  SoleTraderTIN:{type:'X',len:12,req:'M'},
-  STIdentificationType2:{type:'X',len:2,req:'D',enum:VALID.IdentificationType},
-  STIdentificationNumber2:{type:'X',len:20,req:'D'},
-  STContactType1:{type:'X',len:1,req:'D',enum:VALID.ContactType},
-  STContactValue1:{type:'X',len:100,req:'D'},
-  STContactType2:{type:'X',len:1,req:'D',enum:VALID.ContactType},
-  STContactValue2:{type:'X',len:100,req:'D'},
-  LargeExposureIndicator:{type:'X',len:1,req:'M',enum:VALID.YesNo}
- },
- Companies:{
-  ProviderCode:{type:'X',len:18,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  SubjectReferenceDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNumber:{type:'X',len:38,req:'M'},
-  TradeName:{type:'X',len:120,req:'M'},
-  OfficialRegisteredTradeName:{type:'X',len:120,req:'M'},
-  Nationality:{type:'X',len:2,req:'M'},
-  Resident:{type:'X',len:1,req:'M',enum:VALID.Resident},
-  LegalForm:{type:'X',len:2,req:'M',enum:VALID.LegalForm},
-  ExistenceTerm:{type:'D',len:8,req:'NM'},
-  NatureOfBusiness:{type:'X',len:1,req:'M',enum:VALID.PSIC},
-  RegistrationDate:{type:'D',len:8,req:'M'},
-  EmployeesNo:{type:'N',len:9,req:'NM',num:'int'},
-  FirmSize:{type:'X',len:1,req:'M',enum:VALID.FirmSize},
-  GrossAnnualIncome:{type:'N',len:17,req:'M',num:'dec2'},
-  NetAnnualIncome:{type:'N',len:17,req:'M',num:'dec2'},
-  MonthlyExpenses:{type:'N',len:17,req:'NM',num:'dec2'},
-  Conglomerate:{type:'X',len:3,req:'M',enum:VALID.Conglomerate},
-  CurrentFullAddress:{type:'X',len:400,req:'D'},
-  CurrentStreetNo:{type:'X',len:100,req:'D'},
-  CurrentPostalCode:{type:'X',len:4,req:'NM'},
-  CurrentPSGCode:{type:'X',len:12,req:'D'},
-  CurrentCity:{type:'X',len:50,req:'D'},
-  CurrentProvince:{type:'X',len:50,req:'D'},
-  CurrentCountry:{type:'X',len:2,req:'D'},
-  CurrentHouseOwnerLessee:{type:'X',len:1,req:'NM',enum:VALID.HouseOwnerLessee},
-  TIN:{type:'X',len:20,req:'M'},
-  IdentificationType2:{type:'X',len:2,req:'D',enum:VALID.IdentificationType},
-  IdentificationNumber2:{type:'X',len:20,req:'D'},
-  ContactType1:{type:'X',len:1,req:'M',enum:VALID.ContactType},
-  ContactValue1:{type:'X',len:100,req:'M'},
-  ContactType2:{type:'X',len:1,req:'D',enum:VALID.ContactType},
-  ContactValue2:{type:'X',len:100,req:'D'},
-  LargeExposureIndicator:{type:'X',len:1,req:'M',enum:VALID.YesNo}
- },
- CompanyLinks:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  CompanyLinkRefDate:{type:'D',len:8,req:'M'},
-  ParentProviderSubjectNo:{type:'X',len:38,req:'M'},
-  CompanyRole:{type:'X',len:1,req:'M',enum:VALID.CompanyRole},
-  ChildProviderSubjectNo:{type:'X',len:38,req:'M'}
- },
- Installments:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:VALID.Role},
-  DOSRI:{type:'X',len:1,req:'D',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'D',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  ContractType:{type:'X',len:2,req:'M',enum:VALID.ContractType},
-  ContractPhase:{type:'X',len:2,req:'M',enum:VALID.ContractPhase},
-  ContractStatus:{type:'X',len:2,req:'M',enum:VALID.ContractStatus},
-  RegulatoryStatus:{type:'X',len:3,req:'M',enum:VALID.RegulatoryStatus},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  ContractStartDate:{type:'D',len:8,req:'D'},
-  ContractRequestDate:{type:'D',len:8,req:'NM'},
-  ContractPlannedEndDate:{type:'D',len:8,req:'D'},
-  ContractActualEndDate:{type:'D',len:8,req:'D'},
-  LastPaymentDate:{type:'D',len:8,req:'NM'},
-  RestructuredCreditCode:{type:'X',len:1,req:'M',enum:VALID.RestructuredCreditCode},
-  BoardResolutionFlag:{type:'X',len:1,req:'NM',enum:VALID.YesNo},
-  BookType:{type:'X',len:1,req:'M',enum:VALID.BookType},
-  BookCode:{type:'X',len:2,req:'D',enum:VALID.BookCode},
-  TrustType:{type:'X',len:1,req:'D',enum:VALID.TrustType},
-  FinancedAmount:{type:'N',len:17,req:'M',num:'dec2'},
-  FinancedAmountOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  InstallmentsNumber:{type:'N',len:3,req:'M',num:'int'},
-  TransactionType:{type:'X',len:4,req:'M',enum:VALID.TransactionType},
-  CreditPurpose:{type:'X',len:2,req:'M',enum:VALID.CreditPurpose},
-  CreditPurposeEconomicActivity:{type:'X',len:1,req:'M',enum:VALID.PSIC},
-  PaymentPeriodicity:{type:'X',len:1,req:'M',enum:VALID.PaymentPeriodicity},
-  PaymentMethod:{type:'X',len:3,req:'NM',enum:VALID.PaymentMethod},
-  MonthlyPaymentAmount:{type:'N',len:17,req:'D',num:'dec2'},
-  FirstPaymentDate:{type:'D',len:8,req:'NM'},
-  LastPaymentAmount:{type:'N',len:17,req:'D',num:'dec2'},
-  NextPaymentDate:{type:'D',len:8,req:'NM'},
-  NextPayment:{type:'N',len:17,req:'NM',num:'dec2'},
-  OutstandingPaymentsNumber:{type:'N',len:3,req:'D',num:'int'},
-  OutstandingBalance:{type:'N',len:17,req:'D',num:'dec2'},
-  OutstandingBalanceOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  OverduePaymentsNumber:{type:'N',len:3,req:'D',num:'int'},
-  OverduePaymentsAmount:{type:'N',len:17,req:'D',num:'dec2'},
-  DaysPastDue:{type:'N',len:4,req:'D',num:'int'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'D',num:'dec2'},
-  NominalInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'D',enum:VALID.StageImpairmentPFRS9},
-  CreditClassification:{type:'X',len:1,req:'D',enum:VALID.CreditClassification},
-  ProbabilityDefault:{type:'N',len:7,req:'D',num:'pct4'},
-  EffectiveInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  UnearnedInterest:{type:'N',len:17,req:'D',num:'dec2'},
-  InterestSetting:{type:'X',len:1,req:'D',enum:VALID.InterestSetting},
-  FrequencyRepricing:{type:'X',len:1,req:'D',enum:VALID.FrequencyRepricing},
-  LoanFundersNumber:{type:'N',len:2,req:'D',num:'int'},
-  GoodType:{type:'X',len:2,req:'NM',enum:VALID.GoodType},
-  GoodValue:{type:'N',len:17,req:'NM',num:'int'},
-  NewUsedCode:{type:'X',len:1,req:'NM',enum:VALID.NewUsedCode},
-  GoodBrand:{type:'X',len:100,req:'NM'},
-  ManufacturingDate:{type:'D',len:8,req:'NM'},
-  RegistrationNumber:{type:'X',len:20,req:'NM'}
- },
- NonInstallments:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:VALID.Role},
-  DOSRI:{type:'X',len:1,req:'D',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'D',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  ContractType:{type:'X',len:2,req:'M',enum:VALID.ContractType},
-  ContractPhase:{type:'X',len:2,req:'M',enum:VALID.ContractPhase},
-  ContractStatus:{type:'X',len:2,req:'M',enum:VALID.ContractStatus},
-  RegulatoryStatus:{type:'X',len:3,req:'M',enum:VALID.RegulatoryStatus},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  ContractStartDate:{type:'D',len:8,req:'D'},
-  ContractRequestDate:{type:'D',len:8,req:'NM'},
-  ContractPlannedEndDate:{type:'D',len:8,req:'D'},
-  ContractActualEndDate:{type:'D',len:8,req:'D'},
-  LastPaymentDate:{type:'D',len:8,req:'NM'},
-  RestructuredCreditCode:{type:'X',len:1,req:'M',enum:VALID.RestructuredCreditCode},
-  BoardResolutionFlag:{type:'X',len:1,req:'NM',enum:VALID.YesNo},
-  BookType:{type:'X',len:1,req:'M',enum:VALID.BookType},
-  BookCode:{type:'X',len:2,req:'D',enum:VALID.BookCode},
-  TrustType:{type:'X',len:1,req:'D',enum:VALID.TrustType},
-  CreditLimitFinancedAmount:{type:'N',len:17,req:'M',num:'dec2'},
-  CreditLimitOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  TransactionType:{type:'X',len:4,req:'M',enum:VALID.TransactionType},
-  CreditPurpose:{type:'X',len:2,req:'M',enum:VALID.CreditPurpose},
-  CreditPurposeEconomicActivity:{type:'X',len:1,req:'M',enum:VALID.PSIC},
-  UtilizationOutstandingBalance:{type:'N',len:17,req:'D',num:'dec2'},
-  UtilizationOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  OverallCreditLimit:{type:'N',len:17,req:'NM',num:'dec2'},
-  DaysPastDue:{type:'N',len:4,req:'D',num:'int'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'D',num:'dec2'},
-  NominalInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'D',enum:VALID.StageImpairmentPFRS9},
-  CreditClassification:{type:'X',len:1,req:'D',enum:VALID.CreditClassification},
-  ProbabilityDefault:{type:'N',len:7,req:'D',num:'pct4'},
-  EffectiveInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  UnearnedInterest:{type:'N',len:17,req:'D',num:'dec2'},
-  InterestSetting:{type:'X',len:1,req:'D',enum:VALID.InterestSetting},
-  FrequencyRepricing:{type:'X',len:1,req:'D',enum:VALID.FrequencyRepricing},
-  LoanFundersNumber:{type:'N',len:2,req:'D',num:'int'}
- },
- CreditCards:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:['B','C']},
-  DOSRI:{type:'X',len:1,req:'D',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'D',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  ContractType:{type:'X',len:2,req:'M',enum:VALID.ContractType},
-  ContractPhase:{type:'X',len:2,req:'M',enum:VALID.ContractPhase},
-  ContractStatus:{type:'X',len:2,req:'NM',enum:VALID.ContractStatus},
-  RegulatoryStatus:{type:'X',len:3,req:'NM',enum:VALID.RegulatoryStatus},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  ContractStartDate:{type:'D',len:8,req:'D'},
-  ContractRequestDate:{type:'D',len:8,req:'NM'},
-  ContractPlannedEndDate:{type:'D',len:8,req:'NM'},
-  ContractActualEndDate:{type:'D',len:8,req:'D'},
-  LastPaymentDate:{type:'D',len:8,req:'NM'},
-  RestructuredCreditCode:{type:'X',len:1,req:'NM',enum:VALID.RestructuredCreditCode},
-  BookType:{type:'X',len:1,req:'M',enum:VALID.BookType},
-  CreditLimit:{type:'N',len:17,req:'M',num:'dec2'},
-  CreditLimitOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  TransactionType:{type:'X',len:4,req:'M',enum:VALID.TransactionType},
-  CardReferenceNumber:{type:'X',len:38,req:'NM'},
-  CardReferenceCode:{type:'X',len:38,req:'NM'},
-  PaymentPeriodicity:{type:'X',len:1,req:'D',enum:VALID.PaymentPeriodicity},
-  PaymentMethod:{type:'X',len:3,req:'NM',enum:VALID.PaymentMethod},
-  MonthlyPaymentAmount:{type:'N',len:17,req:'NM',num:'dec2'},
-  NextPaymentDate:{type:'D',len:8,req:'NM'},
-  NextPayment:{type:'N',len:17,req:'D',num:'dec2'},
-  LastPaymentAmount:{type:'N',len:17,req:'D',num:'dec2'},
-  OutstandingBalance:{type:'N',len:17,req:'D',num:'dec2'},
-  OutstandingBalanceOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  OutstandingBalanceUnbilled:{type:'N',len:17,req:'NM',num:'dec2'},
-  OverduePaymentsNumber:{type:'N',len:3,req:'D',num:'int'},
-  OverduePaymentsAmount:{type:'N',len:17,req:'D',num:'dec2'},
-  DaysPastDue:{type:'N',len:4,req:'D',num:'int'},
-  InstallmentType:{type:'X',len:1,req:'D',enum:VALID.InstallmentType},
-  ChargedAmount:{type:'N',len:17,req:'NM',num:'dec2'},
-  LastChargeDate:{type:'D',len:8,req:'NM'},
-  FlagCardUsed:{type:'X',len:1,req:'NM',enum:VALID.FlagCardUsed},
-  TimesCardUsed:{type:'N',len:2,req:'NM',num:'int'},
-  MinPaymentIndicator:{type:'N',len:1,req:'NM',enum:VALID.MinPaymentIndicator},
-  MinPaymentPercentage:{type:'N',len:3,req:'NM',num:'int'},
-  PremiumCard:{type:'X',len:1,req:'NM',enum:VALID.CardPremium},
-  CancellationDate:{type:'D',len:8,req:'NM'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'D',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'D',num:'dec2'},
-  NominalInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'D',enum:VALID.StageImpairmentPFRS9},
-  CreditClassification:{type:'X',len:1,req:'D',enum:VALID.CreditClassification},
-  ProbabilityDefault:{type:'N',len:7,req:'D',num:'pct4'},
-  EffectiveInterestRate:{type:'N',len:7,req:'D',num:'pct4'},
-  UnearnedInterest:{type:'N',len:17,req:'D',num:'dec2'},
-  InterestSetting:{type:'X',len:1,req:'D',enum:VALID.InterestSetting},
-  FrequencyRepricing:{type:'X',len:1,req:'D',enum:VALID.FrequencyRepricing}
- },
- OtherCreditAccomodations:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:VALID.Role},
-  DOSRI:{type:'X',len:1,req:'M',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'M',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  BookType:{type:'X',len:1,req:'M',enum:VALID.BookType},
-  OtherCreditAccType:{type:'X',len:2,req:'M',enum:VALID.OtherCreditAccType},
-  GrantDate:{type:'D',len:8,req:'M'},
-  MaturityDate:{type:'D',len:8,req:'D'},
-  RegulatoryStatus:{type:'X',len:3,req:'M',enum:VALID.RegulatoryStatus},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  CreditPurpose:{type:'X',len:2,req:'M',enum:VALID.CreditPurpose},
-  CreditPurposeEconomicActivity:{type:'X',len:1,req:'M',enum:VALID.PSIC},
-  AmountGrantedOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  AmountGranted:{type:'N',len:17,req:'M',num:'dec2'},
-  OutstandingBalanceOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  OutstandingBalance:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'M',num:'dec2'},
-  NominalInterestRate:{type:'N',len:7,req:'M',num:'pct4'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'M',enum:VALID.StageImpairmentPFRS9},
-  CreditClassification:{type:'X',len:1,req:'D',enum:VALID.CreditClassification},
-  ProbabilityDefault:{type:'N',len:7,req:'M',num:'pct4'},
-  EffectiveInterestRate:{type:'N',len:7,req:'M',num:'pct4'},
-  UnearnedInterest:{type:'N',len:17,req:'D',num:'dec2'},
-  InterestSetting:{type:'X',len:1,req:'D',enum:VALID.InterestSetting},
-  FrequencyRepricing:{type:'X',len:1,req:'D',enum:VALID.FrequencyRepricing},
-  DaysPastDue:{type:'N',len:4,req:'M',num:'int'},
-  RestructuredCreditCode:{type:'X',len:1,req:'NM',enum:VALID.RestructuredCreditCode},
-  GuaranteeType:{type:'X',len:3,req:'NM'},
-  AssetAppraisedValue:{type:'N',len:17,req:'D',num:'dec2'},
-  AssetAppraisalDate:{type:'D',len:8,req:'D'}
- },
- Investments:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:['B']},
-  DOSRI:{type:'X',len:1,req:'M',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'M',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  BookType:{type:'X',len:1,req:'M',enum:VALID.BookType},
-  BookCode:{type:'X',len:2,req:'D',enum:VALID.BookCode},
-  TrustType:{type:'X',len:1,req:'D',enum:VALID.TrustType},
-  InvestmentType:{type:'X',len:1,req:'M',enum:VALID.InvestmentType},
-  GrantDate:{type:'D',len:8,req:'M'},
-  MaturityDate:{type:'D',len:8,req:'D'},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  AmountGrantedOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  AmountGranted:{type:'N',len:17,req:'M',num:'dec2'},
-  AccumulatedMarketGainsOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2signed'},
-  AccumulatedMarketGains:{type:'N',len:17,req:'M',num:'dec2signed'},
-  OutstandingBalanceOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  OutstandingBalance:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'M',num:'dec2'},
-  NominalInterestRate:{type:'N',len:7,req:'M',num:'pct4'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'M',enum:VALID.StageImpairmentPFRS9},
-  ProbabilityDefault:{type:'N',len:7,req:'M',num:'pct4'},
-  EffectiveInterestRate:{type:'N',len:7,req:'M',num:'pct4'},
-  UnearnedInterest:{type:'N',len:17,req:'D',num:'dec2'},
-  InterestSetting:{type:'X',len:1,req:'D',enum:VALID.InterestSetting},
-  FrequencyRepricing:{type:'X',len:1,req:'D',enum:VALID.FrequencyRepricing},
-  DaysPastDue:{type:'N',len:4,req:'M',num:'int'},
-  RestructuredCreditCode:{type:'X',len:1,req:'NM',enum:VALID.RestructuredCreditCode},
-  GuaranteeType:{type:'X',len:3,req:'NM'},
-  CreditRatingAgencyUsed:{type:'X',len:1,req:'NM',enum:VALID.CreditRatingAgency},
-  CreditRatingIssuerLastInvestment:{type:'X',len:2,req:'NM',enum:VALID.CreditRating},
-  LatestCreditRatingIssuer:{type:'X',len:2,req:'M',enum:VALID.InvestmentIssuerType},
-  NatureOfOffering:{type:'X',len:2,req:'NM',enum:VALID.NatureOfOffering}
- },
- OffBalanceSheets:{
-  ProviderCode:{type:'X',len:10,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  ContractRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  Role:{type:'X',len:1,req:'M',enum:['B']},
-  DOSRI:{type:'X',len:1,req:'M',enum:VALID.DOSRI},
-  RPT:{type:'X',len:1,req:'M',enum:VALID.RPT},
-  ProviderContractNo:{type:'X',len:38,req:'M'},
-  ContingentAccountType:{type:'X',len:1,req:'M',enum:VALID.ContingentAccountType},
-  OriginalCurrency:{type:'X',len:3,req:'M',enum:VALID.Currency},
-  OutstandingBalanceOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  OutstandingBalance:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECLOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  AllowanceECL:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoanOriginalCurrency:{type:'N',len:17,req:'M',num:'dec2'},
-  NetCarryingAmountLoan:{type:'N',len:17,req:'M',num:'dec2'},
-  StageImpairmentPFRS9:{type:'X',len:1,req:'M',enum:VALID.StageImpairmentPFRS9},
-  ProbabilityDefault:{type:'N',len:7,req:'M',num:'pct4'}
- },
- SubjectNegativeEvents:{
-  ProviderCode:{type:'X',len:18,req:'M'},
-  BranchCode:{type:'X',len:6,req:'NM'},
-  NegativeEventRefDate:{type:'D',len:8,req:'M'},
-  ProviderSubjectNo:{type:'X',len:38,req:'M'},
-  EventCode:{type:'X',len:1,req:'M',enum:VALID.NegativeEventCode},
-  EventDetail:{type:'X',len:400,req:'NM'},
-  EventDate:{type:'D',len:8,req:'NM'},
-  EventStatus:{type:'X',len:2,req:'NM',enum:VALID.NegativeEventStatus},
-  EventStatusDate:{type:'D',len:8,req:'NM'}
- }
-};
-
-// ============================================================================
-// ERRORS
-// ============================================================================
-const ERR_DESC={
- 'HD_MAND':'Header mandatory field empty',
- 'HD_VER':'Header Version invalid',
- 'HD_SUB':'Header SubmissionType invalid',
- 'HD_REF':'Header FileReferenceDate invalid',
- 'HD_CNT':'Header count mismatch',
- 'FT_MAND':'Footer mandatory field empty',
- 'FT_REF':'Footer FileReferenceDate invalid',
- 'FT_CNT':'Footer NumberOfRecords mismatch',
- 'HF_PROV':'Header/Footer ProviderCode mismatch',
- '168':'OutstandingPaymentsNumber not integer',
- '090':'DaysPastDue mandatory',
- '195':'RestructuredCreditCode mandatory/invalid',
- '089':'LastPaymentAmount mandatory',
- '296':'GuaranteedAmount and GuaranteeType must both be filled or both empty',
- '318':'CompanyLink ParentProviderSubjectNo not found',
- '319':'CompanyLink ChildProviderSubjectNo not found',
- 'SL_ROLE':'CompanyLink CompanyRole invalid',
- '021':'No name: need FirstName+LastName or FullName',
- '139':'CurrentAddress incomplete',
- '141':'SoleTrader address incomplete',
- '113':'CurrentPostalCode and PSGCode both empty',
- '050':'TIN invalid',
- '053':'SoleTraderTIN invalid',
- '020':'Company TIN mandatory',
- '028':'STContactType1+Value1 missing',
- '074':'ContactType+Value must both be filled',
- '044':'HouseOwnerLessee invalid',
- '048':'STHouseOwnerLessee invalid',
- '104':'Company ContactType1+Value1 mandatory',
- '069':'ID Type+Number mismatch',
- '023':'Both names and FullName filled',
- 'EMP':'Employment mandatory fields missing',
- 'CN_RCC':'CN RestructuredCreditCode mandatory/invalid',
- 'CN_DPD':'CN DaysPastDue mandatory',
- 'CN_LIM':'CN CreditLimitFinancedAmount mandatory',
- 'CN_BAL':'CN UtilizationOutstandingBalance mandatory',
- 'CC_DPD':'CC DaysPastDue mandatory',
- 'CC_NXT':'CC NextPayment mandatory when Active',
- 'CC_LPA':'CC LastPaymentAmount mandatory',
- 'CA_MAND':'CA mandatory field empty',
- 'CA_DPD':'CA DaysPastDue mandatory',
- 'CV_MAND':'CV mandatory field empty',
- 'CV_DPD':'CV DaysPastDue mandatory',
- 'CV_INV':'CV InvestmentType invalid',
- 'CV_LCI':'CV LatestCreditRatingIssuer mandatory',
- 'CF_MAND':'CF mandatory field empty',
- 'CF_CAT':'CF ContingentAccountType invalid',
- 'NE_MAND':'NE mandatory field empty',
- 'NE_EVT':'NE EventCode invalid',
- 'DUP':'Duplicate ProviderSubjectNumber',
- 'VAL':'Invalid domain value',
- 'MAND':'Mandatory field empty',
- 'DATE':'Invalid date format',
- 'PSGC':'Invalid PSGC code',
- 'CUR':'Invalid currency',
- 'ROLE_LS':'LinkedSubject role/name mismatch',
- 'LEN':'Field length exceeded',
- 'TYPE':'Field type/format invalid',
- 'DATE_LOGIC':'Invalid date relationship',
- 'PROV':'ProviderCode mismatch with header',
- 'BOOK':'BookType dependent field invalid',
- 'NUM':'Invalid numeric format',
- 'SUBREF':'Reference date greater than header FileReferenceDate'
-};
-
-// ============================================================================
-// GLOBALS
-// ============================================================================
-let xmlDoc=null,xmlStr='',xmlLines=[],fName='';
-let errs={},warns={};
-const logs=[];
-let allIssues=[];
-let headerFileReferenceDate='';
-let headerProviderCode='';
-
-function addI(code,msg,line,col,isWarn=false){
- const issue={code,msg,line:line||0,col:col||0,isWarn};
- allIssues.push(issue);
- if(isWarn){if(!warns[code])warns[code]=[];warns[code].push(issue);}
- else{if(!errs[code])errs[code]=[];errs[code].push(issue);}
+function addI(code,msg,line,col=0,isWarn=false){
+  const o={code,msg,line,col,isWarn};
+  allIssues.push(o);
+  if(isWarn){
+    if(!warns[code])warns[code]=[];
+    warns[code].push(o);
+  }else{
+    if(!errs[code])errs[code]=[];
+    errs[code].push(o);
+  }
 }
-function lg(t,m){
- const ts=new Date().toLocaleTimeString();
- logs.push({t,m,ts});
- const el=document.getElementById('logA');
- if(el){el.innerHTML=logs.map(l=>`<div class="l${l.t}">[${l.ts}] ${esc(l.m)}</div>`).join('');el.scrollTop=el.scrollHeight}
+function lg(type,msg){
+  logs.push({type,msg,ts:new Date().toLocaleTimeString()});
+  const el=document.getElementById('logA');
+  if(el){
+    el.innerHTML=logs.map(l=>`<div class="l${l.type}">[${l.ts}] ${esc(l.msg)}</div>`).join('');
+    el.scrollTop=el.scrollHeight;
+  }
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function clrLog(){logs.length=0;const el=document.getElementById('logA');if(el)el.innerHTML=''}
-function buildLineIndex(){xmlLines=xmlStr.split('\n');lg('i',`XML has ${xmlLines.length} lines`)}
-
-function findElementLine(el){
- const tag=el.tagName, attrs=el.attributes; let searchAttrs=[];
- const keyAttrs=['ProviderSubjectNumber','ProviderContractNo','ProviderSubjectNo','ParentProviderSubjectNo','ChildProviderSubjectNo','ProviderCode'];
- for(let ka of keyAttrs){const v=el.getAttribute(ka); if(v){searchAttrs.push(`${ka}="${v}"`); if(searchAttrs.length>=2)break;}}
- if(!searchAttrs.length&&attrs.length>0)searchAttrs.push(`${attrs[0].name}="${attrs[0].value}"`);
- if(!searchAttrs.length)return 0;
- for(let i=0;i<xmlLines.length;i++){if(xmlLines[i].includes('<'+tag)&&xmlLines[i].includes(searchAttrs[0]))return i+1;}
- return 0;
-}
-
-// ============================================================================
-// HELPERS
-// ============================================================================
-function gAttr(el,...names){
- for(const n of names){
-   const v=el.getAttribute(n);
-   if(v!==null&&v!==undefined) return String(v).trim();
- }
- return '';
-}
+function clrLog(){logs=[];document.getElementById('logA').innerHTML=''}
+function gAttr(el,...names){for(const n of names){const v=el.getAttribute(n);if(v!==null)return String(v).trim()}return ''}
 function hasVal(v){return v!==null&&v!==undefined&&String(v).trim()!==''}
-function isValidDate8(v){return /^\d{8}$/.test(v||'')}
-function parseYMD(v){
- if(!isValidDate8(v)) return null;
- const y=+v.slice(0,4), m=+v.slice(4,6), d=+v.slice(6,8);
- const dt=new Date(Date.UTC(y,m-1,d));
- if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==m-1||dt.getUTCDate()!==d) return null;
- return dt;
-}
-function cmpDate(a,b){
- const da=parseYMD(a), db=parseYMD(b);
- if(!da||!db) return null;
- if(da<db) return -1;
- if(da>db) return 1;
- return 0;
-}
-function isInteger(v){return /^\d+$/.test((v||'').trim())}
-function isDecimal2(v){return /^\d+(\.\d{1,2})?$/.test((v||'').trim())}
-function isDecimal2Signed(v){return /^-?\d+(\.\d{1,2})?$/.test((v||'').trim())}
-function isPct4(v){return /^-?\d+(\.\d{1,4})?$/.test((v||'').trim())}
-function cleanDigits(v){return String(v||'').replace(/\D/g,'')}
-function countBodyRecords(){
- return xmlDoc.querySelectorAll('Individuals,Companies,CompanyLinks,Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets,SubjectNegativeEvents').length;
-}
-function subjectExists(id){
- if(!id) return false;
- return [...xmlDoc.querySelectorAll('Individuals,Companies')].some(e=>gAttr(e,'ProviderSubjectNumber')===id);
-}
-function chkDomValue(ref,field,val,enumList,line){
- if(hasVal(val)&&enumList&&!enumList.includes(val)) addI('VAL',`${ref}: ${field}="${val}" not in domain`,line);
-}
-function chkDateField(ref,field,val,line,mandatory=false){
- if(mandatory&&!hasVal(val)){addI('MAND',`${ref}: ${field} empty`,line);return;}
- if(hasVal(val)&&!isValidDate8(val)) addI('DATE',`${ref}: ${field}="${val}" invalid YYYYMMDD`,line);
- if(hasVal(val)&&isValidDate8(val)&&!parseYMD(val)) addI('DATE',`${ref}: ${field}="${val}" invalid calendar date`,line);
-}
-function chkByRule(el, field, rule, ref, line){
- const val=gAttr(el,field);
- if(rule.req==='M'&&!hasVal(val)){addI('MAND',`${ref}: ${field} empty`,line);return;}
- if(!hasVal(val)) return;
+function isDate8(v){return /^\d{8}$/.test(v||'')}
+function parseDate8(v){if(!isDate8(v))return null;const y=+v.slice(0,4),m=+v.slice(4,6),d=+v.slice(6,8);const dt=new Date(Date.UTC(y,m-1,d));if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==m-1||dt.getUTCDate()!==d)return null;return dt}
+function cmpDate(a,b){const da=parseDate8(a),db=parseDate8(b);if(!da||!db)return null;if(da<db)return -1;if(da>db)return 1;return 0}
+function isInt(v){return /^\d+$/.test(String(v||'').trim())}
+function isDec2(v){return /^\d+(\.\d{1,2})?$/.test(String(v||'').trim())}
+function isDec2Signed(v){return /^-?\d+(\.\d{1,2})?$/.test(String(v||'').trim())}
+function isPct4(v){return /^-?\d+(\.\d{1,4})?$/.test(String(v||'').trim())}
+function digits(v){return String(v||'').replace(/\D/g,'')}
 
- if(rule.len && val.length>rule.len) addI('LEN',`${ref}: ${field} length ${val.length} > ${rule.len}`,line);
-
- if(rule.type==='D'){
-   chkDateField(ref,field,val,line,false);
-   return;
- }
-
- if(rule.type==='N'){
-   let ok=true;
-   if(rule.num==='int') ok=isInteger(val);
-   else if(rule.num==='dec2') ok=isDecimal2(val);
-   else if(rule.num==='dec2signed') ok=isDecimal2Signed(val);
-   else if(rule.num==='pct4') ok=isPct4(val);
-   else ok=isDecimal2(val)||isInteger(val);
-   if(!ok) addI('NUM',`${ref}: ${field}="${val}" invalid numeric format ${rule.num||''}`.trim(),line);
-   return;
- }
-
- if(rule.enum) chkDomValue(ref,field,val,rule.enum,line);
-}
-function chkRuleSet(tagName, rules, aliases={}){
- xmlDoc.querySelectorAll(tagName).forEach(el=>{
-   const line=findElementLine(el), ref=`${tagName}:${(gAttr(el,'ProviderContractNo')||gAttr(el,'ProviderSubjectNo')||gAttr(el,'ProviderSubjectNumber')||'?').slice(-12)} L${line}`;
-   Object.entries(rules).forEach(([f,rule])=>{
-     const fieldName = aliases[f] || f;
-     chkByRule(el, fieldName, rule, ref, line);
-   });
- });
-}
-function chkProviderCodeAgainstHeader(el, ref, line){
- const pc=gAttr(el,'ProviderCode');
- if(headerProviderCode && pc && pc!==headerProviderCode) addI('PROV',`${ref}: ProviderCode="${pc}" != Header ProviderCode="${headerProviderCode}"`,line);
-}
-function chkRefDateAgainstHeader(el, field, ref, line){
- const v=gAttr(el,field);
- if(v && headerFileReferenceDate && cmpDate(v,headerFileReferenceDate)===1) addI('SUBREF',`${ref}: ${field}="${v}" > Header FileReferenceDate="${headerFileReferenceDate}"`,line);
+function buildLineIndex(){xmlLines=xmlStr.split('\n')}
+function findElementLine(el){
+  const tag=el.tagName;
+  const keys=['ProviderSubjectNumber','ProviderContractNo','ProviderSubjectNo','ParentProviderSubjectNo','ChildProviderSubjectNo','ProviderCode'];
+  for(let i=0;i<xmlLines.length;i++){
+    if(!xmlLines[i].includes('<'+tag)) continue;
+    for(const k of keys){
+      const v=el.getAttribute(k);
+      if(v && xmlLines[i].includes(`${k}="${v}"`)) return i+1;
+    }
+  }
+  return 0;
 }
 
-// ============================================================================
-// FILE HANDLING
-// ============================================================================
-function handleFile(f){
- if(!f)return;
- if(!f.name.endsWith('.xml')){alert('Please select an .xml file');return}
- fName=f.name;
- const r=new FileReader();
- r.onload=e=>{
-   let raw=e.target.result;
-   if(raw.charCodeAt(0)===0xFEFF)raw=raw.substring(1);
-   const xi=raw.indexOf('<?xml');
-   if(xi>0)raw=raw.substring(xi); else if(xi===-1)raw=raw.trim();
-   xmlStr=raw; buildLineIndex(); run();
- };
- r.readAsText(f,'UTF-8');
+function bindUpload(){
+  const dz=document.getElementById('dz');
+  const fi=document.getElementById('fi');
+  dz.addEventListener('click',()=>fi.click());
+  fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dg')});
+  dz.addEventListener('dragleave',()=>dz.classList.remove('dg'));
+  dz.addEventListener('drop',e=>{
+    e.preventDefault();
+    dz.classList.remove('dg');
+    if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
 }
-const dz=document.getElementById('dz');
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dg')});
-dz.addEventListener('dragleave',()=>dz.classList.remove('dg'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dg');if(e.dataTransfer.files.length)handleFile(e.dataTransfer.files[0])});
+
+function handleFile(file){
+  if(!file) return;
+  if(!file.name.toLowerCase().endsWith('.xml')){
+    alert('Please select an XML file.');
+    return;
+  }
+  fName=file.name;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    let raw=e.target.result||'';
+    if(raw.charCodeAt(0)===0xFEFF) raw=raw.substring(1);
+    const xi=raw.indexOf('<?xml');
+    if(xi>0) raw=raw.substring(xi);
+    xmlStr=raw;
+    buildLineIndex();
+    run();
+  };
+  reader.onerror=()=>alert('Failed to read file.');
+  reader.readAsText(file,'UTF-8');
+}
 
 function resetTool(){
- xmlDoc=null;xmlStr='';xmlLines=[];errs={};warns={};allIssues=[];logs.length=0;headerFileReferenceDate='';headerProviderCode='';
- document.getElementById('upSec').classList.remove('hidden');
- ['fiSec','stSec','rSec'].forEach(i=>document.getElementById(i).classList.add('hidden'));
- document.getElementById('fi').value='';
+  xmlDoc=null;xmlStr='';xmlLines=[];fName='';
+  errs={};warns={};allIssues=[];logs=[];headerProviderCode='';headerFileReferenceDate='';
+  document.getElementById('upSec').classList.remove('hidden');
+  document.getElementById('fiSec').classList.add('hidden');
+  document.getElementById('stSec').classList.add('hidden');
+  document.getElementById('rSec').classList.add('hidden');
+  document.getElementById('fi').value='';
+  document.getElementById('logA').innerHTML='Ready...';
 }
+
 function stab(n,btn){
- document.querySelectorAll('.tb').forEach(b=>b.classList.remove('a'));
- document.querySelectorAll('.tc').forEach(c=>c.classList.remove('a'));
- btn.classList.add('a');
- document.getElementById('t-'+n).classList.add('a');
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('a'));
+  document.querySelectorAll('.tc').forEach(c=>c.classList.remove('a'));
+  btn.classList.add('a');
+  document.getElementById('t-'+n).classList.add('a');
 }
 
-// ============================================================================
-// MAIN RUNNER
-// ============================================================================
 function run(){
- lg('i','Loading: '+fName+' ('+(xmlStr.length/1024).toFixed(1)+' KB, '+xmlLines.length+' lines)');
- if(!xmlStr.trim()){alert('File is empty.');return}
- const p=new DOMParser(); xmlDoc=p.parseFromString(xmlStr,'text/xml');
- const pe=xmlDoc.querySelector('parsererror');
- if(pe){
-   const msg=(pe.textContent||'').substring(0,400);
-   lg('e','XML Parse Error: '+msg);
-   alert('XML Parse Error:\n\n'+msg);
-   return;
- }
- errs={};warns={};allIssues=[];
- headerFileReferenceDate=''; headerProviderCode='';
+  lg('i',`Loading ${fName}`);
+  const parser=new DOMParser();
+  xmlDoc=parser.parseFromString(xmlStr,'text/xml');
+  const pe=xmlDoc.querySelector('parsererror');
+  if(pe){
+    alert('XML Parse Error:\n\n'+(pe.textContent||'Invalid XML'));
+    lg('e','XML parse error');
+    return;
+  }
 
- chkHeaderFooter();
- chkIndividuals();
- chkCompanies();
- chkCompanyLinks();
- chkInstallments();
- chkNonInstallments();
- chkCreditCards();
- chkOtherCredit();
- chkInvestments();
- chkOffBalance();
- chkNegativeEvents();
- chkDups();
+  errs={};warns={};allIssues=[];
+  headerProviderCode='';headerFileReferenceDate='';
 
- document.getElementById('upSec').classList.add('hidden');
- document.getElementById('fiSec').classList.remove('hidden');
- document.getElementById('fn').textContent=fName;
- document.getElementById('fs').textContent=`${(xmlStr.length/1024).toFixed(1)} KB ${xmlLines.length} lines ${new Date().toLocaleString()}`;
- showStats();
- showResults();
- buildFieldMap();
- buildFixOpts();
- ['stSec','rSec'].forEach(i=>document.getElementById(i).classList.remove('hidden'));
- const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
- lg('i',`Done ${tE} errors in ${allIssues.length} total issues`);
+  validateHeaderFooter();
+  validateIndividuals();
+  validateCompanies();
+  validateCompanyLinks();
+  validateInstallments();
+  validateNonInstallments();
+  validateCreditCards();
+  validateOtherCredit();
+  validateInvestments();
+  validateOffBalance();
+  validateNegativeEvents();
+  validateDuplicates();
+
+  document.getElementById('upSec').classList.add('hidden');
+  document.getElementById('fiSec').classList.remove('hidden');
+  document.getElementById('stSec').classList.remove('hidden');
+  document.getElementById('rSec').classList.remove('hidden');
+  document.getElementById('fn').textContent=fName;
+  document.getElementById('fs').textContent=`${(xmlStr.length/1024).toFixed(1)} KB • ${xmlLines.length} lines • ${new Date().toLocaleString()}`;
+
+  showStats();
+  showResults();
+  buildFieldMap();
+  buildFixOpts();
+
+  lg('o','Validation complete');
 }
 
-// ============================================================================
-// VALIDATORS
-// ============================================================================
-function chkHeaderFooter(){
- const h=xmlDoc.querySelector('Header'), f=xmlDoc.querySelector('Footer');
-
- if(!h){addI('HD_MAND','Header missing',1);return;}
- const hln=findElementLine(h), href=`HD:L${hln}`;
-
- Object.entries(RULES.Header).forEach(([k,r])=>chkByRule(h,k,r,href,hln));
- headerFileReferenceDate=gAttr(h,'FileReferenceDate');
- headerProviderCode=gAttr(h,'ProviderCode');
-
- if(gAttr(h,'Version') && gAttr(h,'Version')!=='1.0') addI('HD_VER',`${href}: Version must be 1.0`,hln);
- if(gAttr(h,'SubmissionType')) chkDomValue(href,'SubmissionType',gAttr(h,'SubmissionType'),VALID.SubmissionType,hln);
-
- if(!f){addI('FT_MAND','Footer missing',xmlLines.length);return;}
- const fln=findElementLine(f), fref=`FT:L${fln}`;
- Object.entries(RULES.Footer).forEach(([k,r])=>chkByRule(f,k,r,fref,fln));
-
- if(gAttr(h,'ProviderCode') && gAttr(f,'ProviderCode') && gAttr(h,'ProviderCode')!==gAttr(f,'ProviderCode')){
-   addI('HF_PROV',`Header ProviderCode="${gAttr(h,'ProviderCode')}" != Footer ProviderCode="${gAttr(f,'ProviderCode')}"`,fln);
- }
-
- const bodyRecords=countBodyRecords();
- const ftRec=gAttr(f,'NumberOfRecords');
- if(hasVal(ftRec)&&isInteger(ftRec)&&parseInt(ftRec,10)!==bodyRecords){
-   addI('FT_CNT',`${fref}: NumberOfRecords=${ftRec} but actual body records=${bodyRecords}`,fln);
- }
-
- const subCnt=xmlDoc.querySelectorAll('Individuals,Companies').length;
- const ctrCnt=xmlDoc.querySelectorAll('Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets').length;
- const negCnt=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
-
- const hSub=gAttr(h,'TotalSubjectRecords'), hCtr=gAttr(h,'TotalContractRecords'), hNeg=gAttr(h,'TotalNegativeEventRecords');
- if(hasVal(hSub)&&isInteger(hSub)&&parseInt(hSub,10)!==subCnt) addI('HD_CNT',`${href}: TotalSubjectRecords=${hSub} actual=${subCnt}`,hln,0,true);
- if(hasVal(hCtr)&&isInteger(hCtr)&&parseInt(hCtr,10)!==ctrCnt) addI('HD_CNT',`${href}: TotalContractRecords=${hCtr} actual=${ctrCnt}`,hln,0,true);
- if(hasVal(hNeg)&&isInteger(hNeg)&&parseInt(hNeg,10)!==negCnt) addI('HD_CNT',`${href}: TotalNegativeEventRecords=${hNeg} actual=${negCnt}`,hln,0,true);
+function subjectExists(id){
+  return [...xmlDoc.querySelectorAll('Individuals,Companies')].some(e=>gAttr(e,'ProviderSubjectNumber')===id);
+}
+function bodyRecordCount(){
+  return xmlDoc.querySelectorAll('Individuals,Companies,CompanyLinks,Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets,SubjectNegativeEvents').length;
 }
 
-function chkIndividuals(){
- const els=xmlDoc.querySelectorAll('Individuals'); lg('i',`Checking ${els.length} Individuals...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNumber')||'?', ref=`ID:${s.slice(-8)} L${ln}`;
-   Object.entries(RULES.Individuals).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'SubjectReferenceDate',ref,ln);
-
-   const first=gAttr(el,'FirstName'), last=gAttr(el,'LastName'), full=gAttr(el,'FullName');
-   if(!first&&!last&&!full) addI('021',`${ref}: No name data`,ln);
-   if(first&&last&&full) addI('023',`${ref}: Both names and FullName filled`,ln,0,true);
-   if((first&&!last)||(!first&&last)) addI('021',`${ref}: FirstName and LastName must both be present`,ln);
-
-   const currentFull=gAttr(el,'CurrentFullAddress');
-   const currentParts=['CurrentStreetNo','CurrentPostalCode','CurrentPSGCode','CurrentCity','CurrentProvince','CurrentCountry'].map(a=>gAttr(el,a)).filter(Boolean);
-   if(!currentFull && (!gAttr(el,'CurrentCity') || !gAttr(el,'CurrentProvince'))) addI('139',`${ref}: CurrentAddress incomplete`,ln);
-   if(!gAttr(el,'CurrentPostalCode')&&!gAttr(el,'CurrentPSGCode')&&!currentFull) addI('113',`${ref}: CurrentPostalCode and CurrentPSGCode both empty`,ln);
-   if(currentFull && currentParts.length>0) addI('VAL',`${ref}: CurrentFullAddress and parsed current address both filled`,ln,0,true);
-
-   const permFull=gAttr(el,'PermanentFullAddress');
-   const permParts=['PermanentStreetNo','PermanentPostalCode','PermanentPSGCode','PermanentCity','PermanentProvince','PermanentCountry'].map(a=>gAttr(el,a)).filter(Boolean);
-   if(permFull && permParts.length>0) addI('VAL',`${ref}: PermanentFullAddress and parsed permanent address both filled`,ln,0,true);
-
-   ['PermanentPSGCode','CurrentPSGCode','STCurrentPSGCode'].forEach(a=>{
-     const v=gAttr(el,a);
-     if(v){
-       if(!/^\d{9,10}$/.test(v)) addI('PSGC',`${ref}: ${a}="${v}" invalid format`,ln);
-       else if(PSGC_SET.size && !PSGC_SET.has(v) && !PSGC_SET.has(v.replace(/^0/,''))) addI('PSGC',`${ref}: ${a}="${v}" not in loaded PSGC subset`,ln,0,true);
-     }
-   });
-
-   ['BirthCountry','Nationality','PermanentCountry','CurrentCountry','IDIssueCountry1','IDIssueCountry2','IDIssueCountry3','STCurrentCountry'].forEach(a=>{
-     const v=gAttr(el,a); if(v) chkDomValue(ref,a,v,VALID.Country||[],ln);
-   });
-
-   const tin=gAttr(el,'TIN');
-   if(tin){
-     const cl=cleanDigits(tin);
-     if(cl.length!==12) addI('050',`${ref}: TIN should be 12 digits, got ${cl.length}`,ln);
-   }
-   const stTin=gAttr(el,'SoleTraderTIN');
-   if(stTin){
-     const cl=cleanDigits(stTin);
-     if(cl.length!==12) addI('053',`${ref}: SoleTraderTIN should be 12 digits, got ${cl.length}`,ln);
-   }
-
-   if(!gAttr(el,'TIN') && !gAttr(el,'IdentificationType2') && !gAttr(el,'IdentificationType3') && !gAttr(el,'IDType1') && !gAttr(el,'IDType2') && !gAttr(el,'IDType3')){
-     addI('MAND',`${ref}: TIN unavailable but no alternate ID provided`,ln);
-   }
-
-   if(!gAttr(el,'ContactType1')||!gAttr(el,'ContactValue1')) addI('074',`${ref}: ContactType1 and ContactValue1 mandatory`,ln);
-
-   for(let i=1;i<=3;i++){
-     const t=gAttr(el,`IDType${i}`), n=gAttr(el,`IDNumber${i}`);
-     if((t&&!n)||(!t&&n)) addI('069',`${ref}: IDType${i}/IDNumber${i} mismatch`,ln,0,true);
-   }
-   [['IdentificationType2','IdentificationNumber2'],['IdentificationType3','IdentificationNumber3']].forEach(pair=>{
-     const t=gAttr(el,pair[0]), n=gAttr(el,pair[1]);
-     if((t&&!n)||(!t&&n)) addI('069',`${ref}: ${pair[0]}/${pair[1]} mismatch`,ln,0,true);
-   });
-
-   if(!gAttr(el,'EmploymentOccupationStatus')||!gAttr(el,'EmploymentDateHiredFrom')||!gAttr(el,'EmploymentAnnualMonthlyIndicator')){
-     addI('EMP',`${ref}: Employment mandatory fields missing`,ln);
-   }
-
-   if(gAttr(el,'SoleTraderTradeName')){
-     const stFull=gAttr(el,'STCurrentFullAddress');
-     if(!stFull && (!gAttr(el,'STCurrentCity') || !gAttr(el,'STCurrentProvince'))) addI('141',`${ref}: Sole trader address incomplete`,ln);
-   }
- });
- lg('o','Individuals done');
+function checkProviderCode(el, ref, line){
+  const p=gAttr(el,'ProviderCode');
+  if(headerProviderCode && p && p!==headerProviderCode) addI('PROV',`${ref}: ProviderCode="${p}" != Header "${headerProviderCode}"`,line);
+}
+function checkRefDate(fieldVal, ref, fieldName, line){
+  if(fieldVal && headerFileReferenceDate && cmpDate(fieldVal,headerFileReferenceDate)===1){
+    addI('SUBREF',`${ref}: ${fieldName}="${fieldVal}" > Header FileReferenceDate="${headerFileReferenceDate}"`,line);
+  }
+}
+function checkDate(val, ref, field, line, mandatory=false){
+  if(mandatory && !hasVal(val)){addI('MAND',`${ref}: ${field} empty`,line);return}
+  if(hasVal(val) && !isDate8(val)) addI('DATE',`${ref}: ${field}="${val}" invalid format`,line);
+  if(hasVal(val) && isDate8(val) && !parseDate8(val)) addI('DATE',`${ref}: ${field}="${val}" invalid date`,line);
+}
+function checkLen(val, max, ref, field, line){
+  if(hasVal(val) && val.length>max) addI('LEN',`${ref}: ${field} length ${val.length} > ${max}`,line);
+}
+function checkEnum(val, arr, ref, field, line){
+  if(hasVal(val) && arr && !arr.includes(val)) addI('VAL',`${ref}: ${field}="${val}" invalid domain`,line);
+}
+function checkNum(val, mode, ref, field, line){
+  if(!hasVal(val)) return;
+  let ok=true;
+  if(mode==='int') ok=isInt(val);
+  else if(mode==='dec2') ok=isDec2(val);
+  else if(mode==='dec2signed') ok=isDec2Signed(val);
+  else if(mode==='pct4') ok=isPct4(val);
+  if(!ok) addI('NUM',`${ref}: ${field}="${val}" invalid ${mode}`,line);
 }
 
-function chkCompanies(){
- const els=xmlDoc.querySelectorAll('Companies'); lg('i',`Checking ${els.length} Companies...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNumber')||'?', ref=`BD:${s.slice(-8)} L${ln}`;
-   Object.entries(RULES.Companies).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'SubjectReferenceDate',ref,ln);
+function validateHeaderFooter(){
+  const h=xmlDoc.querySelector('Header');
+  const f=xmlDoc.querySelector('Footer');
 
-   const tin=gAttr(el,'TIN');
-   if(tin){
-     const cl=cleanDigits(tin);
-     if(cl.length<9||cl.length>20) addI('020',`${ref}: Company TIN invalid digits length ${cl.length}`,ln);
-   } else {
-     addI('020',`${ref}: Company TIN missing`,ln);
-   }
+  if(!h){addI('HD_MAND','Header missing',1);return}
+  const hln=findElementLine(h)||1, href=`HD L${hln}`;
 
-   const currentFull=gAttr(el,'CurrentFullAddress');
-   const currentParts=['CurrentStreetNo','CurrentPostalCode','CurrentPSGCode','CurrentCity','CurrentProvince','CurrentCountry'].map(a=>gAttr(el,a)).filter(Boolean);
-   if(currentFull && currentParts.length>0) addI('VAL',`${ref}: CurrentFullAddress and parsed company address both filled`,ln,0,true);
+  ['ProviderCode','FileReferenceDate','Version','SubmissionType','TotalSubjectRecords','TotalContractRecords','TotalNegativeEventRecords'].forEach(a=>{
+    if(!hasVal(gAttr(h,a))) addI('HD_MAND',`${href}: ${a} empty`,hln);
+  });
 
-   const psgc=gAttr(el,'CurrentPSGCode');
-   if(psgc){
-     if(!/^\d{9,10}$/.test(psgc)) addI('PSGC',`${ref}: CurrentPSGCode="${psgc}" invalid format`,ln);
-     else if(PSGC_SET.size && !PSGC_SET.has(psgc) && !PSGC_SET.has(psgc.replace(/^0/,''))) addI('PSGC',`${ref}: CurrentPSGCode="${psgc}" not in loaded PSGC subset`,ln,0,true);
-   }
- });
- lg('o','Companies done');
+  checkLen(gAttr(h,'ProviderCode'),10,href,'ProviderCode',hln);
+  checkDate(gAttr(h,'FileReferenceDate'),href,'FileReferenceDate',hln,true);
+  checkEnum(gAttr(h,'SubmissionType'),VALID.SubmissionType,href,'SubmissionType',hln);
+  checkNum(gAttr(h,'TotalSubjectRecords'),'int',href,'TotalSubjectRecords',hln);
+  checkNum(gAttr(h,'TotalContractRecords'),'int',href,'TotalContractRecords',hln);
+  checkNum(gAttr(h,'TotalNegativeEventRecords'),'int',href,'TotalNegativeEventRecords',hln);
+  if(hasVal(gAttr(h,'Version')) && gAttr(h,'Version')!=='1.0') addI('HD_VER',`${href}: Version must be 1.0`,hln);
+
+  headerProviderCode=gAttr(h,'ProviderCode');
+  headerFileReferenceDate=gAttr(h,'FileReferenceDate');
+
+  if(!f){addI('FT_MAND','Footer missing',xmlLines.length);return}
+  const fln=findElementLine(f)||xmlLines.length, fref=`FT L${fln}`;
+
+  ['ProviderCode','FileReferenceDate','NumberOfRecords'].forEach(a=>{
+    if(!hasVal(gAttr(f,a))) addI('FT_MAND',`${fref}: ${a} empty`,fln);
+  });
+  checkLen(gAttr(f,'ProviderCode'),10,fref,'ProviderCode',fln);
+  checkDate(gAttr(f,'FileReferenceDate'),fref,'FileReferenceDate',fln,true);
+  checkNum(gAttr(f,'NumberOfRecords'),'int',fref,'NumberOfRecords',fln);
+
+  if(headerProviderCode && gAttr(f,'ProviderCode') && headerProviderCode!==gAttr(f,'ProviderCode')){
+    addI('HF_PROV',`${fref}: Footer ProviderCode != Header ProviderCode`,fln);
+  }
+
+  const actualBody=bodyRecordCount();
+  const footerCount=gAttr(f,'NumberOfRecords');
+  if(isInt(footerCount) && parseInt(footerCount,10)!==actualBody){
+    addI('FT_CNT',`${fref}: NumberOfRecords=${footerCount} actual=${actualBody}`,fln);
+  }
+
+  const subActual=xmlDoc.querySelectorAll('Individuals,Companies').length;
+  const ctrActual=xmlDoc.querySelectorAll('Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets').length;
+  const negActual=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
+
+  if(isInt(gAttr(h,'TotalSubjectRecords')) && parseInt(gAttr(h,'TotalSubjectRecords'),10)!==subActual) addI('HD_CNT',`${href}: TotalSubjectRecords mismatch`,hln,0,true);
+  if(isInt(gAttr(h,'TotalContractRecords')) && parseInt(gAttr(h,'TotalContractRecords'),10)!==ctrActual) addI('HD_CNT',`${href}: TotalContractRecords mismatch`,hln,0,true);
+  if(isInt(gAttr(h,'TotalNegativeEventRecords')) && parseInt(gAttr(h,'TotalNegativeEventRecords'),10)!==negActual) addI('HD_CNT',`${href}: TotalNegativeEventRecords mismatch`,hln,0,true);
 }
 
-function chkCompanyLinks(){
- const els=xmlDoc.querySelectorAll('CompanyLinks'); lg('i',`Checking ${els.length} CompanyLinks...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), ref=`SL:L${ln}`;
-   Object.entries(RULES.CompanyLinks).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'CompanyLinkRefDate',ref,ln);
+function validateIndividuals(){
+  xmlDoc.querySelectorAll('Individuals').forEach(el=>{
+    const ln=findElementLine(el), ref=`ID:${(gAttr(el,'ProviderSubjectNumber')||'?').slice(-8)} L${ln}`;
 
-   const par=gAttr(el,'ParentProviderSubjectNo'), ch=gAttr(el,'ChildProviderSubjectNo');
-   if(par && !subjectExists(par)) addI('318',`${ref}: ParentProviderSubjectNo "${par}" not found in file`,ln);
-   if(ch && !subjectExists(ch)) addI('319',`${ref}: ChildProviderSubjectNo "${ch}" not found in file`,ln);
- });
- lg('o','CompanyLinks done');
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln);
+
+    checkLen(gAttr(el,'ProviderCode'),10,ref,'ProviderCode',ln);
+    checkLen(gAttr(el,'BranchCode'),6,ref,'BranchCode',ln);
+    checkLen(gAttr(el,'ProviderSubjectNumber'),38,ref,'ProviderSubjectNumber',ln);
+    checkLen(gAttr(el,'Title'),2,ref,'Title',ln);
+    checkLen(gAttr(el,'FirstName'),70,ref,'FirstName',ln);
+    checkLen(gAttr(el,'MiddleName'),70,ref,'MiddleName',ln);
+    checkLen(gAttr(el,'LastName'),70,ref,'LastName',ln);
+    checkLen(gAttr(el,'FullName'),220,ref,'FullName',ln);
+    checkLen(gAttr(el,'Suffix'),10,ref,'Suffix',ln);
+    checkLen(gAttr(el,'PreviousLastName'),70,ref,'PreviousLastName',ln);
+    checkLen(gAttr(el,'BirthPlace'),100,ref,'BirthPlace',ln);
+    checkLen(gAttr(el,'BirthCountry'),2,ref,'BirthCountry',ln);
+    checkLen(gAttr(el,'Nationality'),2,ref,'Nationality',ln);
+    checkLen(gAttr(el,'MotherMaidenFullName'),220,ref,'MotherMaidenFullName',ln);
+
+    checkDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln,true);
+    checkDate(gAttr(el,'BirthDate'),ref,'BirthDate',ln,true);
+    checkDate(gAttr(el,'EmploymentDateHiredFrom'),ref,'EmploymentDateHiredFrom',ln,false);
+
+    checkEnum(gAttr(el,'Title'),VALID.Title,ref,'Title',ln);
+    checkEnum(gAttr(el,'Gender'),VALID.Gender,ref,'Gender',ln);
+    checkEnum(gAttr(el,'BirthCountry'),VALID.Country,ref,'BirthCountry',ln);
+    checkEnum(gAttr(el,'Nationality'),VALID.Country,ref,'Nationality',ln);
+    checkEnum(gAttr(el,'Resident'),VALID.Resident,ref,'Resident',ln);
+    checkEnum(gAttr(el,'CivilStatus'),VALID.CivilStatus,ref,'CivilStatus',ln);
+    checkEnum(gAttr(el,'ContactType1'),VALID.ContactType,ref,'ContactType1',ln);
+    checkEnum(gAttr(el,'ContactType2'),VALID.ContactType,ref,'ContactType2',ln);
+    checkEnum(gAttr(el,'EmploymentPSIC'),VALID.PSIC,ref,'EmploymentPSIC',ln);
+    checkEnum(gAttr(el,'EmploymentAnnualMonthlyIndicator'),VALID.AnnualMonthly,ref,'EmploymentAnnualMonthlyIndicator',ln);
+    checkEnum(gAttr(el,'EmploymentOccupationStatus'),VALID.OccupationStatus,ref,'EmploymentOccupationStatus',ln);
+    checkEnum(gAttr(el,'PermanentHouseOwnerLessee'),VALID.HouseOwnerLessee,ref,'PermanentHouseOwnerLessee',ln);
+    checkEnum(gAttr(el,'CurrentHouseOwnerLessee'),VALID.HouseOwnerLessee,ref,'CurrentHouseOwnerLessee',ln);
+    checkEnum(gAttr(el,'STCurrentHouseOwnerLessee'),VALID.HouseOwnerLessee,ref,'STCurrentHouseOwnerLessee',ln);
+    checkEnum(gAttr(el,'LargeExposureIndicator'),VALID.YesNo,ref,'LargeExposureIndicator',ln);
+
+    checkNum(gAttr(el,'DependantsNo')||gAttr(el,'DependentsNo'),'int',ref,'DependantsNo',ln);
+    checkNum(gAttr(el,'CarsOwnedNo'),'int',ref,'CarsOwnedNo',ln);
+    checkNum(gAttr(el,'EmploymentGrossIncome'),'dec2',ref,'EmploymentGrossIncome',ln);
+    checkNum(gAttr(el,'EmploymentNetIncome'),'dec2',ref,'EmploymentNetIncome',ln);
+
+    const first=gAttr(el,'FirstName'), last=gAttr(el,'LastName'), full=gAttr(el,'FullName');
+    if(!first && !last && !full) addI('021',`${ref}: need FirstName+LastName or FullName`,ln);
+    if((first&&!last)||(!first&&last)) addI('021',`${ref}: FirstName and LastName must both be present`,ln);
+    if(first&&last&&full) addI('023',`${ref}: both parsed name and FullName filled`,ln,0,true);
+
+    if(!gAttr(el,'ContactType1') || !gAttr(el,'ContactValue1')) addI('074',`${ref}: ContactType1 and ContactValue1 mandatory`,ln);
+    if((gAttr(el,'ContactType2')&&!gAttr(el,'ContactValue2'))||(!gAttr(el,'ContactType2')&&gAttr(el,'ContactValue2'))) addI('074',`${ref}: ContactType2 and ContactValue2 mismatch`,ln,0,true);
+
+    const tin=gAttr(el,'TIN');
+    if(tin){
+      if(digits(tin).length!==12) addI('050',`${ref}: TIN must be 12 digits`,ln);
+    }
+
+    const stTin=gAttr(el,'SoleTraderTIN');
+    if(stTin){
+      if(digits(stTin).length!==12) addI('053',`${ref}: SoleTraderTIN must be 12 digits`,ln);
+    }
+
+    if(!tin && !gAttr(el,'IdentificationType2') && !gAttr(el,'IdentificationType3') && !gAttr(el,'IDType1') && !gAttr(el,'IDType2') && !gAttr(el,'IDType3')){
+      addI('MAND',`${ref}: TIN unavailable but no alternate ID provided`,ln);
+    }
+
+    if((gAttr(el,'IdentificationType2')&&!gAttr(el,'IdentificationNumber2'))||(!gAttr(el,'IdentificationType2')&&gAttr(el,'IdentificationNumber2'))) addI('069',`${ref}: IdentificationType2/IdentificationNumber2 mismatch`,ln,0,true);
+    if((gAttr(el,'IdentificationType3')&&!gAttr(el,'IdentificationNumber3'))||(!gAttr(el,'IdentificationType3')&&gAttr(el,'IdentificationNumber3'))) addI('069',`${ref}: IdentificationType3/IdentificationNumber3 mismatch`,ln,0,true);
+    for(let i=1;i<=3;i++){
+      if((gAttr(el,`IDType${i}`)&&!gAttr(el,`IDNumber${i}`))||(!gAttr(el,`IDType${i}`)&&gAttr(el,`IDNumber${i}`))) addI('069',`${ref}: IDType${i}/IDNumber${i} mismatch`,ln,0,true);
+    }
+
+    const currentFull=gAttr(el,'CurrentFullAddress');
+    const currentPieces=['CurrentStreetNo','CurrentPostalCode','CurrentPSGCode','CurrentCity','CurrentProvince','CurrentCountry'].filter(a=>hasVal(gAttr(el,a)));
+    if(currentFull && currentPieces.length) addI('VAL',`${ref}: CurrentFullAddress with parsed current fields`,ln,0,true);
+    if(!currentFull && (!gAttr(el,'CurrentCity') || !gAttr(el,'CurrentProvince'))) addI('139',`${ref}: current parsed address incomplete`,ln);
+    if(!currentFull && !gAttr(el,'CurrentPostalCode') && !gAttr(el,'CurrentPSGCode')) addI('113',`${ref}: CurrentPostalCode and CurrentPSGCode both empty`,ln);
+
+    const permFull=gAttr(el,'PermanentFullAddress');
+    const permPieces=['PermanentStreetNo','PermanentPostalCode','PermanentPSGCode','PermanentCity','PermanentProvince','PermanentCountry'].filter(a=>hasVal(gAttr(el,a)));
+    if(permFull && permPieces.length) addI('VAL',`${ref}: PermanentFullAddress with parsed permanent fields`,ln,0,true);
+
+    if(hasVal(gAttr(el,'PermanentPSGCode')) && !/^\d{9,10}$/.test(gAttr(el,'PermanentPSGCode'))) addI('PSGC',`${ref}: PermanentPSGCode invalid`,ln);
+    if(hasVal(gAttr(el,'CurrentPSGCode')) && !/^\d{9,10}$/.test(gAttr(el,'CurrentPSGCode'))) addI('PSGC',`${ref}: CurrentPSGCode invalid`,ln);
+    if(hasVal(gAttr(el,'STCurrentPSGCode')) && !/^\d{9,10}$/.test(gAttr(el,'STCurrentPSGCode'))) addI('PSGC',`${ref}: STCurrentPSGCode invalid`,ln);
+
+    if(!gAttr(el,'EmploymentTradeName')||!gAttr(el,'EmploymentPSIC')||!gAttr(el,'EmploymentGrossIncome')||!gAttr(el,'EmploymentNetIncome')||!gAttr(el,'EmploymentAnnualMonthlyIndicator')||!gAttr(el,'EmploymentOccupationStatus')||!gAttr(el,'EmploymentDateHiredFrom')){
+      addI('EMP',`${ref}: employment fields incomplete`,ln);
+    }
+
+    if(gAttr(el,'SoleTraderTradeName')){
+      const stFull=gAttr(el,'STCurrentFullAddress');
+      if(!stFull && (!gAttr(el,'STCurrentCity')||!gAttr(el,'STCurrentProvince'))) addI('141',`${ref}: sole trader address incomplete`,ln);
+      if(!gAttr(el,'STContactType1')||!gAttr(el,'STContactValue1')) addI('028',`${ref}: STContactType1/STContactValue1 missing`,ln);
+    }
+  });
 }
 
-function chkInstallments(){
- const els=xmlDoc.querySelectorAll('Installments'); lg('i',`Checking ${els.length} Installments...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CI:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.Installments).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
+function validateCompanies(){
+  xmlDoc.querySelectorAll('Companies').forEach(el=>{
+    const ln=findElementLine(el), ref=`BD:${(gAttr(el,'ProviderSubjectNumber')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln);
 
-   const phase=gAttr(el,'ContractPhase');
-   const start=gAttr(el,'ContractStartDate');
-   const req=gAttr(el,'ContractRequestDate');
-   const planned=gAttr(el,'ContractPlannedEndDate');
-   const actual=gAttr(el,'ContractActualEndDate');
-   const lastPayDt=gAttr(el,'LastPaymentDate');
-   const nextPayDt=gAttr(el,'NextPaymentDate');
+    checkDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln,true);
+    checkDate(gAttr(el,'ExistenceTerm'),ref,'ExistenceTerm',ln,false);
+    checkDate(gAttr(el,'RegistrationDate'),ref,'RegistrationDate',ln,true);
 
-   if(['AC','CL','CA'].includes(phase) && !start) addI('MAND',`${ref}: ContractStartDate mandatory for phase ${phase}`,ln);
-   if(['AC','CL','CA'].includes(phase) && !planned) addI('MAND',`${ref}: ContractPlannedEndDate mandatory for phase ${phase}`,ln);
-   if(['CL','CA'].includes(phase) && !actual) addI('MAND',`${ref}: ContractActualEndDate mandatory for phase ${phase}`,ln);
-   if(phase==='AC' && !gAttr(el,'RestructuredCreditCode')) addI('195',`${ref}: RestructuredCreditCode empty`,ln);
+    checkLen(gAttr(el,'ProviderCode'),18,ref,'ProviderCode',ln);
+    checkLen(gAttr(el,'BranchCode'),6,ref,'BranchCode',ln);
+    checkLen(gAttr(el,'ProviderSubjectNumber'),38,ref,'ProviderSubjectNumber',ln);
+    checkLen(gAttr(el,'TradeName'),120,ref,'TradeName',ln);
+    checkLen(gAttr(el,'OfficialRegisteredTradeName'),120,ref,'OfficialRegisteredTradeName',ln);
+    checkLen(gAttr(el,'Nationality'),2,ref,'Nationality',ln);
 
-   if(start && gAttr(el,'ContractRefDate') && cmpDate(start,gAttr(el,'ContractRefDate'))!==null && cmpDate(start,gAttr(el,'ContractRefDate'))>=0){
-     addI('DATE_LOGIC',`${ref}: ContractStartDate must be less than ContractRefDate`,ln);
-   }
-   if(req && start && cmpDate(req,start)!==null && cmpDate(req,start)===1){
-     addI('DATE_LOGIC',`${ref}: ContractRequestDate should not be greater than ContractStartDate`,ln,0,true);
-   }
-   if(planned && start && cmpDate(planned,start)!==null && cmpDate(planned,start)!==-1 && cmpDate(planned,start)!==1){
-     addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be greater than ContractStartDate`,ln);
-   }
-   if(planned && start && cmpDate(planned,start)!==null && cmpDate(planned,start)!==1){
-     addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be greater than ContractStartDate`,ln);
-   }
-   if(actual && start && cmpDate(actual,start)!==null && cmpDate(actual,start)!==1){
-     addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be greater than ContractStartDate`,ln);
-   }
-   if(lastPayDt && start && cmpDate(lastPayDt,start)!==null && cmpDate(lastPayDt,start)!!==1){
-     addI('DATE_LOGIC',`${ref}: LastPaymentDate must be greater than ContractStartDate`,ln,0,true);
-   }
-   if(lastPayDt && gAttr(el,'ContractRefDate') && cmpDate(lastPayDt,gAttr(el,'ContractRefDate'))===1){
-     addI('DATE_LOGIC',`${ref}: LastPaymentDate must be <= ContractRefDate`,ln);
-   }
-   if(nextPayDt){
-     if(['CL','CA'].includes(phase)) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be empty for phase ${phase}`,ln,0,true);
-     if(start && cmpDate(nextPayDt,start)!==null && cmpDate(nextPayDt,start)!!==1) addI('DATE_LOGIC',`${ref}: NextPaymentDate must be greater than ContractStartDate`,ln);
-     if(planned && cmpDate(nextPayDt,planned)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractPlannedEndDate`,ln,0,true);
-     if(actual && cmpDate(nextPayDt,actual)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractActualEndDate`,ln,0,true);
-   }
+    checkEnum(gAttr(el,'Nationality'),VALID.Country,ref,'Nationality',ln);
+    checkEnum(gAttr(el,'Resident'),VALID.Resident,ref,'Resident',ln);
+    checkEnum(gAttr(el,'LegalForm'),VALID.LegalForm,ref,'LegalForm',ln);
+    checkEnum(gAttr(el,'NatureOfBusiness'),VALID.PSIC,ref,'NatureOfBusiness',ln);
+    checkEnum(gAttr(el,'FirmSize'),VALID.FirmSize,ref,'FirmSize',ln);
+    checkEnum(gAttr(el,'Conglomerate'),VALID.Conglomerate,ref,'Conglomerate',ln);
+    checkEnum(gAttr(el,'CurrentHouseOwnerLessee'),VALID.HouseOwnerLessee,ref,'CurrentHouseOwnerLessee',ln);
+    checkEnum(gAttr(el,'ContactType1'),VALID.ContactType,ref,'ContactType1',ln);
+    checkEnum(gAttr(el,'ContactType2'),VALID.ContactType,ref,'ContactType2',ln);
+    checkEnum(gAttr(el,'LargeExposureIndicator'),VALID.YesNo,ref,'LargeExposureIndicator',ln);
 
-   if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('090',`${ref}: DaysPastDue empty`,ln);
-   if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'LastPaymentAmount')) addI('089',`${ref}: LastPaymentAmount empty`,ln);
-   if(gAttr(el,'OutstandingPaymentsNumber') && !isInteger(gAttr(el,'OutstandingPaymentsNumber'))) addI('168',`${ref}: OutstandingPaymentsNumber not integer`,ln);
-   if(gAttr(el,'InstallmentsNumber') && (!isInteger(gAttr(el,'InstallmentsNumber')) || parseInt(gAttr(el,'InstallmentsNumber'),10)<=0)) addI('TYPE',`${ref}: InstallmentsNumber must be positive integer`,ln);
+    checkNum(gAttr(el,'EmployeesNo'),'int',ref,'EmployeesNo',ln);
+    checkNum(gAttr(el,'GrossAnnualIncome'),'dec2',ref,'GrossAnnualIncome',ln);
+    checkNum(gAttr(el,'NetAnnualIncome'),'dec2',ref,'NetAnnualIncome',ln);
+    checkNum(gAttr(el,'MonthlyExpenses'),'dec2',ref,'MonthlyExpenses',ln);
 
-   const bookType=gAttr(el,'BookType');
-   if(bookType==='B' && !gAttr(el,'BookCode')) addI('BOOK',`${ref}: BookCode required when BookType=B`,ln);
-   if(bookType==='T' && !gAttr(el,'TrustType')) addI('BOOK',`${ref}: TrustType required when BookType=T`,ln);
+    const tin=gAttr(el,'TIN');
+    if(!tin) addI('020',`${ref}: Company TIN missing`,ln);
+    else if(digits(tin).length<9||digits(tin).length>20) addI('020',`${ref}: Company TIN invalid`,ln);
 
-   if(phase==='AC' && !gAttr(el,'MonthlyPaymentAmount')) addI('MAND',`${ref}: MonthlyPaymentAmount mandatory for Active`,ln);
+    if(!gAttr(el,'ContactType1') || !gAttr(el,'ContactValue1')) addI('104',`${ref}: ContactType1/ContactValue1 mandatory`,ln);
 
-   if(gAttr(el,'OutstandingPaymentsNumber')&&!gAttr(el,'OutstandingBalance')) addI('MAND',`${ref}: OutstandingBalance required with OutstandingPaymentsNumber`,ln);
-   if(gAttr(el,'OutstandingBalance')&&!gAttr(el,'OutstandingPaymentsNumber')) addI('MAND',`${ref}: OutstandingPaymentsNumber required with OutstandingBalance`,ln,0,true);
-
-   if(gAttr(el,'OverduePaymentsNumber')&&!gAttr(el,'OverduePaymentsAmount')) addI('MAND',`${ref}: OverduePaymentsAmount required with OverduePaymentsNumber`,ln);
-   if(gAttr(el,'OverduePaymentsAmount')&&!gAttr(el,'OverduePaymentsNumber')) addI('MAND',`${ref}: OverduePaymentsNumber required with OverduePaymentsAmount`,ln);
-
-   for(let i=1;i<=6;i++){
-     const gA=gAttr(el,`GuaranteedAmount${i}`), gT=gAttr(el,`GuaranteeType${i}`);
-     if((gA&&!gT)||(!gA&&gT)) addI('296',`${ref}: GuaranteedAmount${i} and GuaranteeType${i} mismatch`,ln);
-     const gp=gAttr(el,`GuarantorProviderSubjectNo${i}`), gn=gAttr(el,`GuarantorName${i}`);
-     if(gT && !gp && !gn) addI('MAND',`${ref}: GuarantorProviderSubjectNo${i} or GuarantorName${i} required when GuaranteeType${i} is filled`,ln);
-     const ct=gAttr(el,`CustomerType${i}`);
-     if(ct) chkDomValue(ref,`CustomerType${i}`,ct,VALID.GuaranteeCustomerType,ln);
-   }
-
-   for(let i=1;i<=6;i++){
-     const ls=gAttr(el,`LSProviderSubjectNo${i}`), lr=gAttr(el,`LinkedSubjectRole${i}`), lnm=gAttr(el,`LinkedSubjectName${i}`);
-     if((ls&&!lr)||(lr&&!ls&&!lnm)) addI('ROLE_LS',`${ref}: linked subject set ${i} inconsistent`,ln,0,true);
-     if(lr && !['C','G'].includes(lr)) addI('VAL',`${ref}: LinkedSubjectRole${i} invalid`,ln);
-   }
- });
- lg('o','Installments done');
+    const currentFull=gAttr(el,'CurrentFullAddress');
+    const currentPieces=['CurrentStreetNo','CurrentPostalCode','CurrentPSGCode','CurrentCity','CurrentProvince','CurrentCountry'].filter(a=>hasVal(gAttr(el,a)));
+    if(currentFull && currentPieces.length) addI('VAL',`${ref}: CurrentFullAddress with parsed address fields`,ln,0,true);
+  });
 }
 
-function chkNonInstallments(){
- const els=xmlDoc.querySelectorAll('NonInstallments'); lg('i',`Checking ${els.length} NonInstallments...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CN:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.NonInstallments).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
+function validateCompanyLinks(){
+  xmlDoc.querySelectorAll('CompanyLinks').forEach(el=>{
+    const ln=findElementLine(el), ref=`SL L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'CompanyLinkRefDate'),ref,'CompanyLinkRefDate',ln);
 
-   const phase=gAttr(el,'ContractPhase');
-   const start=gAttr(el,'ContractStartDate');
-   const planned=gAttr(el,'ContractPlannedEndDate');
-   const actual=gAttr(el,'ContractActualEndDate');
-   const lastPayDt=gAttr(el,'LastPaymentDate');
+    checkDate(gAttr(el,'CompanyLinkRefDate'),ref,'CompanyLinkRefDate',ln,true);
+    checkLen(gAttr(el,'ProviderCode'),10,ref,'ProviderCode',ln);
+    checkLen(gAttr(el,'BranchCode'),6,ref,'BranchCode',ln);
+    checkLen(gAttr(el,'ParentProviderSubjectNo'),38,ref,'ParentProviderSubjectNo',ln);
+    checkLen(gAttr(el,'ChildProviderSubjectNo'),38,ref,'ChildProviderSubjectNo',ln);
+    checkEnum(gAttr(el,'CompanyRole'),VALID.CompanyRole,ref,'CompanyRole',ln);
 
-   if(['AC','CL','CA'].includes(phase) && !start) addI('MAND',`${ref}: ContractStartDate mandatory`,ln);
-   if(['AC','CL','CA'].includes(phase) && !planned) addI('MAND',`${ref}: ContractPlannedEndDate mandatory`,ln);
-   if(['CL','CA'].includes(phase) && !actual) addI('MAND',`${ref}: ContractActualEndDate mandatory`,ln);
-
-   if(start && gAttr(el,'ContractRefDate') && cmpDate(start,gAttr(el,'ContractRefDate'))!==null && cmpDate(start,gAttr(el,'ContractRefDate'))>=0){
-     addI('DATE_LOGIC',`${ref}: ContractStartDate must be less than ContractRefDate`,ln);
-   }
-   if(planned && start && cmpDate(planned,start)!==1) addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be greater than ContractStartDate`,ln);
-   if(actual && start && cmpDate(actual,start)!==1) addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be greater than ContractStartDate`,ln);
-   if(lastPayDt && start && cmpDate(lastPayDt,start)!==null && cmpDate(lastPayDt,start)!==1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be greater than ContractStartDate`,ln,0,true);
-   if(lastPayDt && gAttr(el,'ContractRefDate') && cmpDate(lastPayDt,gAttr(el,'ContractRefDate'))===1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be <= ContractRefDate`,ln);
-
-   const rcc=gAttr(el,'RestructuredCreditCode');
-   if(!rcc) addI('CN_RCC',`${ref}: RestructuredCreditCode empty`,ln);
-   if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('CN_DPD',`${ref}: DaysPastDue empty`,ln);
-   if(!gAttr(el,'CreditLimitFinancedAmount')) addI('CN_LIM',`${ref}: CreditLimitFinancedAmount empty`,ln);
-   if(phase==='AC'&&!gAttr(el,'UtilizationOutstandingBalance')) addI('CN_BAL',`${ref}: UtilizationOutstandingBalance empty`,ln);
-
-   const bookType=gAttr(el,'BookType');
-   if(bookType==='B' && !gAttr(el,'BookCode')) addI('BOOK',`${ref}: BookCode required when BookType=B`,ln);
-   if(bookType==='T' && !gAttr(el,'TrustType')) addI('BOOK',`${ref}: TrustType required when BookType=T`,ln);
-
-   for(let i=1;i<=6;i++){
-     const gA=gAttr(el,`GuaranteedAmount${i}`), gT=gAttr(el,`GuaranteeType${i}`);
-     if((gA&&!gT)||(!gA&&gT)) addI('296',`${ref}: GuaranteedAmount${i} and GuaranteeType${i} mismatch`,ln);
-   }
-   for(let i=1;i<=6;i++){
-     const ls=gAttr(el,`LSProviderSubjectNo${i}`), lr=gAttr(el,`LinkedSubjectRole${i}`), lnm=gAttr(el,`LinkedSubjectName${i}`);
-     if((ls&&!lr)||(lr&&!ls&&!lnm)) addI('ROLE_LS',`${ref}: linked subject set ${i} inconsistent`,ln,0,true);
-   }
- });
- lg('o','NonInstallments done');
+    if(!subjectExists(gAttr(el,'ParentProviderSubjectNo'))) addI('318',`${ref}: ParentProviderSubjectNo not found`,ln);
+    if(!subjectExists(gAttr(el,'ChildProviderSubjectNo'))) addI('319',`${ref}: ChildProviderSubjectNo not found`,ln);
+  });
 }
 
-function chkCreditCards(){
- const els=xmlDoc.querySelectorAll('CreditCards'); lg('i',`Checking ${els.length} CreditCards...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CC:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.CreditCards).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
+function validateInstallments(){
+  xmlDoc.querySelectorAll('Installments').forEach(el=>{
+    const ln=findElementLine(el), ref=`CI:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
 
-   const phase=gAttr(el,'ContractPhase');
-   const start=gAttr(el,'ContractStartDate');
-   const planned=gAttr(el,'ContractPlannedEndDate');
-   const actual=gAttr(el,'ContractActualEndDate');
-   const lastPayDt=gAttr(el,'LastPaymentDate');
-   const nextPayDt=gAttr(el,'NextPaymentDate');
+    Object.entries({
+      ProviderCode:[10],BranchCode:[6],ProviderSubjectNo:[38],ProviderContractNo:[38],ContractType:[2],ContractPhase:[2],ContractStatus:[2],RegulatoryStatus:[3],OriginalCurrency:[3],TransactionType:[4],CreditPurpose:[2],CreditPurposeEconomicActivity:[1],PaymentPeriodicity:[1],PaymentMethod:[3],GoodType:[2],NewUsedCode:[1],GoodBrand:[100],RegistrationNumber:[20]
+    }).forEach(([f,[len]])=>checkLen(gAttr(el,f),len,ref,f,ln));
 
-   if(['AC','CL','CA'].includes(phase) && !start) addI('MAND',`${ref}: ContractStartDate mandatory`,ln);
-   if(['CL','CA'].includes(phase) && !actual) addI('MAND',`${ref}: ContractActualEndDate mandatory`,ln);
-   if(actual && phase==='AC') addI('DATE_LOGIC',`${ref}: ContractActualEndDate should be empty when ContractPhase=AC`,ln,0,true);
+    ['ContractRefDate','ContractStartDate','ContractRequestDate','ContractPlannedEndDate','ContractActualEndDate','LastPaymentDate','FirstPaymentDate','NextPaymentDate'].forEach(f=>checkDate(gAttr(el,f),ref,f,ln,false));
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
 
-   if(start && gAttr(el,'ContractRefDate') && cmpDate(start,gAttr(el,'ContractRefDate'))!==null && cmpDate(start,gAttr(el,'ContractRefDate'))>=0){
-     addI('DATE_LOGIC',`${ref}: ContractStartDate must be less than ContractRefDate`,ln);
-   }
-   if(planned && start && cmpDate(planned,start)!==1) addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be greater than ContractStartDate`,ln,0,true);
-   if(actual && start && cmpDate(actual,start)!==1) addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be greater than ContractStartDate`,ln);
-   if(lastPayDt && start && cmpDate(lastPayDt,start)!==null && cmpDate(lastPayDt,start)!==1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be greater than ContractStartDate`,ln,0,true);
-   if(lastPayDt && gAttr(el,'ContractRefDate') && cmpDate(lastPayDt,gAttr(el,'ContractRefDate'))===1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be <= ContractRefDate`,ln);
+    checkEnum(gAttr(el,'Role'),VALID.Role,ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'ContractType'),VALID.ContractType,ref,'ContractType',ln);
+    checkEnum(gAttr(el,'ContractPhase'),VALID.ContractPhase,ref,'ContractPhase',ln);
+    checkEnum(gAttr(el,'ContractStatus'),VALID.ContractStatus,ref,'ContractStatus',ln);
+    checkEnum(gAttr(el,'RegulatoryStatus'),VALID.RegulatoryStatus,ref,'RegulatoryStatus',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'RestructuredCreditCode'),VALID.RestructuredCreditCode,ref,'RestructuredCreditCode',ln);
+    checkEnum(gAttr(el,'BoardResolutionFlag'),VALID.YesNo,ref,'BoardResolutionFlag',ln);
+    checkEnum(gAttr(el,'BookType'),VALID.BookType,ref,'BookType',ln);
+    checkEnum(gAttr(el,'BookCode'),VALID.BookCode,ref,'BookCode',ln);
+    checkEnum(gAttr(el,'TrustType'),VALID.TrustType,ref,'TrustType',ln);
+    checkEnum(gAttr(el,'TransactionType'),VALID.TransactionType,ref,'TransactionType',ln);
+    checkEnum(gAttr(el,'CreditPurpose'),VALID.CreditPurpose,ref,'CreditPurpose',ln);
+    checkEnum(gAttr(el,'CreditPurposeEconomicActivity'),VALID.PSIC,ref,'CreditPurposeEconomicActivity',ln);
+    checkEnum(gAttr(el,'PaymentPeriodicity'),VALID.PaymentPeriodicity,ref,'PaymentPeriodicity',ln);
+    checkEnum(gAttr(el,'PaymentMethod'),VALID.PaymentMethod,ref,'PaymentMethod',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+    checkEnum(gAttr(el,'CreditClassification'),VALID.CreditClassification,ref,'CreditClassification',ln);
+    checkEnum(gAttr(el,'InterestSetting'),VALID.InterestSetting,ref,'InterestSetting',ln);
+    checkEnum(gAttr(el,'FrequencyRepricing'),VALID.FrequencyRepricing,ref,'FrequencyRepricing',ln);
+    checkEnum(gAttr(el,'GoodType'),VALID.GoodType,ref,'GoodType',ln);
+    checkEnum(gAttr(el,'NewUsedCode'),VALID.NewUsedCode,ref,'NewUsedCode',ln);
 
-   if(nextPayDt){
-     if(['CL','CA'].includes(phase)) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be empty when phase ${phase}`,ln,0,true);
-     if(start && cmpDate(nextPayDt,start)!==null && cmpDate(nextPayDt,start)!==1) addI('DATE_LOGIC',`${ref}: NextPaymentDate must be greater than ContractStartDate`,ln);
-     if(planned && cmpDate(nextPayDt,planned)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractPlannedEndDate`,ln,0,true);
-     if(actual && cmpDate(nextPayDt,actual)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractActualEndDate`,ln,0,true);
-   }
+    checkNum(gAttr(el,'FinancedAmount'),'dec2',ref,'FinancedAmount',ln);
+    checkNum(gAttr(el,'FinancedAmountOriginalCurrency'),'dec2',ref,'FinancedAmountOriginalCurrency',ln);
+    checkNum(gAttr(el,'InstallmentsNumber'),'int',ref,'InstallmentsNumber',ln);
+    checkNum(gAttr(el,'MonthlyPaymentAmount'),'dec2',ref,'MonthlyPaymentAmount',ln);
+    checkNum(gAttr(el,'LastPaymentAmount'),'dec2',ref,'LastPaymentAmount',ln);
+    checkNum(gAttr(el,'NextPayment'),'dec2',ref,'NextPayment',ln);
+    checkNum(gAttr(el,'OutstandingPaymentsNumber'),'int',ref,'OutstandingPaymentsNumber',ln);
+    checkNum(gAttr(el,'OutstandingBalance'),'dec2',ref,'OutstandingBalance',ln);
+    checkNum(gAttr(el,'OutstandingBalanceOriginalCurrency'),'dec2',ref,'OutstandingBalanceOriginalCurrency',ln);
+    checkNum(gAttr(el,'OverduePaymentsNumber'),'int',ref,'OverduePaymentsNumber',ln);
+    checkNum(gAttr(el,'OverduePaymentsAmount'),'dec2',ref,'OverduePaymentsAmount',ln);
+    checkNum(gAttr(el,'DaysPastDue'),'int',ref,'DaysPastDue',ln);
+    checkNum(gAttr(el,'AllowanceECLOriginalCurrency'),'dec2',ref,'AllowanceECLOriginalCurrency',ln);
+    checkNum(gAttr(el,'AllowanceECL'),'dec2',ref,'AllowanceECL',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoanOriginalCurrency'),'dec2',ref,'NetCarryingAmountLoanOriginalCurrency',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoan'),'dec2',ref,'NetCarryingAmountLoan',ln);
+    checkNum(gAttr(el,'NominalInterestRate'),'pct4',ref,'NominalInterestRate',ln);
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+    checkNum(gAttr(el,'EffectiveInterestRate'),'pct4',ref,'EffectiveInterestRate',ln);
+    checkNum(gAttr(el,'UnearnedInterest'),'dec2',ref,'UnearnedInterest',ln);
+    checkNum(gAttr(el,'LoanFundersNumber'),'int',ref,'LoanFundersNumber',ln);
+    checkNum(gAttr(el,'GoodValue'),'int',ref,'GoodValue',ln);
 
-   if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('CC_DPD',`${ref}: DaysPastDue empty`,ln);
-   if(phase==='AC'&&!gAttr(el,'NextPayment')) addI('CC_NXT',`${ref}: NextPayment empty`,ln);
-   if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'LastPaymentAmount')) addI('CC_LPA',`${ref}: LastPaymentAmount empty`,ln);
+    const phase=gAttr(el,'ContractPhase');
+    const start=gAttr(el,'ContractStartDate');
+    const refDt=gAttr(el,'ContractRefDate');
+    const planned=gAttr(el,'ContractPlannedEndDate');
+    const actual=gAttr(el,'ContractActualEndDate');
+    const lastPay=gAttr(el,'LastPaymentDate');
+    const nextPay=gAttr(el,'NextPaymentDate');
 
-   if(gAttr(el,'FlagCardUsed')==='1' && gAttr(el,'TimesCardUsed') && parseInt(gAttr(el,'TimesCardUsed')||'0',10)<=0){
-     addI('TYPE',`${ref}: TimesCardUsed must be > 0 when FlagCardUsed=1`,ln);
-   }
-   if(gAttr(el,'FlagCardUsed')==='0' && gAttr(el,'TimesCardUsed') && parseInt(gAttr(el,'TimesCardUsed')||'0',10)!==0){
-     addI('TYPE',`${ref}: TimesCardUsed must be 0 when FlagCardUsed=0`,ln,0,true);
-   }
+    if(['AC','CL','CA'].includes(phase)&&!start) addI('MAND',`${ref}: ContractStartDate mandatory`,ln);
+    if(['AC','CL','CA'].includes(phase)&&!planned) addI('MAND',`${ref}: ContractPlannedEndDate mandatory`,ln);
+    if(['CL','CA'].includes(phase)&&!actual) addI('MAND',`${ref}: ContractActualEndDate mandatory`,ln);
+    if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'LastPaymentAmount')) addI('089',`${ref}: LastPaymentAmount mandatory`,ln);
+    if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('090',`${ref}: DaysPastDue mandatory`,ln);
+    if(!gAttr(el,'RestructuredCreditCode')) addI('195',`${ref}: RestructuredCreditCode mandatory`,ln);
+    if(gAttr(el,'OutstandingPaymentsNumber')&&!gAttr(el,'OutstandingBalance')) addI('MAND',`${ref}: OutstandingBalance required with OutstandingPaymentsNumber`,ln);
+    if(gAttr(el,'OutstandingBalance')&&!gAttr(el,'OutstandingPaymentsNumber')) addI('MAND',`${ref}: OutstandingPaymentsNumber required with OutstandingBalance`,ln,0,true);
+    if(gAttr(el,'OverduePaymentsNumber')&&!gAttr(el,'OverduePaymentsAmount')) addI('MAND',`${ref}: OverduePaymentsAmount required with OverduePaymentsNumber`,ln);
+    if(gAttr(el,'OverduePaymentsAmount')&&!gAttr(el,'OverduePaymentsNumber')) addI('MAND',`${ref}: OverduePaymentsNumber required with OverduePaymentsAmount`,ln);
 
-   for(let i=1;i<=6;i++){
-     const gA=gAttr(el,`GuaranteedAmount${i}`), gT=gAttr(el,`GuaranteeType${i}`);
-     if((gA&&!gT)||(!gA&&gT)) addI('296',`${ref}: GuaranteedAmount${i} and GuaranteeType${i} mismatch`,ln);
-   }
-   for(let i=1;i<=6;i++){
-     const ls=gAttr(el,`LSProviderSubjectNo${i}`), lr=gAttr(el,`LinkedSubjectRole${i}`), lnm=gAttr(el,`LinkedSubjectName${i}`);
-     if((ls&&!lr)||(lr&&!ls&&!lnm)) addI('ROLE_LS',`${ref}: linked subject set ${i} inconsistent`,ln,0,true);
-   }
- });
- lg('o','CreditCards done');
+    if(start && refDt && cmpDate(start,refDt)!==null && cmpDate(start,refDt)>=0) addI('DATE_LOGIC',`${ref}: ContractStartDate must be < ContractRefDate`,ln);
+    if(planned && start && cmpDate(planned,start)!==1) addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be > ContractStartDate`,ln);
+    if(actual && start && cmpDate(actual,start)!==1) addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be > ContractStartDate`,ln);
+    if(lastPay && start && cmpDate(lastPay,start)!==null && cmpDate(lastPay,start)!==1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be > ContractStartDate`,ln,0,true);
+    if(lastPay && refDt && cmpDate(lastPay,refDt)===1) addI('DATE_LOGIC',`${ref}: LastPaymentDate must be <= ContractRefDate`,ln);
+    if(nextPay){
+      if(['CL','CA'].includes(phase)) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be empty for closed phases`,ln,0,true);
+      if(start && cmpDate(nextPay,start)!==null && cmpDate(nextPay,start)!==1) addI('DATE_LOGIC',`${ref}: NextPaymentDate must be > ContractStartDate`,ln);
+      if(planned && cmpDate(nextPay,planned)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractPlannedEndDate`,ln,0,true);
+      if(actual && cmpDate(nextPay,actual)===1) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be <= ContractActualEndDate`,ln,0,true);
+    }
+
+    const bookType=gAttr(el,'BookType');
+    if(bookType==='B'&&!gAttr(el,'BookCode')) addI('BOOK',`${ref}: BookCode required when BookType=B`,ln);
+    if(bookType==='T'&&!gAttr(el,'TrustType')) addI('BOOK',`${ref}: TrustType required when BookType=T`,ln);
+
+    for(let i=1;i<=6;i++){
+      const amt=gAttr(el,`GuaranteedAmount${i}`), typ=gAttr(el,`GuaranteeType${i}`);
+      if((amt&&!typ)||(!amt&&typ)) addI('296',`${ref}: GuaranteedAmount${i}/GuaranteeType${i} mismatch`,ln);
+      const gp=gAttr(el,`GuarantorProviderSubjectNo${i}`), gn=gAttr(el,`GuarantorName${i}`);
+      if(typ && !gp && !gn) addI('MAND',`${ref}: guarantor info required for GuaranteeType${i}`,ln);
+    }
+    for(let i=1;i<=6;i++){
+      const ls=gAttr(el,`LSProviderSubjectNo${i}`), lr=gAttr(el,`LinkedSubjectRole${i}`), lnm=gAttr(el,`LinkedSubjectName${i}`);
+      if((ls&&!lr)||(lr&&!ls&&!lnm)) addI('VAL',`${ref}: linked subject set ${i} invalid`,ln,0,true);
+    }
+  });
 }
 
-function chkOtherCredit(){
- const els=xmlDoc.querySelectorAll('OtherCreditAccomodations'); lg('i',`Checking ${els.length} OtherCreditAccomodations...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CA:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.OtherCreditAccomodations).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
+function validateNonInstallments(){
+  xmlDoc.querySelectorAll('NonInstallments').forEach(el=>{
+    const ln=findElementLine(el), ref=`CN:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
 
-   const grant=gAttr(el,'GrantDate'), mat=gAttr(el,'MaturityDate');
-   if(mat && grant && cmpDate(mat,grant)!==1) addI('DATE_LOGIC',`${ref}: MaturityDate must be greater than GrantDate`,ln);
-   if(!gAttr(el,'DaysPastDue')) addI('CA_DPD',`${ref}: DaysPastDue empty`,ln);
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
+    ['ContractStartDate','ContractRequestDate','ContractPlannedEndDate','ContractActualEndDate','LastPaymentDate'].forEach(f=>checkDate(gAttr(el,f),ref,f,ln,false));
 
-   if(gAttr(el,'AssetAppraisedValue') && !gAttr(el,'AssetAppraisalDate')) addI('MAND',`${ref}: AssetAppraisalDate required when AssetAppraisedValue is filled`,ln);
-   if(gAttr(el,'AssetAppraisalDate') && !gAttr(el,'AssetAppraisedValue')) addI('MAND',`${ref}: AssetAppraisedValue required when AssetAppraisalDate is filled`,ln,0,true);
- });
- lg('o','OtherCreditAccomodations done');
+    checkEnum(gAttr(el,'Role'),VALID.Role,ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'ContractType'),VALID.ContractType,ref,'ContractType',ln);
+    checkEnum(gAttr(el,'ContractPhase'),VALID.ContractPhase,ref,'ContractPhase',ln);
+    checkEnum(gAttr(el,'ContractStatus'),VALID.ContractStatus,ref,'ContractStatus',ln);
+    checkEnum(gAttr(el,'RegulatoryStatus'),VALID.RegulatoryStatus,ref,'RegulatoryStatus',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'RestructuredCreditCode'),VALID.RestructuredCreditCode,ref,'RestructuredCreditCode',ln);
+    checkEnum(gAttr(el,'BoardResolutionFlag'),VALID.YesNo,ref,'BoardResolutionFlag',ln);
+    checkEnum(gAttr(el,'BookType'),VALID.BookType,ref,'BookType',ln);
+    checkEnum(gAttr(el,'BookCode'),VALID.BookCode,ref,'BookCode',ln);
+    checkEnum(gAttr(el,'TrustType'),VALID.TrustType,ref,'TrustType',ln);
+    checkEnum(gAttr(el,'TransactionType'),VALID.TransactionType,ref,'TransactionType',ln);
+    checkEnum(gAttr(el,'CreditPurpose'),VALID.CreditPurpose,ref,'CreditPurpose',ln);
+    checkEnum(gAttr(el,'CreditPurposeEconomicActivity'),VALID.PSIC,ref,'CreditPurposeEconomicActivity',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+    checkEnum(gAttr(el,'CreditClassification'),VALID.CreditClassification,ref,'CreditClassification',ln);
+    checkEnum(gAttr(el,'InterestSetting'),VALID.InterestSetting,ref,'InterestSetting',ln);
+    checkEnum(gAttr(el,'FrequencyRepricing'),VALID.FrequencyRepricing,ref,'FrequencyRepricing',ln);
+
+    checkNum(gAttr(el,'CreditLimitFinancedAmount'),'dec2',ref,'CreditLimitFinancedAmount',ln);
+    checkNum(gAttr(el,'CreditLimitOriginalCurrency'),'dec2',ref,'CreditLimitOriginalCurrency',ln);
+    checkNum(gAttr(el,'UtilizationOutstandingBalance'),'dec2',ref,'UtilizationOutstandingBalance',ln);
+    checkNum(gAttr(el,'UtilizationOriginalCurrency'),'dec2',ref,'UtilizationOriginalCurrency',ln);
+    checkNum(gAttr(el,'OverallCreditLimit'),'dec2',ref,'OverallCreditLimit',ln);
+    checkNum(gAttr(el,'DaysPastDue'),'int',ref,'DaysPastDue',ln);
+    checkNum(gAttr(el,'AllowanceECLOriginalCurrency'),'dec2',ref,'AllowanceECLOriginalCurrency',ln);
+    checkNum(gAttr(el,'AllowanceECL'),'dec2',ref,'AllowanceECL',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoanOriginalCurrency'),'dec2',ref,'NetCarryingAmountLoanOriginalCurrency',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoan'),'dec2',ref,'NetCarryingAmountLoan',ln);
+    checkNum(gAttr(el,'NominalInterestRate'),'pct4',ref,'NominalInterestRate',ln);
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+    checkNum(gAttr(el,'EffectiveInterestRate'),'pct4',ref,'EffectiveInterestRate',ln);
+    checkNum(gAttr(el,'UnearnedInterest'),'dec2',ref,'UnearnedInterest',ln);
+    checkNum(gAttr(el,'LoanFundersNumber'),'int',ref,'LoanFundersNumber',ln);
+
+    const phase=gAttr(el,'ContractPhase');
+    const start=gAttr(el,'ContractStartDate'), refDt=gAttr(el,'ContractRefDate'), planned=gAttr(el,'ContractPlannedEndDate'), actual=gAttr(el,'ContractActualEndDate');
+
+    if(!gAttr(el,'RestructuredCreditCode')) addI('CN_RCC',`${ref}: RestructuredCreditCode mandatory`,ln);
+    if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('CN_DPD',`${ref}: DaysPastDue mandatory`,ln);
+    if(!gAttr(el,'CreditLimitFinancedAmount')) addI('CN_LIM',`${ref}: CreditLimitFinancedAmount mandatory`,ln);
+    if(phase==='AC'&&!gAttr(el,'UtilizationOutstandingBalance')) addI('CN_BAL',`${ref}: UtilizationOutstandingBalance mandatory`,ln);
+
+    if(start && refDt && cmpDate(start,refDt)!==null && cmpDate(start,refDt)>=0) addI('DATE_LOGIC',`${ref}: ContractStartDate must be < ContractRefDate`,ln);
+    if(planned && start && cmpDate(planned,start)!==1) addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be > ContractStartDate`,ln);
+    if(actual && start && cmpDate(actual,start)!==1) addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be > ContractStartDate`,ln);
+
+    const bookType=gAttr(el,'BookType');
+    if(bookType==='B'&&!gAttr(el,'BookCode')) addI('BOOK',`${ref}: BookCode required when BookType=B`,ln);
+    if(bookType==='T'&&!gAttr(el,'TrustType')) addI('BOOK',`${ref}: TrustType required when BookType=T`,ln);
+  });
 }
 
-function chkInvestments(){
- const els=xmlDoc.querySelectorAll('Investments'); lg('i',`Checking ${els.length} Investments...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CV:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.Investments).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
+function validateCreditCards(){
+  xmlDoc.querySelectorAll('CreditCards').forEach(el=>{
+    const ln=findElementLine(el), ref=`CC:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
 
-   const grant=gAttr(el,'GrantDate'), mat=gAttr(el,'MaturityDate');
-   if(mat && grant && cmpDate(mat,grant)!==1) addI('DATE_LOGIC',`${ref}: MaturityDate must be greater than GrantDate`,ln);
-   if(!gAttr(el,'DaysPastDue')) addI('CV_DPD',`${ref}: DaysPastDue empty`,ln);
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
+    ['ContractStartDate','ContractRequestDate','ContractPlannedEndDate','ContractActualEndDate','LastPaymentDate','NextPaymentDate','LastChargeDate','CancellationDate'].forEach(f=>checkDate(gAttr(el,f),ref,f,ln,false));
 
-   const bookType=gAttr(el,'BookType');
-   if(bookType==='B' && !gAttr(el,'BookCode')) addI('BOOK',`${ref}: BookCode required when BookType=B`,ln);
-   if(bookType==='T' && !gAttr(el,'TrustType')) addI('BOOK',`${ref}: TrustType required when BookType=T`,ln);
+    checkEnum(gAttr(el,'Role'),['B','C'],ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'ContractType'),VALID.ContractType,ref,'ContractType',ln);
+    checkEnum(gAttr(el,'ContractPhase'),VALID.ContractPhase,ref,'ContractPhase',ln);
+    checkEnum(gAttr(el,'ContractStatus'),VALID.ContractStatus,ref,'ContractStatus',ln);
+    checkEnum(gAttr(el,'RegulatoryStatus'),VALID.RegulatoryStatus,ref,'RegulatoryStatus',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'RestructuredCreditCode'),VALID.RestructuredCreditCode,ref,'RestructuredCreditCode',ln);
+    checkEnum(gAttr(el,'BookType'),VALID.BookType,ref,'BookType',ln);
+    checkEnum(gAttr(el,'TransactionType'),VALID.TransactionType,ref,'TransactionType',ln);
+    checkEnum(gAttr(el,'PaymentPeriodicity'),VALID.PaymentPeriodicity,ref,'PaymentPeriodicity',ln);
+    checkEnum(gAttr(el,'PaymentMethod'),VALID.PaymentMethod,ref,'PaymentMethod',ln);
+    checkEnum(gAttr(el,'InstallmentType'),VALID.InstallmentType,ref,'InstallmentType',ln);
+    checkEnum(gAttr(el,'FlagCardUsed'),VALID.FlagCardUsed,ref,'FlagCardUsed',ln);
+    checkEnum(gAttr(el,'MinPaymentIndicator'),['0','1','2','3'],ref,'MinPaymentIndicator',ln);
+    checkEnum(gAttr(el,'PremiumCard'),VALID.CardPremium,ref,'PremiumCard',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+    checkEnum(gAttr(el,'CreditClassification'),VALID.CreditClassification,ref,'CreditClassification',ln);
+    checkEnum(gAttr(el,'InterestSetting'),VALID.InterestSetting,ref,'InterestSetting',ln);
+    checkEnum(gAttr(el,'FrequencyRepricing'),VALID.FrequencyRepricing,ref,'FrequencyRepricing',ln);
 
-   if(!gAttr(el,'LatestCreditRatingIssuer')) addI('CV_LCI',`${ref}: LatestCreditRatingIssuer empty`,ln);
- });
- lg('o','Investments done');
+    checkNum(gAttr(el,'CreditLimit'),'dec2',ref,'CreditLimit',ln);
+    checkNum(gAttr(el,'CreditLimitOriginalCurrency'),'dec2',ref,'CreditLimitOriginalCurrency',ln);
+    checkNum(gAttr(el,'MonthlyPaymentAmount'),'dec2',ref,'MonthlyPaymentAmount',ln);
+    checkNum(gAttr(el,'NextPayment'),'dec2',ref,'NextPayment',ln);
+    checkNum(gAttr(el,'LastPaymentAmount'),'dec2',ref,'LastPaymentAmount',ln);
+    checkNum(gAttr(el,'OutstandingBalance'),'dec2',ref,'OutstandingBalance',ln);
+    checkNum(gAttr(el,'OutstandingBalanceOriginalCurrency'),'dec2',ref,'OutstandingBalanceOriginalCurrency',ln);
+    checkNum(gAttr(el,'OutstandingBalanceUnbilled'),'dec2',ref,'OutstandingBalanceUnbilled',ln);
+    checkNum(gAttr(el,'OverduePaymentsNumber'),'int',ref,'OverduePaymentsNumber',ln);
+    checkNum(gAttr(el,'OverduePaymentsAmount'),'dec2',ref,'OverduePaymentsAmount',ln);
+    checkNum(gAttr(el,'DaysPastDue'),'int',ref,'DaysPastDue',ln);
+    checkNum(gAttr(el,'ChargedAmount'),'dec2',ref,'ChargedAmount',ln);
+    checkNum(gAttr(el,'TimesCardUsed'),'int',ref,'TimesCardUsed',ln);
+    checkNum(gAttr(el,'MinPaymentPercentage'),'int',ref,'MinPaymentPercentage',ln);
+    checkNum(gAttr(el,'AllowanceECLOriginalCurrency'),'dec2',ref,'AllowanceECLOriginalCurrency',ln);
+    checkNum(gAttr(el,'AllowanceECL'),'dec2',ref,'AllowanceECL',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoanOriginalCurrency'),'dec2',ref,'NetCarryingAmountLoanOriginalCurrency',ln);
+    checkNum(gAttr(el,'NetCarryingAmountLoan'),'dec2',ref,'NetCarryingAmountLoan',ln);
+    checkNum(gAttr(el,'NominalInterestRate'),'pct4',ref,'NominalInterestRate',ln);
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+    checkNum(gAttr(el,'EffectiveInterestRate'),'pct4',ref,'EffectiveInterestRate',ln);
+    checkNum(gAttr(el,'UnearnedInterest'),'dec2',ref,'UnearnedInterest',ln);
+
+    const phase=gAttr(el,'ContractPhase');
+    const start=gAttr(el,'ContractStartDate'), refDt=gAttr(el,'ContractRefDate'), planned=gAttr(el,'ContractPlannedEndDate'), actual=gAttr(el,'ContractActualEndDate'), nextDt=gAttr(el,'NextPaymentDate');
+
+    if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'DaysPastDue')) addI('CC_DPD',`${ref}: DaysPastDue mandatory`,ln);
+    if(phase==='AC'&&!gAttr(el,'NextPayment')) addI('CC_NXT',`${ref}: NextPayment mandatory`,ln);
+    if(['AC','CL','CA'].includes(phase)&&!gAttr(el,'LastPaymentAmount')) addI('CC_LPA',`${ref}: LastPaymentAmount mandatory`,ln);
+
+    if(start && refDt && cmpDate(start,refDt)!==null && cmpDate(start,refDt)>=0) addI('DATE_LOGIC',`${ref}: ContractStartDate must be < ContractRefDate`,ln);
+    if(planned && start && cmpDate(planned,start)!==1) addI('DATE_LOGIC',`${ref}: ContractPlannedEndDate must be > ContractStartDate`,ln,0,true);
+    if(actual && start && cmpDate(actual,start)!==1) addI('DATE_LOGIC',`${ref}: ContractActualEndDate must be > ContractStartDate`,ln);
+    if(nextDt){
+      if(['CL','CA'].includes(phase)) addI('DATE_LOGIC',`${ref}: NextPaymentDate should be empty for closed phase`,ln,0,true);
+      if(start && cmpDate(nextDt,start)!==null && cmpDate(nextDt,start)!==1) addI('DATE_LOGIC',`${ref}: NextPaymentDate must be > ContractStartDate`,ln);
+    }
+
+    if(gAttr(el,'FlagCardUsed')==='1' && hasVal(gAttr(el,'TimesCardUsed')) && parseInt(gAttr(el,'TimesCardUsed'),10)<=0) addI('NUM',`${ref}: TimesCardUsed must be > 0 when FlagCardUsed=1`,ln);
+    if(gAttr(el,'FlagCardUsed')==='0' && hasVal(gAttr(el,'TimesCardUsed')) && parseInt(gAttr(el,'TimesCardUsed'),10)!==0) addI('NUM',`${ref}: TimesCardUsed must be 0 when FlagCardUsed=0`,ln,0,true);
+  });
 }
 
-function chkOffBalance(){
- const els=xmlDoc.querySelectorAll('OffBalanceSheets'); lg('i',`Checking ${els.length} OffBalanceSheets...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', c=gAttr(el,'ProviderContractNo')||'?', ref=`CF:${s.slice(-8)}/${c.slice(-8)} L${ln}`;
-   Object.entries(RULES.OffBalanceSheets).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'ContractRefDate',ref,ln);
- });
- lg('o','OffBalanceSheets done');
+function validateOtherCredit(){
+  xmlDoc.querySelectorAll('OtherCreditAccomodations').forEach(el=>{
+    const ln=findElementLine(el), ref=`CA:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
+
+    ['ContractRefDate','GrantDate','MaturityDate','AssetAppraisalDate'].forEach(f=>checkDate(gAttr(el,f),ref,f,ln,false));
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
+
+    checkEnum(gAttr(el,'Role'),VALID.Role,ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'BookType'),VALID.BookType,ref,'BookType',ln);
+    checkEnum(gAttr(el,'OtherCreditAccType'),VALID.OtherCreditAccType,ref,'OtherCreditAccType',ln);
+    checkEnum(gAttr(el,'RegulatoryStatus'),VALID.RegulatoryStatus,ref,'RegulatoryStatus',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'CreditPurpose'),VALID.CreditPurpose,ref,'CreditPurpose',ln);
+    checkEnum(gAttr(el,'CreditPurposeEconomicActivity'),VALID.PSIC,ref,'CreditPurposeEconomicActivity',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+    checkEnum(gAttr(el,'CreditClassification'),VALID.CreditClassification,ref,'CreditClassification',ln);
+    checkEnum(gAttr(el,'RestructuredCreditCode'),VALID.RestructuredCreditCode,ref,'RestructuredCreditCode',ln);
+    checkEnum(gAttr(el,'InterestSetting'),VALID.InterestSetting,ref,'InterestSetting',ln);
+    checkEnum(gAttr(el,'FrequencyRepricing'),VALID.FrequencyRepricing,ref,'FrequencyRepricing',ln);
+
+    ['AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan'].forEach(f=>checkNum(gAttr(el,f),'dec2',ref,f,ln));
+    checkNum(gAttr(el,'NominalInterestRate'),'pct4',ref,'NominalInterestRate',ln);
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+    checkNum(gAttr(el,'EffectiveInterestRate'),'pct4',ref,'EffectiveInterestRate',ln);
+    checkNum(gAttr(el,'UnearnedInterest'),'dec2',ref,'UnearnedInterest',ln);
+    checkNum(gAttr(el,'DaysPastDue'),'int',ref,'DaysPastDue',ln);
+    checkNum(gAttr(el,'AssetAppraisedValue'),'dec2',ref,'AssetAppraisedValue',ln);
+
+    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','OtherCreditAccType','GrantDate','RegulatoryStatus','OriginalCurrency','CreditPurpose','CreditPurposeEconomicActivity','AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue'];
+    mand.forEach(f=>{if(!hasVal(gAttr(el,f))) addI('CA_MAND',`${ref}: ${f} mandatory`,ln)});
+
+    const grant=gAttr(el,'GrantDate'), mat=gAttr(el,'MaturityDate');
+    if(mat && grant && cmpDate(mat,grant)!==1) addI('DATE_LOGIC',`${ref}: MaturityDate must be > GrantDate`,ln);
+    if(!gAttr(el,'DaysPastDue')) addI('CA_DPD',`${ref}: DaysPastDue mandatory`,ln);
+    if(gAttr(el,'AssetAppraisedValue')&&!gAttr(el,'AssetAppraisalDate')) addI('MAND',`${ref}: AssetAppraisalDate required when AssetAppraisedValue present`,ln);
+  });
 }
 
-function chkNegativeEvents(){
- const els=xmlDoc.querySelectorAll('SubjectNegativeEvents'); lg('i',`Checking ${els.length} SubjectNegativeEvents...`);
- els.forEach(el=>{
-   const ln=findElementLine(el), s=gAttr(el,'ProviderSubjectNo')||'?', ref=`NE:${s.slice(-8)} L${ln}`;
-   Object.entries(RULES.SubjectNegativeEvents).forEach(([k,r])=>chkByRule(el,k,r,ref,ln));
-   chkProviderCodeAgainstHeader(el,ref,ln);
-   chkRefDateAgainstHeader(el,'NegativeEventRefDate',ref,ln);
+function validateInvestments(){
+  xmlDoc.querySelectorAll('Investments').forEach(el=>{
+    const ln=findElementLine(el), ref=`CV:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
 
-   const ed=gAttr(el,'EventDate'), esd=gAttr(el,'EventStatusDate');
-   if(esd && ed && cmpDate(esd,ed)!==null && cmpDate(esd,ed)===-1) addI('DATE_LOGIC',`${ref}: EventStatusDate should not be earlier than EventDate`,ln,0,true);
- });
- lg('o','SubjectNegativeEvents done');
+    ['ContractRefDate','GrantDate','MaturityDate'].forEach(f=>checkDate(gAttr(el,f),ref,f,ln,false));
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
+
+    checkEnum(gAttr(el,'Role'),['B'],ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'BookType'),VALID.BookType,ref,'BookType',ln);
+    checkEnum(gAttr(el,'BookCode'),VALID.BookCode,ref,'BookCode',ln);
+    checkEnum(gAttr(el,'TrustType'),VALID.TrustType,ref,'TrustType',ln);
+    checkEnum(gAttr(el,'InvestmentType'),VALID.InvestmentType,ref,'InvestmentType',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+    checkEnum(gAttr(el,'RestructuredCreditCode'),VALID.RestructuredCreditCode,ref,'RestructuredCreditCode',ln);
+    checkEnum(gAttr(el,'InterestSetting'),VALID.InterestSetting,ref,'InterestSetting',ln);
+    checkEnum(gAttr(el,'FrequencyRepricing'),VALID.FrequencyRepricing,ref,'FrequencyRepricing',ln);
+    checkEnum(gAttr(el,'CreditRatingAgencyUsed'),VALID.CreditRatingAgency,ref,'CreditRatingAgencyUsed',ln);
+    checkEnum(gAttr(el,'CreditRatingIssuerLastInvestment'),VALID.CreditRating,ref,'CreditRatingIssuerLastInvestment',ln);
+    checkEnum(gAttr(el,'LatestCreditRatingIssuer'),VALID.InvestmentIssuerType,ref,'LatestCreditRatingIssuer',ln);
+    checkEnum(gAttr(el,'NatureOfOffering'),VALID.NatureOfOffering,ref,'NatureOfOffering',ln);
+
+    ['AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','UnearnedInterest'].forEach(f=>checkNum(gAttr(el,f),'dec2',ref,f,ln));
+    checkNum(gAttr(el,'AccumulatedMarketGainsOriginalCurrency'),'dec2signed',ref,'AccumulatedMarketGainsOriginalCurrency',ln);
+    checkNum(gAttr(el,'AccumulatedMarketGains'),'dec2signed',ref,'AccumulatedMarketGains',ln);
+    checkNum(gAttr(el,'NominalInterestRate'),'pct4',ref,'NominalInterestRate',ln);
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+    checkNum(gAttr(el,'EffectiveInterestRate'),'pct4',ref,'EffectiveInterestRate',ln);
+    checkNum(gAttr(el,'DaysPastDue'),'int',ref,'DaysPastDue',ln);
+
+    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','InvestmentType','GrantDate','OriginalCurrency','AmountGrantedOriginalCurrency','AmountGranted','AccumulatedMarketGainsOriginalCurrency','AccumulatedMarketGains','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue','LatestCreditRatingIssuer'];
+    mand.forEach(f=>{if(!hasVal(gAttr(el,f))) addI('CV_MAND',`${ref}: ${f} mandatory`,ln)});
+
+    const grant=gAttr(el,'GrantDate'), mat=gAttr(el,'MaturityDate');
+    if(mat && grant && cmpDate(mat,grant)!==1) addI('DATE_LOGIC',`${ref}: MaturityDate must be > GrantDate`,ln);
+    if(!gAttr(el,'LatestCreditRatingIssuer')) addI('CV_LCI',`${ref}: LatestCreditRatingIssuer mandatory`,ln);
+  });
 }
 
-function chkDups(){
- const cnt={}, lnMap={};
- xmlDoc.querySelectorAll('Individuals,Companies').forEach(e=>{
-   const s=gAttr(e,'ProviderSubjectNumber');
-   if(!s) return;
-   cnt[s]=(cnt[s]||0)+1;
-   if(!lnMap[s]) lnMap[s]=findElementLine(e);
- });
- for(const[s,c] of Object.entries(cnt)){
-   if(c>1) addI('DUP',`${s} appears ${c}x (first at L${lnMap[s]})`,lnMap[s],0,true);
- }
+function validateOffBalance(){
+  xmlDoc.querySelectorAll('OffBalanceSheets').forEach(el=>{
+    const ln=findElementLine(el), ref=`CF:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
+
+    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
+    checkEnum(gAttr(el,'Role'),['B'],ref,'Role',ln);
+    checkEnum(gAttr(el,'DOSRI'),VALID.DOSRI,ref,'DOSRI',ln);
+    checkEnum(gAttr(el,'RPT'),VALID.RPT,ref,'RPT',ln);
+    checkEnum(gAttr(el,'ContingentAccountType'),VALID.ContingentAccountType,ref,'ContingentAccountType',ln);
+    checkEnum(gAttr(el,'OriginalCurrency'),VALID.Currency,ref,'OriginalCurrency',ln);
+    checkEnum(gAttr(el,'StageImpairmentPFRS9'),VALID.StageImpairmentPFRS9,ref,'StageImpairmentPFRS9',ln);
+
+    ['OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan'].forEach(f=>checkNum(gAttr(el,f),'dec2',ref,f,ln));
+    checkNum(gAttr(el,'ProbabilityDefault'),'pct4',ref,'ProbabilityDefault',ln);
+
+    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','ContingentAccountType','OriginalCurrency','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','StageImpairmentPFRS9','ProbabilityDefault'];
+    mand.forEach(f=>{if(!hasVal(gAttr(el,f))) addI('CF_MAND',`${ref}: ${f} mandatory`,ln)});
+  });
 }
 
-// ============================================================================
-// DISPLAY
-// ============================================================================
+function validateNegativeEvents(){
+  xmlDoc.querySelectorAll('SubjectNegativeEvents').forEach(el=>{
+    const ln=findElementLine(el), ref=`NE:${(gAttr(el,'ProviderSubjectNo')||'?').slice(-8)} L${ln}`;
+    checkProviderCode(el,ref,ln);
+    checkRefDate(gAttr(el,'NegativeEventRefDate'),ref,'NegativeEventRefDate',ln);
+
+    checkDate(gAttr(el,'NegativeEventRefDate'),ref,'NegativeEventRefDate',ln,true);
+    checkDate(gAttr(el,'EventDate'),ref,'EventDate',ln,false);
+    checkDate(gAttr(el,'EventStatusDate'),ref,'EventStatusDate',ln,false);
+
+    checkLen(gAttr(el,'ProviderCode'),18,ref,'ProviderCode',ln);
+    checkLen(gAttr(el,'BranchCode'),6,ref,'BranchCode',ln);
+    checkLen(gAttr(el,'ProviderSubjectNo'),38,ref,'ProviderSubjectNo',ln);
+    checkLen(gAttr(el,'EventCode'),1,ref,'EventCode',ln);
+    checkLen(gAttr(el,'EventDetail'),400,ref,'EventDetail',ln);
+    checkLen(gAttr(el,'EventStatus'),2,ref,'EventStatus',ln);
+
+    checkEnum(gAttr(el,'EventCode'),VALID.NegativeEventCode,ref,'EventCode',ln);
+    checkEnum(gAttr(el,'EventStatus'),VALID.NegativeEventStatus,ref,'EventStatus',ln);
+
+    ['ProviderCode','NegativeEventRefDate','ProviderSubjectNo','EventCode'].forEach(f=>{if(!hasVal(gAttr(el,f))) addI('NE_MAND',`${ref}: ${f} mandatory`,ln)});
+  });
+}
+
+function validateDuplicates(){
+  const map={};
+  xmlDoc.querySelectorAll('Individuals,Companies').forEach(el=>{
+    const psn=gAttr(el,'ProviderSubjectNumber');
+    if(!psn) return;
+    if(!map[psn]) map[psn]=[];
+    map[psn].push(findElementLine(el));
+  });
+  Object.entries(map).forEach(([k,v])=>{
+    if(v.length>1) addI('DUP',`${k} appears ${v.length} times`,v[0],0,true);
+  });
+}
+
 function showStats(){
- const ind=new Set(), comp=new Set();
- xmlDoc.querySelectorAll('Individuals').forEach(e=>ind.add(gAttr(e,'ProviderSubjectNumber')));
- xmlDoc.querySelectorAll('Companies').forEach(e=>comp.add(gAttr(e,'ProviderSubjectNumber')));
- const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
- const tW=Object.values(warns).reduce((s,a)=>s+a.length,0);
- document.getElementById('sS').textContent=ind.size+comp.size;
- document.getElementById('sCI').textContent=xmlDoc.querySelectorAll('Installments').length;
- document.getElementById('sCN').textContent=xmlDoc.querySelectorAll('NonInstallments').length;
- document.getElementById('sCC').textContent=xmlDoc.querySelectorAll('CreditCards').length;
- document.getElementById('sCA').textContent=xmlDoc.querySelectorAll('OtherCreditAccomodations').length;
- document.getElementById('sCV').textContent=xmlDoc.querySelectorAll('Investments').length;
- document.getElementById('sCF').textContent=xmlDoc.querySelectorAll('OffBalanceSheets').length;
- document.getElementById('sNE').textContent=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
- document.getElementById('sE').textContent=tE;
- document.getElementById('sW').textContent=tW;
- const sp=document.getElementById('sP');
- sp.textContent=tE===0?'READY':'ERROR';
- sp.style.color=tE===0?'var(--ok)':'var(--er)';
+  const sub=xmlDoc.querySelectorAll('Individuals,Companies').length;
+  const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
+  const tW=Object.values(warns).reduce((s,a)=>s+a.length,0);
+  document.getElementById('sS').textContent=sub;
+  document.getElementById('sCI').textContent=xmlDoc.querySelectorAll('Installments').length;
+  document.getElementById('sCN').textContent=xmlDoc.querySelectorAll('NonInstallments').length;
+  document.getElementById('sCC').textContent=xmlDoc.querySelectorAll('CreditCards').length;
+  document.getElementById('sCA').textContent=xmlDoc.querySelectorAll('OtherCreditAccomodations').length;
+  document.getElementById('sCV').textContent=xmlDoc.querySelectorAll('Investments').length;
+  document.getElementById('sCF').textContent=xmlDoc.querySelectorAll('OffBalanceSheets').length;
+  document.getElementById('sNE').textContent=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
+  document.getElementById('sE').textContent=tE;
+  document.getElementById('sW').textContent=tW;
+  document.getElementById('sP').textContent=tE===0?'READY':'ERROR';
 }
+
 function setCnt(id,codes){
- const tot=codes.reduce((s,c)=>(s+(errs[c]||[]).length+(warns[c]||[]).length),0);
- const el=document.getElementById(id);
- if(el){
-   el.textContent=tot>0?`${tot} issue${tot>1?'s':''}`:'OK';
-   el.className=tot>0?'eb cr':'eb ok';
- }
+  const total=codes.reduce((s,c)=>s+(errs[c]?.length||0)+(warns[c]?.length||0),0);
+  const el=document.getElementById(id);
+  el.textContent=total?`${total} issues`:'OK';
+  el.className=total?'eb cr':'eb ok';
 }
-function showResults(){
- const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
- const tW=Object.values(warns).reduce((s,a)=>s+a.length,0);
- let ban='';
- if(tE===0&&tW===0)ban='<div class="sb pass">No issues found.</div>';
- else if(tE>0)ban=`<div class="sb fail">${tE} errors + ${tW} warnings. Fix errors before submitting.</div>`;
- else ban=`<div class="sb rev">${tW} warnings only.</div>`;
- document.getElementById('sBan').innerHTML=ban;
 
- document.getElementById('hfE').innerHTML=bldTbl(['HD_MAND','HD_VER','HD_SUB','HD_REF','HD_CNT','FT_MAND','FT_REF','FT_CNT','HF_PROV']);
- setCnt('hfCnt',['HD_MAND','HD_VER','HD_SUB','HD_REF','HD_CNT','FT_MAND','FT_REF','FT_CNT','HF_PROV']);
+function lnBadge(line){return line?`<span class="ln" onclick="openXV(${line})">${line}</span>`:''}
 
- document.getElementById('lpcE').innerHTML=bldTbl(['168','090','195','089','296','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
- setCnt('ciCnt',['168','090','195','089','296','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
-
- document.getElementById('cnE').innerHTML=bldTbl(['CN_RCC','CN_DPD','CN_LIM','CN_BAL','296','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
- setCnt('cnCnt',['CN_RCC','CN_DPD','CN_LIM','CN_BAL','296','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
-
- document.getElementById('ccE').innerHTML=bldTbl(['CC_DPD','CC_NXT','CC_LPA','296','DATE_LOGIC','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
- setCnt('ccCnt',['CC_DPD','CC_NXT','CC_LPA','296','DATE_LOGIC','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL','ROLE_LS']);
-
- document.getElementById('caE').innerHTML=bldTbl(['CA_MAND','CA_DPD','DATE_LOGIC','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
- setCnt('caCnt',['CA_MAND','CA_DPD','DATE_LOGIC','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
-
- document.getElementById('cvE').innerHTML=bldTbl(['CV_MAND','CV_DPD','CV_INV','CV_LCI','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
- setCnt('cvCnt',['CV_MAND','CV_DPD','CV_INV','CV_LCI','DATE_LOGIC','BOOK','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
-
- document.getElementById('cfE').innerHTML=bldTbl(['CF_MAND','CF_CAT','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
- setCnt('cfCnt',['CF_MAND','CF_CAT','PROV','SUBREF','MAND','NUM','LEN','TYPE','VAL']);
-
- document.getElementById('neE').innerHTML=bldTbl(['NE_MAND','NE_EVT','DATE_LOGIC','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL']);
- setCnt('neCnt',['NE_MAND','NE_EVT','DATE_LOGIC','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL']);
-
- document.getElementById('slE').innerHTML=bldTbl(['318','319','SL_ROLE','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL']);
- setCnt('slCnt',['318','319','SL_ROLE','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL']);
-
- document.getElementById('subE').innerHTML=bldTbl(['021','139','141','113','050','053','020','028','074','044','048','104','069','EMP','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL','PSGC']);
- setCnt('subCnt',['021','139','141','113','050','053','020','028','074','044','048','104','069','EMP','PROV','SUBREF','MAND','DATE','LEN','TYPE','VAL','PSGC']);
-
- document.getElementById('wrnE').innerHTML=bldTbl(['023','DUP','PSGC','CUR'],true);
- setCnt('wrnCnt',['023','DUP','PSGC','CUR']);
-}
-function lnBadge(lineNum){if(!lineNum)return '';return `<span class="ln" onclick="openXV(${lineNum})" title="Click to view line ${lineNum}">${lineNum}</span>`}
 function bldTbl(codes){
- let rows='', found=false;
- codes.forEach(code=>{
-   const elist=errs[code]||[], wlist=warns[code]||[], items=[...elist,...wlist];
-   if(!items.length)return;
-   found=true;
-   const isErrCode=elist.length>0, uid='d_'+Math.random().toString(36).slice(2,9), tot=items.length;
-   rows+=`<tr><td class="code">${code}</td><td><span class="eb ${isErrCode?'cr':'wn'}">${tot}</span></td><td style="font-size:.77rem;max-width:280px">${ERR_DESC[code]||code}</td><td><span class="ct2" onclick="document.getElementById('${uid}').classList.toggle('sh')">${tot} item${tot>1?'s':''}</span><div id="${uid}" class="cc dl">${items.slice(0,60).map(issue=>`<div class="dl-item"><span class="di-ln">${lnBadge(issue.line)}</span><span class="di-txt">${esc(issue.msg)}</span></div>`).join('')}${items.length>60?`<div class="dl-item"><span class="di-txt" style="color:var(--w)">...and ${items.length-60} more</span></div>`:''}</div></td></tr>`;
- });
- if(!found)return '<p style="color:var(--ok);font-size:.82rem;padding:.25rem 0">No issues.</p>';
- return `<div style="overflow-x:auto"><table class="et"><thead><tr><th width="70">Code</th><th width="80">Count</th><th>Description</th><th>Details</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  let rows='', found=false;
+  codes.forEach(code=>{
+    const items=[...(errs[code]||[]), ...(warns[code]||[])];
+    if(!items.length) return;
+    found=true;
+    const uid='d_'+Math.random().toString(36).slice(2,8);
+    rows+=`<tr>
+      <td class="code">${code}</td>
+      <td><span class="eb ${(errs[code]||[]).length?'cr':'wn'}">${items.length}</span></td>
+      <td>${ERR_DESC[code]||code}</td>
+      <td>
+        <span class="ct2" onclick="document.getElementById('${uid}').classList.toggle('sh')">${items.length} item(s)</span>
+        <div id="${uid}" class="cc dl">
+          ${items.map(i=>`<div class="dl-item"><span class="di-ln">${lnBadge(i.line)}</span><span class="di-txt">${esc(i.msg)}</span></div>`).join('')}
+        </div>
+      </td>
+    </tr>`;
+  });
+  if(!found) return '<p style="color:var(--ok)">No issues.</p>';
+  return `<table class="et"><thead><tr><th>Code</th><th>Count</th><th>Description</th><th>Details</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-// ============================================================================
-// XML VIEWER
-// ============================================================================
+function showResults(){
+  const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
+  const tW=Object.values(warns).reduce((s,a)=>s+a.length,0);
+  document.getElementById('sBan').innerHTML = tE===0
+    ? `<div class="sb ${tW?'rev':'pass'}">${tW?`${tW} warnings only.`:'No issues found.'}</div>`
+    : `<div class="sb fail">${tE} errors + ${tW} warnings. Fix errors before submitting.</div>`;
+
+  document.getElementById('hfE').innerHTML=bldTbl(['HD_MAND','HD_VER','HD_CNT','FT_MAND','FT_CNT','HF_PROV']);
+  document.getElementById('ciE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','089','090','168','195','296']);
+  document.getElementById('cnE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','CN_RCC','CN_DPD','CN_LIM','CN_BAL','296']);
+  document.getElementById('ccE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CC_DPD','CC_NXT','CC_LPA','296']);
+  document.getElementById('caE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CA_MAND','CA_DPD']);
+  document.getElementById('cvE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CV_MAND','CV_LCI']);
+  document.getElementById('cfE').innerHTML=bldTbl(['MAND','LEN','DATE','NUM','VAL','PROV','SUBREF','CF_MAND']);
+  document.getElementById('neE').innerHTML=bldTbl(['MAND','LEN','DATE','VAL','PROV','SUBREF','NE_MAND']);
+  document.getElementById('slE').innerHTML=bldTbl(['MAND','LEN','DATE','VAL','PROV','SUBREF','318','319','SL_ROLE']);
+  document.getElementById('subE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','021','023','044','050','053','069','074','104','113','139','141','EMP']);
+  document.getElementById('wrnE').innerHTML=bldTbl(['DUP']);
+
+  setCnt('hfCnt',['HD_MAND','HD_VER','HD_CNT','FT_MAND','FT_CNT','HF_PROV']);
+  setCnt('ciCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','089','090','168','195','296']);
+  setCnt('cnCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','CN_RCC','CN_DPD','CN_LIM','CN_BAL','296']);
+  setCnt('ccCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CC_DPD','CC_NXT','CC_LPA','296']);
+  setCnt('caCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CA_MAND','CA_DPD']);
+  setCnt('cvCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CV_MAND','CV_LCI']);
+  setCnt('cfCnt',['MAND','LEN','DATE','NUM','VAL','PROV','SUBREF','CF_MAND']);
+  setCnt('neCnt',['MAND','LEN','DATE','VAL','PROV','SUBREF','NE_MAND']);
+  setCnt('slCnt',['MAND','LEN','DATE','VAL','PROV','SUBREF','318','319','SL_ROLE']);
+  setCnt('subCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','021','023','044','050','053','069','074','104','113','139','141','EMP']);
+  setCnt('wrnCnt',['DUP']);
+}
+
 function openXV(targetLine){
- const wrap=document.getElementById('xvWrap'), body=document.getElementById('xvBody'), title=document.getElementById('xvTitle'), info=document.getElementById('xvInfo');
- title.textContent=`XML Viewer ${fName}`;
- info.textContent=`${xmlLines.length} lines${targetLine?` line ${targetLine}`:''}`;
- const errLines=new Set(), warnLines=new Set();
- allIssues.forEach(i=>{if(i.line>0){if(i.isWarn)warnLines.add(i.line); else errLines.add(i.line)}});
- function hlXML(line){
-   return line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-     .replace(/(&lt;\/?[\w:]+)/g,'<span class="xt-tag">$1</span>')
-     .replace(/(&gt;)/g,'<span class="xt-tag">$1</span>')
-     .replace(/([\w:]+)=/g,'<span class="xt-attr">$1</span>=')
-     .replace(/="([^"]*)"/g,'="<span class="xt-val">$1</span>"');
- }
- let html='<table style="width:100%;border-collapse:collapse">';
- xmlLines.forEach((line,i)=>{
-   const n=i+1, isErr=errLines.has(n), isWarn=warnLines.has(n), cls=isErr?'xv-line hl-err':isWarn?'xv-line hl':'xv-line';
-   html+=`<tr class="${cls}" id="xvL${n}"><td class="xv-num">${n}</td><td class="xv-txt">${hlXML(line)}</td></tr>`;
- });
- html+='</table>';
- body.innerHTML=html;
- wrap.classList.add('sh');
- if(targetLine>0)setTimeout(()=>{const el=document.getElementById(`xvL${targetLine}`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},100);
+  const wrap=document.getElementById('xvWrap');
+  const body=document.getElementById('xvBody');
+  document.getElementById('xvTitle').textContent=`XML Viewer ${fName}`;
+  document.getElementById('xvInfo').textContent=`${xmlLines.length} lines`;
+
+  const errLines=new Set(), warnLines=new Set();
+  allIssues.forEach(i=>{ if(i.line){ if(i.isWarn) warnLines.add(i.line); else errLines.add(i.line); } });
+
+  function hl(line){
+    return esc(line)
+      .replace(/(&lt;\/?[\w:]+)/g,'<span class="xt-tag">$1</span>')
+      .replace(/(&gt;)/g,'<span class="xt-tag">$1</span>')
+      .replace(/([\w:]+)=/g,'<span class="xt-attr">$1</span>=')
+      .replace(/="([^"]*)"/g,'="<span class="xt-val">$1</span>"');
+  }
+
+  body.innerHTML = xmlLines.map((line,idx)=>{
+    const n=idx+1;
+    const cls=errLines.has(n)?'xv-line hl-err':warnLines.has(n)?'xv-line hl':'xv-line';
+    return `<div id="xvL${n}" class="${cls}"><div class="xv-num">${n}</div><div class="xv-txt">${hl(line)}</div></div>`;
+  }).join('');
+
+  wrap.classList.add('sh');
+  if(targetLine){
+    setTimeout(()=>{
+      const el=document.getElementById('xvL'+targetLine);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    },100);
+  }
 }
 function closeXV(){document.getElementById('xvWrap').classList.remove('sh')}
 document.getElementById('xvWrap').addEventListener('click',function(e){if(e.target===this)closeXV()});
 
-// ============================================================================
-// FIELD MAP
-// ============================================================================
-function buildFieldMap(){
- const rl=r=>r==='M'?'<span class="req-tag m">M</span>':r==='D'?'<span class="req-tag d">D</span>':'<span class="req-tag n">NM</span>';
- const render=(flds,id)=>{
-   const el=document.getElementById(id); if(!el)return;
-   let html='<div class="fld-grid">';
-   Object.entries(flds).forEach(([f,r])=>{html+=`<div class="fld-item"><span class="fn">${f}</span>${rl(r)}</div>`});
-   el.innerHTML=html+'</div>';
- };
- render(FIELDS_HD,'fmapHD'); render(FIELDS_ID,'fmapID'); render(FIELDS_BD,'fmapBD'); render(FIELDS_SL,'fmapSL');
- render(FIELDS_CI,'fmapCI'); render(FIELDS_CN,'fmapCN'); render(FIELDS_CC,'fmapCC'); render(FIELDS_CA,'fmapCA');
- render(FIELDS_CV,'fmapCV'); render(FIELDS_CF,'fmapCF'); render(FIELDS_NE,'fmapNE'); render(FIELDS_FT,'fmapFT');
-}
-
-// ============================================================================
-// FIX ENGINE
-// ============================================================================
 const FIXES=[
- {id:'f_rcc',label:'Set missing RestructuredCreditCode="2" where applicable',code:'195',on:true,dd:'DD p84'},
- {id:'f_opn',label:'Round OutstandingPaymentsNumber to integer CI',code:'168',on:true,dd:'DD p18'},
- {id:'f_dpd',label:'Set missing DaysPastDue="0" on contract groups',code:'090',on:true,dd:'DD p19/29/41/54/57'},
- {id:'f_hol',label:'Fix HouseOwnerLessee "0" → "1" ID',code:'044',on:true,dd:'DD p63'},
- {id:'f_emp',label:'Set employment defaults ID',code:'EMP',on:true,dd:'DD p7'},
- {id:'f_post',label:'Copy CurrentPostalCode from PermanentPostalCode ID',code:'113',on:true,dd:'DD p4'},
- {id:'f_sta',label:'Set STCurrentCountry="PH" ID',code:'141',on:true,dd:'DD p8'},
- {id:'f_stc',label:'Copy ST Contact from Contact1 ID',code:'028',on:true,dd:'DD p9'},
- {id:'f_tin',label:'Clean TIN/STTIN to digits only ID',code:'050',on:true,dd:'DD p5'},
- {id:'f_id',label:'Clear mismatched ID pairs ID',code:'069',on:true,dd:'DD p5-6'},
- {id:'f_lpa',label:'Set LastPaymentAmount from MonthlyPaymentAmount CI/CC',code:'089',on:true,dd:'DD p18/40'},
- {id:'f_hdr',label:'Set missing Header Version to 1.0',code:'HD_VER',on:true,dd:'DD p1'}
+  {id:'f_rcc',label:'Set missing RestructuredCreditCode="2"',code:'195',on:true},
+  {id:'f_opn',label:'Round OutstandingPaymentsNumber to integer',code:'168',on:true},
+  {id:'f_dpd',label:'Set missing DaysPastDue="0"',code:'090',on:true},
+  {id:'f_tin',label:'Clean TIN / STTIN to digits only',code:'050',on:true},
+  {id:'f_hdr',label:'Set missing Header Version to 1.0',code:'HD_VER',on:true}
 ];
 function buildFixOpts(){
- let html='';
- FIXES.forEach(f=>{
-   const cnt=(errs[f.code]||[]).length+(warns[f.code]||[]).length;
-   const dis=cnt===0;
-   html+=`<label style="${dis?'opacity:.42':''}"><input type="checkbox" id="${f.id}" ${f.on&&!dis?'checked':''} ${dis?'disabled':''}><div><span>${f.label}</span>${cnt>0?`<span class="eb cr" style="margin-left:.3rem">${cnt}</span>`:''}<div style="font-size:.62rem;color:var(--tl)">[${f.dd}]</div></div></label>`;
- });
- document.getElementById('fixOpts').innerHTML=html;
+  document.getElementById('fixOpts').innerHTML = FIXES.map(f=>{
+    const cnt=(errs[f.code]?.length||0)+(warns[f.code]?.length||0);
+    const dis=cnt===0;
+    return `<label style="${dis?'opacity:.45':''}">
+      <input type="checkbox" id="${f.id}" ${f.on&&!dis?'checked':''} ${dis?'disabled':''}>
+      <div>${f.label}${cnt?` <span class="eb cr">${cnt}</span>`:''}</div>
+    </label>`;
+  }).join('');
 }
 function applyFixes(){
- lg('i','Applying corrections...');
- const doc=new DOMParser().parseFromString(xmlStr,'text/xml');
- const fixes=[];
- const ck=id=>{const e=document.getElementById(id);return e&&!e.disabled&&e.checked};
+  const doc=new DOMParser().parseFromString(xmlStr,'text/xml');
+  const out=[];
+  const ck=id=>{const e=document.getElementById(id);return e&&!e.disabled&&e.checked};
 
- if(ck('f_rcc')){
-   let c=0;
-   [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('NonInstallments'),...doc.querySelectorAll('CreditCards'),...doc.querySelectorAll('OtherCreditAccomodations'),...doc.querySelectorAll('Investments')].forEach(el=>{
-     const v=(el.getAttribute('RestructuredCreditCode')||'').trim();
-     if(!v || !VALID.RestructuredCreditCode.includes(v)){el.setAttribute('RestructuredCreditCode','2');c++}
-   });
-   if(c)fixes.push(`RestructuredCreditCode: ${c} set to "2"`);
- }
- if(ck('f_opn')){
-   let c=0;
-   doc.querySelectorAll('Installments').forEach(el=>{
-     const v=el.getAttribute('OutstandingPaymentsNumber')||'';
-     if(v && /^-?\d+(\.\d+)?$/.test(v) && !/^\d+$/.test(v)){el.setAttribute('OutstandingPaymentsNumber',Math.round(parseFloat(v)).toString());c++}
-   });
-   if(c)fixes.push(`OutstandingPaymentsNumber: ${c} rounded`);
- }
- if(ck('f_dpd')){
-   let c=0;
-   [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('NonInstallments'),...doc.querySelectorAll('CreditCards'),...doc.querySelectorAll('OtherCreditAccomodations'),...doc.querySelectorAll('Investments')].forEach(el=>{
-     const ph=el.getAttribute('ContractPhase')||'';
-     if(['AC','CL','CA'].includes(ph)&&!(el.getAttribute('DaysPastDue')||'').trim()){el.setAttribute('DaysPastDue','0');c++}
-   });
-   if(c)fixes.push(`DaysPastDue: ${c} set to "0"`);
- }
- if(ck('f_hol')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     ['PermanentHouseOwnerLessee','CurrentHouseOwnerLessee','STCurrentHouseOwnerLessee'].forEach(a=>{
-       if((el.getAttribute(a)||'').trim()==='0'){el.setAttribute(a,'1');c++}
-     });
-   });
-   if(c)fixes.push(`HouseOwnerLessee: ${c} fixed`);
- }
- if(ck('f_emp')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     const g=k=>(el.getAttribute(k)||'').trim();
-     if(!g('EmploymentOccupationStatus')){el.setAttribute('EmploymentOccupationStatus','3');c++}
-     if(!g('EmploymentDateHiredFrom')){el.setAttribute('EmploymentDateHiredFrom','19000102');c++}
-     if(!g('EmploymentAnnualMonthlyIndicator')){el.setAttribute('EmploymentAnnualMonthlyIndicator','M');c++}
-     if(!g('EmploymentGrossIncome')){el.setAttribute('EmploymentGrossIncome','0');c++}
-     if(!g('EmploymentNetIncome')){el.setAttribute('EmploymentNetIncome','0');c++}
-   });
-   if(c)fixes.push(`Employment: ${c} fields set`);
- }
- if(ck('f_post')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     const g=k=>(el.getAttribute(k)||'').trim();
-     if(!g('CurrentPostalCode')&&!g('CurrentPSGCode')&&!g('CurrentFullAddress')){
-       const pp=g('PermanentPostalCode');
-       if(pp){el.setAttribute('CurrentPostalCode',pp);c++}
-     }
-   });
-   if(c)fixes.push(`CurrentPostalCode: ${c} copied from permanent`);
- }
- if(ck('f_sta')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     if(!(el.getAttribute('STCurrentCountry')||'').trim()){el.setAttribute('STCurrentCountry','PH');c++}
-   });
-   if(c)fixes.push(`STCurrentCountry: ${c} set to PH`);
- }
- if(ck('f_stc')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     const ct=(el.getAttribute('STContactType1')||'').trim();
-     const cv=(el.getAttribute('STContactValue1')||'').trim();
-     if(!ct&&!cv){
-       const ct1=(el.getAttribute('ContactType1')||'').trim();
-       const cv1=(el.getAttribute('ContactValue1')||'').trim();
-       if(ct1&&cv1){el.setAttribute('STContactType1',ct1);el.setAttribute('STContactValue1',cv1);c++}
-     }
-   });
-   if(c)fixes.push(`ST contact copied: ${c}`);
- }
- if(ck('f_tin')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     ['TIN','SoleTraderTIN'].forEach(a=>{
-       const v=(el.getAttribute(a)||'').trim();
-       if(v){
-         const cl=cleanDigits(v);
-         if(cl!==v){el.setAttribute(a,cl);c++}
-       }
-     });
-   });
-   if(c)fixes.push(`TIN digits cleaned: ${c}`);
- }
- if(ck('f_id')){
-   let c=0;
-   doc.querySelectorAll('Individuals').forEach(el=>{
-     for(let i=1;i<=3;i++){
-       const t=(el.getAttribute(`IDType${i}`)||'').trim(), n=(el.getAttribute(`IDNumber${i}`)||'').trim();
-       if((t&&!n)||(!t&&n)){['IDType','IDNumber','IDIssueDate','IDIssueCountry','IDExpiryDate'].forEach(f=>el.setAttribute(f+i,''));c++}
-     }
-   });
-   if(c)fixes.push(`Mismatched ID pairs cleared: ${c}`);
- }
- if(ck('f_lpa')){
-   let c=0;
-   [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('CreditCards')].forEach(el=>{
-     const ph=el.getAttribute('ContractPhase')||'';
-     const lpa=(el.getAttribute('LastPaymentAmount')||'').trim();
-     const mpa=(el.getAttribute('MonthlyPaymentAmount')||'').trim();
-     if(['AC','CL','CA'].includes(ph)&&!lpa&&mpa){el.setAttribute('LastPaymentAmount',mpa);c++}
-   });
-   if(c)fixes.push(`LastPaymentAmount set: ${c}`);
- }
- if(ck('f_hdr')){
-   let c=0;
-   const h=doc.querySelector('Header');
-   if(h && !(h.getAttribute('Version')||'').trim()){h.setAttribute('Version','1.0');c++}
-   if(c)fixes.push(`Header Version fixed: ${c}`);
- }
+  if(ck('f_rcc')){
+    let c=0;
+    [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('NonInstallments'),...doc.querySelectorAll('CreditCards'),...doc.querySelectorAll('OtherCreditAccomodations'),...doc.querySelectorAll('Investments')].forEach(el=>{
+      if(!(el.getAttribute('RestructuredCreditCode')||'').trim()){el.setAttribute('RestructuredCreditCode','2');c++}
+    });
+    if(c) out.push(`RestructuredCreditCode fixed: ${c}`);
+  }
 
- if(!fixes.length){
-   document.getElementById('fixRes').innerHTML='<p style="color:var(--w)">No applicable fixes.</p>';
-   return;
- }
- let html='<div class="la">';
- fixes.forEach(f=>{html+=`<div class="lo">${f}</div>`;lg('o',f)});
- html+=`<div class="li" style="margin-top:.5rem">${fixes.length} fix categories applied</div></div>`;
- html+='<div class="bg"><button class="btn bs" onclick="dlFile()">Download Corrected XML</button></div>';
- document.getElementById('fixRes').innerHTML=html;
- const ser=new XMLSerializer();
- window._correctedXML='<?xml version="1.0" encoding="UTF-8"?>\n'+ser.serializeToString(doc);
- lg('o','Corrected XML ready');
+  if(ck('f_opn')){
+    let c=0;
+    doc.querySelectorAll('Installments').forEach(el=>{
+      const v=(el.getAttribute('OutstandingPaymentsNumber')||'').trim();
+      if(v && /^-?\d+(\.\d+)?$/.test(v) && !/^\d+$/.test(v)){el.setAttribute('OutstandingPaymentsNumber',Math.round(parseFloat(v)).toString());c++}
+    });
+    if(c) out.push(`OutstandingPaymentsNumber rounded: ${c}`);
+  }
+
+  if(ck('f_dpd')){
+    let c=0;
+    [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('NonInstallments'),...doc.querySelectorAll('CreditCards'),...doc.querySelectorAll('OtherCreditAccomodations'),...doc.querySelectorAll('Investments')].forEach(el=>{
+      if(!(el.getAttribute('DaysPastDue')||'').trim()){el.setAttribute('DaysPastDue','0');c++}
+    });
+    if(c) out.push(`DaysPastDue defaulted: ${c}`);
+  }
+
+  if(ck('f_tin')){
+    let c=0;
+    doc.querySelectorAll('Individuals').forEach(el=>{
+      ['TIN','SoleTraderTIN'].forEach(a=>{
+        const v=(el.getAttribute(a)||'').trim();
+        if(v){
+          const d=digits(v);
+          if(v!==d){el.setAttribute(a,d);c++}
+        }
+      });
+    });
+    if(c) out.push(`TIN fields cleaned: ${c}`);
+  }
+
+  if(ck('f_hdr')){
+    let c=0;
+    const h=doc.querySelector('Header');
+    if(h && !(h.getAttribute('Version')||'').trim()){h.setAttribute('Version','1.0');c++}
+    if(c) out.push(`Header Version set: ${c}`);
+  }
+
+  if(!out.length){
+    document.getElementById('fixRes').innerHTML='<p style="color:var(--w)">No applicable fixes.</p>';
+    return;
+  }
+
+  const ser=new XMLSerializer();
+  window._correctedXML='<?xml version="1.0" encoding="UTF-8"?>\n'+ser.serializeToString(doc);
+  document.getElementById('fixRes').innerHTML=
+    `<div class="la">${out.map(x=>`<div class="lo">${esc(x)}</div>`).join('')}</div>
+     <div class="bg"><button class="btn bs" onclick="dlFile()">Download Corrected XML</button></div>`;
 }
 function dlFile(){
- const content=window._correctedXML||xmlStr;
- const blob=new Blob([content],{type:'application/xml'});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');
- a.href=url;
- a.download=fName.replace('.xml','_CORRECTED.xml');
- a.click();
- URL.revokeObjectURL(url);
+  const blob=new Blob([window._correctedXML||xmlStr],{type:'application/xml'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=fName.replace('.xml','_CORRECTED.xml');
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
-// ============================================================================
-// EXPORT
-// ============================================================================
+function buildFieldMap(){
+  const rl=r=>r==='M'?'<span class="req-tag m">M</span>':r==='D'?'<span class="req-tag d">D</span>':'<span class="req-tag n">NM</span>';
+  const render=(obj,id)=>{
+    document.getElementById(id).innerHTML='<div class="fld-grid">'+Object.entries(obj).map(([k,v])=>`<div class="fld-item"><span class="fn">${k}</span>${rl(v)}</div>`).join('')+'</div>';
+  };
+  render(FIELDS_HD,'fmapHD'); render(FIELDS_ID,'fmapID'); render(FIELDS_BD,'fmapBD'); render(FIELDS_SL,'fmapSL');
+  render(FIELDS_CI,'fmapCI'); render(FIELDS_CN,'fmapCN'); render(FIELDS_CC,'fmapCC'); render(FIELDS_CA,'fmapCA');
+  render(FIELDS_CV,'fmapCV'); render(FIELDS_CF,'fmapCF'); render(FIELDS_NE,'fmapNE'); render(FIELDS_FT,'fmapFT');
+}
+
 function exportReport(type='excel'){
- const tE=Object.values(errs).reduce((s,a)=>s+a.length,0);
- const tW=Object.values(warns).reduce((s,a)=>s+a.length,0);
- const now=new Date().toLocaleString();
+  const totalErrors=Object.values(errs).reduce((s,a)=>s+a.length,0);
+  const totalWarnings=Object.values(warns).reduce((s,a)=>s+a.length,0);
+  const now=new Date().toLocaleString();
 
- if(type==='excel'){
-   let csv='CSDF Validation Report\n';
-   csv+=`File:,${fName}\nGenerated:,${now}\nTotal Lines:,${xmlLines.length}\n`;
-   csv+=`Total Errors:,${tE}\nTotal Warnings:,${tW}\nStatus:,${tE===0?'READY':'HAS ERRORS'}\n\n`;
-   csv+='Severity,Error Code,Line No,Column,Description,Details\n';
-   allIssues.forEach(issue=>{
-     const sev=issue.isWarn?'WARNING':'ERROR';
-     const desc=(ERR_DESC[issue.code]||issue.code).replace(/,/g,';');
-     const msg=String(issue.msg).replace(/,/g,';').replace(/"/g,"'");
-     csv+=`${sev},${issue.code},${issue.line||'N/A'},${issue.col||'N/A'},"${desc}","${msg}"\n`;
-   });
-   const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
-   const url=URL.createObjectURL(blob);
-   const a=document.createElement('a');
-   a.href=url;
-   a.download=fName.replace('.xml','_ValidationReport.csv');
-   a.click();
-   URL.revokeObjectURL(url);
-   lg('o','Exported CSV');
- } else if(type==='html'){
-   const groups={};
-   allIssues.forEach(issue=>{if(!groups[issue.code])groups[issue.code]=[];groups[issue.code].push(issue)});
-   let rows='';
-   Object.entries(groups).forEach(([code,issues])=>{
-     const isErr=!issues[0].isWarn;
-     rows+=`<tr><td><span style="background:${isErr?'#fee2e2':'#fef3c7'};color:${isErr?'#dc2626':'#d97706'};padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700">${isErr?'ERROR':'WARN'}</span></td><td style="font-family:monospace;font-weight:700">${code}</td><td>${issues.length}</td><td style="font-size:.78rem">${ERR_DESC[code]||code}</td><td style="font-size:.72rem;font-family:monospace">${issues.slice(0,8).map(i=>`<div style="padding:2px 0;border-bottom:1px solid #f1f5f9"><span style="background:#1e293b;color:#60a5fa;padding:0 4px;border-radius:3px;font-size:.65rem;margin-right:4px">L${i.line||'?'}</span>${esc(i.msg)}</div>`).join('')}${issues.length>8?`<div style="color:#d97706">...+${issues.length-8} more</div>`:''}</td></tr>`;
-   });
-   const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CSDF Report</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;background:#f8fafc;padding:2rem;color:#1e293b}.header{background:linear-gradient(135deg,#1e3a8a,#1a56db);color:#fff;padding:1.5rem 2rem;border-radius:12px;margin-bottom:1.5rem}.header h1{font-size:1.2rem;margin-bottom:.5rem}.header p{font-size:.8rem;opacity:.85}table{width:100%;border-collapse:collapse;font-size:.8rem}th{background:#f8fafc;padding:.6rem 1rem;text-align:left;font-size:.68rem;text-transform:uppercase;color:#64748b;border-bottom:2px solid #dbeafe}td{padding:.55rem 1rem;border-bottom:1px solid #f1f5f9;vertical-align:top}.card{background:#fff;border-radius:10px;border:1px solid #dbeafe;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}.card h3{padding:.75rem 1.25rem;background:#f1f5f9;border-bottom:1px solid #dbeafe;font-size:.88rem}</style></head><body><div class="header"><h1>CSDF Validation Report</h1><p>File: <strong>${esc(fName)}</strong> | ${now} | ${xmlLines.length} lines | v8.0 Strict</p><p style="margin-top:.4rem">Status: ${tE===0?'READY TO SUBMIT':'HAS ERRORS'}</p></div><div class="card"><h3>Validation Issues ${allIssues.length} total</h3>${rows?`<table><thead><tr><th>Type</th><th>Code</th><th>Count</th><th>Description</th><th>Details</th></tr></thead><tbody>${rows}</tbody></table>`:'<p style="padding:1rem;color:#059669">No issues found.</p>'}</div></body></html>`;
-   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-   const url=URL.createObjectURL(blob);
-   const a=document.createElement('a');
-   a.href=url;
-   a.download=fName.replace('.xml','_ValidationReport.html');
-   a.click();
-   URL.revokeObjectURL(url);
-   lg('o','Exported HTML');
- }
+  if(type==='excel'){
+    let csv='CSDF Validation Report\n';
+    csv+=`File,${fName}\nGenerated,${now}\nErrors,${totalErrors}\nWarnings,${totalWarnings}\n\n`;
+    csv+='Severity,Code,Line,Description,Details\n';
+    allIssues.forEach(i=>{
+      csv+=`${i.isWarn?'WARNING':'ERROR'},${i.code},${i.line},"${(ERR_DESC[i.code]||i.code).replace(/"/g,"'")}","${String(i.msg).replace(/"/g,"'")}"\n`;
+    });
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=fName.replace('.xml','_ValidationReport.csv');
+    a.click();
+    URL.revokeObjectURL(url);
+  }else{
+    const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Validation Report</title></head><body><h1>Validation Report</h1><p>${esc(fName)}</p><p>${esc(now)}</p><p>Errors: ${totalErrors} Warnings: ${totalWarnings}</p><table border="1" cellpadding="6" cellspacing="0"><tr><th>Severity</th><th>Code</th><th>Line</th><th>Description</th><th>Details</th></tr>${allIssues.map(i=>`<tr><td>${i.isWarn?'WARNING':'ERROR'}</td><td>${i.code}</td><td>${i.line||''}</td><td>${esc(ERR_DESC[i.code]||i.code)}</td><td>${esc(i.msg)}</td></tr>`).join('')}</table></body></html>`;
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=fName.replace('.xml','_ValidationReport.html');
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 }
+
+bindUpload();
 </script>
 </body>
 </html>
