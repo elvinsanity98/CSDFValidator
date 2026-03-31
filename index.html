@@ -1,121 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSDF Validator v8.2 COCREE 2.0 Strict Validator</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSDF Validator v8.3</title>
 <style>
-:root{--p:#1a56db;--pd:#1e3a8a;--pl:#3b82f6;--bg:#f0f4ff;--c:#fff;--bd:#dbeafe;--t:#1e293b;--tl:#64748b;--ok:#059669;--okb:#d1fae5;--er:#dc2626;--erb:#fee2e2;--w:#d97706;--wb:#fef3c7;--sh:0 4px 24px rgba(30,58,138,.08);--r:12px}
+:root{
+  --p:#1a56db;--pd:#1e3a8a;--pl:#3b82f6;--bg:#f0f4ff;--c:#fff;--bd:#dbeafe;
+  --t:#1e293b;--tl:#64748b;--ok:#059669;--okb:#d1fae5;--er:#dc2626;--erb:#fee2e2;
+  --w:#d97706;--wb:#fef3c7;--sh:0 4px 24px rgba(30,58,138,.08);--r:12px
+}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
-.nav{background:linear-gradient(135deg,var(--pd),var(--p));color:#fff;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(30,58,138,.2);position:sticky;top:0;z-index:100}
-.nav h1{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.nav{
+  background:linear-gradient(135deg,var(--pd),var(--p));color:#fff;padding:0 2rem;height:64px;
+  display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(30,58,138,.2)
+}
+.nav h1{font-size:1.05rem;font-weight:700;display:flex;gap:.5rem;align-items:center}
 .nav .v{background:rgba(255,255,255,.15);padding:2px 10px;border-radius:20px;font-size:.62rem}
-.ct{max-width:1380px;margin:0 auto;padding:1.5rem}
-.card{background:var(--c);border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--bd);margin-bottom:1.5rem;overflow:hidden}
-.ch{padding:.9rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.92rem}
-.ch-l{display:flex;align-items:center;gap:.5rem}
-.cb{padding:1.5rem}
-.uz{border:2px dashed var(--pl);border-radius:var(--r);padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .2s;background:linear-gradient(135deg,#eff6ff,#f0f4ff)}
-.uz:hover,.uz.dg{border-color:var(--p);background:#dbeafe;transform:translateY(-2px)}
-.uz .ic{font-size:2.5rem;margin-bottom:.75rem;color:var(--p)}
-.uz h3{color:var(--pd);margin-bottom:.4rem;font-size:1rem}
-.uz p{color:var(--tl);font-size:.8rem}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:8px;font-size:.8rem;font-weight:600;border:none;cursor:pointer;transition:all .15s}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.bp{background:var(--p);color:#fff}.bp:hover:not(:disabled){background:var(--pd);transform:translateY(-1px)}
-.bs{background:var(--ok);color:#fff}.bs:hover:not(:disabled){background:#047857}
-.bo{background:transparent;color:var(--p);border:1.5px solid var(--pl)}.bo:hover:not(:disabled){background:var(--bd)}
-.bw{background:#7c3aed;color:#fff}.bw:hover:not(:disabled){background:#6d28d9}
-.bg{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:.8rem;margin-bottom:1.5rem}
-.sc{background:var(--c);border-radius:var(--r);padding:1rem;border:1px solid var(--bd);text-align:center;box-shadow:var(--sh)}
-.sc .n{font-size:1.4rem;font-weight:800;color:var(--p)}
-.sc .l{font-size:.6rem;color:var(--tl);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem}
-.sc.e .n{color:var(--er)}.sc.w .n{color:var(--w)}.sc.s .n{color:var(--ok)}
-.eb{display:inline-flex;align-items:center;padding:1px 7px;border-radius:5px;font-size:.65rem;font-weight:700;gap:3px}
-.eb.cr{background:var(--erb);color:var(--er)}.eb.wn{background:var(--wb);color:var(--w)}.eb.ok{background:var(--okb);color:var(--ok)}.eb.inf{background:#ede9fe;color:#7c3aed}
-.ln{display:inline-flex;align-items:center;background:#1e293b;color:#94a3b8;padding:1px 6px;border-radius:4px;font-family:'Consolas',monospace;font-size:.65rem;font-weight:700;gap:2px;cursor:pointer;margin-left:4px;border:1px solid #334155}
-.ln:hover{background:#334155;color:#e2e8f0}
-.ln::before{content:'L';color:#60a5fa}
+.ct{max-width:1320px;margin:0 auto;padding:1.25rem}
+.card{background:var(--c);border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--bd);margin-bottom:1rem;overflow:hidden}
+.ch{padding:.85rem 1.25rem;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.cb{padding:1.25rem}
+.uz{
+  border:2px dashed var(--pl);border-radius:var(--r);padding:2.3rem 1.5rem;text-align:center;cursor:pointer;
+  transition:.2s;background:linear-gradient(135deg,#eff6ff,#f0f4ff)
+}
+.uz:hover,.uz.dg{border-color:var(--p);background:#dbeafe}
+.uz .ic{font-size:2.4rem;margin-bottom:.5rem;color:var(--p)}
+.uz h3{color:var(--pd);margin-bottom:.35rem;font-size:1rem}
+.uz p{color:var(--tl);font-size:.82rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .9rem;border-radius:8px;font-size:.8rem;
+  font-weight:600;border:none;cursor:pointer
+}
+.bp{background:var(--p);color:#fff}
+.bo{background:transparent;color:var(--p);border:1.5px solid var(--pl)}
+.bw{background:#7c3aed;color:#fff}
+.bs{background:var(--ok);color:#fff}
+.bg{display:flex;gap:.5rem;flex-wrap:wrap}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.8rem}
+.sc{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:.9rem;text-align:center;box-shadow:var(--sh)}
+.sc .n{font-size:1.35rem;font-weight:800;color:var(--p)}
+.sc .l{font-size:.62rem;color:var(--tl);text-transform:uppercase;letter-spacing:.05em;margin-top:.18rem}
+.sc.e .n{color:var(--er)} .sc.w .n{color:var(--w)} .sc.s .n{color:var(--ok)}
+.tabs{display:flex;border-bottom:2px solid var(--bd);margin-bottom:1rem;overflow-x:auto}
+.tb{
+  padding:.65rem 1rem;cursor:pointer;font-weight:600;font-size:.8rem;color:var(--tl);
+  border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap
+}
+.tb.a{color:var(--p);border-bottom-color:var(--p)}
+.tc{display:none}.tc.a{display:block}
 .et{width:100%;border-collapse:separate;border-spacing:0;font-size:.8rem}
-.et th{background:#f1f5f9;padding:.65rem .9rem;text-align:left;font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--tl);border-bottom:2px solid var(--bd)}
-.et td{padding:.55rem .9rem;border-bottom:1px solid #f1f5f9;vertical-align:top;line-height:1.45}
-.et tr:hover td{background:#f8fafc}
-.et .code{font-family:'Consolas',monospace;font-weight:700;color:var(--pd);font-size:.76rem}
-.dl{max-height:220px;overflow-y:auto;background:#f8fafc;border-radius:6px;padding:.5rem;margin-top:.4rem;border:1px solid #e2e8f0}
-.dl-item{display:flex;align-items:flex-start;gap:.4rem;padding:3px 0;border-bottom:1px solid #f1f5f9;font-size:.74rem}
+.et th{
+  background:#f1f5f9;padding:.6rem .8rem;text-align:left;font-size:.68rem;text-transform:uppercase;
+  color:var(--tl);border-bottom:2px solid var(--bd)
+}
+.et td{padding:.55rem .8rem;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.eb{display:inline-flex;align-items:center;padding:1px 7px;border-radius:5px;font-size:.65rem;font-weight:700}
+.eb.cr{background:var(--erb);color:var(--er)} .eb.ok{background:var(--okb);color:var(--ok)} .eb.wn{background:var(--wb);color:var(--w)}
+.dl{max-height:220px;overflow-y:auto;background:#f8fafc;border-radius:6px;padding:.5rem;margin-top:.35rem;border:1px solid #e2e8f0}
+.dl-item{padding:3px 0;border-bottom:1px solid #eef2f7;font-family:Consolas,monospace;font-size:.72rem}
 .dl-item:last-child{border-bottom:none}
-.dl-item .di-ln{flex-shrink:0}
-.dl-item .di-txt{color:var(--tl);font-family:'Consolas',monospace;font-size:.72rem;line-height:1.4}
-.ct2{cursor:pointer;user-select:none;color:var(--p);font-size:.75rem}.ct2:hover{text-decoration:underline}
+.ct2{cursor:pointer;color:var(--p);font-size:.75rem}
 .cc{display:none}.cc.sh{display:block}
-.xv-wrap{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;display:flex;align-items:center;justify-content:center;display:none}
-.xv-wrap.sh{display:flex}
-.xv-box{background:#0f172a;border-radius:12px;width:92%;max-width:980px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.xv-header{padding:.75rem 1rem;background:#1e293b;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.xv-header span{color:#e2e8f0;font-size:.85rem;font-weight:600}
-.xv-body{overflow-y:auto;padding:0;flex:1}
-.xv-num{color:#4b5563;width:56px;text-align:right;flex-shrink:0;padding:0 .5rem;user-select:none;font-size:.7rem}
-.xv-txt{color:#e2e8f0;white-space:pre;flex:1;padding-right:.5rem;overflow-x:auto;font-family:Consolas,monospace;font-size:.74rem;line-height:1.55}
-.xv-line{display:flex;gap:.5rem}
-.xv-line.hl{background:#422006}
-.xv-line.hl-err{background:#450a0a}
-.xv-txt .xt-tag{color:#60a5fa}
-.xv-txt .xt-attr{color:#86efac}
-.xv-txt .xt-val{color:#fca5a5}
-.sb{padding:.9rem 1.3rem;border-radius:var(--r);display:flex;align-items:center;gap:.6rem;font-weight:500;margin-bottom:1rem;font-size:.88rem}
+.hidden{display:none!important}
+.fi{
+  display:flex;align-items:center;gap:1rem;padding:.85rem;background:var(--bd);border-radius:8px;margin-bottom:1rem
+}
+.fi .ic{font-size:1.8rem}
+.fi .dt h4{font-size:.9rem;color:var(--pd)}
+.fi .dt p{font-size:.76rem;color:var(--tl)}
+.sb{padding:.85rem 1rem;border-radius:10px;font-weight:600;margin-bottom:1rem}
 .sb.pass{background:var(--okb);border:1px solid #a7f3d0;color:#065f46}
 .sb.fail{background:var(--erb);border:1px solid #fca5a5;color:#991b1b}
 .sb.rev{background:var(--wb);border:1px solid #fcd34d;color:#92400e}
-.tabs{display:flex;border-bottom:2px solid var(--bd);margin-bottom:1.5rem;overflow-x:auto}
-.tb{padding:.65rem 1.1rem;cursor:pointer;font-weight:600;font-size:.8rem;color:var(--tl);border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;white-space:nowrap}
-.tb:hover{color:var(--p)}.tb.a{color:var(--p);border-bottom-color:var(--p)}
-.tc{display:none}.tc.a{display:block}
-.fi{display:flex;align-items:center;gap:1rem;padding:.9rem;background:var(--bd);border-radius:8px;margin-bottom:1rem}
-.fi .ic{font-size:1.8rem}.fi .dt h4{font-size:.88rem;color:var(--pd)}.fi .dt p{font-size:.75rem;color:var(--tl)}
-.la{background:#0f172a;color:#94a3b8;font-family:'Consolas',monospace;font-size:.73rem;padding:1rem;border-radius:8px;max-height:320px;overflow-y:auto;line-height:1.6}
+.la{
+  background:#0f172a;color:#94a3b8;font-family:Consolas,monospace;font-size:.73rem;padding:1rem;border-radius:8px;
+  max-height:280px;overflow-y:auto;line-height:1.6
+}
 .la .lo{color:#34d399}.la .le{color:#f87171}.la .lw{color:#fbbf24}.la .li{color:#60a5fa}
-.hidden{display:none!important}
-.chk-group label{display:flex;align-items:flex-start;gap:.5rem;padding:.38rem 0;font-size:.8rem;cursor:pointer;line-height:1.4}
-.chk-group label input{width:15px;height:15px;accent-color:var(--p);margin-top:2px;flex-shrink:0}
-.req-tag{font-size:.55rem;padding:1px 4px;border-radius:3px;font-weight:700;vertical-align:middle}
+.fld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.35rem}
+.fld-item{display:flex;align-items:center;gap:.35rem;padding:.3rem .5rem;border:1px solid #e2e8f0;border-radius:6px;font-size:.73rem}
+.fld-item .fn{font-weight:600;flex:1}
+.req-tag{font-size:.55rem;padding:1px 4px;border-radius:3px;font-weight:700}
 .req-tag.m{background:#dbeafe;color:#1e40af}.req-tag.d{background:#e0e7ff;color:#4338ca}.req-tag.n{background:#f1f5f9;color:#94a3b8}
-.fld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.35rem}
-.fld-item{display:flex;align-items:center;gap:.3rem;padding:.3rem .5rem;border-radius:5px;font-size:.73rem;border:1px solid #e2e8f0}
-.fld-item .fn{font-weight:600;flex:1;font-size:.7rem}
-.legend{display:flex;gap:1rem;margin-bottom:.75rem;font-size:.74rem;flex-wrap:wrap}
-.exp-bar{background:#f1f5f9;border-radius:8px;padding:.65rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;font-size:.78rem;flex-wrap:wrap}
-@media(max-width:768px){.ct{padding:.75rem}.sg{grid-template-columns:repeat(3,1fr)}}
+.xv-wrap{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:999}
+.xv-wrap.sh{display:flex}
+.xv-box{background:#0f172a;border-radius:12px;width:92%;max-width:980px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden}
+.xv-header{padding:.75rem 1rem;background:#1e293b;display:flex;justify-content:space-between;align-items:center}
+.xv-body{overflow:auto;flex:1}
+.xv-line{display:flex;font-family:Consolas,monospace;font-size:.74rem}
+.xv-num{width:60px;text-align:right;color:#64748b;padding:0 .5rem}
+.xv-txt{flex:1;color:#e2e8f0;white-space:pre}
+.xv-line.hl{background:#422006}.xv-line.hl-err{background:#450a0a}
+.xv-txt .xt-tag{color:#60a5fa}.xv-txt .xt-attr{color:#86efac}.xv-txt .xt-val{color:#fca5a5}
+.ln{display:inline-block;background:#1e293b;color:#60a5fa;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:.65rem;cursor:pointer}
 </style>
 </head>
 <body>
 <div class="xv-wrap" id="xvWrap">
   <div class="xv-box">
     <div class="xv-header">
-      <span id="xvTitle">XML Viewer</span>
-      <div style="display:flex;gap:.5rem">
-        <span id="xvInfo" style="color:#60a5fa;font-size:.75rem"></span>
-        <button class="btn bo" onclick="closeXV()" style="padding:.2rem .6rem;font-size:.72rem;color:#e2e8f0;border-color:#4b5563">Close</button>
-      </div>
+      <span id="xvTitle" style="color:#fff;font-weight:600">XML Viewer</span>
+      <button class="btn bo" onclick="closeXV()" style="color:#fff;border-color:#4b5563">Close</button>
     </div>
     <div class="xv-body" id="xvBody"></div>
   </div>
 </div>
 
 <nav class="nav">
-  <h1>CSDF Validator &amp; Corrector <span class="v">v8.2 STRICT</span></h1>
-  <span style="font-size:.68rem;opacity:.75">Sections may be empty: ID BD SL CI CN CC CA CV CF NE</span>
+  <h1>CSDF Validator &amp; Corrector <span class="v">v8.3</span></h1>
+  <span style="font-size:.68rem;opacity:.8">Empty sections allowed: ID BD SL CI CN CC CA CV CF NE</span>
 </nav>
 
 <div class="ct">
   <div id="upSec" class="card">
-    <div class="ch"><div class="ch-l">Upload CSDF Submission XML</div></div>
+    <div class="ch">Upload CSDF Submission XML</div>
     <div class="cb">
       <div class="uz" id="dz">
         <div class="ic">📄</div>
-        <h3>Drop your CSDF XML file here</h3>
-        <p>or click to browse • Accepts .xml files</p>
+        <h3>Drop your XML file here</h3>
+        <p>or click to browse</p>
       </div>
       <input type="file" id="fi" style="display:none" accept=".xml">
     </div>
@@ -124,8 +130,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   <div id="fiSec" class="hidden">
     <div class="fi">
       <div class="ic">🧾</div>
-      <div class="dt"><h4 id="fn">-</h4><p id="fs">-</p></div>
-      <div style="margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap">
+      <div class="dt">
+        <h4 id="fn">-</h4>
+        <p id="fs">-</p>
+      </div>
+      <div style="margin-left:auto" class="bg">
         <button class="btn bo" onclick="openXV(0)">View XML</button>
         <button class="btn bw" onclick="exportReport('excel')">CSV</button>
         <button class="btn bw" onclick="exportReport('html')">HTML</button>
@@ -160,110 +169,115 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
     <div id="t-chk" class="tc a">
       <div id="sBan"></div>
-      <div class="exp-bar">
-        Export:
-        <button class="btn bp" onclick="exportReport('excel')">Excel/CSV</button>
-        <button class="btn bw" onclick="exportReport('html')">HTML Report</button>
-      </div>
-
-      <div class="card"><div class="ch"><div class="ch-l">Header / Footer Errors</div><span id="hfCnt" class="eb cr"></span></div><div class="cb"><div id="hfE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CI Installment Errors</div><span id="ciCnt" class="eb cr"></span></div><div class="cb"><div id="ciE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CN Non-Installment Errors</div><span id="cnCnt" class="eb cr"></span></div><div class="cb"><div id="cnE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CC Credit Card Errors</div><span id="ccCnt" class="eb cr"></span></div><div class="cb"><div id="ccE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CA Other Credit Accommodation Errors</div><span id="caCnt" class="eb cr"></span></div><div class="cb"><div id="caE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CV Investment Errors</div><span id="cvCnt" class="eb cr"></span></div><div class="cb"><div id="cvE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CF Off Balance Errors</div><span id="cfCnt" class="eb cr"></span></div><div class="cb"><div id="cfE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">NE Negative Event Errors</div><span id="neCnt" class="eb cr"></span></div><div class="cb"><div id="neE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">SL Subject Link Errors</div><span id="slCnt" class="eb cr"></span></div><div class="cb"><div id="slE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">ID / BD Subject Errors</div><span id="subCnt" class="eb cr"></span></div><div class="cb"><div id="subE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">Warnings</div><span id="wrnCnt" class="eb wn"></span></div><div class="cb"><div id="wrnE"></div></div></div>
+      <div class="card"><div class="ch">Header / Footer</div><div class="cb"><div id="hfE"></div></div></div>
+      <div class="card"><div class="ch">CI Installments</div><div class="cb"><div id="ciE"></div></div></div>
+      <div class="card"><div class="ch">CN Non-Installments</div><div class="cb"><div id="cnE"></div></div></div>
+      <div class="card"><div class="ch">CC Credit Cards</div><div class="cb"><div id="ccE"></div></div></div>
+      <div class="card"><div class="ch">CA Other Credit Accommodation</div><div class="cb"><div id="caE"></div></div></div>
+      <div class="card"><div class="ch">CV Investments</div><div class="cb"><div id="cvE"></div></div></div>
+      <div class="card"><div class="ch">CF Off Balance</div><div class="cb"><div id="cfE"></div></div></div>
+      <div class="card"><div class="ch">NE Negative Events</div><div class="cb"><div id="neE"></div></div></div>
+      <div class="card"><div class="ch">SL Subject Links</div><div class="cb"><div id="slE"></div></div></div>
+      <div class="card"><div class="ch">ID / BD Subjects</div><div class="cb"><div id="subE"></div></div></div>
+      <div class="card"><div class="ch">Warnings</div><div class="cb"><div id="wrnE"></div></div></div>
     </div>
 
     <div id="t-fix" class="tc">
-      <div class="card">
-        <div class="ch"><div class="ch-l">Auto-Correction</div></div>
-        <div class="cb">
-          <div class="chk-group" id="fixOpts"></div>
-          <div class="bg">
-            <button class="btn bp" onclick="applyFixes()">Apply All &amp; Download</button>
-          </div>
-        </div>
-      </div>
-      <div class="card"><div class="ch"><div class="ch-l">Fix Results</div></div><div class="cb"><div id="fixRes">Click Apply to see results.</div></div></div>
+      <div class="card"><div class="ch">Auto-Correction</div><div class="cb"><div class="chk-group" id="fixOpts"></div><div class="bg"><button class="btn bp" onclick="applyFixes()">Apply All & Download</button></div></div></div>
+      <div class="card"><div class="ch">Fix Results</div><div class="cb"><div id="fixRes">Click Apply to see results.</div></div></div>
     </div>
 
     <div id="t-fld" class="tc">
-      <div class="legend">
-        <span><span class="req-tag m">M</span> Mandatory</span>
-        <span><span class="req-tag d">D</span> Dependent</span>
-        <span><span class="req-tag n">NM</span> Non-Mandatory</span>
-      </div>
-      <div class="card"><div class="ch"><div class="ch-l">HD Header</div></div><div class="cb"><div id="fmapHD"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">ID Individual</div></div><div class="cb"><div id="fmapID"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">BD Institutional</div></div><div class="cb"><div id="fmapBD"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">SL Subject Link</div></div><div class="cb"><div id="fmapSL"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CI Installment</div></div><div class="cb"><div id="fmapCI"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CN Non-Installment</div></div><div class="cb"><div id="fmapCN"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CC Credit Card</div></div><div class="cb"><div id="fmapCC"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CA Other Credit Accommodation</div></div><div class="cb"><div id="fmapCA"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CV Investments</div></div><div class="cb"><div id="fmapCV"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">CF Off Balance</div></div><div class="cb"><div id="fmapCF"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">NE Negative Events</div></div><div class="cb"><div id="fmapNE"></div></div></div>
-      <div class="card"><div class="ch"><div class="ch-l">FT Footer</div></div><div class="cb"><div id="fmapFT"></div></div></div>
+      <div class="card"><div class="ch">Field Maps</div><div class="cb">
+        <div id="fmapHD"></div><br>
+        <div id="fmapID"></div><br>
+        <div id="fmapBD"></div><br>
+        <div id="fmapSL"></div><br>
+        <div id="fmapCI"></div><br>
+        <div id="fmapCN"></div><br>
+        <div id="fmapCC"></div><br>
+        <div id="fmapCA"></div><br>
+        <div id="fmapCV"></div><br>
+        <div id="fmapCF"></div><br>
+        <div id="fmapNE"></div><br>
+        <div id="fmapFT"></div>
+      </div></div>
     </div>
 
     <div id="t-log" class="tc">
-      <div class="card">
-        <div class="ch"><div class="ch-l">Log</div><button class="btn bo" onclick="clrLog()">Clear</button></div>
-        <div class="cb"><div class="la" id="logA">Ready...</div></div>
-      </div>
+      <div class="card"><div class="ch">Log</div><div class="cb"><div class="la" id="logA">Ready...</div></div></div>
     </div>
   </div>
 </div>
 
 <script>
-// same JS as previous working version, but with explicit note:
-// sections ID BD SL CI CN CC CA CV CF NE may be missing/empty and are not errors
+const FIELDS_HD={RecordType:'M',ProviderCode:'M',FileReferenceDate:'M',Version:'M',SubmissionType:'M',TotalSubjectRecords:'M',TotalContractRecords:'M',TotalNegativeEventRecords:'M',ProviderComments:'NM'};
+const FIELDS_ID={ProviderSubjectNumber:'M',SubjectReferenceDate:'M',TIN:'D',ContactType1:'M',ContactValue1:'M'};
+const FIELDS_BD={ProviderSubjectNumber:'M',SubjectReferenceDate:'M',TIN:'M',ContactType1:'M',ContactValue1:'M'};
+const FIELDS_SL={ParentProviderSubjectNo:'M',CompanyRole:'M',ChildProviderSubjectNo:'M'};
+const FIELDS_CI={ProviderContractNo:'M',ContractRefDate:'M',ContractPhase:'M',DaysPastDue:'D',RestructuredCreditCode:'M'};
+const FIELDS_CN={ProviderContractNo:'M',ContractRefDate:'M',ContractPhase:'M',DaysPastDue:'D',RestructuredCreditCode:'M'};
+const FIELDS_CC={ProviderContractNo:'M',ContractRefDate:'M',ContractPhase:'M',DaysPastDue:'D',NextPayment:'D'};
+const FIELDS_CA={ProviderContractNo:'M',ContractRefDate:'M',GrantDate:'M',DaysPastDue:'M'};
+const FIELDS_CV={ProviderContractNo:'M',ContractRefDate:'M',GrantDate:'M',LatestCreditRatingIssuer:'M'};
+const FIELDS_CF={ProviderContractNo:'M',ContractRefDate:'M',ContingentAccountType:'M'};
+const FIELDS_NE={ProviderSubjectNo:'M',NegativeEventRefDate:'M',EventCode:'M'};
+const FIELDS_FT={ProviderCode:'M',FileReferenceDate:'M',NumberOfRecords:'M'};
+
+const VALID = {
+  SubmissionType:['0','1'],
+  ContractPhase:['AC','CL','CA'],
+  CompanyRole:['P','D','O','H','R','A','S','M'],
+  NegativeEventCode:['U','E','N','Z','K','L','P','D','R','M','O','C']
+};
+
+const ERR_DESC = {
+  HD_MAND:'Header mandatory field empty',
+  FT_MAND:'Footer mandatory field empty',
+  HD_CNT:'Header count mismatch',
+  FT_CNT:'Footer count mismatch',
+  HF_PROV:'Header/Footer ProviderCode mismatch',
+  '021':'No name provided',
+  '050':'TIN invalid',
+  '074':'Contact mismatch',
+  '089':'LastPaymentAmount mandatory',
+  '090':'DaysPastDue mandatory',
+  '104':'Company contact mandatory',
+  '168':'OutstandingPaymentsNumber not integer',
+  '195':'RestructuredCreditCode invalid/missing',
+  '318':'Parent subject missing',
+  '319':'Child subject missing',
+  CA_MAND:'CA mandatory field missing',
+  CA_DPD:'CA DaysPastDue mandatory',
+  CV_MAND:'CV mandatory field missing',
+  CV_LCI:'CV LatestCreditRatingIssuer mandatory',
+  CF_MAND:'CF mandatory field missing',
+  NE_MAND:'NE mandatory field missing',
+  SL_ROLE:'SL CompanyRole invalid',
+  DUP:'Duplicate ProviderSubjectNumber'
+};
 
 let xmlDoc=null, xmlStr='', xmlLines=[], fName='';
-let errs={}, warns={}, allIssues=[], logs=[];
+let errs={}, warns={}, allIssues=[];
 let headerProviderCode='', headerFileReferenceDate='';
 
-function addI(code,msg,line,col=0,isWarn=false){
-  const o={code,msg,line,col,isWarn};
-  allIssues.push(o);
-  if(isWarn){
-    if(!warns[code]) warns[code]=[];
-    warns[code].push(o);
-  }else{
-    if(!errs[code]) errs[code]=[];
-    errs[code].push(o);
-  }
-}
-function lg(type,msg){
-  logs.push({type,msg,ts:new Date().toLocaleTimeString()});
-  const el=document.getElementById('logA');
-  if(el){
-    el.innerHTML=logs.map(l=>`<div class="l${l.type}">[${l.ts}] ${esc(l.msg)}</div>`).join('');
-    el.scrollTop=el.scrollHeight;
-  }
+function addI(code,msg,line=0,isWarn=false){
+  const item={code,msg,line,isWarn};
+  allIssues.push(item);
+  const bucket=isWarn?warns:errs;
+  if(!bucket[code]) bucket[code]=[];
+  bucket[code].push(item);
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function clrLog(){logs=[];document.getElementById('logA').innerHTML='Ready...'}
 function gAttr(el,...names){for(const n of names){const v=el.getAttribute(n);if(v!==null)return String(v).trim()}return ''}
 function hasVal(v){return v!==null&&v!==undefined&&String(v).trim()!==''}
 function isDate8(v){return /^\d{8}$/.test(v||'')}
-function parseDate8(v){if(!isDate8(v))return null;const y=+v.slice(0,4),m=+v.slice(4,6),d=+v.slice(6,8);const dt=new Date(Date.UTC(y,m-1,d));if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==m-1||dt.getUTCDate()!==d)return null;return dt}
-function cmpDate(a,b){const da=parseDate8(a),db=parseDate8(b);if(!da||!db)return null;if(da<db)return -1;if(da>db)return 1;return 0}
 function isInt(v){return /^\d+$/.test(String(v||'').trim())}
-function isDec2(v){return /^\d+(\.\d{1,2})?$/.test(String(v||'').trim())}
-function isDec2Signed(v){return /^-?\d+(\.\d{1,2})?$/.test(String(v||'').trim())}
-function isPct4(v){return /^-?\d+(\.\d{1,4})?$/.test(String(v||'').trim())}
 function digits(v){return String(v||'').replace(/\D/g,'')}
 function buildLineIndex(){xmlLines=xmlStr.split('\n')}
 function findElementLine(el){
   const tag=el.tagName;
-  const keys=['ProviderSubjectNumber','ProviderContractNo','ProviderSubjectNo','ParentProviderSubjectNo','ChildProviderSubjectNo','ProviderCode'];
+  const keys=['ProviderContractNo','ProviderSubjectNo','ProviderSubjectNumber','ParentProviderSubjectNo','ChildProviderSubjectNo','ProviderCode'];
   for(let i=0;i<xmlLines.length;i++){
     if(!xmlLines[i].includes('<'+tag)) continue;
     for(const k of keys){
@@ -273,7 +287,23 @@ function findElementLine(el){
   }
   return 0;
 }
-function bindUpload(){
+function subjectExists(id){
+  return [...xmlDoc.querySelectorAll('Individuals,Companies')].some(e=>gAttr(e,'ProviderSubjectNumber')===id);
+}
+function bodyRecordCount(){
+  return xmlDoc.querySelectorAll('Individuals,Companies,CompanyLinks,Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets,SubjectNegativeEvents').length;
+}
+function checkProviderCode(el,ref,line){
+  const p=gAttr(el,'ProviderCode');
+  if(headerProviderCode && p && p!==headerProviderCode) addI('HF_PROV',`${ref}: ProviderCode mismatch with header`,line);
+}
+function checkRefDate(el, field, ref, line){
+  const v=gAttr(el,field);
+  if(v && headerFileReferenceDate && isDate8(v) && isDate8(headerFileReferenceDate) && v>headerFileReferenceDate){
+    addI('HD_CNT',`${ref}: ${field} > Header FileReferenceDate`,line,true);
+  }
+}
+function buildUpload(){
   const dz=document.getElementById('dz');
   const fi=document.getElementById('fi');
   dz.addEventListener('click',()=>fi.click());
@@ -288,7 +318,7 @@ function bindUpload(){
 }
 function handleFile(file){
   if(!file) return;
-  if(!file.name.toLowerCase().endsWith('.xml')){alert('Please select an XML file.');return;}
+  if(!file.name.toLowerCase().endsWith('.xml')){alert('Please select XML file');return;}
   fName=file.name;
   const reader=new FileReader();
   reader.onload=e=>{
@@ -300,17 +330,15 @@ function handleFile(file){
     buildLineIndex();
     run();
   };
-  reader.onerror=()=>alert('Failed to read file.');
   reader.readAsText(file,'UTF-8');
 }
 function resetTool(){
-  xmlDoc=null;xmlStr='';xmlLines=[];fName='';errs={};warns={};allIssues=[];logs=[];headerProviderCode='';headerFileReferenceDate='';
+  xmlDoc=null;xmlStr='';xmlLines=[];fName='';errs={};warns={};allIssues=[];headerProviderCode='';headerFileReferenceDate='';
   document.getElementById('upSec').classList.remove('hidden');
   document.getElementById('fiSec').classList.add('hidden');
   document.getElementById('stSec').classList.add('hidden');
   document.getElementById('rSec').classList.add('hidden');
   document.getElementById('fi').value='';
-  document.getElementById('logA').innerHTML='Ready...';
 }
 function stab(n,btn){
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('a'));
@@ -318,46 +346,11 @@ function stab(n,btn){
   btn.classList.add('a');
   document.getElementById('t-'+n).classList.add('a');
 }
-function subjectExists(id){
-  return [...xmlDoc.querySelectorAll('Individuals,Companies')].some(e=>gAttr(e,'ProviderSubjectNumber')===id);
-}
-function bodyRecordCount(){
-  return xmlDoc.querySelectorAll('Individuals,Companies,CompanyLinks,Installments,NonInstallments,CreditCards,OtherCreditAccomodations,Investments,OffBalanceSheets,SubjectNegativeEvents').length;
-}
-function checkProviderCode(el, ref, line){
-  const p=gAttr(el,'ProviderCode');
-  if(headerProviderCode && p && p!==headerProviderCode) addI('PROV',`${ref}: ProviderCode="${p}" != Header "${headerProviderCode}"`,line);
-}
-function checkRefDate(fieldVal, ref, fieldName, line){
-  if(fieldVal && headerFileReferenceDate && cmpDate(fieldVal,headerFileReferenceDate)===1){
-    addI('SUBREF',`${ref}: ${fieldName}="${fieldVal}" > Header FileReferenceDate="${headerFileReferenceDate}"`,line);
-  }
-}
-function checkDate(val, ref, field, line, mandatory=false){
-  if(mandatory && !hasVal(val)){addI('MAND',`${ref}: ${field} empty`,line);return}
-  if(hasVal(val) && !isDate8(val)) addI('DATE',`${ref}: ${field}="${val}" invalid format`,line);
-  if(hasVal(val) && isDate8(val) && !parseDate8(val)) addI('DATE',`${ref}: ${field}="${val}" invalid date`,line);
-}
-function checkLen(val, max, ref, field, line){
-  if(hasVal(val) && val.length>max) addI('LEN',`${ref}: ${field} length ${val.length} > ${max}`,line);
-}
-function checkEnum(val, arr, ref, field, line){
-  if(hasVal(val) && arr && !arr.includes(val)) addI('VAL',`${ref}: ${field}="${val}" invalid domain`,line);
-}
-function checkNum(val, mode, ref, field, line){
-  if(!hasVal(val)) return;
-  let ok=true;
-  if(mode==='int') ok=isInt(val);
-  else if(mode==='dec2') ok=isDec2(val);
-  else if(mode==='dec2signed') ok=isDec2Signed(val);
-  else if(mode==='pct4') ok=isPct4(val);
-  if(!ok) addI('NUM',`${ref}: ${field}="${val}" invalid ${mode}`,line);
-}
 function run(){
   const parser=new DOMParser();
   xmlDoc=parser.parseFromString(xmlStr,'text/xml');
   const pe=xmlDoc.querySelector('parsererror');
-  if(pe){alert('XML Parse Error:\n\n'+(pe.textContent||'Invalid XML'));return;}
+  if(pe){alert('XML Parse Error');return;}
   errs={};warns={};allIssues=[];headerProviderCode='';headerFileReferenceDate='';
 
   validateHeaderFooter();
@@ -378,7 +371,7 @@ function run(){
   document.getElementById('stSec').classList.remove('hidden');
   document.getElementById('rSec').classList.remove('hidden');
   document.getElementById('fn').textContent=fName;
-  document.getElementById('fs').textContent=`${(xmlStr.length/1024).toFixed(1)} KB • ${xmlLines.length} lines • ${new Date().toLocaleString()}`;
+  document.getElementById('fs').textContent=`${(xmlStr.length/1024).toFixed(1)} KB • ${xmlLines.length} lines`;
 
   showStats();
   showResults();
@@ -389,157 +382,138 @@ function validateHeaderFooter(){
   const h=xmlDoc.querySelector('Header');
   const f=xmlDoc.querySelector('Footer');
   if(!h){addI('HD_MAND','Header missing',1);return;}
-  const hln=findElementLine(h)||1, href=`HD L${hln}`;
-  ['ProviderCode','FileReferenceDate','Version','SubmissionType','TotalSubjectRecords','TotalContractRecords','TotalNegativeEventRecords'].forEach(a=>{if(!hasVal(gAttr(h,a))) addI('HD_MAND',`${href}: ${a} empty`,hln)});
-  checkLen(gAttr(h,'ProviderCode'),10,href,'ProviderCode',hln);
-  checkDate(gAttr(h,'FileReferenceDate'),href,'FileReferenceDate',hln,true);
-  checkEnum(gAttr(h,'SubmissionType'),VALID.SubmissionType,href,'SubmissionType',hln);
-  checkNum(gAttr(h,'TotalSubjectRecords'),'int',href,'TotalSubjectRecords',hln);
-  checkNum(gAttr(h,'TotalContractRecords'),'int',href,'TotalContractRecords',hln);
-  checkNum(gAttr(h,'TotalNegativeEventRecords'),'int',href,'TotalNegativeEventRecords',hln);
-  if(hasVal(gAttr(h,'Version')) && gAttr(h,'Version')!=='1.0') addI('HD_VER',`${href}: Version must be 1.0`,hln);
+  const hln=findElementLine(h)||1;
+  ['ProviderCode','FileReferenceDate','Version','SubmissionType','TotalSubjectRecords','TotalContractRecords','TotalNegativeEventRecords'].forEach(a=>{
+    if(!gAttr(h,a)) addI('HD_MAND',`Header ${a} empty`,hln);
+  });
   headerProviderCode=gAttr(h,'ProviderCode');
   headerFileReferenceDate=gAttr(h,'FileReferenceDate');
 
   if(!f){addI('FT_MAND','Footer missing',xmlLines.length);return;}
-  const fln=findElementLine(f)||xmlLines.length, fref=`FT L${fln}`;
-  ['ProviderCode','FileReferenceDate','NumberOfRecords'].forEach(a=>{if(!hasVal(gAttr(f,a))) addI('FT_MAND',`${fref}: ${a} empty`,fln)});
-  checkLen(gAttr(f,'ProviderCode'),10,fref,'ProviderCode',fln);
-  checkDate(gAttr(f,'FileReferenceDate'),fref,'FileReferenceDate',fln,true);
-  checkNum(gAttr(f,'NumberOfRecords'),'int',fref,'NumberOfRecords',fln);
-  if(headerProviderCode && gAttr(f,'ProviderCode') && headerProviderCode!==gAttr(f,'ProviderCode')) addI('HF_PROV',`${fref}: Footer ProviderCode != Header ProviderCode`,fln);
-  const actualBody=bodyRecordCount();
-  if(isInt(gAttr(f,'NumberOfRecords')) && parseInt(gAttr(f,'NumberOfRecords'),10)!==actualBody) addI('FT_CNT',`${fref}: NumberOfRecords mismatch actual=${actualBody}`,fln);
+  const fln=findElementLine(f)||xmlLines.length;
+  ['ProviderCode','FileReferenceDate','NumberOfRecords'].forEach(a=>{
+    if(!gAttr(f,a)) addI('FT_MAND',`Footer ${a} empty`,fln);
+  });
+  if(headerProviderCode && gAttr(f,'ProviderCode') && headerProviderCode!==gAttr(f,'ProviderCode')) addI('HF_PROV','Footer ProviderCode mismatch with Header',fln);
+  if(isInt(gAttr(f,'NumberOfRecords')) && parseInt(gAttr(f,'NumberOfRecords'),10)!==bodyRecordCount()) addI('FT_CNT','Footer NumberOfRecords mismatch',fln);
 }
 function validateIndividuals(){
   const list=xmlDoc.querySelectorAll('Individuals');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`ID:${(gAttr(el,'ProviderSubjectNumber')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln);
-    checkDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln,true);
-    checkDate(gAttr(el,'BirthDate'),ref,'BirthDate',ln,true);
-    checkDate(gAttr(el,'EmploymentDateHiredFrom'),ref,'EmploymentDateHiredFrom',ln,false);
-    checkEnum(gAttr(el,'Title'),VALID.Title,ref,'Title',ln);
-    checkEnum(gAttr(el,'Gender'),VALID.Gender,ref,'Gender',ln);
-    checkEnum(gAttr(el,'BirthCountry'),VALID.Country,ref,'BirthCountry',ln);
-    checkEnum(gAttr(el,'Nationality'),VALID.Country,ref,'Nationality',ln);
-    checkEnum(gAttr(el,'Resident'),VALID.Resident,ref,'Resident',ln);
-    checkEnum(gAttr(el,'CivilStatus'),VALID.CivilStatus,ref,'CivilStatus',ln);
+    const ln=findElementLine(el), ref=`ID ${gAttr(el,'ProviderSubjectNumber')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'SubjectReferenceDate',ref,ln);
     const first=gAttr(el,'FirstName'), last=gAttr(el,'LastName'), full=gAttr(el,'FullName');
-    if(!first&&!last&&!full) addI('021',`${ref}: name missing`,ln);
-    if(first&&last&&full) addI('023',`${ref}: parsed names and FullName both present`,ln,0,true);
+    if(!first&&!last&&!full) addI('021',`${ref}: no name`,ln);
+    const tin=gAttr(el,'TIN');
+    if(tin && digits(tin).length!==12) addI('050',`${ref}: TIN must be 12 digits`,ln);
     if(!gAttr(el,'ContactType1') || !gAttr(el,'ContactValue1')) addI('074',`${ref}: ContactType1/ContactValue1 mandatory`,ln);
   });
 }
 function validateCompanies(){
   const list=xmlDoc.querySelectorAll('Companies');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`BD:${(gAttr(el,'ProviderSubjectNumber')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln);
-    checkDate(gAttr(el,'SubjectReferenceDate'),ref,'SubjectReferenceDate',ln,true);
-    checkDate(gAttr(el,'RegistrationDate'),ref,'RegistrationDate',ln,true);
-    checkEnum(gAttr(el,'LegalForm'),VALID.LegalForm,ref,'LegalForm',ln);
-    if(!gAttr(el,'TIN')) addI('020',`${ref}: Company TIN missing`,ln);
+    const ln=findElementLine(el), ref=`BD ${gAttr(el,'ProviderSubjectNumber')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'SubjectReferenceDate',ref,ln);
+    if(!gAttr(el,'TIN')) addI('050',`${ref}: Company TIN missing`,ln);
     if(!gAttr(el,'ContactType1') || !gAttr(el,'ContactValue1')) addI('104',`${ref}: ContactType1/ContactValue1 mandatory`,ln);
   });
 }
 function validateCompanyLinks(){
   const list=xmlDoc.querySelectorAll('CompanyLinks');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`SL L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'CompanyLinkRefDate'),ref,'CompanyLinkRefDate',ln);
-    checkDate(gAttr(el,'CompanyLinkRefDate'),ref,'CompanyLinkRefDate',ln,true);
-    checkEnum(gAttr(el,'CompanyRole'),VALID.CompanyRole,ref,'CompanyRole',ln);
-    if(!subjectExists(gAttr(el,'ParentProviderSubjectNo'))) addI('318',`${ref}: parent subject not found`,ln);
-    if(!subjectExists(gAttr(el,'ChildProviderSubjectNo'))) addI('319',`${ref}: child subject not found`,ln);
+    const ln=findElementLine(el), ref=`SL`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'CompanyLinkRefDate',ref,ln);
+    if(gAttr(el,'CompanyRole') && !VALID.CompanyRole.includes(gAttr(el,'CompanyRole'))) addI('SL_ROLE','CompanyRole invalid',ln);
+    if(!subjectExists(gAttr(el,'ParentProviderSubjectNo'))) addI('318','ParentProviderSubjectNo not found',ln);
+    if(!subjectExists(gAttr(el,'ChildProviderSubjectNo'))) addI('319','ChildProviderSubjectNo not found',ln);
   });
 }
 function validateInstallments(){
   const list=xmlDoc.querySelectorAll('Installments');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CI:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    checkDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln,true);
-    checkEnum(gAttr(el,'ContractPhase'),VALID.ContractPhase,ref,'ContractPhase',ln);
-    if(!gAttr(el,'RestructuredCreditCode')) addI('195',`${ref}: RestructuredCreditCode mandatory`,ln);
-    if(!gAttr(el,'DaysPastDue')) addI('090',`${ref}: DaysPastDue mandatory`,ln);
-    if(!gAttr(el,'LastPaymentAmount')) addI('089',`${ref}: LastPaymentAmount mandatory`,ln);
-    if(gAttr(el,'OutstandingPaymentsNumber') && !isInt(gAttr(el,'OutstandingPaymentsNumber'))) addI('168',`${ref}: OutstandingPaymentsNumber not integer`,ln);
+    const ln=findElementLine(el), ref=`CI ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    if(!gAttr(el,'RestructuredCreditCode')) addI('195','RestructuredCreditCode mandatory',ln);
+    if(!gAttr(el,'DaysPastDue')) addI('090','DaysPastDue mandatory',ln);
+    if(!gAttr(el,'LastPaymentAmount')) addI('089','LastPaymentAmount mandatory',ln);
+    if(gAttr(el,'OutstandingPaymentsNumber') && !isInt(gAttr(el,'OutstandingPaymentsNumber'))) addI('168','OutstandingPaymentsNumber not integer',ln);
     for(let i=1;i<=6;i++){
       const amt=gAttr(el,`GuaranteedAmount${i}`), typ=gAttr(el,`GuaranteeType${i}`);
-      if((amt&&!typ)||(!amt&&typ)) addI('296',`${ref}: GuaranteedAmount${i}/GuaranteeType${i} mismatch`,ln);
+      if((amt&&!typ)||(!amt&&typ)) addI('296',`GuaranteedAmount${i}/GuaranteeType${i} mismatch`,ln);
     }
   });
 }
 function validateNonInstallments(){
   const list=xmlDoc.querySelectorAll('NonInstallments');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CN:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    if(!gAttr(el,'RestructuredCreditCode')) addI('CN_RCC',`${ref}: RestructuredCreditCode mandatory`,ln);
-    if(!gAttr(el,'DaysPastDue')) addI('CN_DPD',`${ref}: DaysPastDue mandatory`,ln);
-    if(!gAttr(el,'CreditLimitFinancedAmount')) addI('CN_LIM',`${ref}: CreditLimitFinancedAmount mandatory`,ln);
-    if(gAttr(el,'ContractPhase')==='AC'&&!gAttr(el,'UtilizationOutstandingBalance')) addI('CN_BAL',`${ref}: UtilizationOutstandingBalance mandatory`,ln);
+    const ln=findElementLine(el), ref=`CN ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    if(!gAttr(el,'RestructuredCreditCode')) addI('CN_RCC','RestructuredCreditCode mandatory',ln);
+    if(!gAttr(el,'DaysPastDue')) addI('CN_DPD','DaysPastDue mandatory',ln);
+    if(!gAttr(el,'CreditLimitFinancedAmount')) addI('CN_LIM','CreditLimitFinancedAmount mandatory',ln);
+    if(gAttr(el,'ContractPhase')==='AC' && !gAttr(el,'UtilizationOutstandingBalance')) addI('CN_BAL','UtilizationOutstandingBalance mandatory',ln);
   });
 }
 function validateCreditCards(){
   const list=xmlDoc.querySelectorAll('CreditCards');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CC:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    if(!gAttr(el,'DaysPastDue')) addI('CC_DPD',`${ref}: DaysPastDue mandatory`,ln);
-    if(gAttr(el,'ContractPhase')==='AC'&&!gAttr(el,'NextPayment')) addI('CC_NXT',`${ref}: NextPayment mandatory`,ln);
-    if(!gAttr(el,'LastPaymentAmount')) addI('CC_LPA',`${ref}: LastPaymentAmount mandatory`,ln);
-    for(let i=1;i<=6;i++){
-      const amt=gAttr(el,`GuaranteedAmount${i}`), typ=gAttr(el,`GuaranteeType${i}`);
-      if((amt&&!typ)||(!amt&&typ)) addI('296',`${ref}: GuaranteedAmount${i}/GuaranteeType${i} mismatch`,ln);
-    }
+    const ln=findElementLine(el), ref=`CC ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    if(!gAttr(el,'DaysPastDue')) addI('CC_DPD','DaysPastDue mandatory',ln);
+    if(gAttr(el,'ContractPhase')==='AC' && !gAttr(el,'NextPayment')) addI('CC_NXT','NextPayment mandatory',ln);
+    if(!gAttr(el,'LastPaymentAmount')) addI('CC_LPA','LastPaymentAmount mandatory',ln);
   });
 }
 function validateOtherCredit(){
   const list=xmlDoc.querySelectorAll('OtherCreditAccomodations');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CA:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','OtherCreditAccType','GrantDate','RegulatoryStatus','OriginalCurrency','CreditPurpose','CreditPurposeEconomicActivity','AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue'];
-    mand.forEach(f=>{if(!gAttr(el,f)) addI('CA_MAND',`${ref}: ${f} mandatory`,ln)});
-    if(!gAttr(el,'DaysPastDue')) addI('CA_DPD',`${ref}: DaysPastDue mandatory`,ln);
+    const ln=findElementLine(el), ref=`CA ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','OtherCreditAccType','GrantDate','RegulatoryStatus','OriginalCurrency','CreditPurpose','CreditPurposeEconomicActivity','AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue'].forEach(f=>{
+      if(!gAttr(el,f)) addI('CA_MAND',`${f} mandatory`,ln);
+    });
+    if(!gAttr(el,'DaysPastDue')) addI('CA_DPD','DaysPastDue mandatory',ln);
   });
 }
 function validateInvestments(){
   const list=xmlDoc.querySelectorAll('Investments');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CV:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','InvestmentType','GrantDate','OriginalCurrency','AmountGrantedOriginalCurrency','AmountGranted','AccumulatedMarketGainsOriginalCurrency','AccumulatedMarketGains','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue','LatestCreditRatingIssuer'];
-    mand.forEach(f=>{if(!gAttr(el,f)) addI('CV_MAND',`${ref}: ${f} mandatory`,ln)});
-    if(!gAttr(el,'LatestCreditRatingIssuer')) addI('CV_LCI',`${ref}: LatestCreditRatingIssuer mandatory`,ln);
+    const ln=findElementLine(el), ref=`CV ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','InvestmentType','GrantDate','OriginalCurrency','AmountGrantedOriginalCurrency','AmountGranted','AccumulatedMarketGainsOriginalCurrency','AccumulatedMarketGains','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue','LatestCreditRatingIssuer'].forEach(f=>{
+      if(!gAttr(el,f)) addI('CV_MAND',`${f} mandatory`,ln);
+    });
+    if(!gAttr(el,'LatestCreditRatingIssuer')) addI('CV_LCI','LatestCreditRatingIssuer mandatory',ln);
   });
 }
 function validateOffBalance(){
   const list=xmlDoc.querySelectorAll('OffBalanceSheets');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`CF:${(gAttr(el,'ProviderContractNo')||'?').slice(-8)} L${ln}`;
-    checkProviderCode(el,ref,ln); checkRefDate(gAttr(el,'ContractRefDate'),ref,'ContractRefDate',ln);
-    const mand=['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','ContingentAccountType','OriginalCurrency','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','StageImpairmentPFRS9','ProbabilityDefault'];
-    mand.forEach(f=>{if(!gAttr(el,f)) addI('CF_MAND',`${ref}: ${f} mandatory`,ln)});
+    const ln=findElementLine(el), ref=`CF ${gAttr(el,'ProviderContractNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'ContractRefDate',ref,ln);
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','ContingentAccountType','OriginalCurrency','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','StageImpairmentPFRS9','ProbabilityDefault'].forEach(f=>{
+      if(!gAttr(el,f)) addI('CF_MAND',`${f} mandatory`,ln);
+    });
   });
 }
 function validateNegativeEvents(){
   const list=xmlDoc.querySelectorAll('SubjectNegativeEvents');
-  if(!list.length) return;
+  if(!list.length) return; // empty section allowed
   list.forEach(el=>{
-    const ln=findElementLine(el), ref=`NE:${(gAttr(el,'ProviderSubjectNo')||'?').slice(-8)} L${ln}`;
-    ['ProviderCode','NegativeEventRefDate','ProviderSubjectNo','EventCode'].forEach(f=>{if(!gAttr(el,f)) addI('NE_MAND',`${ref}: ${f} mandatory`,ln)});
+    const ln=findElementLine(el), ref=`NE ${gAttr(el,'ProviderSubjectNo')||''}`;
+    checkProviderCode(el,ref,ln); checkRefDate(el,'NegativeEventRefDate',ref,ln);
+    ['ProviderCode','NegativeEventRefDate','ProviderSubjectNo','EventCode'].forEach(f=>{
+      if(!gAttr(el,f)) addI('NE_MAND',`${f} mandatory`,ln);
+    });
   });
 }
 function validateDuplicates(){
@@ -550,7 +524,7 @@ function validateDuplicates(){
     if(!map[psn]) map[psn]=[];
     map[psn].push(findElementLine(el));
   });
-  Object.entries(map).forEach(([k,v])=>{if(v.length>1) addI('DUP',`${k} appears ${v.length} times`,v[0],0,true)});
+  Object.entries(map).forEach(([k,v])=>{if(v.length>1) addI('DUP',`${k} appears ${v.length} times`,v[0],true);});
 }
 function showStats(){
   const sub=xmlDoc.querySelectorAll('Individuals,Companies').length;
@@ -568,13 +542,6 @@ function showStats(){
   document.getElementById('sW').textContent=tW;
   document.getElementById('sP').textContent=tE===0?'READY':'ERROR';
 }
-function setCnt(id,codes){
-  const total=codes.reduce((s,c)=>s+(errs[c]?.length||0)+(warns[c]?.length||0),0);
-  const el=document.getElementById(id);
-  el.textContent=total?`${total} issues`:'OK';
-  el.className=total?'eb cr':'eb ok';
-}
-function lnBadge(line){return line?`<span class="ln" onclick="openXV(${line})">${line}</span>`:''}
 function bldTbl(codes){
   let rows='', found=false;
   codes.forEach(code=>{
@@ -582,7 +549,7 @@ function bldTbl(codes){
     if(!items.length) return;
     found=true;
     const uid='d_'+Math.random().toString(36).slice(2,8);
-    rows+=`<tr><td class="code">${code}</td><td><span class="eb ${(errs[code]||[]).length?'cr':'wn'}">${items.length}</span></td><td>${ERR_DESC[code]||code}</td><td><span class="ct2" onclick="document.getElementById('${uid}').classList.toggle('sh')">${items.length} item(s)</span><div id="${uid}" class="cc dl">${items.map(i=>`<div class="dl-item"><span class="di-ln">${lnBadge(i.line)}</span><span class="di-txt">${esc(i.msg)}</span></div>`).join('')}</div></td></tr>`;
+    rows+=`<tr><td class="code">${code}</td><td><span class="eb ${(errs[code]||[]).length?'cr':'wn'}">${items.length}</span></td><td>${ERR_DESC[code]||code}</td><td><span class="ct2" onclick="document.getElementById('${uid}').classList.toggle('sh')">${items.length} item(s)</span><div id="${uid}" class="cc dl">${items.map(i=>`<div class="dl-item">${esc(i.msg)}</div>`).join('')}</div></td></tr>`;
   });
   if(!found) return '<p style="color:var(--ok)">No issues.</p>';
   return `<table class="et"><thead><tr><th>Code</th><th>Count</th><th>Description</th><th>Details</th></tr></thead><tbody>${rows}</tbody></table>`;
@@ -593,38 +560,24 @@ function showResults(){
   document.getElementById('sBan').innerHTML = tE===0
     ? `<div class="sb ${tW?'rev':'pass'}">${tW?`${tW} warnings only.`:'No issues found.'}</div>`
     : `<div class="sb fail">${tE} errors + ${tW} warnings. Fix errors before submitting.</div>`;
-
-  document.getElementById('hfE').innerHTML=bldTbl(['HD_MAND','HD_VER','HD_CNT','FT_MAND','FT_CNT','HF_PROV']);
-  document.getElementById('ciE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','089','090','168','195','296']);
-  document.getElementById('cnE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','CN_RCC','CN_DPD','CN_LIM','CN_BAL','296']);
-  document.getElementById('ccE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CC_DPD','CC_NXT','CC_LPA','296']);
-  document.getElementById('caE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CA_MAND','CA_DPD']);
-  document.getElementById('cvE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CV_MAND','CV_LCI']);
-  document.getElementById('cfE').innerHTML=bldTbl(['MAND','LEN','DATE','NUM','VAL','PROV','SUBREF','CF_MAND']);
-  document.getElementById('neE').innerHTML=bldTbl(['MAND','LEN','DATE','VAL','PROV','SUBREF','NE_MAND']);
-  document.getElementById('slE').innerHTML=bldTbl(['MAND','LEN','DATE','VAL','PROV','SUBREF','318','319','SL_ROLE']);
-  document.getElementById('subE').innerHTML=bldTbl(['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','021','023','044','050','053','069','074','104','113','139','141','EMP']);
+  document.getElementById('hfE').innerHTML=bldTbl(['HD_MAND','FT_MAND','HD_CNT','FT_CNT','HF_PROV']);
+  document.getElementById('ciE').innerHTML=bldTbl(['089','090','168','195','296']);
+  document.getElementById('cnE').innerHTML=bldTbl(['CN_RCC','CN_DPD','CN_LIM','CN_BAL']);
+  document.getElementById('ccE').innerHTML=bldTbl(['CC_DPD','CC_NXT','CC_LPA']);
+  document.getElementById('caE').innerHTML=bldTbl(['CA_MAND','CA_DPD']);
+  document.getElementById('cvE').innerHTML=bldTbl(['CV_MAND','CV_LCI']);
+  document.getElementById('cfE').innerHTML=bldTbl(['CF_MAND']);
+  document.getElementById('neE').innerHTML=bldTbl(['NE_MAND']);
+  document.getElementById('slE').innerHTML=bldTbl(['318','319','SL_ROLE']);
+  document.getElementById('subE').innerHTML=bldTbl(['021','023','050','074','104']);
   document.getElementById('wrnE').innerHTML=bldTbl(['DUP']);
-
-  setCnt('hfCnt',['HD_MAND','HD_VER','HD_CNT','FT_MAND','FT_CNT','HF_PROV']);
-  setCnt('ciCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','089','090','168','195','296']);
-  setCnt('cnCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','BOOK','CN_RCC','CN_DPD','CN_LIM','CN_BAL','296']);
-  setCnt('ccCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CC_DPD','CC_NXT','CC_LPA','296']);
-  setCnt('caCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CA_MAND','CA_DPD']);
-  setCnt('cvCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','CV_MAND','CV_LCI']);
-  setCnt('cfCnt',['MAND','LEN','DATE','NUM','VAL','PROV','SUBREF','CF_MAND']);
-  setCnt('neCnt',['MAND','LEN','DATE','VAL','PROV','SUBREF','NE_MAND']);
-  setCnt('slCnt',['MAND','LEN','DATE','VAL','PROV','SUBREF','318','319','SL_ROLE']);
-  setCnt('subCnt',['MAND','LEN','DATE','DATE_LOGIC','NUM','VAL','PROV','SUBREF','021','023','044','050','053','069','074','104','113','139','141','EMP']);
-  setCnt('wrnCnt',['DUP']);
 }
 function openXV(targetLine){
   const wrap=document.getElementById('xvWrap');
   const body=document.getElementById('xvBody');
   document.getElementById('xvTitle').textContent=`XML Viewer ${fName}`;
-  document.getElementById('xvInfo').textContent=`${xmlLines.length} lines`;
   const errLines=new Set(), warnLines=new Set();
-  allIssues.forEach(i=>{ if(i.line){ if(i.isWarn) warnLines.add(i.line); else errLines.add(i.line); } });
+  allIssues.forEach(i=>{if(i.line){if(i.isWarn)warnLines.add(i.line);else errLines.add(i.line);}});
   function hl(line){
     return esc(line)
       .replace(/(&lt;\/?[\w:]+)/g,'<span class="xt-tag">$1</span>')
@@ -632,15 +585,13 @@ function openXV(targetLine){
       .replace(/([\w:]+)=/g,'<span class="xt-attr">$1</span>=')
       .replace(/="([^"]*)"/g,'="<span class="xt-val">$1</span>"');
   }
-  body.innerHTML = xmlLines.map((line,idx)=>{
+  body.innerHTML=xmlLines.map((line,idx)=>{
     const n=idx+1;
     const cls=errLines.has(n)?'xv-line hl-err':warnLines.has(n)?'xv-line hl':'xv-line';
     return `<div id="xvL${n}" class="${cls}"><div class="xv-num">${n}</div><div class="xv-txt">${hl(line)}</div></div>`;
   }).join('');
   wrap.classList.add('sh');
-  if(targetLine){
-    setTimeout(()=>{const el=document.getElementById('xvL'+targetLine);if(el) el.scrollIntoView({behavior:'smooth',block:'center'});},100);
-  }
+  if(targetLine){setTimeout(()=>{const el=document.getElementById('xvL'+targetLine);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},100);}
 }
 function closeXV(){document.getElementById('xvWrap').classList.remove('sh')}
 document.getElementById('xvWrap').addEventListener('click',function(e){if(e.target===this)closeXV()});
@@ -648,8 +599,7 @@ const FIXES=[
   {id:'f_rcc',label:'Set missing RestructuredCreditCode="2"',code:'195',on:true},
   {id:'f_opn',label:'Round OutstandingPaymentsNumber to integer',code:'168',on:true},
   {id:'f_dpd',label:'Set missing DaysPastDue="0"',code:'090',on:true},
-  {id:'f_tin',label:'Clean TIN / STTIN to digits only',code:'050',on:true},
-  {id:'f_hdr',label:'Set missing Header Version to 1.0',code:'HD_VER',on:true}
+  {id:'f_tin',label:'Clean TIN to digits only',code:'050',on:true}
 ];
 function buildFixOpts(){
   document.getElementById('fixOpts').innerHTML = FIXES.map(f=>{
@@ -661,8 +611,7 @@ function buildFixOpts(){
 function applyFixes(){
   const doc=new DOMParser().parseFromString(xmlStr,'text/xml');
   const out=[];
-  const ck=id=>{const e=document.getElementById(id);return e&&!e.disabled&&e.checked};
-
+  const ck=id=>{const e=document.getElementById(id);return e&&!e.disabled&&e.checked;};
   if(ck('f_rcc')){
     let c=0;
     [...doc.querySelectorAll('Installments'),...doc.querySelectorAll('NonInstallments'),...doc.querySelectorAll('CreditCards'),...doc.querySelectorAll('OtherCreditAccomodations'),...doc.querySelectorAll('Investments')].forEach(el=>{
@@ -698,13 +647,6 @@ function applyFixes(){
     });
     if(c) out.push(`TIN cleaned: ${c}`);
   }
-  if(ck('f_hdr')){
-    let c=0;
-    const h=doc.querySelector('Header');
-    if(h && !(h.getAttribute('Version')||'').trim()){h.setAttribute('Version','1.0');c++}
-    if(c) out.push(`Header Version fixed: ${c}`);
-  }
-
   if(!out.length){document.getElementById('fixRes').innerHTML='<p style="color:var(--w)">No applicable fixes.</p>';return;}
   const ser=new XMLSerializer();
   window._correctedXML='<?xml version="1.0" encoding="UTF-8"?>\n'+ser.serializeToString(doc);
@@ -719,8 +661,19 @@ function dlFile(){
 }
 function buildFieldMap(){
   const rl=r=>r==='M'?'<span class="req-tag m">M</span>':r==='D'?'<span class="req-tag d">D</span>':'<span class="req-tag n">NM</span>';
-  const render=(obj,id)=>document.getElementById(id).innerHTML='<div class="fld-grid">'+Object.entries(obj).map(([k,v])=>`<div class="fld-item"><span class="fn">${k}</span>${rl(v)}</div>`).join('')+'</div>';
-  render(FIELDS_HD,'fmapHD'); render(FIELDS_ID,'fmapID'); render(FIELDS_BD,'fmapBD'); render(FIELDS_SL,'fmapSL'); render(FIELDS_CI,'fmapCI'); render(FIELDS_CN,'fmapCN'); render(FIELDS_CC,'fmapCC'); render(FIELDS_CA,'fmapCA'); render(FIELDS_CV,'fmapCV'); render(FIELDS_CF,'fmapCF'); render(FIELDS_NE,'fmapNE'); render(FIELDS_FT,'fmapFT');
+  const render=(title,obj)=>`<div class="card"><div class="ch">${title}</div><div class="cb"><div class="fld-grid">${Object.entries(obj).map(([k,v])=>`<div class="fld-item"><span class="fn">${k}</span>${rl(v)}</div>`).join('')}</div></div></div>`;
+  document.getElementById('fmapHD').innerHTML=render('HD Header',FIELDS_HD);
+  document.getElementById('fmapID').innerHTML=render('ID Individual',FIELDS_ID);
+  document.getElementById('fmapBD').innerHTML=render('BD Institutional',FIELDS_BD);
+  document.getElementById('fmapSL').innerHTML=render('SL Subject Link',FIELDS_SL);
+  document.getElementById('fmapCI').innerHTML=render('CI Installments',FIELDS_CI);
+  document.getElementById('fmapCN').innerHTML=render('CN Non-Installments',FIELDS_CN);
+  document.getElementById('fmapCC').innerHTML=render('CC Credit Cards',FIELDS_CC);
+  document.getElementById('fmapCA').innerHTML=render('CA Other Credit Accommodation',FIELDS_CA);
+  document.getElementById('fmapCV').innerHTML=render('CV Investments',FIELDS_CV);
+  document.getElementById('fmapCF').innerHTML=render('CF Off Balance',FIELDS_CF);
+  document.getElementById('fmapNE').innerHTML=render('NE Negative Events',FIELDS_NE);
+  document.getElementById('fmapFT').innerHTML=render('FT Footer',FIELDS_FT);
 }
 function exportReport(type='excel'){
   const totalErrors=Object.values(errs).reduce((s,a)=>s+a.length,0);
@@ -745,7 +698,7 @@ function exportReport(type='excel'){
     URL.revokeObjectURL(url);
   }
 }
-bindUpload();
+buildUpload();
 </script>
 </body>
 </html>
