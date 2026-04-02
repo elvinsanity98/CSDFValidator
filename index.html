@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSDF Validator v7.1 COCREE 2.0 Data Dictionary</title>
+<title>CSDF Validator v8.0 COCREE 2.0 Data Dictionary + Appendixes</title>
 <style>
 :root{--p:#1a56db;--pd:#1e3a8a;--pl:#3b82f6;--bg:#f0f4ff;--c:#fff;--bd:#dbeafe;--t:#1e293b;--tl:#64748b;--ok:#059669;--okb:#d1fae5;--er:#dc2626;--erb:#fee2e2;--w:#d97706;--wb:#fef3c7;--sh:0 4px 24px rgba(30,58,138,.08);--r:12px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -95,85 +95,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </style>
 </head>
 <body>
-<!-- XML Viewer Modal -->
-<div class="xv-wrap" id="xvWrap">
-<div class="xv-box">
-<div class="xv-header">
-<span id="xvTitle">XML Viewer</span>
-<div style="display:flex;gap:.5rem">
-<span id="xvInfo" style="color:#60a5fa;font-size:.75rem"></span>
-<button class="btn bo" onclick="closeXV()" style="padding:.2rem .6rem;font-size:.72rem;color:#e2e8f0;border-color:#4b5563">Close</button>
-</div>
-</div>
-<div class="xv-body" id="xvBody"></div>
-</div>
-</div>
-<!-- Navigation -->
-<nav class="nav">
-<h1>CSDF Validator &amp; Corrector <span class="v">v7.1 COCREE 2.0 DD ver. 1.1</span></h1>
-<span style="font-size:.68rem;opacity:.75">HD ID BD SL CI CN CC CA CV CF NE FT</span>
-</nav>
-<!-- Main Container -->
+<div class="xv-wrap" id="xvWrap"><div class="xv-box"><div class="xv-header"><span id="xvTitle">XML Viewer</span><div style="display:flex;gap:.5rem"><span id="xvInfo" style="color:#60a5fa;font-size:.75rem"></span><button class="btn bo" onclick="closeXV()" style="padding:.2rem .6rem;font-size:.72rem;color:#e2e8f0;border-color:#4b5563">Close</button></div></div><div class="xv-body" id="xvBody"></div></div></div>
+<nav class="nav"><h1>CSDF Validator &amp; Corrector <span class="v">v8.0 COCREE 2.0 DD + VUG Appendixes</span></h1><span style="font-size:.68rem;opacity:.75">HD ID BD SL CI CN CC CA CV CF NE FT</span></nav>
 <div class="ct">
-<!-- Upload Section -->
-<div id="upSec" class="card fade-in">
-<div class="ch"><div class="ch-l">Upload CSDF Submission XML</div></div>
-<div class="cb">
-<div class="uz" id="dz" onclick="document.getElementById('fi').click()">
-<div class="ic">📄</div>
-<h3>Drop your CSDF XML file here</h3>
-<p>or click to browse &bull; Accepts .xml files</p>
-</div>
-<input type="file" id="fi" style="display:none" accept=".xml" onchange="handleFile(this.files[0])">
-</div>
-</div>
-<!-- File Info -->
-<div id="fiSec" class="hidden fade-in">
-<div class="fi">
-<div class="ic">📄</div>
-<div class="dt"><h4 id="fn">-</h4><p id="fs">-</p></div>
-<div style="margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap">
-<button class="btn bo" onclick="openXV(0)" style="padding:.35rem .7rem">View XML</button>
-<button class="btn bw" onclick="exportReport('excel')" style="padding:.35rem .7rem">CSV</button>
-<button class="btn bw" onclick="exportReport('html')" style="padding:.35rem .7rem">HTML</button>
-<button class="btn bo" onclick="window.print()" style="padding:.35rem .7rem">Print</button>
-<button class="btn bo" onclick="resetTool()" style="padding:.35rem .7rem">New</button>
-</div>
-</div>
-</div>
-<!-- Stats -->
-<div id="stSec" class="hidden fade-in">
-<div class="sg">
-<div class="sc"><div class="n" id="sS">0</div><div class="l">Subjects</div></div>
-<div class="sc"><div class="n" id="sCI">0</div><div class="l">CI</div></div>
-<div class="sc"><div class="n" id="sCN">0</div><div class="l">CN</div></div>
-<div class="sc"><div class="n" id="sCC">0</div><div class="l">CC</div></div>
-<div class="sc"><div class="n" id="sCA">0</div><div class="l">CA</div></div>
-<div class="sc"><div class="n" id="sCV">0</div><div class="l">CV</div></div>
-<div class="sc"><div class="n" id="sCF">0</div><div class="l">CF</div></div>
-<div class="sc"><div class="n" id="sNE">0</div><div class="l">NE</div></div>
-<div class="sc e"><div class="n" id="sE">0</div><div class="l">Errors</div></div>
-<div class="sc w"><div class="n" id="sW">0</div><div class="l">Warnings</div></div>
-<div class="sc s"><div class="n" id="sP">-</div><div class="l">Status</div></div>
-</div>
-</div>
-<!-- Results Section -->
-<div id="rSec" class="hidden fade-in">
-<div class="tabs">
-<button class="tb a" onclick="stab('chk',this)">Validation</button>
-<button class="tb" onclick="stab('fix',this)">Correct</button>
-<button class="tb" onclick="stab('fld',this)">Fields</button>
-<button class="tb" onclick="stab('log',this)">Log</button>
-</div>
-<!-- Validation Tab -->
-<div id="t-chk" class="tc a">
-<div id="sBan"></div>
-<div class="exp-bar">
-Export:
-<button class="btn bp" onclick="exportReport('excel')" style="padding:.3rem .7rem">Excel/CSV</button>
-<button class="btn bw" onclick="exportReport('html')" style="padding:.3rem .7rem">HTML Report</button>
-<button class="btn bo" onclick="window.print()" style="padding:.3rem .7rem">Print/PDF</button>
-</div>
+<div id="upSec" class="card fade-in"><div class="ch"><div class="ch-l">Upload CSDF Submission XML</div></div><div class="cb"><div class="uz" id="dz" onclick="document.getElementById('fi').click()"><div class="ic">&#128196;</div><h3>Drop your CSDF XML file here</h3><p>or click to browse &bull; Accepts .xml files</p></div><input type="file" id="fi" style="display:none" accept=".xml" onchange="handleFile(this.files[0])"></div></div>
+<div id="fiSec" class="hidden fade-in"><div class="fi"><div class="ic">&#128196;</div><div class="dt"><h4 id="fn">-</h4><p id="fs">-</p></div><div style="margin-left:auto;display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn bo" onclick="openXV(0)" style="padding:.35rem .7rem">View XML</button><button class="btn bw" onclick="exportReport('excel')" style="padding:.35rem .7rem">CSV</button><button class="btn bw" onclick="exportReport('html')" style="padding:.35rem .7rem">HTML</button><button class="btn bo" onclick="window.print()" style="padding:.35rem .7rem">Print</button><button class="btn bo" onclick="resetTool()" style="padding:.35rem .7rem">New</button></div></div></div>
+<div id="stSec" class="hidden fade-in"><div class="sg"><div class="sc"><div class="n" id="sS">0</div><div class="l">Subjects</div></div><div class="sc"><div class="n" id="sCI">0</div><div class="l">CI</div></div><div class="sc"><div class="n" id="sCN">0</div><div class="l">CN</div></div><div class="sc"><div class="n" id="sCC">0</div><div class="l">CC</div></div><div class="sc"><div class="n" id="sCA">0</div><div class="l">CA</div></div><div class="sc"><div class="n" id="sCV">0</div><div class="l">CV</div></div><div class="sc"><div class="n" id="sCF">0</div><div class="l">CF</div></div><div class="sc"><div class="n" id="sNE">0</div><div class="l">NE</div></div><div class="sc e"><div class="n" id="sE">0</div><div class="l">Errors</div></div><div class="sc w"><div class="n" id="sW">0</div><div class="l">Warnings</div></div><div class="sc s"><div class="n" id="sP">-</div><div class="l">Status</div></div></div></div>
+<div id="rSec" class="hidden fade-in"><div class="tabs"><button class="tb a" onclick="stab('chk',this)">Validation</button><button class="tb" onclick="stab('fix',this)">Correct</button><button class="tb" onclick="stab('fld',this)">Fields</button><button class="tb" onclick="stab('log',this)">Log</button></div>
+<div id="t-chk" class="tc a"><div id="sBan"></div><div class="exp-bar">Export:<button class="btn bp" onclick="exportReport('excel')" style="padding:.3rem .7rem">Excel/CSV</button><button class="btn bw" onclick="exportReport('html')" style="padding:.3rem .7rem">HTML Report</button><button class="btn bo" onclick="window.print()" style="padding:.3rem .7rem">Print/PDF</button></div>
 <div class="card"><div class="ch"><div class="ch-l">CI Installment Contract Errors</div><span id="ciCnt" class="eb cr"></span></div><div class="cb"><div id="lpcE">...</div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">CN Non-Installment Contract Errors</div><span id="cnCnt" class="eb wn"></span></div><div class="cb"><div id="cnE">...</div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">CC Credit Card Errors</div><span id="ccCnt" class="eb inf"></span></div><div class="cb"><div id="ccE">...</div></div></div>
@@ -182,30 +111,9 @@ Export:
 <div class="card"><div class="ch"><div class="ch-l">CF Off-Balance Sheet Errors</div><span id="cfCnt" class="eb cr"></span></div><div class="cb"><div id="cfE">...</div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">NE Negative Event Errors</div><span id="neCnt" class="eb wn"></span></div><div class="cb"><div id="neE">...</div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">ID/BD Subject Errors</div><span id="subCnt" class="eb cr"></span></div><div class="cb"><div id="lpsE">...</div></div></div>
-<div class="card"><div class="ch"><div class="ch-l">Warnings</div><span id="wrnCnt" class="eb wn"></span></div><div class="cb"><div id="wrnE">...</div></div></div>
-</div>
-<!-- Correct Tab -->
-<div id="t-fix" class="tc">
-<div class="card">
-<div class="ch"><div class="ch-l">Auto-Correction COCREE 2.0 DD</div></div>
-<div class="cb">
-<p style="margin-bottom:1rem;color:var(--tl);font-size:.8rem">Applies fixes to CI, CN, CC, CA, ID, BD records.</p>
-<div class="chk-group" id="fixOpts"></div>
-<div class="bg">
-<button class="btn bp" onclick="applyFixes()">Apply All &amp; Download</button>
-<button class="btn bo" onclick="applyFixes(true)">Selected Only</button>
-</div>
-</div>
-</div>
-<div class="card"><div class="ch"><div class="ch-l">Fix Results</div></div><div class="cb"><div id="fixRes" style="color:var(--tl);font-size:.85rem">Click Apply to see results.</div></div></div>
-</div>
-<!-- Fields Tab -->
-<div id="t-fld" class="tc">
-<div class="legend">
-<span><span class="req-tag m">M</span> Mandatory</span>
-<span><span class="req-tag d">D</span> Dependent</span>
-<span><span class="req-tag n">NM</span> Non-Mandatory</span>
-</div>
+<div class="card"><div class="ch"><div class="ch-l">SL/Header/Footer &amp; Warnings</div><span id="wrnCnt" class="eb wn"></span></div><div class="cb"><div id="wrnE">...</div></div></div></div>
+<div id="t-fix" class="tc"><div class="card"><div class="ch"><div class="ch-l">Auto-Correction COCREE 2.0 DD</div></div><div class="cb"><p style="margin-bottom:1rem;color:var(--tl);font-size:.8rem">Applies fixes to CI,CN,CC,CA,ID,BD records per DD &amp; VUG Appendixes.</p><div class="chk-group" id="fixOpts"></div><div class="bg"><button class="btn bp" onclick="applyFixes()">Apply All &amp; Download</button><button class="btn bo" onclick="applyFixes(true)">Selected Only</button></div></div></div><div class="card"><div class="ch"><div class="ch-l">Fix Results</div></div><div class="cb"><div id="fixRes" style="color:var(--tl);font-size:.85rem">Click Apply to see results.</div></div></div></div>
+<div id="t-fld" class="tc"><div class="legend"><span><span class="req-tag m">M</span> Mandatory</span><span><span class="req-tag d">D</span> Dependent</span><span><span class="req-tag n">NM</span> Non-Mandatory</span></div>
 <div class="card"><div class="ch"><div class="ch-l">HD Header</div></div><div class="cb"><div id="fmapHD"></div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">ID Individual</div></div><div class="cb"><div id="fmapID"></div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">BD Institutional</div></div><div class="cb"><div id="fmapBD"></div></div></div>
@@ -217,523 +125,1257 @@ Export:
 <div class="card"><div class="ch"><div class="ch-l">CV Investments</div></div><div class="cb"><div id="fmapCV"></div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">CF Off-Balance Sheet</div></div><div class="cb"><div id="fmapCF"></div></div></div>
 <div class="card"><div class="ch"><div class="ch-l">NE Negative Events</div></div><div class="cb"><div id="fmapNE"></div></div></div>
-<div class="card"><div class="ch"><div class="ch-l">FT Footer</div></div><div class="cb"><div id="fmapFT"></div></div></div>
-</div>
-<!-- Log Tab -->
-<div id="t-log" class="tc">
-<div class="card">
-<div class="ch"><div class="ch-l">Log</div><button class="btn bo" onclick="clrLog()" style="padding:.22rem .55rem;font-size:.7rem">Clear</button></div>
-<div class="cb"><div class="la" id="logA">Ready...</div></div>
-</div>
-</div>
-</div>
-</div>
-
+<div class="card"><div class="ch"><div class="ch-l">FT Footer</div></div><div class="cb"><div id="fmapFT"></div></div></div></div>
+<div id="t-log" class="tc"><div class="card"><div class="ch"><div class="ch-l">Log</div><button class="btn bo" onclick="clrLog()" style="padding:.22rem .55rem;font-size:.7rem">Clear</button></div><div class="cb"><div class="la" id="logA">Ready...</div></div></div></div></div></div>
 <script>
 /* ================================================================
    DOMAIN VALUES - COCREE 2.0 DD Pages 62-88
    ================================================================ */
 var VALID={
- RestructuredCreditCode:['1','2','3','4'],
- HouseOwnerLessee:['1','2','3','4'],
- Gender:['M','F'],
- CivilStatus:['1','2','3','4','5'],
- Resident:['0','1'],
- DOSRI:['0','1','2','3','4'],
- RPT:['0','1','2','3','4','5','6'],
- ContractPhase:['AC','CL','CA'],
- RegulatoryStatus:['CR','PD','NPL','ITL'],
- BookType:['B','T'],
- BookCode:['11','12','20','30','41','42'],
- TrustType:['1','2','3','4'],
- InterestSetting:['1','2'],
- FrequencyRepricing:['1','2','3','4','5','6','7','8'],
- StageImpairmentPFRS9:['1','2','3','4'],
- CreditClassification:['1','2','3','4','5'],
- Role:['B','C','G'],
- AnnualMonthly:['M','Y'],
- PaymentPeriodicity:['D','W','F','M','B','Q','T','C','S','Y','I','P'],
- PSIC:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'],
- OccupationStatus:['1','2','3','4','5','6','7','8','9','10','11','12','13'],
- FirmSize:['1','2','3','4'],
- LargeExposure:['0','1'],
- InvestmentType:['A','B','C','D','E','F','G','H'],
- OtherCreditAccType:['3001','3002','3003','3004','3005'],
- ContingentAccountType:['A','B','C','D','E','F','G'],
- CreditRatingAgency:['S','M','F','P'],
- NatureOfOffering:['PP','PO'],
- Conglomerate:['N/A','NEC','ABG','ATG','AYL','CNJ','DEE','DNU','EYG','TYG','GKW','GTN','LPZ','LCG','LTG','MVP','VLL','RAZ','RCY','ROP','SMC','SYG','TTC','YGC'],
- NegativeEventStatus:['AC','CL'],
- NegativeEventCode:['U','E','N','Z','K','L','P','D','R','M','O','C'],
- ContactType:['1','2','3','4','5','6','7','8','9'],
- Title:['10','11','12','13','14','15','16','17','18','19','20','21'],
- LegalForm:['10','11','17','20','21','22','23','24','25','26'],
- CreditRating:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45'],
- InvestmentIssuerType:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18'],
- CompanyRole:['P','D','O','H','R','A','S','M'],
- InstallmentType:['F','V'],
- MinPaymentIndicator:['0','1','2','3'],
- CardPremium:['0','1']
+RestructuredCreditCode:['1','2','3','4'],HouseOwnerLessee:['1','2','3','4'],Gender:['M','F'],CivilStatus:['1','2','3','4','5'],Resident:['0','1'],DOSRI:['0','1','2','3','4'],RPT:['0','1','2','3','4','5','6'],ContractPhase:['AC','CL','CA'],RegulatoryStatus:['CR','PD','NPL','ITL'],BookType:['B','T'],BookCode:['11','12','20','30','41','42'],TrustType:['1','2','3','4'],InterestSetting:['1','2'],FrequencyRepricing:['1','2','3','4','5','6','7','8'],StageImpairmentPFRS9:['1','2','3','4'],CreditClassification:['1','2','3','4','5'],Role:['B','C','G'],AnnualMonthly:['M','Y'],PaymentPeriodicity:['D','W','F','M','B','Q','T','C','S','Y','I','P'],PSIC:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V'],OccupationStatus:['1','2','3','4','5','6','7','8','9','10','11','12','13'],FirmSize:['1','2','3','4'],LargeExposure:['0','1'],InvestmentType:['A','B','C','D','E','F','G','H'],OtherCreditAccType:['3001','3002','3003','3004','3005'],ContingentAccountType:['A','B','C','D','E','F','G'],CreditRatingAgency:['S','M','F','P'],NatureOfOffering:['PP','PO'],Conglomerate:['N/A','NEC','ABG','ATG','AYL','CNJ','DEE','DNU','EYG','TYG','GKW','GTN','LPZ','LCG','LTG','MVP','VLL','RAZ','RCY','ROP','SMC','SYG','TTC','YGC'],NegativeEventStatus:['AC','CL'],NegativeEventCode:['U','E','N','Z','K','L','P','D','R','M','O','C'],ContactType:['1','2','3','4','5','6','7','8','9'],Title:['10','11','12','13','14','15','16','17','18','19','20','21'],LegalForm:['10','11','17','20','21','22','23','24','25','26'],CreditRating:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45'],InvestmentIssuerType:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18'],CompanyRole:['P','D','O','H','R','A','S','M'],InstallmentType:['F','V'],MinPaymentIndicator:['0','1','2','3'],CardPremium:['0','1'],SubmissionType:['0','1'],ContractStatus_I:['NN','DS','DA','NS','NP','PD','DI','CI','RP','FC','BR','CR','WO','LT','WC','MG'],ContractStatus_N:['NN','DS','DA','NS','NP','PD','CI','RP','FC','BR','WO','LT','WC','MG'],ContractStatus_C:['NN','DS','VS','PA','DA','NS','PD','DI','RP','FC','BC','BF','BL','CV','CR','WO','WF','LT','PI','WC','MG'],PaymentMethod:['CAD','BAR','DIR','ADD','CCR','CHQ','CAS','OTH'],Suffix:['Jr','Sr','II','III','IV','V','VI','VII','VIII','IX','X']
 };
 
 /* ================================================================
    FIELD DEFINITIONS M/D/NM
    ================================================================ */
 var FIELDS_HD={RecordType:'M',ProviderCode:'M',FileReferenceDate:'M',Version:'M',SubmissionType:'M',TotalSubjectRecords:'M',TotalContractRecords:'M',TotalNegativeEventRecords:'M',ProviderComments:'NM'};
-
 var FIELDS_ID={RecordType:'M',ProviderCode:'M',BranchCode:'NM',SubjectReferenceDate:'M',ProviderSubjectNumber:'M',Title:'NM',FirstName:'D',LastName:'D',MiddleName:'NM',FullName:'D',Suffix:'NM',PreviousLastName:'NM',Gender:'M',BirthDate:'M',BirthPlace:'M',BirthCountry:'M',Nationality:'M',Resident:'M',CivilStatus:'M',DependantsNo:'NM',CarsOwnedNo:'NM',MotherMaidenFullName:'M',PermanentFullAddress:'D',PermanentStreetNo:'D',PermanentPostalCode:'D',PermanentPSGCode:'D',PermanentCity:'D',PermanentProvince:'D',PermanentCountry:'D',PermanentHouseOwnerLessee:'NM',CurrentFullAddress:'D',CurrentStreetNo:'D',CurrentPostalCode:'D',CurrentPSGCode:'D',CurrentCity:'D',CurrentProvince:'D',CurrentCountry:'D',CurrentHouseOwnerLessee:'NM',TIN:'D',IdentificationType2:'D',IdentificationNumber2:'D',IdentificationType3:'D',IdentificationNumber3:'D',IDType1:'D',IDNumber1:'D',IDIssueDate1:'NM',IDIssueCountry1:'NM',IDExpiryDate1:'NM',IDType2:'D',IDNumber2:'D',IDIssueDate2:'NM',IDIssueCountry2:'NM',IDExpiryDate2:'NM',IDType3:'D',IDNumber3:'D',IDIssueDate3:'NM',IDIssueCountry3:'NM',IDExpiryDate3:'NM',ContactType1:'M',ContactValue1:'M',ContactType2:'D',ContactValue2:'D',EmploymentTradeName:'M',EmploymentPSIC:'M',EmploymentGrossIncome:'M',EmploymentNetIncome:'M',EmploymentAnnualMonthlyIndicator:'M',EmploymentOccupationStatus:'M',EmploymentDateHiredFrom:'M',SoleTraderTradeName:'D',STCurrentFullAddress:'D',STCurrentStreetNo:'D',STCurrentPostalCode:'NM',STCurrentPSGCode:'D',STCurrentCity:'D',STCurrentProvince:'D',STCurrentCountry:'D',STCurrentHouseOwnerLessee:'NM',SoleTraderTIN:'M',STIdentificationType2:'D',STIdentificationNumber2:'D',STContactType1:'D',STContactValue1:'D',STContactType2:'D',STContactValue2:'D',LargeExposureIndicator:'M'};
-
 var FIELDS_BD={RecordType:'M',ProviderCode:'M',BranchCode:'NM',SubjectReferenceDate:'M',ProviderSubjectNumber:'M',TradeName:'M',OfficialRegisteredTradeName:'M',Nationality:'M',Resident:'M',LegalForm:'M',ExistenceTerm:'NM',NatureOfBusiness:'M',RegistrationDate:'M',EmployeesNo:'NM',FirmSize:'M',GrossAnnualIncome:'M',NetAnnualIncome:'M',MonthlyExpenses:'NM',Conglomerate:'M',CurrentFullAddress:'D',CurrentStreetNo:'D',CurrentPostalCode:'NM',CurrentPSGCode:'D',CurrentCity:'D',CurrentProvince:'D',CurrentCountry:'D',CurrentHouseOwnerLessee:'NM',TIN:'M',IdentificationType2:'D',IdentificationNumber2:'D',ContactType1:'M',ContactValue1:'M',ContactType2:'D',ContactValue2:'D',LargeExposureIndicator:'M'};
-
 var FIELDS_SL={RecordType:'M',ProviderCode:'M',BranchCode:'NM',CompanyLinkRefDate:'M',ParentProviderSubjectNo:'M',CompanyRole:'M',ChildProviderSubjectNo:'M'};
-
 var FIELDS_CI={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',FinancedAmount:'M',FinancedAmountOriginalCurrency:'M',InstallmentsNumber:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',PaymentPeriodicity:'M',PaymentMethod:'NM',MonthlyPaymentAmount:'D',FirstPaymentDate:'NM',LastPaymentAmount:'D',NextPaymentDate:'NM',NextPayment:'NM',OutstandingPaymentsNumber:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D',GoodType:'NM',GoodValue:'NM',NewUsedCode:'NM',GoodBrand:'NM',ManufacturingDate:'NM',RegistrationNumber:'NM'};
-
 var FIELDS_CN={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'M',RegulatoryStatus:'M',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'D',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'M',BoardResolutionFlag:'NM',BookType:'M',BookCode:'D',TrustType:'D',CreditLimitFinancedAmount:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',UtilizationOutstandingBalance:'D',UtilizationOriginalCurrency:'D',OverallCreditLimit:'NM',DaysPastDue:'D',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',LoanFundersNumber:'D'};
-
 var FIELDS_CC={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'D',RPT:'D',ProviderContractNo:'M',ContractType:'M',ContractPhase:'M',ContractStatus:'NM',RegulatoryStatus:'NM',OriginalCurrency:'M',ContractStartDate:'D',ContractRequestDate:'NM',ContractPlannedEndDate:'NM',ContractActualEndDate:'D',LastPaymentDate:'NM',RestructuredCreditCode:'NM',BookType:'M',CreditLimit:'M',CreditLimitOriginalCurrency:'M',TransactionType:'M',CardReferenceNumber:'NM',PaymentPeriodicity:'D',PaymentMethod:'NM',MonthlyPaymentAmount:'NM',NextPaymentDate:'NM',NextPayment:'D',LastPaymentAmount:'D',OutstandingBalance:'D',OutstandingBalanceOriginalCurrency:'D',OutstandingBalanceUnbilled:'NM',OverduePaymentsNumber:'D',OverduePaymentsAmount:'D',DaysPastDue:'D',InstallmentType:'D',ChargedAmount:'NM',LastChargeDate:'NM',FlagCardUsed:'NM',TimesCardUsed:'NM',MinPaymentIndicator:'NM',MinPaymentPercentage:'NM',PremiumCard:'NM',CancellationDate:'NM',AllowanceECLOriginalCurrency:'D',AllowanceECL:'D',NetCarryingAmountLoanOriginalCurrency:'D',NetCarryingAmountLoan:'D',NominalInterestRate:'D',StageImpairmentPFRS9:'D',CreditClassification:'D',ProbabilityDefault:'D',EffectiveInterestRate:'D',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D'};
-
 var FIELDS_CA={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',BookType:'M',OtherCreditAccType:'M',GrantDate:'M',MaturityDate:'D',RegulatoryStatus:'M',OriginalCurrency:'M',CreditPurpose:'M',CreditPurposeEconomicActivity:'M',AmountGrantedOriginalCurrency:'M',AmountGranted:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',NominalInterestRate:'M',StageImpairmentPFRS9:'M',CreditClassification:'D',ProbabilityDefault:'M',EffectiveInterestRate:'M',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',DaysPastDue:'M',RestructuredCreditCode:'NM',GuaranteeType:'NM',AssetAppraisedValue:'D',AssetAppraisalDate:'D'};
-
 var FIELDS_CV={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',BookType:'M',BookCode:'D',TrustType:'D',InvestmentType:'M',GrantDate:'M',MaturityDate:'D',OriginalCurrency:'M',AmountGrantedOriginalCurrency:'M',AmountGranted:'M',AccumulatedMarketGainsOriginalCurrency:'M',AccumulatedMarketGains:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',NominalInterestRate:'M',StageImpairmentPFRS9:'M',ProbabilityDefault:'M',EffectiveInterestRate:'M',UnearnedInterest:'D',InterestSetting:'D',FrequencyRepricing:'D',DaysPastDue:'M',RestructuredCreditCode:'NM',GuaranteeType:'NM',CreditRatingAgencyUsed:'NM',CreditRatingIssuerLastInvestment:'NM',LatestCreditRatingIssuer:'M',NatureOfOffering:'NM'};
-
 var FIELDS_CF={RecordType:'M',ProviderCode:'M',BranchCode:'NM',ContractRefDate:'M',ProviderSubjectNo:'M',Role:'M',DOSRI:'M',RPT:'M',ProviderContractNo:'M',ContingentAccountType:'M',OriginalCurrency:'M',OutstandingBalanceOriginalCurrency:'M',OutstandingBalance:'M',AllowanceECLOriginalCurrency:'M',AllowanceECL:'M',NetCarryingAmountLoanOriginalCurrency:'M',NetCarryingAmountLoan:'M',StageImpairmentPFRS9:'M',ProbabilityDefault:'M'};
-
 var FIELDS_NE={RecordType:'M',ProviderCode:'M',BranchCode:'NM',NegativeEventRefDate:'M',ProviderSubjectNo:'M',EventCode:'M',EventDetail:'NM',EventDate:'NM',EventStatus:'NM',EventStatusDate:'NM'};
-
 var FIELDS_FT={RecordType:'M',ProviderCode:'M',FileReferenceDate:'M',NumberOfRecords:'M'};
 
 /* ================================================================
-   ERROR DESCRIPTIONS
+   ERROR DESCRIPTIONS - Mapped to VUG-2/VUG-3 Appendix Codes
    ================================================================ */
 var ERR_DESC={
- '168':'OutstandingPaymentsNumber not integer',
- '090':'DaysPastDue mandatory (AC/CL/CA)',
- '195':'RestructuredCreditCode mandatory; valid:1-4',
- '089':'LastPaymentAmount mandatory (AC/CL/CA)',
- '296':'GuaranteedAmount+GuaranteeType must both be filled or empty',
- '318':'CompanyLink: ParentProviderSubjectNo not found',
- '021':'No name: need FirstName+LastName OR FullName',
- '139':'CurrentAddress incomplete',
- '141':'SoleTrader address incomplete',
- '113':'CurrentPostalCode AND PSGCode both empty',
- '050':'TIN invalid: need 9-12 numeric digits',
- '053':'SoleTraderTIN invalid: need 9-12 numeric digits',
- '020':'Company TIN mandatory',
- '028':'STContactType1+Value1 missing',
- '074':'ContactType+Value must both be filled',
- '044':'HouseOwnerLessee invalid; valid:1-4',
- '048':'STHouseOwnerLessee invalid; valid:1-4',
- '104':'Company ContactType1+Value1 mandatory',
- '069':'ID Type/Number mismatch (both or neither)',
- '023':'Both names AND FullName filled',
- 'EMP':'Employment mandatory fields missing',
- 'CN_RCC':'CN: RestructuredCreditCode mandatory',
- 'CN_DPD':'CN: DaysPastDue mandatory (AC/CL/CA)',
- 'CN_LIM':'CN: CreditLimitFinancedAmount mandatory',
- 'CN_BAL':'CN: UtilizationOutstandingBalance mandatory (Active)',
- 'CC_DPD':'CC: DaysPastDue mandatory (AC/CL/CA)',
- 'CC_NXT':'CC: NextPayment mandatory when Active',
- 'CC_LPA':'CC: LastPaymentAmount mandatory (AC/CL/CA)',
- 'CA_MAND':'CA: Mandatory field empty',
- 'CA_DPD':'CA: DaysPastDue mandatory',
- 'CV_MAND':'CV: Mandatory field empty',
- 'CV_DPD':'CV: DaysPastDue mandatory',
- 'CV_INV':'CV: InvestmentType invalid',
- 'CV_LCI':'CV: LatestCreditRatingIssuer mandatory',
- 'CF_MAND':'CF: Mandatory field empty',
- 'CF_CAT':'CF: ContingentAccountType invalid',
- 'NE_MAND':'NE: Mandatory field empty',
- 'NE_EVT':'NE: EventCode invalid',
- 'DUP':'Duplicate ProviderSubjectNumber',
- 'VAL':'Invalid domain value',
- 'MAND':'Mandatory field empty'
+
+'10-023':'[VUG2-I] FIELD \'CONTRACT TYPE\' IS MANDATORY (CI10)',
+'10-024':'[VUG2-I] FIELD \'CONTRACT PHASE\' IS MANDATORY (CI11)',
+'10-027':'[VUG2-I] FIELD \'ORIGINAL CURRENCY\' IS MANDATORY (CI14)',
+'10-030':'[VUG2-I] FIELD \'INSTALLMENTS NUMBER\' IS MANDATORY (CI27)',
+'10-031':'[VUG2-I] FIELD \'CREDIT LIMIT\' IS MANDATORY (CC22)',
+'10-032':'[VUG2-I] FIELD \'TRADE NAME\' IS MANDATORY (BD6)',
+'10-109':'[VUG2-I] FIELD \'SUBJECT REFERENCE DATE\' IS MANDATORY (ID4)',
+'10-117':'[VUG2-I] FIELD \'PROVIDERCODE\' IS MANDATORY (SL2)',
+'10-120':'[VUG2-I] FIELD \'PROVIDER SUBJECT NUMBER\' IS MANDATORY (ID5)',
+'10-121':'[VUG2-I] FIELD \'FILEREFERENCE DATE\' IS MANDATORY (FT3)',
+'10-150':'[VUG2-I] FIELD \'CONTRACT REFERENCE DATE\' IS MANDATORY (CC4)',
+'10-151':'[VUG2-I] FIELD \'PROVIDER CONTRACT NUMBER\' IS MANDATORY (CN9)',
+'10-152':'[VUG2-I] FIELD \'ROLE\' IS MANDATORY (CC6)',
+'10-154':'[VUG2-I] FIELD \'ORIGINAL CURRENCY\' IS MANDATORY (CA15)',
+'10-161':'[VUG2-I] FIELD \'FINANCED AMOUNT\' IS MANDATORY (CI25)',
+'10-163':'[VUG2-I] FIELD \'PAYMENT PERIODICITY\' IS MANDATORY (CI31)',
+'10-191':'[VUG2-I] FIELD \'GUARANTEED AMOUNT\' IS MANDATORY',
+'10-198':'[VUG2-I] FIELD \'NEGATIVE EVENT REFERENCE DATE\' IS MANDATORY (NE4)',
+'10-200':'[VUG2-I] FIELD \'EVENT CODE\' IS MANDATORY (NE6)',
+'10-204':'[VUG2-I] FIELD \'COMPANY LINK REFERENCE DATE\' IS MANDATORY (SL4)',
+'10-206':'[VUG2-I] FIELD \'PROVIDER SUBJECT NUMBER (CHILD)\' IS MANDATORY (SL7)',
+'10-208':'[VUG2-I] FIELD \'COMPANY ROLE\' IS MANDATORY (SL6)',
+'10-209':'[VUG2-I] FIELD \'PROVIDER SUBJECT NUMBER (PARENT)\' IS MANDATORY (SL5)',
+'10-211':'[VUG2-I] FIELD \'SUBMISSION TYPE\' IS MANDATORY (HD5)',
+'10-275':'[VUG2-I] CONTRACT TYPE IS CREDIT CARD AND INSTALLMENT TYPE IS EMPTY (CC38)',
+'10-276':'[VUG2-I] CONTRACT TYPE IS CREDIT CARD AND PAYMENT PERIODICITY IS EMPTY (CC26)',
+'20-001':'[VUG2-I] FIELD \'GENDER\' IS MANDATORY (ID13)',
+'20-002':'[VUG2-I] FIELD \'FIRST NAME\' IS MANDATORY (ID7)',
+'20-003':'[VUG2-I] FIELD \'LAST NAME\' IS MANDATORY (ID8)',
+'20-004':'[VUG2-I] FIELD \'BIRTH DATE\' IS MANDATORY (ID14)',
+'20-008':'[VUG2-I] FIELD \'NATIONALITY\' IS MANDATORY (ID17,BD8)',
+'20-010':'[VUG2-I] FIELD \'RESIDENT\' IS MANDATORY (ID18,BD9)',
+'20-011':'[VUG2-I] FIELD \'CIVIL STATUS\' IS MANDATORY (ID19)',
+'20-013':'[VUG2-I] FIELD \'MOTHER MAIDEN FULL NAME\' IS MANDATORY (ID22)',
+'20-015':'[VUG2-I] FIELD \'BIRTHPLACE\' IS MANDATORY (ID15)',
+'20-016':'[VUG2-I] FIELD \'BIRTH COUNTRY\' IS MANDATORY (ID16)',
+'20-018':'[VUG2-I] FIELD \'SOLE TRADER TRADE NAME\' IS MANDATORY (ID70)',
+'20-019':'[VUG2-I] FIELD \'SOLE TRADER TIN\' IS MANDATORY (ID79)',
+'20-020':'[VUG2-I] FIELD \'TIN\' IS MANDATORY (BD28)',
+'20-029':'[VUG2-I] ALL EMPLOYMENT DATA SHOULD BE FILLED IN (ID63-ID69)',
+'20-030':'[VUG2-I] FIELDS OFFICIAL REGISTERED TRADE NAME/NATIONALITY/RESIDENT/etc SHOULD BE FILLED IN',
+'20-055':'[VUG2-I] FIELD \'LARGE EXPOSURE INDICATOR\' IS MANDATORY (ID86,BD35)',
+'20-065':'[VUG2-I] FIELD \'TYPE OF TRANSACTION\' IS MANDATORY (CI28,CN27,CC24)',
+'20-077':'[VUG2-I] FIELD \'REGULATORY STATUS\' IS MANDATORY (CI13,CN13,CC13,CA14)',
+'20-079':'[VUG2-I] FIELD \'BOOK TYPE\' IS MANDATORY (CI22,CN22,CC21,CA10,CV10)',
+'20-104':'[VUG2-I] AT LEAST ONE CONTACT:TYPE SHOULD BE FILLED IN (BD31,BD32)',
+'20-119':'[VUG2-I] CURRENT ADDRESS SHOULD BE FILLED IN (ID31,ID71,BD20)',
+'20-121':'[VUG2-I] FIELDS \'LEGAL FORM\' SHOULD BE FILLED IN (BD10)',
+'20-122':'[VUG2-I] FIELDS OFFICIAL REGISTERED TRADE NAME/NATIONALITY/RESIDENT/etc SHOULD BE FILLED IN',
+'20-130':'[VUG2-I] BOTH PERMANENT AND CURRENT ADDRESS SHOULD BE FILLED IN (ID23,ID31)',
+'20-131':'[VUG2-I] SOLE TRADER ADDRESS SHOULD BE FILLED IN (ID71)',
+'20-139':'[VUG2-I] IT IS MANDATORY TO FILL IN STREETNO+CITY+PROVINCE+COUNTRY OR FULLADDRESS',
+'20-141':'[VUG2-I] SOLTRADER ADDRESS: FILL IN STREETNO+CITY+PROVINCE+COUNTRY OR FULLADDRESS',
+'20-154':'[VUG2-I] FIELD \'FINANCED AMOUNT ORIGINAL CURRENCY\' IS MANDATORY (CI26)',
+'20-157':'[VUG2-I] FIELD \'CREDIT PURPOSE\' IS MANDATORY (CI29,CN28,CA16)',
+'20-159':'[VUG2-I] FIELD \'CREDIT LIMIT ORIGINAL CURRENCY\' IS MANDATORY (CN26,CC23)',
+'20-162':'[VUG2-I] FIELD \'OTHER CREDIT ACCOMODATION TYPE\' IS MANDATORY (CA11)',
+'20-163':'[VUG2-I] FIELD \'GRANT DATE\' IS MANDATORY (CA12,CV14)',
+'20-164':'[VUG2-I] FIELD \'CREDIT PURPOSE BASED ON ECONOMIC ACTIVITY\' IS MANDATORY (CI30,CN29,CA17)',
+'20-165':'[VUG2-I] FIELD \'AMOUNT GRANTED ORIGINAL CURRENCY\' IS MANDATORY (CA18,CV17)',
+'20-166':'[VUG2-I] FIELD \'AMOUNT GRANTED\' IS MANDATORY (CA19,CV18)',
+'20-167':'[VUG2-I] FIELD \'OUTSTANDING BALANCE ORIGINAL CURRENCY\' IS MANDATORY (CA20,CV21,CF12)',
+'20-168':'[VUG2-I] FIELD \'OUTSTANDING BALANCE\' IS MANDATORY (CA21,CV22,CF13)',
+'20-169':'[VUG2-I] FIELD \'DAYS PAST DUE\' IS MANDATORY (CA34,CV34)',
+'20-178':'[VUG2-I] FIELD \'BOOK CODE\' IS MANDATORY (CI23,CN23,CV11)',
+'20-179':'[VUG2-I] FIELD \'TRUST TYPE\' IS MANDATORY (CI4,CN24,CV12)',
+'20-180':'[VUG2-I] FIELD \'INVESTMENT TYPE\' IS MANDATORY (CV13)',
+'20-181':'[VUG2-I] FIELD \'ACCUMULATED MARKET GAINS ORIGINAL CURRENCY\' IS MANDATORY (CV19)',
+'20-182':'[VUG2-I] FIELD \'ACCUMULATED MARKET GAINS\' IS MANDATORY (CV20)',
+'20-192':'[VUG2-I] FIELD \'CONTINGENT ACCOUNT TYPE\' IS MANDATORY (CF10)',
+'20-194':'[VUG2-I] FIELD \'CONTRACT STATUS\' IS MANDATORY (CI12,CN12)',
+'20-195':'[VUG2-I] FIELD \'RESTRUCTURED CREDIT CODE\' IS MANDATORY; valid:1-4 (CI20,CN20)',
+'20-239':'[VUG2-I] CONTRACT PHASE AC AND ALLOWANCE FOR ECL IS EMPTY (CI45,CN35,CC48)',
+'20-247':'[VUG2-I] FIELDS DOSRI AND RPT INDICATORS ARE MANDATORY (CA7,CA8,CV7,CV8,CF7)',
+'20-248':'[VUG2-I] FIELD \'MATURITY DATE\' IS MANDATORY (CV15,CA13)',
+'20-249':'[VUG2-I] CREDIT RATING FIELDS ARE MANDATORY (CV37,CV38,CV39,CV40)',
+'20-250':'[VUG2-I] Active phase: ECL/NetCarrying/Rate/Stage/PD/EIR fields mandatory',
+'20-251':'[VUG2-I] ECL/NetCarrying/Stage/PD mandatory (CA,CV,CF)',
+'10-073':'[VUG2-II] SOLE TRADER ID TYPE AND ID CODE MUST BE EITHER EMPTY OR FILLED IN (ID80,ID81)',
+'10-074':'[VUG2-II] CONTACT TYPE AND CONTACT VALUE MUST BE EITHER EMPTY OR FILLED IN',
+'10-075':'[VUG2-II] SOLE TRADER CONTACT TYPE AND VALUE MUST BE EITHER EMPTY OR FILLED IN',
+'10-179':'[VUG2-II] UTILIZATION AMOUNT MANDATORY IF PHASE IS AC/CL/CA (CN30,CN31)',
+'10-251':'[VUG2-II] CONTRACT PHASE AC/CL/CA AND CONTRACT START DATE IS EMPTY (CI15,CN15,CC15)',
+'10-252':'[VUG2-II] CONTRACT PHASE AC/CL/CA AND CONTRACT END PLANNED DATE IS EMPTY (CI17,CN17)',
+'10-253':'[VUG2-II] CONTRACT PHASE CL/CA AND CONTRACT END ACTUAL DATE IS EMPTY (CI18,CN18,CC18)',
+'10-268':'[VUG2-II] CONTRACT PHASE AC/CL/CA AND MONTHLY PAYMENT AMOUNT IS EMPTY OR 0 (CI33)',
+'10-294':'[VUG2-II] IF GUARANTEE CODE NOT EMPTY THEN PROVIDER SUBJECT NO OR GUARANTOR NAME REQUIRED',
+'10-296':'[VUG2-II] GUARANTEED AMOUNT AND GUARANTEE CODE MUST BOTH BE FILLED OR EMPTY',
+'20-021':'[VUG2-II] FILL IN FIRST NAME+LAST NAME OR FULL NAME (ID7,ID8,ID10)',
+'20-023':'[VUG2-II] BOTH FIRST NAME+LAST NAME AND FULL NAME FILLED IN, NOT BOTH (ID7,ID8)',
+'20-025':'[VUG2-II] AT LEAST ONE ID DOCUMENT SHOULD BE FILLED IN (ID44,ID49,ID54)',
+'20-026':'[VUG2-II] IF TIN IS EMPTY THEN AT LEAST ONE IDENTIFICATION CODE REQUIRED',
+'20-028':'[VUG2-II] AT LEAST ONE SOLE TRADER CONTACT TYPE SHOULD BE FILLED IN (ID82)',
+'20-089':'[VUG2-II] IF CONTRACT PHASE AC/CL/CA LAST PAYMENT AMOUNT IS MANDATORY (CI35,CC31)',
+'20-090':'[VUG2-II] IF CONTRACT PHASE AC/CL/CA DAYS PAST DUE IS MANDATORY (CI43,CN33,CC37,CA34,CV34)',
+'20-092':'[VUG2-II] IF CONTRACT PHASE AC NEXT PAYMENT AMOUNT IS MANDATORY (CI37,CC30)',
+'20-097':'[VUG2-II] IF PROVIDER SUBJECT NO OR LINKED SUBJECT NAME PROVIDED ROLE SHOULD BE FILLED',
+'20-098':'[VUG2-II] IF ROLE FILLED IN THEN PROVIDER SUBJECT NO OR LINKED SUBJECT NAME REQUIRED',
+'20-108':'[VUG2-II] IF PERMANENT POSTAL CODE EMPTY THEN PSG CODE SHOULD BE FILLED IN (ID26)',
+'20-113':'[VUG2-II] IF CURRENT POSTAL CODE EMPTY THEN PSG CODE SHOULD BE FILLED IN (ID34,BD22)',
+'20-118':'[VUG2-II] IF SOLE TRADER POSTAL CODE EMPTY THEN PSG CODE SHOULD BE FILLED IN (ID74)',
+'20-232':'[VUG2-II] CONTRACT PHASE AC AND DOSRI OR RPT INDICATOR IS EMPTY (CI7,CI8,CN7,CN8,CC7,CC8)',
+'20-233':'[VUG2-II] CONTRACT PHASE AC AND ALLOWANCE FOR ECL IS EMPTY (CI44,CI45,CN34,CN35,CC47,CC48)',
+'20-234':'[VUG2-II] CONTRACT PHASE AC AND NET CARRYING AMOUNT IS EMPTY',
+'20-235':'[VUG2-II] CONTRACT PHASE AC AND NOMINAL INTEREST RATE IS EMPTY',
+'20-236':'[VUG2-II] CONTRACT PHASE AC AND STAGE/CREDIT CLASS/PD/EIR/UNEARNED/INTSET/FREQREPR IS EMPTY',
+'20-237':'[VUG2-II] CONTRACT PHASE AC AND NUMBER OF FUNDERS FOR THE LOAN IS EMPTY (CI56,CN46)',
+'20-238':'[VUG2-II] CONTRACT PHASE AC AND ALLOWANCE FOR ECL ORIGINAL CURRENCY IS EMPTY',
+'20-240':'[VUG2-II] CONTRACT PHASE AC AND STAGE/INTEREST SETTING/FREQUENCY REPRICING IS EMPTY',
+'20-241':'[VUG2-II] CONTRACT PHASE AC AND CREDIT CLASSIFICATION IS EMPTY',
+'20-242':'[VUG2-II] CONTRACT PHASE AC AND PROBABILITY OF DEFAULT IS EMPTY',
+'20-243':'[VUG2-II] CONTRACT PHASE AC AND EFFECTIVE INTEREST RATE IS EMPTY',
+'20-244':'[VUG2-II] CONTRACT PHASE AC AND UNEARNED INTEREST/INCOME IS EMPTY',
+'20-245':'[VUG2-II] CONTRACT PHASE AC AND ECL/STAGE/CREDIT CLASS/PD/EIR/UNEARNED/FREQREPR IS EMPTY',
+'10-002':'[VUG2-III] FIELD ROLE IS NOT CORRECT (RoleDomain)',
+'10-004':'[VUG2-III] FIELD GENDER IS NOT CORRECT (GenderDomain)',
+'10-006':'[VUG2-III] FIELD COUNTRY OF BIRTH IS NOT CORRECT (CountryDomain)',
+'10-008':'[VUG2-III] FIELD COUNTRY OF ADDRESS IS NOT CORRECT (CountryDomain)',
+'10-009':'[VUG2-III] FIELD TYPE OF IDENTIFICATION CODE IS NOT CORRECT (IdentificationTypeDomain)',
+'10-010':'[VUG2-III] FIELD ID TYPE IS NOT CORRECT (IDTypeDomain)',
+'10-012':'[VUG2-III] FIELD ID ISSUE COUNTRY IS NOT CORRECT (CountryDomain)',
+'10-014':'[VUG2-III] FIELD CONTACT TYPE IS NOT CORRECT (ContactTypeDomain)',
+'10-015':'[VUG2-III] FIELD OCCUPATION STATUS IS NOT CORRECT (OccupationStatusDomain)',
+'10-018':'[VUG2-III] FIELD SOLE TRADER COUNTRY OF ADDRESS IS NOT CORRECT (CountryDomain)',
+'10-019':'[VUG2-III] FIELD SOLE TRADER IDENTIFICATION TYPE IS NOT CORRECT',
+'10-020':'[VUG2-III] FIELD SOLE TRADER CONTACT TYPE IS NOT CORRECT (ContactTypeDomain)',
+'10-021':'[VUG2-III] FIELD LEGAL FORM IS NOT CORRECT (LegalFormDomain)',
+'10-022':'[VUG2-III] FIELD CONTRACT TYPE IS NOT CORRECT (ContractTypeDomain)',
+'10-028':'[VUG2-III] FIELD ORIGINAL CURRENCY IS NOT CORRECT (CurrencyDomain)',
+'10-029':'[VUG2-III] FIELD PAYMENT PERIODICITY IS NOT CORRECT (PaymentPeriodicityDomain)',
+'10-102':'[VUG2-III] FIELD CONTRACT PHASE IS NOT CORRECT (ContractPhaseDomain)',
+'10-111':'[VUG2-III] FIELD COMPANY ROLE IS NOT CORRECT (CompanyRoleDomain)',
+'10-153':'[VUG2-III] FIELD CONTRACT STATUS IS NOT CORRECT (ContractStatusDomain)',
+'10-160':'[VUG2-III] FIELD RESTRUCTURED CREDIT CODE IS NOT CORRECT (RestructuredCreditDomain)',
+'10-164':'[VUG2-III] FIELD PAYMENT METHOD IS NOT CORRECT (PaymentMethodDomain)',
+'10-173':'[VUG2-III] FIELD GOOD TYPE IS NOT CORRECT (GoodTypeDomain)',
+'10-175':'[VUG2-III] FIELD NEW/USED CODE IS NOT CORRECT (NewUsedDomain)',
+'10-181':'[VUG2-III] FIELD INSTALLMENT TYPE IS NOT CORRECT (InstallmentTypeDomain)',
+'10-186':'[VUG2-III] FIELD MIN PAYMENT INDICATOR IS NOT CORRECT (MinPaymentIndicatorDomain)',
+'10-188':'[VUG2-III] FIELD CUSTOMER TYPE IS NOT CORRECT (GuaranteeCustomerTypeDomain)',
+'10-201':'[VUG2-III] FIELD EVENT CODE IS NOT CORRECT (SubjectInfoTypeDomain)',
+'10-212':'[VUG2-III] FIELD SUBMISSION TYPE IS NOT CORRECT (SubmissionTypeDomain)',
+'20-040':'[VUG2-III] FIELD NATIONALITY IS NOT CORRECT (CountryDomain)',
+'20-041':'[VUG2-III] FIELD RESIDENT IS NOT CORRECT (ResidentTypeDomain)',
+'20-042':'[VUG2-III] FIELD CIVIL STATUS IS NOT CORRECT (CivilStatusDomain)',
+'20-043':'[VUG2-III] FIELD TITLE IS NOT CORRECT (TitleDomain)',
+'20-044':'[VUG2-III] FIELD ADDRESS HOUSE OWNER LESSEE IS NOT CORRECT (HouseOwnerLesseeTypeDomain)',
+'20-045':'[VUG2-III] FIELD PSIC IS NOT CORRECT (PSICDomain)',
+'20-046':'[VUG2-III] FIELD ANNUAL MONTHLY INDICATOR IS NOT CORRECT (AnnualMonthlyDomain)',
+'20-048':'[VUG2-III] FIELD SOLE TRADER ADDRESS HOUSE OWNER LESSEE IS NOT CORRECT',
+'20-049':'[VUG2-III] FIELD FIRM SIZE IS NOT CORRECT (FirmSizeDomain)',
+'20-050':'[VUG2-IV] TIN invalid: need 9-12 numeric digits (ID39,BD28)',
+'20-053':'[VUG2-IV] SoleTraderTIN invalid: need 9-12 numeric digits (ID79)',
+'20-054':'[VUG2-III] FIELD LARGE EXPOSURE INDICATOR IS NOT CORRECT (YesNoDomain)',
+'20-060':'[VUG2-III] FIELD BOARD RESOLUTION FLAG IS NOT CORRECT (YesNoDomain)',
+'20-061':'[VUG2-III] FIELD TYPE OF TRANSACTION IS NOT CORRECT (TransactionTypeDomain)',
+'20-062':'[VUG2-III] FIELD PURPOSE OF CREDIT IS NOT CORRECT (CreditPurposeDomain)',
+'20-063':'[VUG2-III] FIELD PREMIUM CARD IS NOT CORRECT (CardPremiumDomain)',
+'20-075':'[VUG2-III] FIELD DOSRI IS NOT CORRECT (DOSRIIndicatorDomain)',
+'20-076':'[VUG2-III] FIELD RPT IS NOT CORRECT (RPTIndicatorDomain)',
+'20-078':'[VUG2-III] FIELD REGULATORY STATUS IS NOT CORRECT (RegulatoryStatusDomain)',
+'20-080':'[VUG2-III] FIELD BOOK TYPE IS NOT CORRECT (BookTypeDomain)',
+'20-095':'[VUG2-III] FIELD EVENT STATUS IS NOT CORRECT (NegativeEventStatusDomain)',
+'20-101':'[VUG2-III] FIELD PERMANENT PSG CODE IS NOT CORRECT (PSGCDomain)',
+'20-102':'[VUG2-III] FIELD CURRENT PSG CODE IS NOT CORRECT (PSGCDomain)',
+'20-103':'[VUG2-III] FIELD SOLE TRADER PSG CODE IS NOT CORRECT (PSGCDomain)',
+'20-105':'[VUG2-III] FIELD CONGLOMERATE IS NOT CORRECT (ConglomerateDomain)',
+'20-150':'[VUG2-III] FIELD STAGE IMPAIRMENT PFRS 9 IS NOT CORRECT (StageOfImpairmentDomain)',
+'20-151':'[VUG2-III] FIELD CREDIT CLASSIFICATION IS NOT CORRECT (CreditClassificationDomain)',
+'20-152':'[VUG2-III] FIELD INTEREST SETTING IS NOT CORRECT (InterestSettingDomain)',
+'20-153':'[VUG2-III] FIELD FREQUENCY OF REPRICING IS NOT CORRECT (FrequencyOfRepricingDomain)',
+'20-158':'[VUG2-III] FIELD CREDIT PURPOSE ECONOMIC ACTIVITY IS NOT CORRECT (PSICDomain)',
+'20-176':'[VUG2-III] FIELD OTHER CREDIT ACCOMODATION TYPE IS NOT CORRECT (OtherCreditAccTypeDomain)',
+'20-177':'[VUG2-III] FIELD GUARANTEE TYPE IS NOT CORRECT (GuaranteesDomain)',
+'20-185':'[VUG2-III] FIELD BOOK CODE IS NOT CORRECT (BookCodeDomain)',
+'20-186':'[VUG2-III] FIELD TRUST TYPE IS NOT CORRECT (TrustTypeDomain)',
+'20-187':'[VUG2-III] FIELD INVESTMENT TYPE IS NOT CORRECT (InvestmentType)',
+'20-188':'[VUG2-III] FIELD CREDIT RATING AGENCY USED IS NOT CORRECT (CreditRatingAgencyDomain)',
+'20-189':'[VUG2-III] FIELD CREDIT RATING OF ISSUER ON DATE OF LAST INVESTMENT IS NOT CORRECT',
+'20-190':'[VUG2-III] FIELD LATEST CREDIT RATING OF ISSUER IS NOT CORRECT (InvestmentIssuerTypeDomain)',
+'20-191':'[VUG2-III] FIELD NATURE OF OFFERING IS NOT CORRECT (NatureofOfferingDomain)',
+'20-193':'[VUG2-III] FIELD CONTINGENT ACCOUNT TYPE IS NOT CORRECT (ContingentAccountTypeDomain)',
+'10-003':'[VUG2-IV] FIELD PROVIDER SUBJECT NUMBER LENGTH IS NOT CORRECT',
+'10-034':'[VUG2-IV] FIELD FIRST NAME LENGTH IS NOT CORRECT (ID7)',
+'10-058':'[VUG2-IV] FIELD FINANCED AMOUNT IS NOT NUMERIC OR LENGTH IS NOT CORRECT (CI25)',
+'10-168':'[VUG2-IV] FIELD OUTSTANDING PAYMENTS NUMBER IS NOT NUMERIC/INTEGER (CI38)',
+'10-005':'[VUG2-V] FIELD DATE OF BIRTH IS NOT CORRECT (ID14)',
+'10-110':'[VUG2-V] FIELD SUBJECT REFERENCE DATE IS NOT CORRECT (ID4)',
+'10-122':'[VUG2-V] FIELD FILEREFERENCE DATE IS NOT CORRECT (FT3)',
+'10-149':'[VUG2-V] FIELD CONTRACT REFERENCE DATE IS NOT CORRECT (CN4)',
+'10-155':'[VUG2-V] FIELD CONTRACT START DATE IS NOT CORRECT (CC15)',
+'NEG':'[VUG2-VI] Field cannot have negative value',
+'10-063':'[VUG2-VII] SUBJECT REFERENCE DATE IS GREATER THAN FILE REFERENCE DATE',
+'10-067':'[VUG2-VII] MORE THAN ONE IDENTIFICATION TYPE WITH THE SAME VALUE ARE NOT ALLOWED',
+'10-069':'[VUG2-VII] IDENTIFICATION TYPE AND IDENTIFICATION CODE MUST BE EITHER EMPTY OR FILLED IN',
+'10-250':'[VUG2-VII] CONTRACT REFERENCE DATE IS LESS THAN LAST PAYMENT DATE',
+'10-255':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN CONTRACT END PLANNED DATE',
+'10-256':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN CONTRACT END ACTUAL DATE',
+'10-257':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN LAST PAYMENT DATE',
+'10-258':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN FIRST PAYMENT DATE',
+'10-270':'[VUG2-VII] CONTRACT PHASE AC AND OUTSTANDING PAYMENTS NUMBER IS EMPTY',
+'10-272':'[VUG2-VII] CONTRACT PHASE AC AND OUTSTANDING BALANCE IS EMPTY',
+'10-274':'[VUG2-VII] OUTSTANDING PAYMENTS NUMBER/OUTSTANDING BALANCE INCONSISTENT',
+'10-280':'[VUG2-VII] OVERDUE PAYMENTS NUMBER/OVERDUE PAYMENTS AMOUNT INCONSISTENT',
+'10-281':'[VUG2-VII] CC: OVERDUE PAYMENTS NUMBER/OVERDUE PAYMENTS AMOUNT INCONSISTENT',
+'10-282':'[VUG2-VII] FLAG CARD USED/TIMES CARD USED INCONSISTENT (CC41,CC42)',
+'10-283':'[VUG2-VII] VALIDITY START DATE IS GREATER THAN VALIDITY END DATE',
+'10-290':'[VUG2-VII] CONTRACT REFERENCE DATE IS LESS THAN CONTRACT START DATE',
+'10-291':'[VUG2-VII] CONTRACT REFERENCE DATE IS GREATER THAN FILE REFERENCE DATE',
+'10-292':'[VUG2-VII] NEGATIVE EVENT REFERENCE DATE IS GREATER THAN FILE REFERENCE DATE',
+'10-293':'[VUG2-VII] COMPANY LINK REFERENCE DATE IS GREATER THAN FILE REFERENCE DATE',
+'10-320':'[VUG2-VII] CHILD PROVIDERSUBJECT NO AND PARENT PROVIDERSUBJECT NO CANNOT BE THE SAME',
+'20-087':'[VUG2-VII] FIELD EVENT STATUS DATE MUST BE GREATER THAN 1900-01-01',
+'20-088':'[VUG2-VII] NEGATIVE EVENT REFERENCE DATE SHOULD BE >= EVENT STATUS DATE',
+'20-228':'[VUG2-VII] OUTSTANDING PAYMENTS NUMBER > INSTALLMENTS NUMBER',
+'20-229':'[VUG2-VII] OVERDUE PAYMENTS NUMBER > INSTALLMENTS NUMBER',
+'20-310':'[VUG2-VII] MORE THAN ONE CONTRACT WITH SAME PROVIDER CONTRACT NUMBER AND REFERENCE DATE',
+'10-130':'[VUG2-VIII] WARNING - ID TYPE/NUMBER MUST BE EITHER EMPTY OR FILLED IN - FIELD CLEANED',
+'10-247':'[VUG2-VIII] WARNING - GUARANTEE CODE IS EMPTY: ASSET FIELDS CLEANED',
+'10-248':'[VUG2-VIII] WARNING - GUARANTEE CODE IS REAL AND CUSTOMER TYPE FILLED: CLEANED',
+'10-249':'[VUG2-VIII] WARNING - GUARANTEE CODE IS PERSONAL AND ASSET FIELDS FILLED: CLEANED',
+'10-288':'[VUG2-VIII] WARNING - CC FIXED INSTALLMENT: MIN PAYMENT INDICATOR CLEANED',
+'10-289':'[VUG2-VIII] WARNING - CC FIXED INSTALLMENT: MIN PAYMENT PERCENTAGE CLEANED',
+'10-299':'[VUG2-VIII] WARNING - PROVIDER SUBJECT NO AND GUARANTOR NAME BOTH FILLED: NAME CLEANED',
+'20-024':'[VUG2-VIII] WARNING - MIDDLE NAME PRESENT BUT FIRST/LAST NAME MISSING - CLEANED',
+'20-094':'[VUG2-VIII] WARNING - FULLADDRESS REPLACED WITH SINGLE ADDRESS FIELDS',
+'20-099':'[VUG2-VIII] WARNING - PROVIDER SUBJECT NO AND LINKED SUBJECT NAME BOTH FILLED - CLEANED',
+'20-100':'[VUG2-VII] AT LEAST ONE PAIR OF PROVIDER SUBJECT NO-ROLE MUST BE FILLED IN',
+'10-090':'[VUG3] THE SAME PROVIDER SUBJECT NO IS ALREADY ASSIGNED TO ANOTHER SUBJECT',
+'10-301':'[VUG3] SUBMISSION TYPE STANDARD: CONTRACT WITH MORE RECENT REF DATE ALREADY IN DB',
+'10-306':'[VUG3] CONTRACT RESTRUCTURED: CONTRACT ALREADY IN DB WITH DIFFERENT CONTRACT CATEGORY',
+'10-307':'[VUG3] CONTRACT NOT VALID: AT LEAST ONE LINKED SUBJECT DOES NOT EXIST',
+'10-308':'[VUG3] CONTRACT NOT VALID: AT LEAST ONE LINKED SUBJECT (BORROWER/CO-BORROWER) HAS ERRORS',
+'10-309':'[VUG3] CONTRACT NOT VALID: SAME SUBJECT IS LINKED MORE THAN ONCE TO IT',
+'10-311':'[VUG3] CONTRACT NOT VALID: GUARANTEE IS LINKED TO A NOT EXISTING SUBJECT',
+'10-312':'[VUG3] CONTRACT NOT VALID: GUARANTEE IS LINKED TO A SUBJECT WITH ERRORS',
+'10-314':'[VUG3] SUBJECT INFO NOT VALID: MORE OCCURENCES WITH SAME EVENTTYPE FOR SAME SUBJECT',
+'10-315':'[VUG3] SUBJECT INFO NOT VALID: LINKED SUBJECT DOES NOT EXIST',
+'10-316':'[VUG3] SUBJECT INFO NOT VALID: LINKED SUBJECT HAS ERRORS',
+'10-317':'[VUG3] COMPANY LINK NOT VALID: MORE OCCURENCES FOR SAME PARENT-CHILD',
+'10-318':'[VUG3] COMPANY LINK NOT VALID: PARENT OR CHILD SUBJECT DOES NOT EXIST',
+'10-319':'[VUG3] COMPANY LINK NOT VALID: PARENT OR CHILD SUBJECT HAS ERRORS',
+'30-002':'[VUG1] FILENAME FORMAT IS NOT VALID',
+'30-003':'[VUG1] PROVIDER CODE SPECIFIED INTO FILENAME IS NOT VALID',
+'30-004':'[VUG1] TIMESTAMP SPECIFIED INTO FILENAME IS NOT VALID',
+'30-005':'[VUG1] ANOTHER FILE WITH THE SAME TIMESTAMP HAS BEEN ALREADY ELABORATED',
+'30-006':'[VUG1] PROVIDER CODE INSIDE THE FILE IS NOT VALID OR DIFFERENT FROM FILENAME',
+'30-007':'[VUG1] FILE REFERENCE DATE INTO THE HEADER/FOOTER IS NOT VALID OR > SYSDATE',
+'30-008':'[VUG1] NO OF RECORDS SPECIFIED IN THE FOOTER IS NOT VALID',
+'30-009':'[VUG1] RECORD TYPE IS NOT VALID',
+'30-010':'[VUG1] NUMBER OF FIELDS IS NOT VALID FOR THE SPECIFIED RECORD TYPE',
+'30-011':'[VUG1] NUMBER OF RECORDS BETWEEN HEADER AND FOOTER IS NOT VALID',
+'30-013':'[VUG1] HEADER IS NOT PRESENT',
+'30-014':'[VUG1] FOOTER IS NOT PRESENT',
+'30-015':'[VUG1] FIELD VERSION OR SUBMISSION TYPE IS NOT VALID OR MISSING',
+'30-016':'[VUG1] FILE SPECIFIED IS EMPTY',
+'30-017':'[VUG1] CHARACTER SET OF FILE MUST BE UTF-8 WITHOUT BOM',
+'30-018':'[VUG1] INVALID CHAR IS PRESENT',
+'30-019':'[VUG1] FILE REFERENCE DATE IN THE FOOTER IS DIFFERENT FROM DATE IN THE HEADER',
+'30-020':'[VUG1] CONTRACT TYPE IS MISSING OR INVALID',
+'30-022':'[VUG1] PROVIDER SUBJECT NO IS MANDATORY',
+'30-023':'[VUG1] PROVIDER SUBJECT NO (PARENT) IS MANDATORY',
+'30-024':'[VUG1] PROVIDER CONTRACT NO IS MANDATORY',
+'30-025':'[VUG1] EVENT CODE IS MANDATORY',
+'30-026':'[VUG1] MORE THAN ONE HEADER ROW FOUND',
+'30-027':'[VUG1] MORE THAN ONE FOOTER ROW FOUND',
+'30-029':'[VUG1] ROLE IS MANDATORY',
+'30-031':'[VUG1] TOTAL SUBJECT RECORDS IS MANDATORY',
+'30-032':'[VUG1] TOTAL CONTRACT RECORDS IS MANDATORY',
+'30-033':'[VUG1] TOTAL NEGATIVE EVENT RECORDS IS MANDATORY',
+'40-001':'[VUG1] THE NAME OF THE COMPRESSED FILE DOES NOT FOLLOW THE NAMING CONVENTION',
+'40-002':'[VUG1] THE EXTENSION OF THE SUBMITTED FILE SHOULD BE .ZIP OR .GPG OR .PGP',
+'40-003':'[VUG1] THE CONTENT OF THE COMPRESSED FILE DOES NOT FOLLOW THE NAMING CONVENTION',
+'40-004':'[VUG1] THE FILE CANNOT BE PROCESSED',
+'40-005':'[VUG1] THE NAME OF THE .ZIP FILE AND THE NAME OF THE .TXT/.XML FILE ARE DIFFERENT',
+'40-006':'[VUG1] THE PROVIDER CODE WITHIN THE FILENAME IS NOT CONSISTENT WITH THE SUBMITTING PROVIDER',
+'40-009':'[VUG1] XML FORMAT IS NOT CORRECT',
+'20-002':'[VUG2-I] FIELD \'FIRST NAME\' IS MANDATORY (ID7)',
+'20-003':'[VUG2-I] FIELD \'LAST NAME\' IS MANDATORY (ID8)',
+'10-259':'[VUG2-VII] CONTRACT PHASE CL/CA AND NEXTPAYMENTDATE IS NOT EMPTY',
+'10-260':'[VUG2-VII] CONTRACT END ACTUAL DATE IS LESS THAN NEXT PAYMENT DATE',
+'10-261':'[VUG2-VII] CONTRACT END PLANNED DATE IS LESS THAN NEXT PAYMENT DATE',
+'10-262':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN NEXT PAYMENT DATE',
+'10-265':'[VUG2-VII] CONTRACT START DATE IS GREATER THAN LAST CHARGE DATE',
+'10-266':'[VUG2-VII] CONTRACT END ACTUAL DATE IS LESS THAN LAST CHARGE DATE',
+'10-267':'[VUG2-VII] CONTRACT END PLANNED DATE IS LESS THAN LAST CHARGE DATE',
+'10-269':'[VUG2-VII] CONTRACT PHASE CL/CA AND NEXT PAYMENT IS NOT EMPTY OR 0',
+'20-107':'[VUG2-VB] DATE HIRED FROM MUST BE GREATER THAN 1900-01-01',
+'20-109':'[VUG2-VB] FILE REFERENCE DATE MUST BE GREATER THAN 1900-01-01',
+'20-110':'[VUG2-VB] EXISTENCE TERM MUST BE GREATER THAN 1900-01-01',
+'20-111':'[VUG2-VB] REGISTRATION DATE MUST BE GREATER THAN 1900-01-01',
+'20-112':'[VUG2-VB] SUBJECT REF DATE MUST BE GREATER THAN 1900-01-01',
+'20-125':'[VUG2-VB] BIRTH DATE MUST BE GREATER THAN 1900-01-01',
+'20-126':'[VUG2-VB] ISSUE DATE MUST BE GREATER THAN 1900-01-01',
+'20-127':'[VUG2-VB] EXPIRY DATE MUST BE GREATER THAN 1900-01-01',
+'20-208':'[VUG2-VB] MANUFACTURING DATE MUST BE GREATER THAN 1900-01-01',
+'20-209':'[VUG2-VB] NEGATIVE EVENT REF DATE MUST BE GREATER THAN 1900-01-01',
+'20-210':'[VUG2-VB] EVENT DATE MUST BE GREATER THAN 1900-01-01',
+'20-211':'[VUG2-VB] CANCELLATION DATE MUST BE GREATER THAN 1900-01-01',
+'20-212':'[VUG2-VB] COMPANY LINK REF DATE MUST BE GREATER THAN 1900-01-01',
+'20-224':'[VUG2-VB] CONTRACT REF DATE MUST BE GREATER THAN 1900-01-01',
+'20-230':'[VUG2-VB] CONTRACT START DATE MUST BE GREATER THAN 1900-01-01',
+'20-265':'[VUG2-VB] GRANT DATE MUST BE GREATER THAN 1900-01-01',
+'20-266':'[VUG2-VB] MATURITY DATE MUST BE GREATER THAN 1900-01-01',
+'20-267':'[VUG2-VB] ASSET APPRAISAL DATE MUST BE GREATER THAN 1900-01-01',
+'20-116':'[VUG2-VI] MONTHLY EXPENSES CANT HAVE A NEGATIVE VALUE',
+'20-200':'[VUG2-VI] ASSET APPRAISED VALUE CANT HAVE A NEGATIVE VALUE',
+'20-201':'[VUG2-VI] LASTPAYMENTAMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-203':'[VUG2-VI] NEXT PAYMENT CANT HAVE A NEGATIVE VALUE',
+'20-205':'[VUG2-VI] OUTSTANDING BALANCE CANT HAVE A NEGATIVE VALUE',
+'20-206':'[VUG2-VI] OVERDUE PAYMENTS AMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-207':'[VUG2-VI] OVERDUE PAYMENTS NUMBER CANT HAVE A NEGATIVE VALUE',
+'20-213':'[VUG2-VI] CHARGED AMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-214':'[VUG2-VI] CREDITLIMIT CANT HAVE A NEGATIVE VALUE',
+'20-215':'[VUG2-VI] MONTHLY PAYMENT AMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-216':'[VUG2-VI] OUTSTANDING PAYMENTS NUMBER CANT HAVE A NEGATIVE VALUE',
+'20-218':'[VUG2-VI] GUARANTEED AMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-219':'[VUG2-VI] UTILIZATION CANT HAVE A NEGATIVE VALUE',
+'20-220':'[VUG2-VI] GOODVALUE CANT HAVE A NEGATIVE VALUE',
+'20-221':'[VUG2-VI] MIN PAYMENT PERCENTAGE CANT HAVE A NEGATIVE VALUE',
+'20-222':'[VUG2-VI] FINANCED AMOUNT CANT HAVE A NEGATIVE VALUE',
+'20-223':'[VUG2-VI] INSTALLMENTS NUMBER CANT HAVE A NEGATIVE VALUE',
+'20-227':'[VUG2-VI] OUTSTANDING BALANCE UNBILLED CANT HAVE A NEGATIVE VALUE',
+'20-252':'[VUG2-VI] FINANCED AMOUNT ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-253':'[VUG2-VI] OUTSTANDING BALANCE ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-254':'[VUG2-VI] CREDIT LIMIT ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-255':'[VUG2-VI] UTILIZATION ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-256':'[VUG2-VI] ALLOWANCE FOR ECL ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-257':'[VUG2-VI] ALLOWANCE FOR ECL CANT HAVE A NEGATIVE VALUE',
+'20-258':'[VUG2-VI] NET CARRYING AMOUNT OF LOAN ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-259':'[VUG2-VI] NET CARRYING AMOUNT OF LOAN CANT HAVE A NEGATIVE VALUE',
+'20-260':'[VUG2-VI] UNEARNED INTEREST/INCOME CANT HAVE A NEGATIVE VALUE',
+'20-261':'[VUG2-VI] AMOUNT GRANTED ORIGINAL CURRENCY CANT HAVE A NEGATIVE VALUE',
+'20-262':'[VUG2-VI] AMOUNT GRANTED CANT HAVE A NEGATIVE VALUE',
+'10-011':'[VUG2-VA] FIELD ID ISSUE DATE IS NOT CORRECT',
+'10-013':'[VUG2-VA] FIELD ID EXPIRY DATE IS NOT CORRECT',
+'10-156':'[VUG2-VA] FIELD CONTRACT REQUEST DATE IS NOT CORRECT',
+'10-157':'[VUG2-VA] FIELD CONTRACT END PLANNED DATE IS NOT CORRECT',
+'10-158':'[VUG2-VA] FIELD CONTRACT END ACTUAL DATE IS NOT CORRECT',
+'10-159':'[VUG2-VA] FIELD LAST PAYMENT DATE IS NOT CORRECT',
+'10-165':'[VUG2-VA] FIELD FIRST PAYMENT DATE IS NOT CORRECT',
+'10-166':'[VUG2-VA] FIELD NEXT PAYMENT DATE IS NOT CORRECT',
+'10-177':'[VUG2-VA] FIELD MANUFACTURING DATE IS NOT CORRECT',
+'10-183':'[VUG2-VA] FIELD LASTCHARGE DATE IS NOT CORRECT',
+'10-193':'[VUG2-VA] FIELD VALIDITY START DATE IS NOT CORRECT',
+'10-194':'[VUG2-VA] FIELD VALIDITY END DATE IS NOT CORRECT',
+'10-199':'[VUG2-VA] FIELD NEGATIVE EVENT REFERENCE DATE IS NOT CORRECT',
+'10-203':'[VUG2-VA] FIELD EVENT DATE IS NOT CORRECT',
+'10-205':'[VUG2-VA] FIELD COMPANY LINK REFERENCE DATE IS NOT CORRECT',
+'20-027':'[VUG2-VA] FIELD DATE HIRED FROM IS NOT CORRECT',
+'20-033':'[VUG2-VA] FIELD TERM OF EXISTENCE IS NOT CORRECT',
+'20-034':'[VUG2-VA] FIELD REGISTRATION DATE IS NOT CORRECT',
+'20-068':'[VUG2-VA] FIELD CANCELLATION DATE IS NOT CORRECT',
+'20-086':'[VUG2-VA] FIELD EVENT STATUS DATE IS NOT CORRECT',
+'20-173':'[VUG2-VA] FIELD GRANT DATE IS NOT CORRECT',
+'20-174':'[VUG2-VA] FIELD MATURITY DATE IS NOT CORRECT',
+'20-175':'[VUG2-VA] FIELD ASSET APPRAISAL DATE IS NOT CORRECT',
+'10-006':'[VUG2-III] FIELD COUNTRY OF BIRTH IS NOT CORRECT',
+'10-008':'[VUG2-III] FIELD COUNTRY OF ADDRESS IS NOT CORRECT',
+'10-009':'[VUG2-III] FIELD TYPE OF IDENTIFICATION CODE IS NOT CORRECT',
+'10-010':'[VUG2-III] FIELD ID TYPE IS NOT CORRECT',
+'10-012':'[VUG2-III] FIELD ID ISSUE COUNTRY IS NOT CORRECT',
+'10-018':'[VUG2-III] FIELD SOLE TRADER COUNTRY OF ADDRESS IS NOT CORRECT',
+'10-019':'[VUG2-III] FIELD SOLE TRADER IDENTIFICATION TYPE IS NOT CORRECT',
+'10-020':'[VUG2-III] FIELD SOLE TRADER CONTACT TYPE IS NOT CORRECT',
+'10-022':'[VUG2-III] FIELD CONTRACT TYPE IS NOT CORRECT',
+'10-028':'[VUG2-III] FIELD ORIGINAL CURRENCY IS NOT CORRECT',
+'10-068':'[VUG2-VII] MORE THAN ONE SOLE TRADER IDENTIFICATION TYPE WITH SAME VALUE',
+'10-070':'[VUG2-VII] MORE THAN ONE ID TYPE WITH THE SAME VALUE ARE NOT ALLOWED',
+'10-071':'[VUG2-VII] MORE THAN ONE CONTACT TYPE WITH THE SAME VALUE ARE NOT ALLOWED',
+'10-072':'[VUG2-VII] MORE THAN ONE SOLE TRADER CONTACT TYPE WITH SAME VALUE',
+'10-250':'[VUG2-VII] CONTRACT REFERENCE DATE IS LESS THAN LAST PAYMENT DATE',
+'20-231':'[VUG2-VII] CONTRACT PHASE AC AND BILLED AMOUNT IS EMPTY AND REFDATE < PLANNED END',
+'20-025':'[VUG2-II] AT LEAST ONE ID DOCUMENT SHOULD BE FILLED IN',
+'20-193':'[VUG2-III] FIELD CONTINGENT ACCOUNT TYPE IS NOT CORRECT',
+'10-023':'[VUG2-I] FIELD CONTRACT TYPE IS MANDATORY (CI10)',
+'10-161':'[VUG2-I] FIELD FINANCED AMOUNT IS MANDATORY (CI25)',
+'10-163':'[VUG2-I] FIELD PAYMENT PERIODICITY IS MANDATORY (CI31)',
+'20-162':'[VUG2-I] FIELD OTHER CREDIT ACCOMODATION TYPE IS MANDATORY (CA11)',
+'20-163':'[VUG2-I] FIELD GRANT DATE IS MANDATORY (CA12,CV14)',
+'20-248':'[VUG2-I] FIELD MATURITY DATE IS MANDATORY (CV15,CA13)',
+'20-193':'[VUG2-I] FIELD CONTINGENT ACCOUNT TYPE IS NOT CORRECT (CF10)',
+'20-097':'[VUG2-II] IF PROVIDER SUBJECT NO OR LINKED SUBJECT NAME PROVIDED ROLE SHOULD BE FILLED',
+'20-098':'[VUG2-II] IF ROLE FILLED IN THEN PROVIDER SUBJECT NO OR LINKED SUBJECT NAME REQUIRED',
+'20-118':'[VUG2-II] IF SOLE TRADER POSTAL CODE EMPTY THEN PSG CODE SHOULD BE FILLED IN (ID74)',
+'10-294':'[VUG2-II] IF GUARANTEE CODE NOT EMPTY THEN PROVIDER SUBJECT NO OR GUARANTOR NAME REQUIRED',
+'10-296':'[VUG2-II] GUARANTEED AMOUNT AND GUARANTEE CODE MUST BOTH BE FILLED OR EMPTY',
+'20-310':'[VUG2-VII] MORE THAN ONE CONTRACT WITH SAME PROVIDER CONTRACT NUMBER AND REFERENCE DATE',
+'20-100':'[VUG2-VII] AT LEAST ONE PAIR OF PROVIDER SUBJECT NO-ROLE MUST BE FILLED IN',
+'DUP':'[VUG3:10-090] Duplicate ProviderSubjectNumber',
+'VAL':'[VUG2-III] Invalid domain value',
+'MAND':'[VUG2-I] Mandatory field empty'
 };
 
-/* ================================================================
-   GLOBALS
-   ================================================================ */
+/* ================================================================ GLOBALS
+================================================================ */
 var xmlDoc=null,xmlStr='',xmlLines=[],fName='';
-var errs={},warns={};
-var logs=[];
-var allIssues=[];
+var errs={},warns={};var logs=[];var allIssues=[];
 
 function addI(code,msg,line,col,isWarn){
- if(typeof isWarn==='undefined')isWarn=false;
- var issue={code:code,msg:msg,line:line||0,col:col||0,isWarn:isWarn};
- allIssues.push(issue);
- if(isWarn){if(!warns[code])warns[code]=[];warns[code].push(issue);}
- else{if(!errs[code])errs[code]=[];errs[code].push(issue);}
+  if(typeof isWarn==='undefined')isWarn=false;
+  var issue={code:code,msg:msg,line:line||0,col:col||0,isWarn:isWarn};
+  allIssues.push(issue);
+  if(isWarn){if(!warns[code])warns[code]=[];warns[code].push(issue);}
+  else{if(!errs[code])errs[code]=[];errs[code].push(issue);}
 }
 
 function lg(t,m){
- var ts=new Date().toLocaleTimeString();
- logs.push({t:t,m:m,ts:ts});
- var el=document.getElementById('logA');
- if(el){el.innerHTML=logs.map(function(l){return '<div class="l'+l.t+'">['+l.ts+'] '+esc(l.m)+'</div>';}).join('');el.scrollTop=el.scrollHeight;}
+  var ts=new Date().toLocaleTimeString();
+  logs.push({t:t,m:m,ts:ts});
+  var el=document.getElementById('logA');
+  if(el){el.innerHTML=logs.map(function(l){return'<div class="l'+l.t+'">['+l.ts+'] '+esc(l.m)+'</div>';}).join('');el.scrollTop=el.scrollHeight;}
 }
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function clrLog(){logs.length=0;var el=document.getElementById('logA');if(el)el.innerHTML='';}
-
-/* ================================================================
-   LINE NUMBER TRACKING
-   ================================================================ */
 function buildLineIndex(){xmlLines=xmlStr.split('\n');lg('i','XML has '+xmlLines.length+' lines');}
 
 function findElementLine(el){
- var tag=el.tagName;var attrs=el.attributes;var searchAttrs=[];
- var keyAttrs=['ProviderSubjectNumber','ProviderContractNo','ProviderSubjectNo','ParentProviderSubjectNo'];
- for(var k=0;k<keyAttrs.length;k++){var v=el.getAttribute(keyAttrs[k]);if(v){searchAttrs.push(keyAttrs[k]+'="'+v+'"');if(searchAttrs.length>=2)break;}}
- if(!searchAttrs.length&&attrs.length>0)searchAttrs.push(attrs[0].name+'="'+attrs[0].value+'"');
- if(!searchAttrs.length)return 0;
- for(var i=0;i<xmlLines.length;i++){if(xmlLines[i].indexOf('<'+tag)>=0&&xmlLines[i].indexOf(searchAttrs[0])>=0)return i+1;}
- return 0;
+  if(!el||!el.tagName)return 0;
+  var tag=el.tagName;var attrs=el.attributes;var sa=[];
+  var ka=['ProviderSubjectNumber','ProviderContractNo','ProviderSubjectNo','ParentProviderSubjectNo'];
+  for(var k=0;k<ka.length;k++){var v=el.getAttribute(ka[k]);if(v){sa.push(ka[k]+'="'+v+'"');if(sa.length>=2)break;}}
+  if(!sa.length&&attrs&&attrs.length>0)sa.push(attrs[0].name+'="'+attrs[0].value+'"');
+  if(!sa.length)return 0;
+  for(var i=0;i<xmlLines.length;i++){if(xmlLines[i].indexOf('<'+tag)>=0&&xmlLines[i].indexOf(sa[0])>=0)return i+1;}
+  return 0;
 }
 
-/* ================================================================
-   FILE HANDLING
-   ================================================================ */
 function handleFile(f){
- if(!f)return;
- if(!f.name.endsWith('.xml')){alert('Please select an .xml file');return;}
- fName=f.name;
- var r=new FileReader();
- r.onload=function(e){
-  var raw=e.target.result;
-  if(raw.charCodeAt(0)===0xFEFF)raw=raw.substring(1);
-  var xi=raw.indexOf('<?xml');
-  if(xi>0)raw=raw.substring(xi);
-  else if(xi===-1)raw=raw.trim();
-  xmlStr=raw;buildLineIndex();run();
- };
- r.readAsText(f,'UTF-8');
+  if(!f)return;
+  if(!f.name.toLowerCase().endsWith('.xml')){alert('Please select an .xml file');return;}
+  fName=f.name;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var raw=e.target.result;
+      if(!raw||!raw.length){alert('File appears empty.');return;}
+      // Strip BOM
+      if(raw.charCodeAt(0)===0xFEFF)raw=raw.substring(1);
+      // Find XML declaration start
+      var xi=raw.indexOf('<?xml');
+      if(xi>0)raw=raw.substring(xi);
+      else if(xi===-1){
+        // No XML declaration - try to find first < tag
+        var firstTag=raw.indexOf('<');
+        if(firstTag>0)raw=raw.substring(firstTag);
+        raw=raw.trim();
+      }
+      xmlStr=raw;
+      buildLineIndex();
+      run();
+    }catch(err){
+      alert('Error reading file: '+err.message);
+      lg('e','File read error: '+err.message);
+    }
+  };
+  r.onerror=function(){
+    alert('Failed to read file.');
+    lg('e','FileReader error');
+  };
+  r.readAsText(f,'UTF-8');
 }
 
 var dz=document.getElementById('dz');
-dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('dg');});
-dz.addEventListener('dragleave',function(){dz.classList.remove('dg');});
-dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('dg');if(e.dataTransfer.files.length)handleFile(e.dataTransfer.files[0]);});
+if(dz){
+  dz.addEventListener('dragover',function(e){e.preventDefault();e.stopPropagation();dz.classList.add('dg');});
+  dz.addEventListener('dragleave',function(e){e.preventDefault();e.stopPropagation();dz.classList.remove('dg');});
+  dz.addEventListener('drop',function(e){e.preventDefault();e.stopPropagation();dz.classList.remove('dg');if(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files.length)handleFile(e.dataTransfer.files[0]);});
+}
 
 function resetTool(){
- xmlDoc=null;xmlStr='';xmlLines=[];errs={};warns={};allIssues=[];logs.length=0;
- document.getElementById('upSec').classList.remove('hidden');
- ['fiSec','stSec','rSec'].forEach(function(i){document.getElementById(i).classList.add('hidden');});
- document.getElementById('fi').value='';
+  xmlDoc=null;xmlStr='';xmlLines=[];errs={};warns={};allIssues=[];logs.length=0;
+  document.getElementById('upSec').classList.remove('hidden');
+  ['fiSec','stSec','rSec'].forEach(function(i){document.getElementById(i).classList.add('hidden');});
+  document.getElementById('fi').value='';
 }
 
 function stab(n,btn){
- document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('a');});
- document.querySelectorAll('.tc').forEach(function(c){c.classList.remove('a');});
- btn.classList.add('a');
- document.getElementById('t-'+n).classList.add('a');
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('a');});
+  document.querySelectorAll('.tc').forEach(function(c){c.classList.remove('a');});
+  btn.classList.add('a');
+  document.getElementById('t-'+n).classList.add('a');
 }
 
-/* ================================================================
-   MAIN RUNNER
-   ================================================================ */
+function isValidDate(s){
+  if(!s||s.length!==8)return false;
+  var y=parseInt(s.substring(0,4)),m=parseInt(s.substring(4,6)),d=parseInt(s.substring(6,8));
+  if(isNaN(y)||isNaN(m)||isNaN(d))return false;
+  if(m<1||m>12||d<1||d>31)return false;
+  return true;
+}
+
+function dateGt(a,b){return a>b;}
+function isNeg(v){if(!v)return false;return parseFloat(v)<0;}
+
+/* ================================================================ MAIN RUNNER
+================================================================ */
 function run(){
- lg('i','Loading: '+fName+' ('+(xmlStr.length/1024).toFixed(1)+' KB, '+xmlLines.length+' lines)');
- if(!xmlStr.trim()){alert('File is empty.');return;}
- var p=new DOMParser();
- xmlDoc=p.parseFromString(xmlStr,'text/xml');
- var pe=xmlDoc.querySelector('parsererror');
- if(pe){var msg=(pe.textContent||'').substring(0,400);lg('e','XML Parse Error: '+msg);alert('XML Parse Error:\n\n'+msg);return;}
- lg('o','Parsed OK ID:'+xmlDoc.querySelectorAll('Individuals').length+' BD:'+xmlDoc.querySelectorAll('Companies').length+' CI:'+xmlDoc.querySelectorAll('Installments').length+' CN:'+xmlDoc.querySelectorAll('NonInstallments').length+' CC:'+xmlDoc.querySelectorAll('CreditCards').length+' CA:'+xmlDoc.querySelectorAll('OtherCreditAccomodations').length+' CV:'+xmlDoc.querySelectorAll('Investments').length+' CF:'+xmlDoc.querySelectorAll('OffBalanceSheets').length+' NE:'+xmlDoc.querySelectorAll('SubjectNegativeEvents').length);
- errs={};warns={};allIssues=[];
- chkIndividuals();chkCompanies();chkInstallments();chkNonInstallments();chkCreditCards();chkOtherCredit();chkInvestments();chkOffBalance();chkNegativeEvents();chkLinks();chkDups();
- document.getElementById('upSec').classList.add('hidden');
- document.getElementById('fiSec').classList.remove('hidden');
- document.getElementById('fn').textContent=fName;
- document.getElementById('fs').textContent=(xmlStr.length/1024).toFixed(1)+' KB  '+xmlLines.length+' lines  '+new Date().toLocaleString();
- showStats();showResults();buildFieldMap();buildFixOpts();
- ['stSec','rSec'].forEach(function(i){document.getElementById(i).classList.remove('hidden');});
- var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
- lg('i','Done '+tE+' errors in '+allIssues.length+' total issues');
+  lg('i','Loading: '+fName+' ('+(xmlStr.length/1024).toFixed(1)+' KB, '+xmlLines.length+' lines)');
+  if(!xmlStr.trim()){alert('File is empty.');return;}
+  var p=new DOMParser();
+  xmlDoc=p.parseFromString(xmlStr,'text/xml');
+  var pe=xmlDoc.querySelector('parsererror');
+  if(pe){
+    var msg=(pe.textContent||'').substring(0,400);
+    lg('e','XML Parse Error: '+msg);
+    alert('XML Parse Error:\n\n'+msg);
+    return;
+  }
+  lg('o','Parsed OK');
+  errs={};warns={};allIssues=[];
+try{
+ chkHeader();chkFooter();chkIndividuals();chkCompanies();chkInstallments();chkNonInstallments();chkCreditCards();chkOtherCredit();chkInvestments();chkOffBalance();chkNegativeEvents();chkLinks();chkDups();chkDefaultDates();chkNegativeValues();chkDuplicateContracts();chkNextPaymentLogic();
+}catch(ex){
+    lg('e','Validation error: '+ex.message);
+    console.error(ex);
+  }
+  document.getElementById('upSec').classList.add('hidden');
+  document.getElementById('fiSec').classList.remove('hidden');
+  document.getElementById('fn').textContent=fName;
+  document.getElementById('fs').textContent=(xmlStr.length/1024).toFixed(1)+' KB '+xmlLines.length+' lines '+new Date().toLocaleString();
+  showStats();showResults();buildFieldMap();buildFixOpts();
+  ['stSec','rSec'].forEach(function(i){document.getElementById(i).classList.remove('hidden');});
+  var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
+  lg('i','Done '+tE+' errors in '+allIssues.length+' total issues');
 }
 
-/* ================================================================
-   VALIDATORS
-   ================================================================ */
-function chkDom(el,attr,validList,ref,line){
- var v=(el.getAttribute(attr)||'').trim();
- if(v&&validList.indexOf(v)===-1)addI('VAL',ref+': '+attr+'="'+v+'" valid:['+validList.slice(0,5).join(',')+((validList.length>5)?'...':'')+']',line);
+/* ================================================================ VALIDATORS
+================================================================ */
+function chkDom(el,attr,validList,ref,line,vugCode){
+  var v=(el.getAttribute(attr)||'').trim();
+  if(v&&validList.indexOf(v)===-1)addI(vugCode||'VAL',ref+': '+attr+'="'+v+'" invalid',line);
+}
+
+function chkNeg(el,attr,ref,line){
+  var v=(el.getAttribute(attr)||'').trim();
+  if(v&&isNeg(v))addI('NEG',ref+': '+attr+'="'+v+'" negative',line);
+}
+
+function chkHeader(){
+  var hd=xmlDoc.querySelector('Header');
+  if(!hd){lg('e','No Header found');return;}
+  var g=function(k){return(hd.getAttribute(k)||'').trim();};
+  var frd=g('FileReferenceDate');
+  if(frd&&!isValidDate(frd))addI('MAND','HD: FileReferenceDate format invalid "'+frd+'"',1);
+  if(g('Version')&&g('Version')!=='1.0')addI('MAND','HD: Version must be 1.0',1);
+  if(g('SubmissionType'))chkDom(hd,'SubmissionType',VALID.SubmissionType,'HD',1,'VAL');
+}
+
+function chkFooter(){
+  var ft=xmlDoc.querySelector('Footer');if(!ft)return;
+  var g=function(k){return(ft.getAttribute(k)||'').trim();};
+  if(!g('ProviderCode'))addI('MAND','FT: ProviderCode empty',findElementLine(ft));
 }
 
 function chkIndividuals(){
- var els=xmlDoc.querySelectorAll('Individuals');lg('i','Checking '+els.length+' Individuals...');
- els.forEach(function(el){
-  var s=el.getAttribute('ProviderSubjectNumber')||'?';
-  var g=function(k){return(el.getAttribute(k)||'').trim();};
-  var ln=findElementLine(el);var ref='ID:'+s.slice(-8)+' L'+ln;
-  if(!g('FirstName')&&!g('LastName')&&!g('FullName'))addI('021',ref+': No name data',ln);
-  if(g('FirstName')&&g('LastName')&&g('FullName'))addI('023',ref+': Both names+FullName filled',ln,0,true);
-  chkDom(el,'Gender',VALID.Gender,ref,ln);
-  chkDom(el,'LargeExposureIndicator',VALID.LargeExposure,ref,ln);
-  chkDom(el,'Resident',VALID.Resident,ref,ln);
-  chkDom(el,'CivilStatus',VALID.CivilStatus,ref,ln);
-  if(g('Title'))chkDom(el,'Title',VALID.Title,ref,ln);
-  if(g('EmploymentPSIC'))chkDom(el,'EmploymentPSIC',VALID.PSIC,ref,ln);
-  if(g('EmploymentOccupationStatus'))chkDom(el,'EmploymentOccupationStatus',VALID.OccupationStatus,ref,ln);
-  if(g('EmploymentAnnualMonthlyIndicator')&&g('EmploymentAnnualMonthlyIndicator')!==' ')chkDom(el,'EmploymentAnnualMonthlyIndicator',VALID.AnnualMonthly,ref,ln);
-  if(g('ContactType1'))chkDom(el,'ContactType1',VALID.ContactType,ref,ln);
-  if(g('ContactType2'))chkDom(el,'ContactType2',VALID.ContactType,ref,ln);
-  if(g('STContactType1'))chkDom(el,'STContactType1',VALID.ContactType,ref,ln);
-  if(g('STContactType2'))chkDom(el,'STContactType2',VALID.ContactType,ref,ln);
-  ['PermanentHouseOwnerLessee','CurrentHouseOwnerLessee','STCurrentHouseOwnerLessee'].forEach(function(a){var v=g(a);if(v&&VALID.HouseOwnerLessee.indexOf(v)===-1)addI('044',ref+': '+a+'="'+v+'"',ln);});
-  if(!g('CurrentFullAddress')&&(!g('CurrentCity')||!g('CurrentProvince')))addI('139',ref+': incomplete',ln);
-  if(!g('CurrentPostalCode')&&!g('CurrentPSGCode')&&!g('CurrentFullAddress'))addI('113',ref+': both empty',ln);
-  if(g('SoleTraderTradeName')){if(!g('STCurrentFullAddress')&&(!g('STCurrentCity')||!g('STCurrentProvince')||!g('STCurrentCountry')))addI('141',ref+': ST address incomplete',ln);}
-  var tin=g('TIN');if(tin){var cl=tin.replace(/[^0-9]/g,'');if(cl.length<9||cl.length>12)addI('050',ref+': TIN="'+tin+'" ('+cl.length+' digits)',ln);}
-  var stTin=g('SoleTraderTIN');if(stTin){var cl2=stTin.replace(/[^0-9]/g,'');if(cl2.length<9||cl2.length>12)addI('053',ref+': STTIN="'+stTin+'"',ln);}
-  if(!g('EmploymentOccupationStatus'))addI('EMP',ref+': OccupationStatus empty',ln);
-  if(!g('EmploymentDateHiredFrom'))addI('EMP',ref+': DateHiredFrom empty',ln);
-  var ami=g('EmploymentAnnualMonthlyIndicator');if(!ami||ami===' ')addI('EMP',ref+': AnnualMonthlyIndicator empty',ln);
-  if(!g('ContactType1')||!g('ContactValue1'))addI('074',ref+': ContactType1+Value1 mandatory',ln);
-  for(var i=1;i<=3;i++){var t=g('IDType'+i),n=g('IDNumber'+i);if((t&&!n)||(!t&&n))addI('069',ref+': IDType'+i+'/IDNumber'+i+' mismatch',ln,0,true);}
- });lg('o','Individuals done');
+  var els=xmlDoc.querySelectorAll('Individuals');
+  lg('i','Checking '+els.length+' Individuals...');
+  var hd=xmlDoc.querySelector('Header');
+  var frd=hd?hd.getAttribute('FileReferenceDate')||'':'';
+  els.forEach(function(el){
+    var s=el.getAttribute('ProviderSubjectNumber')||'?';
+    var g=function(k){return(el.getAttribute(k)||'').trim();};
+    var ln=findElementLine(el);
+    var ref='ID:'+s.slice(-8)+' L'+ln;
+
+    // VUG2-II:20-021 Name check
+    if(!g('FirstName')&&!g('LastName')&&!g('FullName'))addI('20-021',ref+': No name data',ln);
+    if(g('FirstName')&&g('LastName')&&g('FullName'))addI('20-023',ref+': Both names+FullName',ln,0,true);
+
+    // VUG2-III Domain checks
+    chkDom(el,'Gender',VALID.Gender,ref,ln,'10-004');
+    chkDom(el,'LargeExposureIndicator',VALID.LargeExposure,ref,ln,'20-054');
+    chkDom(el,'Resident',VALID.Resident,ref,ln,'20-041');
+    chkDom(el,'CivilStatus',VALID.CivilStatus,ref,ln,'20-042');
+    if(g('Title'))chkDom(el,'Title',VALID.Title,ref,ln,'20-043');
+    if(g('EmploymentPSIC'))chkDom(el,'EmploymentPSIC',VALID.PSIC,ref,ln,'20-045');
+    if(g('EmploymentOccupationStatus'))chkDom(el,'EmploymentOccupationStatus',VALID.OccupationStatus,ref,ln,'10-015');
+    if(g('EmploymentAnnualMonthlyIndicator')&&g('EmploymentAnnualMonthlyIndicator')!==' ')chkDom(el,'EmploymentAnnualMonthlyIndicator',VALID.AnnualMonthly,ref,ln,'20-046');
+    if(g('ContactType1'))chkDom(el,'ContactType1',VALID.ContactType,ref,ln,'10-014');
+    if(g('ContactType2'))chkDom(el,'ContactType2',VALID.ContactType,ref,ln,'10-014');
+    if(g('STContactType1'))chkDom(el,'STContactType1',VALID.ContactType,ref,ln,'10-014');
+    if(g('STContactType2'))chkDom(el,'STContactType2',VALID.ContactType,ref,ln,'10-014');
+    ['PermanentHouseOwnerLessee','CurrentHouseOwnerLessee'].forEach(function(a){var v=g(a);if(v&&VALID.HouseOwnerLessee.indexOf(v)===-1)addI('20-044',ref+': '+a+'="'+v+'"',ln);});
+    if(g('STCurrentHouseOwnerLessee')&&VALID.HouseOwnerLessee.indexOf(g('STCurrentHouseOwnerLessee'))===-1)addI('20-048',ref+': STHouseOwnerLessee="'+g('STCurrentHouseOwnerLessee')+'"',ln);
+
+    // VUG2-I:20-139 Address
+    if(!g('CurrentFullAddress')&&(!g('CurrentCity')||!g('CurrentProvince')))addI('20-139',ref+': incomplete',ln);
+    if(!g('CurrentPostalCode')&&!g('CurrentPSGCode')&&!g('CurrentFullAddress'))addI('20-113',ref+': both empty',ln);
+
+    // VUG2-II:20-108 Permanent
+    if(!g('PermanentPostalCode')&&!g('PermanentPSGCode')&&!g('PermanentFullAddress'))addI('20-108',ref+': PermanentPostal+PSG empty',ln,0,true);
+
+    // VUG2-I:20-141 SoleTrader
+    if(g('SoleTraderTradeName')){
+      if(!g('STCurrentFullAddress')&&(!g('STCurrentCity')||!g('STCurrentProvince')||!g('STCurrentCountry')))addI('20-141',ref+': ST address incomplete',ln);
+    }
+
+    // VUG2-IV:20-050 TIN
+    var tin=g('TIN');
+    if(tin){var cl=tin.replace(/[^0-9]/g,'');if(cl.length<9||cl.length>12)addI('20-050',ref+': TIN="'+tin+'" ('+cl.length+' digits)',ln);}
+    var stTin=g('SoleTraderTIN');
+    if(stTin){var cl2=stTin.replace(/[^0-9]/g,'');if(cl2.length<9||cl2.length>12)addI('20-053',ref+': STTIN="'+stTin+'"',ln);}
+
+    // VUG2-I:20-029 Employment
+    if(!g('EmploymentOccupationStatus'))addI('20-029',ref+': OccupationStatus empty',ln);
+    if(!g('EmploymentDateHiredFrom'))addI('20-029',ref+': DateHiredFrom empty',ln);
+    var ami=g('EmploymentAnnualMonthlyIndicator');
+    if(!ami||ami===' ')addI('20-029',ref+': AnnualMonthlyIndicator empty',ln);
+
+    // VUG2-I:20-104 Contact
+    if(!g('ContactType1')||!g('ContactValue1'))addI('10-074',ref+': ContactType1+Value1 mandatory',ln);
+
+    // VUG2-VIII:10-130 ID mismatch
+    for(var i=1;i<=3;i++){var t=g('IDType'+i),n=g('IDNumber'+i);if((t&&!n)||(!t&&n))addI('10-130',ref+': IDType'+i+'/IDNumber'+i+' mismatch',ln,0,true);}
+
+    // VUG2-VII:10-063 SubjRef > FileRef
+    var srd=g('SubjectReferenceDate');
+    if(srd&&frd&&dateGt(srd,frd))addI('10-063',ref+': SubjRef '+srd+' > FileRef '+frd,ln);
+
+    // VUG2-I: Missing mandatory checks
+    if(!g('Gender'))addI('20-001',ref+': Gender empty',ln);
+    if(!g('BirthDate'))addI('20-004',ref+': BirthDate empty',ln);
+    if(!g('BirthPlace'))addI('20-015',ref+': BirthPlace empty',ln);
+    if(!g('BirthCountry'))addI('20-016',ref+': BirthCountry empty',ln);
+    if(!g('Nationality'))addI('20-008',ref+': Nationality empty',ln);
+    if(!g('Resident'))addI('20-010',ref+': Resident empty',ln);
+    if(!g('CivilStatus'))addI('20-011',ref+': CivilStatus empty',ln);
+    if(!g('MotherMaidenFullName'))addI('20-013',ref+': MotherMaidenFullName empty',ln);
+    if(!g('LargeExposureIndicator'))addI('20-055',ref+': LargeExposureIndicator empty',ln);
+    if(!g('SubjectReferenceDate'))addI('10-109',ref+': SubjectReferenceDate empty',ln);
+    if(!g('ProviderSubjectNumber'))addI('10-120',ref+': ProviderSubjectNumber empty',ln);
+
+    // VUG2-I:20-029 All employment fields
+    if(!g('EmploymentTradeName'))addI('20-029',ref+': EmploymentTradeName empty',ln);
+    if(!g('EmploymentPSIC'))addI('20-029',ref+': EmploymentPSIC empty',ln);
+    if(!g('EmploymentGrossIncome'))addI('20-029',ref+': EmploymentGrossIncome empty',ln);
+    if(!g('EmploymentNetIncome'))addI('20-029',ref+': EmploymentNetIncome empty',ln);
+
+    // VUG2-V: Date format
+    if(g('BirthDate')&&!isValidDate(g('BirthDate')))addI('10-005',ref+': BirthDate invalid',ln);
+    if(g('SubjectReferenceDate')&&!isValidDate(g('SubjectReferenceDate')))addI('10-110',ref+': SubjRefDate invalid',ln);
+
+    // VUG2-II:20-130 Both permanent and current address
+    if(!g('PermanentFullAddress')&&!g('PermanentStreetNo')&&!g('CurrentFullAddress')&&!g('CurrentStreetNo'))
+      addI('20-130',ref+': Both addresses empty',ln);
+
+    // VUG2-II:20-025 At least one ID document
+    if(!g('TIN')&&!g('IDType1')&&!g('IDType2')&&!g('IDType3'))
+      addI('20-026',ref+': TIN empty and no ID documents',ln);
+
+    // VUG2-VII:10-067 Duplicate ID types
+    var idTypes=[];
+    for(var j=1;j<=3;j++){var tt=g('IDType'+j);if(tt)idTypes.push(tt);}
+    if(new Set(idTypes).size!==idTypes.length)addI('10-067',ref+': Duplicate IDType values',ln);
+  });
+  lg('o','Individuals done');
 }
 
 function chkCompanies(){
- var els=xmlDoc.querySelectorAll('Companies');lg('i','Checking '+els.length+' Companies...');
- els.forEach(function(el){
-  var s=el.getAttribute('ProviderSubjectNumber')||'?';
-  var g=function(k){return(el.getAttribute(k)||'').trim();};
-  var ln=findElementLine(el);var ref='BD:'+s.slice(-8)+' L'+ln;
-  var tin=g('TIN').toLowerCase();if(!tin||['none','n/a','none ',''].indexOf(tin)>=0)addI('020',ref+': TIN missing/invalid',ln);
-  if(!g('ContactType1')||!g('ContactValue1'))addI('104',ref+': Contact mandatory',ln);
-  chkDom(el,'FirmSize',VALID.FirmSize,ref,ln);
-  if(g('Conglomerate'))chkDom(el,'Conglomerate',VALID.Conglomerate,ref,ln);
-  chkDom(el,'Resident',VALID.Resident,ref,ln);
-  if(g('LegalForm'))chkDom(el,'LegalForm',VALID.LegalForm,ref,ln);
-  if(g('NatureOfBusiness'))chkDom(el,'NatureOfBusiness',VALID.PSIC,ref,ln);
-  chkDom(el,'LargeExposureIndicator',VALID.LargeExposure,ref,ln);
-  if(g('ContactType1'))chkDom(el,'ContactType1',VALID.ContactType,ref,ln);
-  if(g('CurrentHouseOwnerLessee'))chkDom(el,'CurrentHouseOwnerLessee',VALID.HouseOwnerLessee,ref,ln);
- });lg('o','Companies done');
+  var els=xmlDoc.querySelectorAll('Companies');
+  lg('i','Checking '+els.length+' Companies...');
+  els.forEach(function(el){
+    var s=el.getAttribute('ProviderSubjectNumber')||'?';
+    var g=function(k){return(el.getAttribute(k)||'').trim();};
+    var ln=findElementLine(el);
+    var ref='BD:'+s.slice(-8)+' L'+ln;
+    var tin=g('TIN').toLowerCase();
+    if(!tin||['none','n/a','none ',''].indexOf(tin)>=0)addI('20-020',ref+': TIN missing/invalid',ln);
+    if(!g('ContactType1')||!g('ContactValue1'))addI('20-104',ref+': Contact mandatory',ln);
+    chkDom(el,'FirmSize',VALID.FirmSize,ref,ln,'20-049');
+    if(g('Conglomerate'))chkDom(el,'Conglomerate',VALID.Conglomerate,ref,ln,'20-105');
+    chkDom(el,'Resident',VALID.Resident,ref,ln,'20-041');
+    if(g('LegalForm'))chkDom(el,'LegalForm',VALID.LegalForm,ref,ln,'10-021');
+    if(g('NatureOfBusiness'))chkDom(el,'NatureOfBusiness',VALID.PSIC,ref,ln,'20-045');
+    chkDom(el,'LargeExposureIndicator',VALID.LargeExposure,ref,ln,'20-054');
+    if(g('ContactType1'))chkDom(el,'ContactType1',VALID.ContactType,ref,ln,'10-014');
+    if(g('CurrentHouseOwnerLessee'))chkDom(el,'CurrentHouseOwnerLessee',VALID.HouseOwnerLessee,ref,ln,'20-044');
+
+    // VUG2-I:20-030 BD mandatory fields
+    if(!g('OfficialRegisteredTradeName'))addI('20-030',ref+': OfficialRegisteredTradeName empty',ln);
+    if(!g('Nationality'))addI('20-008',ref+': Nationality empty',ln);
+    if(!g('Resident'))addI('20-010',ref+': Resident empty',ln);
+    if(!g('NatureOfBusiness'))addI('20-030',ref+': NatureOfBusiness empty',ln);
+    if(!g('RegistrationDate'))addI('20-030',ref+': RegistrationDate empty',ln);
+    if(!g('FirmSize'))addI('20-030',ref+': FirmSize empty',ln);
+    if(!g('GrossAnnualIncome'))addI('20-030',ref+': GrossAnnualIncome empty',ln);
+    if(!g('NetAnnualIncome'))addI('20-030',ref+': NetAnnualIncome empty',ln);
+    if(!g('Conglomerate'))addI('20-030',ref+': Conglomerate empty',ln);
+    if(!g('LegalForm'))addI('20-121',ref+': LegalForm empty',ln);
+    if(!g('LargeExposureIndicator'))addI('20-055',ref+': LargeExposureIndicator empty',ln);
+    if(!g('TradeName'))addI('10-032',ref+': TradeName empty',ln);
+
+    // VUG2-I:20-119 Current address
+    if(!g('CurrentFullAddress')&&!g('CurrentStreetNo'))addI('20-119',ref+': CurrentAddress empty',ln);
+  });
+  lg('o','Companies done');
+}
+
+function chkContract(el,type){
+  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
+  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
+  var ln=findElementLine(el);
+  var ref=type+':'+s+'/'+c+' L'+ln;
+  var g=function(a){return(el.getAttribute(a)||'').trim();};
+  var phase=g('ContractPhase');
+  var hd=xmlDoc.querySelector('Header');
+  var frd=hd?hd.getAttribute('FileReferenceDate')||'':'';
+
+  // Domain checks
+  chkDom(el,'ContractPhase',VALID.ContractPhase,ref,ln,'10-102');
+  chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln,'20-078');
+  chkDom(el,'BookType',VALID.BookType,ref,ln,'20-080');
+  chkDom(el,'Role',VALID.Role,ref,ln,'10-002');
+  if(g('DOSRI'))chkDom(el,'DOSRI',VALID.DOSRI,ref,ln,'20-075');
+  if(g('RPT'))chkDom(el,'RPT',VALID.RPT,ref,ln,'20-076');
+  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln,'20-150');
+  if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln,'20-151');
+  if(g('BookCode'))chkDom(el,'BookCode',VALID.BookCode,ref,ln,'20-185');
+  if(g('TrustType'))chkDom(el,'TrustType',VALID.TrustType,ref,ln,'20-186');
+  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln,'20-152');
+  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln,'20-153');
+  if(g('CreditPurposeEconomicActivity'))chkDom(el,'CreditPurposeEconomicActivity',VALID.PSIC,ref,ln,'20-158');
+
+  // VUG2-II:20-232 Active phase DOSRI/RPT
+  if(phase==='AC'){
+    if(!g('DOSRI'))addI('20-232',ref+': DOSRI empty when Active',ln);
+    if(!g('RPT'))addI('20-232',ref+': RPT empty when Active',ln);
+  }
+
+  // VUG2-II:20-233 Active ECL
+  if(phase==='AC'){
+    if(!g('AllowanceECLOriginalCurrency')||!g('AllowanceECL'))addI('20-233',ref+': AllowanceECL empty when Active',ln);
+    if(!g('NetCarryingAmountLoanOriginalCurrency')||!g('NetCarryingAmountLoan'))addI('20-234',ref+': NetCarrying empty when Active',ln);
+    if(!g('NominalInterestRate'))addI('20-235',ref+': NominalInterestRate empty when Active',ln);
+    if(!g('StageImpairmentPFRS9'))addI('20-236',ref+': StageImpairment empty when Active',ln);
+  }
+
+  // VUG2-I: Mandatory fields missing
+  if(!g('ProviderCode'))addI('MAND',ref+': ProviderCode empty',ln);
+  if(!g('ContractRefDate'))addI('10-150',ref+': ContractRefDate empty',ln);
+  if(!g('ProviderSubjectNo'))addI('MAND',ref+': ProviderSubjectNo empty',ln);
+  if(!g('ProviderContractNo'))addI('10-151',ref+': ProviderContractNo empty',ln);
+  if(!g('Role'))addI('10-152',ref+': Role empty',ln);
+  if(!g('ContractPhase'))addI('10-024',ref+': ContractPhase empty',ln);
+  if(!g('OriginalCurrency'))addI('10-027',ref+': OriginalCurrency empty',ln);
+
+  // VUG2-II:20-234-20-244 Active phase dependency checks
+  if(phase==='AC'){
+    if(!g('NetCarryingAmountLoanOriginalCurrency'))addI('20-234',ref+': NetCarryingOrigCurr empty',ln);
+    if(!g('NetCarryingAmountLoan'))addI('20-234',ref+': NetCarryingLoan empty',ln);
+    if(!g('CreditClassification'))addI('20-241',ref+': CreditClassification empty',ln);
+    if(!g('ProbabilityDefault'))addI('20-242',ref+': ProbabilityDefault empty',ln);
+    if(!g('EffectiveInterestRate'))addI('20-243',ref+': EffectiveInterestRate empty',ln);
+    if(!g('UnearnedInterest'))addI('20-244',ref+': UnearnedInterest empty',ln);
+    if(!g('InterestSetting'))addI('20-240',ref+': InterestSetting empty',ln);
+    if(!g('FrequencyRepricing'))addI('20-240',ref+': FrequencyRepricing empty',ln);
+  }
+
+  // VUG2-I: ContractStatus for CI/CN
+  if(type==='CI'||type==='CN'){
+    if(!g('ContractStatus'))addI('20-194',ref+': ContractStatus empty',ln);
+  }
+
+  // VUG2-III: ContractStatus domain
+  if(g('ContractStatus')){
+    var cs=g('ContractStatus');
+    if(type==='CI'&&VALID.ContractStatus_I.indexOf(cs)===-1)addI('10-153',ref+': ContractStatus="'+cs+'"',ln);
+    if(type==='CN'&&VALID.ContractStatus_N.indexOf(cs)===-1)addI('10-153',ref+': ContractStatus="'+cs+'"',ln);
+    if(type==='CC'&&VALID.ContractStatus_C.indexOf(cs)===-1)addI('10-153',ref+': ContractStatus="'+cs+'"',ln);
+  }
+
+  // VUG2-I: TransactionType, CreditPurpose
+  if(!g('TransactionType')&&(type==='CI'||type==='CN'||type==='CC'))addI('20-065',ref+': TransactionType empty',ln);
+  if((type==='CI'||type==='CN')&&!g('CreditPurpose'))addI('20-157',ref+': CreditPurpose empty',ln);
+  if((type==='CI'||type==='CN')&&!g('CreditPurposeEconomicActivity'))addI('20-164',ref+': CreditPurposeEconomicActivity empty',ln);
+
+  // VUG2-VII:10-274 Outstanding inconsistency
+  var opn=g('OutstandingPaymentsNumber'),ob=g('OutstandingBalance');
+  if(phase==='AC'&&((opn&&parseInt(opn)>0&&(!ob||parseFloat(ob)===0))||(ob&&parseFloat(ob)>0&&(!opn||parseInt(opn)===0))))
+    addI('10-274',ref+': OutstandingPaymentsNumber/Balance inconsistent',ln);
+
+  // VUG2-VII:10-280 Overdue inconsistency
+  var odn=g('OverduePaymentsNumber'),oda=g('OverduePaymentsAmount');
+  if(['AC','CL','CA'].indexOf(phase)>=0&&((odn&&parseInt(odn)>0&&(!oda||parseFloat(oda)===0))||(oda&&parseFloat(oda)>0&&(!odn||parseInt(odn)===0))))
+    addI('10-280',ref+': OverduePaymentsNumber/Amount inconsistent',ln);
+
+  // DaysPastDue VUG2-II:20-090
+  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('DaysPastDue'))addI('20-090',ref+': DaysPastDue empty',ln);
+
+  // Date logic VUG2-VII - declare all date vars first
+  var csd=g('ContractStartDate'),crd=g('ContractRefDate'),cpd=g('ContractPlannedEndDate'),cad=g('ContractActualEndDate'),lpd=g('LastPaymentDate');
+  var fpd=g('FirstPaymentDate');
+
+  if(crd&&csd&&dateGt(csd,crd))addI('10-290',ref+': StartDate>RefDate',ln);
+  if(csd&&cpd&&dateGt(csd,cpd))addI('10-255',ref+': StartDate>PlannedEnd',ln);
+  if(csd&&cad&&dateGt(csd,cad))addI('10-256',ref+': StartDate>ActualEnd',ln);
+  if(csd&&lpd&&dateGt(csd,lpd))addI('10-257',ref+': StartDate>LastPayment',ln,0,true);
+  if(crd&&frd&&dateGt(crd,frd))addI('10-291',ref+': ContractRefDate>FileRefDate',ln);
+
+  // VUG2-VII:10-258 StartDate > FirstPaymentDate
+  if(csd&&fpd&&dateGt(csd,fpd))addI('10-258',ref+': StartDate>FirstPaymentDate',ln);
+
+  // VUG2-II:10-251,10-252,10-253
+  if(['AC','CL','CA'].indexOf(phase)>=0&&!csd)addI('10-251',ref+': StartDate empty',ln);
+  if(['AC','CL','CA'].indexOf(phase)>=0&&!cpd&&type!=='CC')addI('10-252',ref+': PlannedEndDate empty',ln);
+  if(['CL','CA'].indexOf(phase)>=0&&!cad)addI('10-253',ref+': ActualEndDate empty',ln);
+
+  // Guarantee consistency VUG2-II:10-296
+  for(var i=1;i<=6;i++){
+    var gA=g('GuaranteedAmount'+i),gT=g('GuaranteeType'+i);
+    if((gA&&!gT)||(!gA&&gT))addI('10-296',ref+': G'+i+' amt="'+gA+'" type="'+gT+'"',ln);
+  }
+
+  // LinkedSubjectRole
+  for(var j=1;j<=6;j++){
+    var lsr=g('LinkedSubjectRole'+j);
+    if(lsr&&['C','G'].indexOf(lsr)===-1)addI('VAL',ref+': LinkedSubjectRole'+j+'="'+lsr+'" valid:[C,G]',ln);
+  }
+
+  // Negative values VUG2-VI
+  ['OutstandingBalance','OverduePaymentsAmount','OverduePaymentsNumber','DaysPastDue'].forEach(function(f){chkNeg(el,f,ref,ln);});
+
+  return{phase:phase,ref:ref,ln:ln,g:g};
 }
 
 function chkInstallments(){
- var els=xmlDoc.querySelectorAll('Installments');lg('i','Checking '+els.length+' CI contracts...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CI:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  var phase=g('ContractPhase');
-  chkDom(el,'ContractPhase',VALID.ContractPhase,ref,ln);
-  chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln);
-  chkDom(el,'BookType',VALID.BookType,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  if(g('DOSRI'))chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  if(g('RPT'))chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('PaymentPeriodicity'))chkDom(el,'PaymentPeriodicity',VALID.PaymentPeriodicity,ref,ln);
-  if(g('CreditPurposeEconomicActivity'))chkDom(el,'CreditPurposeEconomicActivity',VALID.PSIC,ref,ln);
-  var rcc=g('RestructuredCreditCode');
-  if(!rcc)addI('195',ref+': empty',ln);
-  else if(VALID.RestructuredCreditCode.indexOf(rcc)===-1)addI('195',ref+': "'+rcc+'" invalid',ln);
-  var opn=g('OutstandingPaymentsNumber');if(opn&&opn.indexOf('.')>=0&&parseFloat(opn)%1!==0)addI('168',ref+': "'+opn+'"',ln);
-  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('DaysPastDue'))addI('090',ref+': DaysPastDue empty',ln);
-  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('LastPaymentAmount'))addI('089',ref+': LastPaymentAmount empty',ln);
-  for(var i=1;i<=6;i++){var gA=g('GuaranteedAmount'+i),gT=g('GuaranteeType'+i);if((gA&&!gT)||(!gA&&gT))addI('296',ref+': G'+i+' amt="'+gA+'" type="'+gT+'"',ln);}
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
-  if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln);
-  if(g('BookCode'))chkDom(el,'BookCode',VALID.BookCode,ref,ln);
-  if(g('TrustType'))chkDom(el,'TrustType',VALID.TrustType,ref,ln);
-  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln);
-  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln);
-  for(var j=1;j<=6;j++){var lsr=g('LinkedSubjectRole'+j);if(lsr&&['C','G'].indexOf(lsr)===-1)addI('VAL',ref+': LinkedSubjectRole'+j+'="'+lsr+'" valid:[C,G]',ln);}
- });lg('o','CI done');
+  var els=xmlDoc.querySelectorAll('Installments');
+  lg('i','Checking '+els.length+' CI contracts...');
+  els.forEach(function(el){
+    var r=chkContract(el,'CI');
+    var g=r.g,phase=r.phase,ref=r.ref,ln=r.ln;
+    if(g('PaymentPeriodicity'))chkDom(el,'PaymentPeriodicity',VALID.PaymentPeriodicity,ref,ln,'10-029');
+
+    // VUG2-I:20-195 RestructuredCreditCode
+    var rcc=g('RestructuredCreditCode');
+    if(!rcc)addI('20-195',ref+': empty',ln);
+    else if(VALID.RestructuredCreditCode.indexOf(rcc)===-1)addI('10-160',ref+': "'+rcc+'" invalid',ln);
+
+    // VUG2-IV:10-168
+    var opn=g('OutstandingPaymentsNumber');
+    if(opn&&opn.indexOf('.')>=0&&parseFloat(opn)%1!==0)addI('10-168',ref+': "'+opn+'"',ln);
+
+    // VUG2-II:20-089
+    if(['AC','CL','CA'].indexOf(phase)>=0&&!g('LastPaymentAmount'))addI('20-089',ref+': LastPaymentAmount empty',ln);
+
+    // VUG2-II:10-268
+    if(['AC','CL','CA'].indexOf(phase)>=0&&(!g('MonthlyPaymentAmount')||g('MonthlyPaymentAmount')==='0'))addI('10-268',ref+': MonthlyPaymentAmount empty/0',ln);
+
+    // VUG2-II:20-237
+    if(phase==='AC'&&!g('LoanFundersNumber'))addI('20-237',ref+': LoanFundersNumber empty',ln);
+
+    // VUG2-VI negatives
+    ['FinancedAmount','FinancedAmountOriginalCurrency','MonthlyPaymentAmount','LastPaymentAmount','NextPayment','OutstandingPaymentsNumber','GuaranteedAmount1'].forEach(function(f){chkNeg(el,f,ref,ln);});
+  });
+  lg('o','CI done');
 }
 
 function chkNonInstallments(){
- var els=xmlDoc.querySelectorAll('NonInstallments');lg('i','Checking '+els.length+' CN contracts...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CN:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  var phase=g('ContractPhase');
-  chkDom(el,'ContractPhase',VALID.ContractPhase,ref,ln);
-  chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln);
-  chkDom(el,'BookType',VALID.BookType,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  if(g('DOSRI'))chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  if(g('RPT'))chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('CreditPurposeEconomicActivity'))chkDom(el,'CreditPurposeEconomicActivity',VALID.PSIC,ref,ln);
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
-  if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln);
-  if(g('BookCode'))chkDom(el,'BookCode',VALID.BookCode,ref,ln);
-  if(g('TrustType'))chkDom(el,'TrustType',VALID.TrustType,ref,ln);
-  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln);
-  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln);
-  var rcc=g('RestructuredCreditCode');
-  if(!rcc)addI('CN_RCC',ref+': empty',ln);
-  else if(VALID.RestructuredCreditCode.indexOf(rcc)===-1)addI('CN_RCC',ref+': "'+rcc+'" invalid',ln);
-  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('DaysPastDue'))addI('CN_DPD',ref+': empty',ln);
-  if(!g('CreditLimitFinancedAmount'))addI('CN_LIM',ref+': empty',ln);
-  if(phase==='AC'&&!g('UtilizationOutstandingBalance'))addI('CN_BAL',ref+': empty',ln);
-  for(var i=1;i<=6;i++){var gA=g('GuaranteedAmount'+i),gT=g('GuaranteeType'+i);if((gA&&!gT)||(!gA&&gT))addI('296',ref+': G'+i,ln);}
-  for(var j=1;j<=6;j++){var lsr=g('LinkedSubjectRole'+j);if(lsr&&['C','G'].indexOf(lsr)===-1)addI('VAL',ref+': LinkedSubjectRole'+j+'="'+lsr+'" valid:[C,G]',ln);}
- });lg('o','CN done');
+  var els=xmlDoc.querySelectorAll('NonInstallments');
+  lg('i','Checking '+els.length+' CN contracts...');
+  els.forEach(function(el){
+    var r=chkContract(el,'CN');
+    var g=r.g,phase=r.phase,ref=r.ref,ln=r.ln;
+    var rcc=g('RestructuredCreditCode');
+    if(!rcc)addI('20-195',ref+': empty',ln);
+    else if(VALID.RestructuredCreditCode.indexOf(rcc)===-1)addI('10-160',ref+': "'+rcc+'" invalid',ln);
+    if(!g('CreditLimitFinancedAmount'))addI('MAND',ref+': CreditLimitFinancedAmount empty',ln);
+
+    // VUG2-II:10-179
+    if(['AC','CL','CA'].indexOf(phase)>=0&&!g('UtilizationOutstandingBalance'))addI('10-179',ref+': Utilization empty',ln);
+    if(phase==='AC'&&!g('LoanFundersNumber'))addI('20-237',ref+': LoanFundersNumber empty',ln);
+    chkNeg(el,'UtilizationOutstandingBalance',ref,ln);
+    chkNeg(el,'CreditLimitFinancedAmount',ref,ln);
+
+    // VUG2-I: CN mandatory
+    if(!g('ContractType'))addI('10-023',ref+': ContractType empty',ln);
+    if(!g('CreditLimitOriginalCurrency'))addI('20-159',ref+': CreditLimitOrigCurr empty',ln);
+    if(!g('ContractStatus'))addI('20-194',ref+': ContractStatus empty',ln);
+    if(!g('CreditPurpose'))addI('20-157',ref+': CreditPurpose empty',ln);
+    if(!g('CreditPurposeEconomicActivity'))addI('20-164',ref+': CreditPurposeEconActivity empty',ln);
+  });
+  lg('o','CN done');
 }
 
 function chkCreditCards(){
- var els=xmlDoc.querySelectorAll('CreditCards');lg('i','Checking '+els.length+' CC records...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CC:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  var phase=g('ContractPhase');
-  chkDom(el,'ContractPhase',VALID.ContractPhase,ref,ln);
-  chkDom(el,'BookType',VALID.BookType,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  if(g('DOSRI'))chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  if(g('RPT'))chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('RegulatoryStatus'))chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln);
-  if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln);
-  if(g('PaymentPeriodicity'))chkDom(el,'PaymentPeriodicity',VALID.PaymentPeriodicity,ref,ln);
-  if(g('InstallmentType'))chkDom(el,'InstallmentType',VALID.InstallmentType,ref,ln);
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
-  if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln);
-  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln);
-  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln);
-  if(g('MinPaymentIndicator'))chkDom(el,'MinPaymentIndicator',VALID.MinPaymentIndicator,ref,ln);
-  if(g('PremiumCard'))chkDom(el,'PremiumCard',VALID.CardPremium,ref,ln);
-  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('DaysPastDue'))addI('CC_DPD',ref+': empty',ln);
-  if(phase==='AC'&&!g('NextPayment'))addI('CC_NXT',ref+': empty',ln);
-  if(['AC','CL','CA'].indexOf(phase)>=0&&!g('LastPaymentAmount'))addI('CC_LPA',ref+': empty',ln);
-  for(var i=1;i<=6;i++){var gA=g('GuaranteedAmount'+i),gT=g('GuaranteeType'+i);if((gA&&!gT)||(!gA&&gT))addI('296',ref+': G'+i,ln);}
-  for(var j=1;j<=6;j++){var lsr=g('LinkedSubjectRole'+j);if(lsr&&['C','G'].indexOf(lsr)===-1)addI('VAL',ref+': LinkedSubjectRole'+j+'="'+lsr+'" valid:[C,G]',ln);}
- });lg('o','CC done');
+  var els=xmlDoc.querySelectorAll('CreditCards');
+  lg('i','Checking '+els.length+' CC records...');
+  els.forEach(function(el){
+    var r=chkContract(el,'CC');
+    var g=r.g,phase=r.phase,ref=r.ref,ln=r.ln;
+    if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln,'10-160');
+    if(g('PaymentPeriodicity'))chkDom(el,'PaymentPeriodicity',VALID.PaymentPeriodicity,ref,ln,'10-029');
+    if(g('InstallmentType'))chkDom(el,'InstallmentType',VALID.InstallmentType,ref,ln,'10-181');
+    if(g('MinPaymentIndicator'))chkDom(el,'MinPaymentIndicator',VALID.MinPaymentIndicator,ref,ln,'10-186');
+    if(g('PremiumCard'))chkDom(el,'PremiumCard',VALID.CardPremium,ref,ln,'20-063');
+
+    // VUG2-I:10-275 InstallmentType mandatory for CC
+    if(!g('InstallmentType'))addI('10-275',ref+': InstallmentType empty',ln);
+    // VUG2-I:10-276 PaymentPeriodicity mandatory for CC
+    if(!g('PaymentPeriodicity'))addI('10-276',ref+': PaymentPeriodicity empty',ln);
+
+    // VUG2-II:20-092 NextPayment
+    if(phase==='AC'&&!g('NextPayment'))addI('20-092',ref+': NextPayment empty',ln);
+    // VUG2-II:20-089 LastPaymentAmount
+    if(['AC','CL','CA'].indexOf(phase)>=0&&!g('LastPaymentAmount'))addI('20-089',ref+': LastPaymentAmount empty',ln);
+
+    // VUG2-VII:10-282 FlagCardUsed/TimesCardUsed
+    var fcu=g('FlagCardUsed'),tcu=g('TimesCardUsed');
+    if((fcu==='1'&&(!tcu||tcu==='0'))||(fcu==='0'&&tcu&&parseInt(tcu)>0))addI('10-282',ref+': FlagCardUsed/TimesCardUsed inconsistent',ln,0,true);
+    chkNeg(el,'CreditLimit',ref,ln);chkNeg(el,'ChargedAmount',ref,ln);chkNeg(el,'OutstandingBalanceUnbilled',ref,ln);
+
+    // VUG2-I: CC mandatory
+    if(!g('ContractType'))addI('10-023',ref+': ContractType empty',ln);
+    if(!g('CreditLimit'))addI('10-031',ref+': CreditLimit empty',ln);
+    if(!g('CreditLimitOriginalCurrency'))addI('20-159',ref+': CreditLimitOrigCurr empty',ln);
+
+    // VUG2-II:20-231 Active phase and outstanding balance empty
+    if(phase==='AC'&&!g('OutstandingBalance')){
+      var cpd2=g('ContractPlannedEndDate'),crd2=g('ContractRefDate');
+      if(crd2&&cpd2&&dateGt(cpd2,crd2))addI('10-272',ref+': OutstandingBalance empty when Active',ln);
+    }
+  });
+  lg('o','CC done');
 }
 
 function chkOtherCredit(){
- var els=xmlDoc.querySelectorAll('OtherCreditAccomodations');lg('i','Checking '+els.length+' CA records...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CA:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','OtherCreditAccType','GrantDate','RegulatoryStatus','OriginalCurrency','CreditPurpose','CreditPurposeEconomicActivity','AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue'].forEach(function(f){if(!g(f))addI('CA_MAND',ref+': '+f+' empty',ln);});
-  chkDom(el,'BookType',VALID.BookType,ref,ln);
-  chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('OtherCreditAccType'))chkDom(el,'OtherCreditAccType',VALID.OtherCreditAccType,ref,ln);
-  if(g('CreditPurposeEconomicActivity'))chkDom(el,'CreditPurposeEconomicActivity',VALID.PSIC,ref,ln);
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
-  if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln);
-  if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln);
-  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln);
-  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln);
- });lg('o','CA done');
+  var els=xmlDoc.querySelectorAll('OtherCreditAccomodations');
+  lg('i','Checking '+els.length+' CA records...');
+  els.forEach(function(el){
+    var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
+    var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
+    var ln=findElementLine(el);
+    var ref='CA:'+s+'/'+c+' L'+ln;
+    var g=function(a){return(el.getAttribute(a)||'').trim();};
+
+    // VUG2-I mandatory checks
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','OtherCreditAccType','GrantDate','RegulatoryStatus','OriginalCurrency','CreditPurpose','CreditPurposeEconomicActivity','AmountGrantedOriginalCurrency','AmountGranted','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue'].forEach(function(f){if(!g(f))addI('20-251',ref+': '+f+' empty',ln);});
+    chkDom(el,'BookType',VALID.BookType,ref,ln,'20-080');
+    chkDom(el,'RegulatoryStatus',VALID.RegulatoryStatus,ref,ln,'20-078');
+    chkDom(el,'Role',VALID.Role,ref,ln,'10-002');
+    chkDom(el,'DOSRI',VALID.DOSRI,ref,ln,'20-075');
+    chkDom(el,'RPT',VALID.RPT,ref,ln,'20-076');
+    if(g('OtherCreditAccType'))chkDom(el,'OtherCreditAccType',VALID.OtherCreditAccType,ref,ln,'20-176');
+    if(g('CreditPurposeEconomicActivity'))chkDom(el,'CreditPurposeEconomicActivity',VALID.PSIC,ref,ln,'20-158');
+    if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln,'20-150');
+    if(g('CreditClassification'))chkDom(el,'CreditClassification',VALID.CreditClassification,ref,ln,'20-151');
+    if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln,'10-160');
+    if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln,'20-152');
+    if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln,'20-153');
+    chkNeg(el,'OutstandingBalance',ref,ln);chkNeg(el,'AmountGranted',ref,ln);
+  });
+  lg('o','CA done');
 }
 
 function chkInvestments(){
- var els=xmlDoc.querySelectorAll('Investments');lg('i','Checking '+els.length+' CV records...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CV:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','InvestmentType','GrantDate','OriginalCurrency','AmountGrantedOriginalCurrency','AmountGranted','AccumulatedMarketGainsOriginalCurrency','AccumulatedMarketGains','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue','LatestCreditRatingIssuer'].forEach(function(f){if(!g(f))addI('CV_MAND',ref+': '+f+' empty',ln);});
-  chkDom(el,'BookType',VALID.BookType,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('InvestmentType'))chkDom(el,'InvestmentType',VALID.InvestmentType,ref,ln);
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
-  if(g('BookCode'))chkDom(el,'BookCode',VALID.BookCode,ref,ln);
-  if(g('TrustType'))chkDom(el,'TrustType',VALID.TrustType,ref,ln);
-  if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln);
-  if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln);
-  if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln);
-  if(g('CreditRatingAgencyUsed'))chkDom(el,'CreditRatingAgencyUsed',VALID.CreditRatingAgency,ref,ln);
-  if(g('NatureOfOffering'))chkDom(el,'NatureOfOffering',VALID.NatureOfOffering,ref,ln);
-  if(g('LatestCreditRatingIssuer'))chkDom(el,'LatestCreditRatingIssuer',VALID.InvestmentIssuerType,ref,ln);
-  if(g('CreditRatingIssuerLastInvestment'))chkDom(el,'CreditRatingIssuerLastInvestment',VALID.CreditRating,ref,ln);
- });lg('o','CV done');
+  var els=xmlDoc.querySelectorAll('Investments');
+  lg('i','Checking '+els.length+' CV records...');
+  els.forEach(function(el){
+    var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
+    var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
+    var ln=findElementLine(el);
+    var ref='CV:'+s+'/'+c+' L'+ln;
+    var g=function(a){return(el.getAttribute(a)||'').trim();};
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','BookType','InvestmentType','GrantDate','OriginalCurrency','AmountGrantedOriginalCurrency','AmountGranted','AccumulatedMarketGainsOriginalCurrency','AccumulatedMarketGains','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','NominalInterestRate','StageImpairmentPFRS9','ProbabilityDefault','EffectiveInterestRate','DaysPastDue','LatestCreditRatingIssuer'].forEach(function(f){if(!g(f))addI('20-251',ref+': '+f+' empty',ln);});
+    chkDom(el,'BookType',VALID.BookType,ref,ln,'20-080');
+    chkDom(el,'Role',VALID.Role,ref,ln,'10-002');
+    chkDom(el,'DOSRI',VALID.DOSRI,ref,ln,'20-075');
+    chkDom(el,'RPT',VALID.RPT,ref,ln,'20-076');
+    if(g('InvestmentType'))chkDom(el,'InvestmentType',VALID.InvestmentType,ref,ln,'20-187');
+    if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln,'20-150');
+    if(g('BookCode'))chkDom(el,'BookCode',VALID.BookCode,ref,ln,'20-185');
+    if(g('TrustType'))chkDom(el,'TrustType',VALID.TrustType,ref,ln,'20-186');
+    if(g('InterestSetting'))chkDom(el,'InterestSetting',VALID.InterestSetting,ref,ln,'20-152');
+    if(g('FrequencyRepricing'))chkDom(el,'FrequencyRepricing',VALID.FrequencyRepricing,ref,ln,'20-153');
+    if(g('RestructuredCreditCode'))chkDom(el,'RestructuredCreditCode',VALID.RestructuredCreditCode,ref,ln,'10-160');
+    if(g('CreditRatingAgencyUsed'))chkDom(el,'CreditRatingAgencyUsed',VALID.CreditRatingAgency,ref,ln,'20-188');
+    if(g('NatureOfOffering'))chkDom(el,'NatureOfOffering',VALID.NatureOfOffering,ref,ln,'20-191');
+    if(g('LatestCreditRatingIssuer'))chkDom(el,'LatestCreditRatingIssuer',VALID.InvestmentIssuerType,ref,ln,'20-190');
+    if(g('CreditRatingIssuerLastInvestment'))chkDom(el,'CreditRatingIssuerLastInvestment',VALID.CreditRating,ref,ln,'20-189');
+    chkNeg(el,'OutstandingBalance',ref,ln);chkNeg(el,'AmountGranted',ref,ln);
+  });
+  lg('o','CV done');
 }
 
 function chkOffBalance(){
- var els=xmlDoc.querySelectorAll('OffBalanceSheets');lg('i','Checking '+els.length+' CF records...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='CF:'+s+'/'+c+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','ContingentAccountType','OriginalCurrency','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','StageImpairmentPFRS9','ProbabilityDefault'].forEach(function(f){if(!g(f))addI('CF_MAND',ref+': '+f+' empty',ln);});
-  if(g('ContingentAccountType'))chkDom(el,'ContingentAccountType',VALID.ContingentAccountType,ref,ln);
-  chkDom(el,'Role',VALID.Role,ref,ln);
-  chkDom(el,'DOSRI',VALID.DOSRI,ref,ln);
-  chkDom(el,'RPT',VALID.RPT,ref,ln);
-  if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln);
- });lg('o','CF done');
+  var els=xmlDoc.querySelectorAll('OffBalanceSheets');
+  lg('i','Checking '+els.length+' CF records...');
+  els.forEach(function(el){
+    var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
+    var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);
+    var ln=findElementLine(el);
+    var ref='CF:'+s+'/'+c+' L'+ln;
+    var g=function(a){return(el.getAttribute(a)||'').trim();};
+    ['ProviderCode','ContractRefDate','ProviderSubjectNo','Role','DOSRI','RPT','ProviderContractNo','ContingentAccountType','OriginalCurrency','OutstandingBalanceOriginalCurrency','OutstandingBalance','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','StageImpairmentPFRS9','ProbabilityDefault'].forEach(function(f){if(!g(f))addI('20-251',ref+': '+f+' empty',ln);});
+    if(g('ContingentAccountType'))chkDom(el,'ContingentAccountType',VALID.ContingentAccountType,ref,ln,'20-193');
+    chkDom(el,'Role',VALID.Role,ref,ln,'10-002');
+    chkDom(el,'DOSRI',VALID.DOSRI,ref,ln,'20-075');
+    chkDom(el,'RPT',VALID.RPT,ref,ln,'20-076');
+    if(g('StageImpairmentPFRS9'))chkDom(el,'StageImpairmentPFRS9',VALID.StageImpairmentPFRS9,ref,ln,'20-150');
+  });
+  lg('o','CF done');
 }
 
 function chkNegativeEvents(){
- var els=xmlDoc.querySelectorAll('SubjectNegativeEvents');lg('i','Checking '+els.length+' NE records...');
- els.forEach(function(el){
-  var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
-  var ln=findElementLine(el);var ref='NE:'+s+' L'+ln;
-  var g=function(a){return(el.getAttribute(a)||'').trim();};
-  ['ProviderCode','NegativeEventRefDate','ProviderSubjectNo','EventCode'].forEach(function(f){if(!g(f))addI('NE_MAND',ref+': '+f+' empty',ln);});
-  if(g('EventCode'))chkDom(el,'EventCode',VALID.NegativeEventCode,ref,ln);
-  if(g('EventStatus'))chkDom(el,'EventStatus',VALID.NegativeEventStatus,ref,ln);
- });lg('o','NE done');
+  var els=xmlDoc.querySelectorAll('SubjectNegativeEvents');
+  lg('i','Checking '+els.length+' NE records...');
+  var hd=xmlDoc.querySelector('Header');
+  var frd=hd?hd.getAttribute('FileReferenceDate')||'':'';
+  els.forEach(function(el){
+    var s=(el.getAttribute('ProviderSubjectNo')||'?').slice(-8);
+    var ln=findElementLine(el);
+    var ref='NE:'+s+' L'+ln;
+    var g=function(a){return(el.getAttribute(a)||'').trim();};
+    ['ProviderCode','NegativeEventRefDate','ProviderSubjectNo','EventCode'].forEach(function(f){if(!g(f))addI('MAND',ref+': '+f+' empty',ln);});
+    if(g('EventCode'))chkDom(el,'EventCode',VALID.NegativeEventCode,ref,ln,'10-201');
+    if(g('EventStatus'))chkDom(el,'EventStatus',VALID.NegativeEventStatus,ref,ln,'20-095');
+    var nrd=g('NegativeEventRefDate');
+    if(nrd&&frd&&dateGt(nrd,frd))addI('10-292',ref+': NegEventRefDate>FileRefDate',ln);
+  });
+  lg('o','NE done');
 }
 
 function chkLinks(){
- var subjs=new Set();
- xmlDoc.querySelectorAll('Individuals').forEach(function(e){subjs.add(e.getAttribute('ProviderSubjectNumber')||'');});
- xmlDoc.querySelectorAll('Companies').forEach(function(e){subjs.add(e.getAttribute('ProviderSubjectNumber')||'');});
- xmlDoc.querySelectorAll('CompanyLinks').forEach(function(el){
-  var par=el.getAttribute('ParentProviderSubjectNo')||'';
-  var ln=findElementLine(el);
-  if(!subjs.has(par))addI('318','Parent "'+par+'" L'+ln+': not in file',ln);
-  var cr=(el.getAttribute('CompanyRole')||'').trim();
-  if(cr)chkDom(el,'CompanyRole',VALID.CompanyRole,'SL:'+par.slice(-8)+' L'+ln,ln);
+  var subjs=new Set();
+  xmlDoc.querySelectorAll('Individuals').forEach(function(e){subjs.add(e.getAttribute('ProviderSubjectNumber')||'');});
+  xmlDoc.querySelectorAll('Companies').forEach(function(e){subjs.add(e.getAttribute('ProviderSubjectNumber')||'');});
+  xmlDoc.querySelectorAll('CompanyLinks').forEach(function(el){
+    var par=el.getAttribute('ParentProviderSubjectNo')||'';
+    var chi=el.getAttribute('ChildProviderSubjectNo')||'';
+    var ln=findElementLine(el);
+    var ref='SL:'+par.slice(-8)+' L'+ln;
+    if(!subjs.has(par))addI('10-318','Parent "'+par+'" not in file',ln);
+    if(!subjs.has(chi))addI('10-318','Child "'+chi+'" not in file',ln);
+    var cr=(el.getAttribute('CompanyRole')||'').trim();
+    if(cr)chkDom(el,'CompanyRole',VALID.CompanyRole,ref,ln,'10-111');
+    var crd=el.getAttribute('CompanyLinkRefDate')||'';
+    var hd=xmlDoc.querySelector('Header');
+    var frd=hd?hd.getAttribute('FileReferenceDate')||'':'';
+    if(crd&&frd&&dateGt(crd,frd))addI('10-293',ref+': LinkRefDate>FileRefDate',ln);
+
+    // VUG2-I: SL mandatory fields
+    if(!par)addI('10-209',ref+': ParentProviderSubjectNo empty',ln);
+    if(!chi)addI('10-206',ref+': ChildProviderSubjectNo empty',ln);
+    if(!cr)addI('10-208',ref+': CompanyRole empty',ln);
+    if(!el.getAttribute('CompanyLinkRefDate'))addI('10-204',ref+': CompanyLinkRefDate empty',ln);
+
+    // VUG2-VII:10-320 Parent = Child
+    if(par&&chi&&par===chi)addI('10-320',ref+': Parent=Child "'+par+'"',ln);
+  });
+}
+
+function chkDefaultDates(){
+ var DEF='19000101';
+ // VUG2-VB checks
+ xmlDoc.querySelectorAll('Individuals').forEach(function(el){
+  var ln=findElementLine(el);var s=(el.getAttribute('ProviderSubjectNumber')||'?').slice(-8);var ref='ID:'+s+' L'+ln;
+  var g=function(k){return(el.getAttribute(k)||'').trim();};
+  if(g('BirthDate')===DEF)addI('20-125',ref+': BirthDate=1900-01-01',ln);
+  if(g('SubjectReferenceDate')===DEF)addI('20-112',ref+': SubjRefDate=1900-01-01',ln);
+  if(g('EmploymentDateHiredFrom')&&g('EmploymentDateHiredFrom')===DEF&&g('EmploymentOccupationStatus')!=='6'&&g('EmploymentOccupationStatus')!=='7'&&g('EmploymentOccupationStatus')!=='8')addI('20-107',ref+': DateHiredFrom=1900-01-01',ln,0,true);
+  for(var i=1;i<=3;i++){
+   if(g('IDIssueDate'+i)===DEF)addI('20-126',ref+': IDIssueDate'+i+'=1900-01-01',ln,0,true);
+   if(g('IDExpiryDate'+i)===DEF)addI('20-127',ref+': IDExpiryDate'+i+'=1900-01-01',ln,0,true);
+  }
+ });
+ xmlDoc.querySelectorAll('Companies').forEach(function(el){
+  var ln=findElementLine(el);var s=(el.getAttribute('ProviderSubjectNumber')||'?').slice(-8);var ref='BD:'+s+' L'+ln;
+  var g=function(k){return(el.getAttribute(k)||'').trim();};
+  if(g('SubjectReferenceDate')===DEF)addI('20-112',ref+': SubjRefDate=1900-01-01',ln);
+  if(g('ExistenceTerm')===DEF)addI('20-110',ref+': ExistenceTerm=1900-01-01',ln,0,true);
+  if(g('RegistrationDate')===DEF)addI('20-111',ref+': RegistrationDate=1900-01-01',ln,0,true);
+ });
+ ['Installments','NonInstallments','CreditCards','OtherCreditAccomodations','Investments','OffBalanceSheets'].forEach(function(tag){
+  xmlDoc.querySelectorAll(tag).forEach(function(el){
+   var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref=tag.charAt(0)+':'+c+' L'+ln;
+   var crd=(el.getAttribute('ContractRefDate')||'').trim();
+   var csd=(el.getAttribute('ContractStartDate')||'').trim();
+   if(crd===DEF)addI('20-224',ref+': ContractRefDate=1900-01-01',ln);
+   if(csd===DEF)addI('20-230',ref+': ContractStartDate=1900-01-01',ln);
+   var gd=(el.getAttribute('GrantDate')||'').trim();
+   if(gd===DEF)addI('20-265',ref+': GrantDate=1900-01-01',ln);
+   var md=(el.getAttribute('MaturityDate')||'').trim();
+   if(md===DEF)addI('20-266',ref+': MaturityDate=1900-01-01',ln);
+  });
+ });
+}
+
+function chkNegativeValues(){
+ // VUG2-VI detailed negative checks for all record types
+ xmlDoc.querySelectorAll('Installments').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CI:'+c+' L'+ln;
+  var fields=['FinancedAmount','FinancedAmountOriginalCurrency','MonthlyPaymentAmount','LastPaymentAmount','NextPayment','OutstandingPaymentsNumber','OutstandingBalance','OutstandingBalanceOriginalCurrency','OverduePaymentsNumber','OverduePaymentsAmount','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','UnearnedInterest','GuaranteedAmount1','GuaranteedAmount2','GuaranteedAmount3','GuaranteedAmount4','GuaranteedAmount5','GuaranteedAmount6','GoodValue','InstallmentsNumber'];
+  var negCodes={'FinancedAmount':'20-222','FinancedAmountOriginalCurrency':'20-252','MonthlyPaymentAmount':'20-215','LastPaymentAmount':'20-201','NextPayment':'20-203','OutstandingPaymentsNumber':'20-216','OutstandingBalance':'20-205','OutstandingBalanceOriginalCurrency':'20-253','OverduePaymentsNumber':'20-207','OverduePaymentsAmount':'20-206','AllowanceECLOriginalCurrency':'20-256','AllowanceECL':'20-257','NetCarryingAmountLoanOriginalCurrency':'20-258','NetCarryingAmountLoan':'20-259','UnearnedInterest':'20-260','GoodValue':'20-220','InstallmentsNumber':'20-223'};
+  fields.forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v)){var ec=negCodes[f]||'NEG';addI(ec,ref+': '+f+'="'+v+'" negative',ln);}
+  });
+ });
+ xmlDoc.querySelectorAll('NonInstallments').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CN:'+c+' L'+ln;
+  ['UtilizationOutstandingBalance','UtilizationOriginalCurrency','CreditLimitFinancedAmount','CreditLimitOriginalCurrency','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan'].forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v))addI('20-219',ref+': '+f+'="'+v+'" negative',ln);
+  });
+ });
+ xmlDoc.querySelectorAll('CreditCards').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CC:'+c+' L'+ln;
+  var ccNeg={'CreditLimit':'20-214','CreditLimitOriginalCurrency':'20-254','ChargedAmount':'20-213','OutstandingBalance':'20-205','OutstandingBalanceOriginalCurrency':'20-253','OutstandingBalanceUnbilled':'20-227','OverduePaymentsNumber':'20-207','OverduePaymentsAmount':'20-206','MonthlyPaymentAmount':'20-215','LastPaymentAmount':'20-201','NextPayment':'20-203','AllowanceECLOriginalCurrency':'20-256','AllowanceECL':'20-257','MinPaymentPercentage':'20-221'};
+  Object.keys(ccNeg).forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v))addI(ccNeg[f],ref+': '+f+'="'+v+'" negative',ln);
+  });
+ });
+ xmlDoc.querySelectorAll('OtherCreditAccomodations').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CA:'+c+' L'+ln;
+  ['OutstandingBalance','OutstandingBalanceOriginalCurrency','AmountGranted','AmountGrantedOriginalCurrency','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan','AssetAppraisedValue'].forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v))addI('20-261',ref+': '+f+'="'+v+'" negative',ln);
+  });
+ });
+ xmlDoc.querySelectorAll('Investments').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CV:'+c+' L'+ln;
+  ['OutstandingBalance','OutstandingBalanceOriginalCurrency','AmountGranted','AmountGrantedOriginalCurrency','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan'].forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v))addI('20-262',ref+': '+f+'="'+v+'" negative',ln);
+  });
+ });
+ xmlDoc.querySelectorAll('OffBalanceSheets').forEach(function(el){
+  var ln=findElementLine(el);var c=(el.getAttribute('ProviderContractNo')||'?').slice(-8);var ref='CF:'+c+' L'+ln;
+  ['OutstandingBalance','OutstandingBalanceOriginalCurrency','AllowanceECLOriginalCurrency','AllowanceECL','NetCarryingAmountLoanOriginalCurrency','NetCarryingAmountLoan'].forEach(function(f){
+   var v=(el.getAttribute(f)||'').trim();
+   if(v&&isNeg(v))addI('20-258',ref+': '+f+'="'+v+'" negative',ln);
+  });
+ });
+ xmlDoc.querySelectorAll('Companies').forEach(function(el){
+  var ln=findElementLine(el);var s=(el.getAttribute('ProviderSubjectNumber')||'?').slice(-8);var ref='BD:'+s+' L'+ln;
+  var v=(el.getAttribute('MonthlyExpenses')||'').trim();
+  if(v&&isNeg(v))addI('20-116',ref+': MonthlyExpenses="'+v+'" negative',ln);
+ });
+}
+
+function chkDuplicateContracts(){
+ // VUG2-VII:20-310 duplicate contract+refdate
+ var seen={};
+ ['Installments','NonInstallments','CreditCards','OtherCreditAccomodations','Investments','OffBalanceSheets'].forEach(function(tag){
+  xmlDoc.querySelectorAll(tag).forEach(function(el){
+   var pcn=(el.getAttribute('ProviderContractNo')||'').trim();
+   var crd=(el.getAttribute('ContractRefDate')||'').trim();
+   var key=pcn+'|'+crd+'|'+tag;
+   if(seen[key]){
+    addI('20-310',tag+': '+pcn+' refDate='+crd+' duplicate',findElementLine(el));
+   }
+   seen[key]=true;
+  });
+ });
+}
+
+function chkNextPaymentLogic(){
+ // VUG2-VII: 10-259,10-260,10-261,10-262,10-269
+ ['Installments','CreditCards'].forEach(function(tag){
+  xmlDoc.querySelectorAll(tag).forEach(function(el){
+   var ln=findElementLine(el);
+   var g=function(a){return(el.getAttribute(a)||'').trim();};
+   var phase=g('ContractPhase'),npd=g('NextPaymentDate'),np=g('NextPayment');
+   var csd=g('ContractStartDate'),cpd=g('ContractPlannedEndDate'),cad=g('ContractActualEndDate');
+   var type=tag==='Installments'?'CI':'CC';
+   var ref=type+':'+(g('ProviderContractNo')||'?').slice(-8)+' L'+ln;
+   // 10-259
+   if(['CL','CA'].indexOf(phase)>=0&&npd)addI('10-259',ref+': NextPaymentDate not empty when CL/CA',ln,0,true);
+   // 10-269
+   if(['CL','CA'].indexOf(phase)>=0&&np&&np!=='0'&&np!=='0.00')addI('10-269',ref+': NextPayment not empty/0 when CL/CA',ln,0,true);
+   // 10-260
+   if(cad&&npd&&dateGt(npd,cad))addI('10-260',ref+': ActualEndDate<NextPaymentDate',ln,0,true);
+   // 10-261
+   if(cpd&&npd&&dateGt(npd,cpd))addI('10-261',ref+': PlannedEndDate<NextPaymentDate',ln,0,true);
+   // 10-262
+   if(csd&&npd&&dateGt(csd,npd))addI('10-262',ref+': StartDate>NextPaymentDate',ln);
+  });
  });
 }
 
 function chkDups(){
- var cnt={};var lnMap={};
- xmlDoc.querySelectorAll('Individuals').forEach(function(e){var s=e.getAttribute('ProviderSubjectNumber')||'';cnt[s]=(cnt[s]||0)+1;if(!lnMap[s])lnMap[s]=findElementLine(e);});
- Object.keys(cnt).forEach(function(s){if(cnt[s]>1)addI('DUP',s+' appears '+cnt[s]+'x (first at L'+lnMap[s]+')',lnMap[s],0,true);});
+  var cnt={};var lnMap={};
+  xmlDoc.querySelectorAll('Individuals').forEach(function(e){
+    var s=e.getAttribute('ProviderSubjectNumber')||'';
+    cnt[s]=(cnt[s]||0)+1;
+    if(!lnMap[s])lnMap[s]=findElementLine(e);
+  });
+  Object.keys(cnt).forEach(function(s){if(cnt[s]>1)addI('DUP',s+' appears '+cnt[s]+'x (first at L'+lnMap[s]+')',lnMap[s],0,true);});
 }
 
-/* ================================================================
-   DISPLAY - FIXED STATUS DISPLAY
-   ================================================================ */
+/* ================================================================ DISPLAY
+================================================================ */
 function showStats(){
- var ind=new Set(),comp=new Set();
- xmlDoc.querySelectorAll('Individuals').forEach(function(e){ind.add(e.getAttribute('ProviderSubjectNumber'));});
- xmlDoc.querySelectorAll('Companies').forEach(function(e){comp.add(e.getAttribute('ProviderSubjectNumber'));});
- var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
- var tW=Object.values(warns).reduce(function(s,a){return s+a.length;},0);
- document.getElementById('sS').textContent=ind.size+comp.size;
- document.getElementById('sCI').textContent=xmlDoc.querySelectorAll('Installments').length;
- document.getElementById('sCN').textContent=xmlDoc.querySelectorAll('NonInstallments').length;
- document.getElementById('sCC').textContent=xmlDoc.querySelectorAll('CreditCards').length;
- document.getElementById('sCA').textContent=xmlDoc.querySelectorAll('OtherCreditAccomodations').length;
- document.getElementById('sCV').textContent=xmlDoc.querySelectorAll('Investments').length;
- document.getElementById('sCF').textContent=xmlDoc.querySelectorAll('OffBalanceSheets').length;
- document.getElementById('sNE').textContent=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
- document.getElementById('sE').textContent=tE;
- document.getElementById('sW').textContent=tW;
- /* FIX: Use innerHTML with actual Unicode chars instead of textContent with HTML entities */
- var sp=document.getElementById('sP');
- if(tE===0){sp.innerHTML='PASS';sp.style.color='var(--ok)';}
- else{sp.innerHTML='FAIL';sp.style.color='var(--er)';}
+  var ind=new Set(),comp=new Set();
+  xmlDoc.querySelectorAll('Individuals').forEach(function(e){ind.add(e.getAttribute('ProviderSubjectNumber'));});
+  xmlDoc.querySelectorAll('Companies').forEach(function(e){comp.add(e.getAttribute('ProviderSubjectNumber'));});
+  var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
+  var tW=Object.values(warns).reduce(function(s,a){return s+a.length;},0);
+  document.getElementById('sS').textContent=ind.size+comp.size;
+  document.getElementById('sCI').textContent=xmlDoc.querySelectorAll('Installments').length;
+  document.getElementById('sCN').textContent=xmlDoc.querySelectorAll('NonInstallments').length;
+  document.getElementById('sCC').textContent=xmlDoc.querySelectorAll('CreditCards').length;
+  document.getElementById('sCA').textContent=xmlDoc.querySelectorAll('OtherCreditAccomodations').length;
+  document.getElementById('sCV').textContent=xmlDoc.querySelectorAll('Investments').length;
+  document.getElementById('sCF').textContent=xmlDoc.querySelectorAll('OffBalanceSheets').length;
+  document.getElementById('sNE').textContent=xmlDoc.querySelectorAll('SubjectNegativeEvents').length;
+  document.getElementById('sE').textContent=tE;
+  document.getElementById('sW').textContent=tW;
+  var sp=document.getElementById('sP');
+  if(tE===0){sp.innerHTML='PASS';sp.style.color='var(--ok)';}
+  else{sp.innerHTML='FAIL';sp.style.color='var(--er)';}
 }
 
 function setCnt(id,codes){
- var tot=codes.reduce(function(s,c){return s+(errs[c]||[]).length+(warns[c]||[]).length;},0);
- var el=document.getElementById(id);
- if(el){el.textContent=tot>0?tot+' issue'+(tot>1?'s':''):' OK';el.className=tot>0?'eb cr':'eb ok';}
+  var tot=codes.reduce(function(s,c){return s+(errs[c]||[]).length+(warns[c]||[]).length;},0);
+  var el=document.getElementById(id);
+  if(el){el.textContent=tot>0?tot+' issue'+(tot>1?'s':''):' OK';el.className=tot>0?'eb cr':'eb ok';}
 }
 
 function showResults(){
@@ -741,306 +1383,377 @@ function showResults(){
  var tW=Object.values(warns).reduce(function(s,a){return s+a.length;},0);
  var ban='';
  if(tE===0&&tW===0)ban='<div class="sb pass">PASS - No issues found.</div>';
- else if(tE>0)ban='<div class="sb fail">FAIL - '+tE+' errors + '+tW+' warnings. Fix errors before submitting.</div>';
+ else if(tE>0)ban='<div class="sb fail">FAIL - '+tE+' errors + '+tW+' warnings.</div>';
  else ban='<div class="sb rev">WARNING - '+tW+' warnings only.</div>';
  document.getElementById('sBan').innerHTML=ban;
- document.getElementById('lpcE').innerHTML=bldTbl(['168','090','195','089','296','318']);
- setCnt('ciCnt',['168','090','195','089','296','318']);
- document.getElementById('cnE').innerHTML=bldTbl(['CN_RCC','CN_DPD','CN_LIM','CN_BAL']);
- setCnt('cnCnt',['CN_RCC','CN_DPD','CN_LIM','CN_BAL']);
- document.getElementById('ccE').innerHTML=bldTbl(['CC_DPD','CC_NXT','CC_LPA']);
- setCnt('ccCnt',['CC_DPD','CC_NXT','CC_LPA']);
- document.getElementById('caE').innerHTML=bldTbl(['CA_MAND','CA_DPD']);
- setCnt('caCnt',['CA_MAND','CA_DPD']);
- document.getElementById('cvE').innerHTML=bldTbl(['CV_MAND','CV_DPD','CV_INV','CV_LCI']);
- setCnt('cvCnt',['CV_MAND','CV_DPD','CV_INV','CV_LCI']);
- document.getElementById('cfE').innerHTML=bldTbl(['CF_MAND','CF_CAT']);
- setCnt('cfCnt',['CF_MAND','CF_CAT']);
- document.getElementById('neE').innerHTML=bldTbl(['NE_MAND','NE_EVT']);
- setCnt('neCnt',['NE_MAND','NE_EVT']);
- document.getElementById('lpsE').innerHTML=bldTbl(['021','139','141','113','050','053','020','028','074','044','048','104','069','EMP']);
- setCnt('subCnt',['021','139','141','113','050','053','020','028','074','044','048','104','069','EMP']);
- document.getElementById('wrnE').innerHTML=bldTbl(['023','DUP','VAL','MAND'],true);
- setCnt('wrnCnt',['023','DUP','VAL','MAND']);
+
+ // Dynamically categorize ALL found errors/warnings by record type prefix
+ var ciFound={},cnFound={},ccFound={},caFound={},cvFound={},cfFound={},neFound={},subFound={},slFound={},allOther={};
+ var allCodes=Object.keys(errs).concat(Object.keys(warns));
+ var seen={};
+ allCodes.forEach(function(code){if(!seen[code]){seen[code]=true;}});
+ Object.keys(seen).forEach(function(code){
+  var items=(errs[code]||[]).concat(warns[code]||[]);
+  if(!items.length)return;
+  var assigned=false;
+  items.forEach(function(issue){
+   var m=issue.msg||'';
+   if(!assigned){
+    if(m.indexOf('CI:')===0||m.indexOf('CI ')>=0||(code.match(/^(10-02[234789]|10-03[012]|10-15[012]|10-16[01345]|10-25[12356789]|10-26[89]|10-27[024]|10-28[0123]|10-29[0456]|20-06[12345]|20-07[5679]|20-08[09]|20-09[2]|20-15[0-8]|20-17[89]|20-19[45]|20-23[2-9]|20-24[0-5]|20-25[0])$/))){}
+   }
+  });
+  // Simple assignment based on message prefix
+  var firstMsg=(items[0]&&items[0].msg)||'';
+  if(firstMsg.indexOf('CI:')===0)ciFound[code]=items;
+  else if(firstMsg.indexOf('CN:')===0)cnFound[code]=items;
+  else if(firstMsg.indexOf('CC:')===0)ccFound[code]=items;
+  else if(firstMsg.indexOf('CA:')===0)caFound[code]=items;
+  else if(firstMsg.indexOf('CV:')===0)cvFound[code]=items;
+  else if(firstMsg.indexOf('CF:')===0)cfFound[code]=items;
+  else if(firstMsg.indexOf('NE:')===0)neFound[code]=items;
+  else if(firstMsg.indexOf('ID:')=== 0||firstMsg.indexOf('BD:')===0)subFound[code]=items;
+  else if(firstMsg.indexOf('SL:')===0||firstMsg.indexOf('HD:')===0||firstMsg.indexOf('FT:')===0||firstMsg.indexOf('Parent')>=0||firstMsg.indexOf('Child')>=0)slFound[code]=items;
+  else allOther[code]=items;
+ });
+
+ document.getElementById('lpcE').innerHTML=bldTblDyn(ciFound);setCntDyn('ciCnt',ciFound);
+ document.getElementById('cnE').innerHTML=bldTblDyn(cnFound);setCntDyn('cnCnt',cnFound);
+ document.getElementById('ccE').innerHTML=bldTblDyn(ccFound);setCntDyn('ccCnt',ccFound);
+ document.getElementById('caE').innerHTML=bldTblDyn(caFound);setCntDyn('caCnt',caFound);
+ document.getElementById('cvE').innerHTML=bldTblDyn(cvFound);setCntDyn('cvCnt',cvFound);
+ document.getElementById('cfE').innerHTML=bldTblDyn(cfFound);setCntDyn('cfCnt',cfFound);
+ document.getElementById('neE').innerHTML=bldTblDyn(neFound);setCntDyn('neCnt',neFound);
+ document.getElementById('lpsE').innerHTML=bldTblDyn(subFound);setCntDyn('subCnt',subFound);
+ // Merge SL + allOther for the warnings section
+ var wrnMerged={};
+ Object.keys(slFound).forEach(function(k){wrnMerged[k]=slFound[k];});
+ Object.keys(allOther).forEach(function(k){wrnMerged[k]=allOther[k];});
+ document.getElementById('wrnE').innerHTML=bldTblDyn(wrnMerged);setCntDyn('wrnCnt',wrnMerged);
 }
 
-function lnBadge(lineNum){if(!lineNum)return '';return '<span class="ln" onclick="openXV('+lineNum+')" title="Click to view line '+lineNum+'">'+lineNum+'</span>';}
+function setCntDyn(id,obj){
+ var tot=Object.values(obj).reduce(function(s,a){return s+a.length;},0);
+ var el=document.getElementById(id);
+ if(el){el.textContent=tot>0?tot+' issue'+(tot>1?'s':''):' OK';el.className=tot>0?'eb cr':'eb ok';}
+}
+
+function bldTblDyn(obj){
+ var codes=Object.keys(obj);
+ if(!codes.length)return '<p style="color:var(--ok);font-size:.82rem;padding:.25rem 0">No issues.</p>';
+ var rows='';
+ codes.forEach(function(code){
+  var items=obj[code];if(!items||!items.length)return;
+  var isErrCode=false;items.forEach(function(i){if(!i.isWarn)isErrCode=true;});
+  var uid='d_'+Math.random().toString(36).slice(2,9);var tot=items.length;
+  rows+='<tr><td class="code">'+code+'</td><td><span class="eb '+(isErrCode?'cr':'wn')+'">'+tot+'</span></td><td style="font-size:.77rem;max-width:280px">'+(ERR_DESC[code]||code)+'</td><td><span class="ct2" onclick="document.getElementById(\''+uid+'\').classList.toggle(\'sh\')">'+tot+' item'+(tot>1?'s':'')+'</span><div id="'+uid+'" class="cc dl">'+items.slice(0,200).map(function(issue){return '<div class="dl-item"><span class="di-ln">'+lnBadge(issue.line)+'</span><span class="di-txt">'+esc(issue.msg)+'</span></div>';}).join('')+(items.length>200?'<div class="dl-item"><span class="di-txt" style="color:var(--w)">...and '+(items.length-200)+' more</span></div>':'')+'</div></td></tr>';
+ });
+ return '<div style="overflow-x:auto"><table class="et"><thead><tr><th width="70">Code</th><th width="80">Count</th><th>Description (VUG Ref)</th><th>Details</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+function lnBadge(lineNum){
+  if(!lineNum)return '';
+  return '<span class="ln" onclick="openXV('+lineNum+')" title="Click to view line '+lineNum+'">'+lineNum+'</span>';
+}
 
 function bldTbl(codes,isWarnSection){
- var rows='',found=false;
- codes.forEach(function(code){
-  var elist=errs[code]||[];var wlist=warns[code]||[];var items=elist.concat(wlist);
-  if(!items.length)return;found=true;
-  var isErrCode=elist.length>0;var uid='d_'+Math.random().toString(36).slice(2,9);var tot=items.length;
-  rows+='<tr><td class="code">'+code+'</td><td><span class="eb '+(isErrCode?'cr':'wn')+'">'+tot+'</span></td><td style="font-size:.77rem;max-width:280px">'+(ERR_DESC[code]||code)+'</td><td><span class="ct2" onclick="document.getElementById(\''+uid+'\').classList.toggle(\'sh\')"> '+tot+' item'+(tot>1?'s':'')+'</span><div id="'+uid+'" class="cc dl">'+items.slice(0,60).map(function(issue){return '<div class="dl-item"><span class="di-ln">'+lnBadge(issue.line)+'</span><span class="di-txt">'+esc(issue.msg)+'</span></div>';}).join('')+(items.length>60?'<div class="dl-item"><span class="di-txt" style="color:var(--w)">...and '+(items.length-60)+' more</span></div>':'')+'</div></td></tr>';
- });
- if(!found)return '<p style="color:var(--ok);font-size:.82rem;padding:.25rem 0">No issues.</p>';
- return '<div style="overflow-x:auto"><table class="et"><thead><tr><th width="70">Code</th><th width="80">Count</th><th>Description</th><th>Details</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  var rows='',found=false;
+  codes.forEach(function(code){
+    var elist=errs[code]||[];var wlist=warns[code]||[];var items=elist.concat(wlist);
+    if(!items.length)return;found=true;
+    var isErrCode=elist.length>0;var uid='d_'+Math.random().toString(36).slice(2,9);var tot=items.length;
+    rows+='<tr><td class="code">'+code+'</td><td><span class="eb '+(isErrCode?'cr':'wn')+'">'+tot+'</span></td><td style="font-size:.77rem;max-width:280px">'+(ERR_DESC[code]||code)+'</td><td><span class="ct2" onclick="document.getElementById(\''+uid+'\').classList.toggle(\'sh\')">'+tot+' item'+(tot>1?'s':'')+'</span><div id="'+uid+'" class="cc dl">'+items.slice(0,60).map(function(issue){return '<div class="dl-item"><span class="di-ln">'+lnBadge(issue.line)+'</span><span class="di-txt">'+esc(issue.msg)+'</span></div>';}).join('')+(items.length>60?'<div class="dl-item"><span class="di-txt" style="color:var(--w)">...and '+(items.length-60)+' more</span></div>':'')+'</div></td></tr>';
+  });
+  if(!found)return '<p style="color:var(--ok);font-size:.82rem;padding:.25rem 0">No issues.</p>';
+  return '<div style="overflow-x:auto"><table class="et"><thead><tr><th width="70">Code</th><th width="80">Count</th><th>Description (VUG Ref)</th><th>Details</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
 
-/* ================================================================
-   XML VIEWER
-   ================================================================ */
+/* ================================================================ XML VIEWER
+================================================================ */
 function openXV(targetLine){
- var wrap=document.getElementById('xvWrap'),body=document.getElementById('xvBody'),title=document.getElementById('xvTitle'),info=document.getElementById('xvInfo');
- title.textContent='XML Viewer - '+fName;
- info.textContent=xmlLines.length+' lines'+(targetLine?' - line '+targetLine:'');
- var errLines=new Set(),warnLines=new Set();
- allIssues.forEach(function(i){if(i.line>0){if(i.isWarn)warnLines.add(i.line);else errLines.add(i.line);}});
- function hlXML(line){return line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(&lt;\/?[\w:]+)/g,'<span class="xt-tag">$1</span>').replace(/(&gt;)/g,'<span class="xt-tag">$1</span>').replace(/([\w:]+)=/g,'<span class="xt-attr">$1</span>=').replace(/="([^"]*)"/g,'="<span class="xt-val">$1</span>"');}
- var html='<table style="width:100%;border-collapse:collapse">';
- xmlLines.forEach(function(line,i){var n=i+1;var isErr=errLines.has(n);var isWarn=warnLines.has(n);var cls=isErr?'xv-line hl-err':isWarn?'xv-line hl':'xv-line';html+='<tr class="'+cls+'" id="xvL'+n+'"><td class="xv-num">'+n+'</td><td class="xv-txt">'+hlXML(line)+'</td></tr>';});
- html+='</table>';body.innerHTML=html;wrap.classList.add('sh');
- if(targetLine>0)setTimeout(function(){var el=document.getElementById('xvL'+targetLine);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},100);
+  var wrap=document.getElementById('xvWrap'),body=document.getElementById('xvBody'),title=document.getElementById('xvTitle'),info=document.getElementById('xvInfo');
+  title.textContent='XML Viewer - '+fName;
+  info.textContent=xmlLines.length+' lines'+(targetLine?' - line '+targetLine:'');
+  var errLines=new Set(),warnLines=new Set();
+  allIssues.forEach(function(i){if(i.line>0){if(i.isWarn)warnLines.add(i.line);else errLines.add(i.line);}});
+  function hlXML(line){
+    return line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(&lt;\/?[\w:]+)/g,'<span class="xt-tag">$1</span>').replace(/(&gt;)/g,'<span class="xt-tag">$1</span>').replace(/([\w:]+)=/g,'<span class="xt-attr">$1</span>=').replace(/="([^"]*)"/g,'="<span class="xt-val">$1</span>"');
+  }
+  var html='<table style="width:100%;border-collapse:collapse">';
+  xmlLines.forEach(function(line,i){
+    var n=i+1;var isErr=errLines.has(n);var isWarn=warnLines.has(n);
+    var cls=isErr?'xv-line hl-err':isWarn?'xv-line hl':'xv-line';
+    html+='<tr class="'+cls+'" id="xvL'+n+'"><td class="xv-num">'+n+'</td><td class="xv-txt">'+hlXML(line)+'</td></tr>';
+  });
+  html+='</table>';body.innerHTML=html;wrap.classList.add('sh');
+  if(targetLine>0)setTimeout(function(){var el=document.getElementById('xvL'+targetLine);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},100);
 }
+
 function closeXV(){document.getElementById('xvWrap').classList.remove('sh');}
 document.getElementById('xvWrap').addEventListener('click',function(e){if(e.target===this)closeXV();});
 
-/* ================================================================
-   FIELD MAP
-   ================================================================ */
+/* ================================================================ FIELD MAP
+================================================================ */
 function buildFieldMap(){
- var rl=function(r){return r==='M'?'<span class="req-tag m">M</span>':r==='D'?'<span class="req-tag d">D</span>':'<span class="req-tag n">NM</span>';};
- var render=function(flds,id){var el=document.getElementById(id);if(!el)return;var html='<div class="fld-grid">';Object.entries(flds).forEach(function(entry){html+='<div class="fld-item"><span class="fn">'+entry[0]+'</span>'+rl(entry[1])+'</div>';});el.innerHTML=html+'</div>';};
- render(FIELDS_HD,'fmapHD');render(FIELDS_ID,'fmapID');render(FIELDS_BD,'fmapBD');render(FIELDS_SL,'fmapSL');render(FIELDS_CI,'fmapCI');render(FIELDS_CN,'fmapCN');render(FIELDS_CC,'fmapCC');render(FIELDS_CA,'fmapCA');render(FIELDS_CV,'fmapCV');render(FIELDS_CF,'fmapCF');render(FIELDS_NE,'fmapNE');render(FIELDS_FT,'fmapFT');
+  var rl=function(r){return r==='M'?'<span class="req-tag m">M</span>':r==='D'?'<span class="req-tag d">D</span>':'<span class="req-tag n">NM</span>';};
+  var render=function(flds,id){
+    var el=document.getElementById(id);if(!el)return;
+    var html='<div class="fld-grid">';
+    Object.entries(flds).forEach(function(entry){html+='<div class="fld-item"><span class="fn">'+entry[0]+'</span>'+rl(entry[1])+'</div>';});
+    el.innerHTML=html+'</div>';
+  };
+  render(FIELDS_HD,'fmapHD');render(FIELDS_ID,'fmapID');render(FIELDS_BD,'fmapBD');render(FIELDS_SL,'fmapSL');
+  render(FIELDS_CI,'fmapCI');render(FIELDS_CN,'fmapCN');render(FIELDS_CC,'fmapCC');render(FIELDS_CA,'fmapCA');
+  render(FIELDS_CV,'fmapCV');render(FIELDS_CF,'fmapCF');render(FIELDS_NE,'fmapNE');render(FIELDS_FT,'fmapFT');
 }
 
-/* ================================================================
-   FIX ENGINE - FIXED DOWNLOAD FUNCTION
-   ================================================================ */
+/* ================================================================ FIX ENGINE
+================================================================ */
 var FIXES=[
- {id:'f_rcc',label:'Set RestructuredCreditCode="2" CI+CN',code:'195',on:true,dd:'DD p84'},
- {id:'f_opn',label:'Round OutstandingPaymentsNumber to integer CI',code:'168',on:true,dd:'DD p19'},
- {id:'f_dpd',label:'Set DaysPastDue="0" for active contracts CI+CN+CC',code:'090',on:true,dd:'DD p19,29,41'},
- {id:'f_hol',label:'Fix HouseOwnerLessee "0"->"1" ID',code:'044',on:true,dd:'DD p63'},
- {id:'f_emp',label:'Set Employment mandatory fields ID',code:'EMP',on:true,dd:'DD p7'},
- {id:'f_post',label:'Copy CurrentPostalCode from PermanentPostalCode ID',code:'113',on:true,dd:'DD p4'},
- {id:'f_sta',label:'Fill STCurrentCountry="PH" ID',code:'141',on:true,dd:'DD p8'},
- {id:'f_stc',label:'Copy ST Contact from individual Contact1 ID',code:'028',on:true,dd:'DD p9'},
- {id:'f_tin',label:'Clean TIN/STTIN to numeric digits only ID',code:'050',on:true,dd:'DD p5'},
- {id:'f_id',label:'Clear mismatched ID Type/Number pairs ID',code:'069',on:true,dd:'DD p5-6'},
- {id:'f_lpa',label:'Set LastPaymentAmount from MonthlyPaymentAmount CI',code:'089',on:true,dd:'DD p18'},
- {id:'f_addr',label:'Copy CurrentFullAddress from PermanentFullAddress ID',code:'139',on:false,dd:'DD p4'}
+{id:'f_rcc',label:'Set RestructuredCreditCode="2" CI+CN [VUG2:20-195]',code:'20-195',on:true,dd:'DD p84'},
+{id:'f_opn',label:'Round OutstandingPaymentsNumber to integer CI [VUG2:10-168]',code:'10-168',on:true,dd:'DD p19'},
+{id:'f_dpd',label:'Set DaysPastDue="0" for active contracts CI+CN+CC [VUG2:20-090]',code:'20-090',on:true,dd:'DD p19,29,41'},
+{id:'f_hol',label:'Fix HouseOwnerLessee "0"->"1" ID [VUG2:20-044]',code:'20-044',on:true,dd:'DD p63'},
+{id:'f_emp',label:'Set Employment mandatory fields ID [VUG2:20-029]',code:'20-029',on:true,dd:'DD p7'},
+{id:'f_post',label:'Copy CurrentPostalCode from PermanentPostalCode ID [VUG2:20-113]',code:'20-113',on:true,dd:'DD p4'},
+{id:'f_sta',label:'Fill STCurrentCountry="PH" ID [VUG2:20-141]',code:'20-141',on:true,dd:'DD p8'},
+{id:'f_stc',label:'Copy ST Contact from individual Contact1 ID [VUG2:20-028]',code:'20-028',on:true,dd:'DD p9'},
+{id:'f_tin',label:'Clean TIN/STTIN to numeric digits only ID [VUG2:20-050]',code:'20-050',on:true,dd:'DD p5'},
+{id:'f_id',label:'Clear mismatched ID Type/Number pairs ID [VUG2:10-130]',code:'10-130',on:true,dd:'DD p5-6'},
+{id:'f_lpa',label:'Set LastPaymentAmount from MonthlyPaymentAmount CI [VUG2:20-089]',code:'20-089',on:true,dd:'DD p18'},
+{id:'f_addr',label:'Copy CurrentFullAddress from PermanentFullAddress ID [VUG2:20-139]',code:'20-139',on:false,dd:'DD p4'}
 ];
 
 function buildFixOpts(){
- var html='';
- FIXES.forEach(function(f){
-  var cnt=(errs[f.code]||[]).length+(warns[f.code]||[]).length;
-  var dis=cnt===0;
-  html+='<label style="'+(dis?'opacity:.42':'')+'"><input type="checkbox" id="'+f.id+'" '+(f.on&&!dis?'checked':'')+' '+(dis?'disabled':'')+'><div><span>'+f.label+'</span>'+(cnt>0?'<span class="eb cr" style="margin-left:.3rem">'+cnt+'</span>':'')+'<div style="font-size:.62rem;color:var(--tl)">['+f.dd+']</div></div></label>';
- });
- document.getElementById('fixOpts').innerHTML=html;
+  var html='';
+  FIXES.forEach(function(f){
+    var cnt=(errs[f.code]||[]).length+(warns[f.code]||[]).length;
+    var dis=cnt===0;
+    html+='<label style="'+(dis?'opacity:.42':'')+'"><input type="checkbox" id="'+f.id+'" '+(f.on&&!dis?'checked':'')+' '+(dis?'disabled':'')+'><div><span>'+f.label+'</span>'+(cnt>0?'<span class="eb cr" style="margin-left:.3rem">'+cnt+'</span>':'')+'<div style="font-size:.62rem;color:var(--tl)">['+f.dd+']</div></div></label>';
+  });
+  document.getElementById('fixOpts').innerHTML=html;
 }
 
-/* Global variable to store corrected XML */
 var _correctedXML='';
 
 function applyFixes(selOnly){
- lg('i','Applying corrections...');
- var doc=new DOMParser().parseFromString(xmlStr,'text/xml');
- var fixes=[];
- var ck=function(id){var e=document.getElementById(id);return e&&!e.disabled&&e.checked;};
+  lg('i','Applying corrections...');
+  var doc=new DOMParser().parseFromString(xmlStr,'text/xml');
+  var fixes=[];
+  var ck=function(id){var e=document.getElementById(id);return e&&!e.disabled&&e.checked;};
 
- if(ck('f_rcc')){
-  var c=0;
-  var rccEls=Array.from(doc.querySelectorAll('Installments')).concat(Array.from(doc.querySelectorAll('NonInstallments')));
-  rccEls.forEach(function(el){var v=(el.getAttribute('RestructuredCreditCode')||'').trim();if(!v||VALID.RestructuredCreditCode.indexOf(v)===-1){el.setAttribute('RestructuredCreditCode','2');c++;}});
-  if(c)fixes.push('RestructuredCreditCode: '+c+' set to "2"');
- }
+  if(ck('f_rcc')){
+    var c=0;
+    Array.from(doc.querySelectorAll('Installments')).concat(Array.from(doc.querySelectorAll('NonInstallments'))).forEach(function(el){
+      var v=(el.getAttribute('RestructuredCreditCode')||'').trim();
+      if(!v||VALID.RestructuredCreditCode.indexOf(v)===-1){el.setAttribute('RestructuredCreditCode','2');c++;}
+    });
+    if(c)fixes.push('RestructuredCreditCode: '+c+' set to "2"');
+  }
 
- if(ck('f_opn')){
-  var c2=0;
-  doc.querySelectorAll('Installments').forEach(function(el){var v=el.getAttribute('OutstandingPaymentsNumber')||'';if(v&&v.indexOf('.')>=0&&parseFloat(v)%1!==0){el.setAttribute('OutstandingPaymentsNumber',Math.round(parseFloat(v)).toString());c2++;}});
-  if(c2)fixes.push('OutstandingPaymentsNumber: '+c2+' rounded');
- }
+  if(ck('f_opn')){
+    var c2=0;
+    doc.querySelectorAll('Installments').forEach(function(el){
+      var v=el.getAttribute('OutstandingPaymentsNumber')||'';
+      if(v&&v.indexOf('.')>=0&&parseFloat(v)%1!==0){el.setAttribute('OutstandingPaymentsNumber',Math.round(parseFloat(v)).toString());c2++;}
+    });
+    if(c2)fixes.push('OutstandingPaymentsNumber: '+c2+' rounded');
+  }
 
- if(ck('f_dpd')){
-  var c3=0;
-  var dpdEls=Array.from(doc.querySelectorAll('Installments')).concat(Array.from(doc.querySelectorAll('NonInstallments'))).concat(Array.from(doc.querySelectorAll('CreditCards')));
-  dpdEls.forEach(function(el){var ph=el.getAttribute('ContractPhase')||'';if(['AC','CL','CA'].indexOf(ph)>=0&&!(el.getAttribute('DaysPastDue')||'').trim()){el.setAttribute('DaysPastDue','0');c3++;}});
-  if(c3)fixes.push('DaysPastDue: '+c3+' set to "0"');
- }
+  if(ck('f_dpd')){
+    var c3=0;
+    Array.from(doc.querySelectorAll('Installments')).concat(Array.from(doc.querySelectorAll('NonInstallments'))).concat(Array.from(doc.querySelectorAll('CreditCards'))).forEach(function(el){
+      var ph=el.getAttribute('ContractPhase')||'';
+      if(['AC','CL','CA'].indexOf(ph)>=0&&!(el.getAttribute('DaysPastDue')||'').trim()){el.setAttribute('DaysPastDue','0');c3++;}
+    });
+    if(c3)fixes.push('DaysPastDue: '+c3+' set to "0"');
+  }
 
- if(ck('f_hol')){
-  var c4=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){['PermanentHouseOwnerLessee','CurrentHouseOwnerLessee','STCurrentHouseOwnerLessee'].forEach(function(a){if((el.getAttribute(a)||'').trim()==='0'){el.setAttribute(a,'1');c4++;}});});
-  if(c4)fixes.push('HouseOwnerLessee: '+c4+' fixed');
- }
+  if(ck('f_hol')){
+    var c4=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      ['PermanentHouseOwnerLessee','CurrentHouseOwnerLessee','STCurrentHouseOwnerLessee'].forEach(function(a){
+        if((el.getAttribute(a)||'').trim()==='0'){el.setAttribute(a,'1');c4++;}
+      });
+    });
+    if(c4)fixes.push('HouseOwnerLessee: '+c4+' fixed');
+  }
 
- if(ck('f_emp')){
-  var c5=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(!g('EmploymentOccupationStatus')){el.setAttribute('EmploymentOccupationStatus','3');c5++;}
-   if(!g('EmploymentDateHiredFrom')){el.setAttribute('EmploymentDateHiredFrom','19000102');c5++;}
-   var ami=g('EmploymentAnnualMonthlyIndicator');if(!ami||ami===' '){el.setAttribute('EmploymentAnnualMonthlyIndicator','M');c5++;}
-   if(!g('EmploymentGrossIncome')){el.setAttribute('EmploymentGrossIncome','0');c5++;}
-   if(!g('EmploymentNetIncome')){el.setAttribute('EmploymentNetIncome','0');c5++;}
-  });
-  if(c5)fixes.push('Employment: '+c5+' fields set');
- }
+  if(ck('f_emp')){
+    var c5=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(!g('EmploymentOccupationStatus')){el.setAttribute('EmploymentOccupationStatus','3');c5++;}
+      if(!g('EmploymentDateHiredFrom')){el.setAttribute('EmploymentDateHiredFrom','19000102');c5++;}
+      var ami=g('EmploymentAnnualMonthlyIndicator');
+      if(!ami||ami===' '){el.setAttribute('EmploymentAnnualMonthlyIndicator','M');c5++;}
+      if(!g('EmploymentGrossIncome')){el.setAttribute('EmploymentGrossIncome','0');c5++;}
+      if(!g('EmploymentNetIncome')){el.setAttribute('EmploymentNetIncome','0');c5++;}
+    });
+    if(c5)fixes.push('Employment: '+c5+' fields set');
+  }
 
- if(ck('f_post')){
-  var c6=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(!g('CurrentPostalCode')&&!g('CurrentPSGCode')&&!g('CurrentFullAddress')){var pp=g('PermanentPostalCode');if(pp){el.setAttribute('CurrentPostalCode',pp);c6++;}}
-  });
-  if(c6)fixes.push('PostalCode: '+c6+' copied');
- }
+  if(ck('f_post')){
+    var c6=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(!g('CurrentPostalCode')&&!g('CurrentPSGCode')&&!g('CurrentFullAddress')){
+        var pp=g('PermanentPostalCode');
+        if(pp){el.setAttribute('CurrentPostalCode',pp);c6++;}
+      }
+    });
+    if(c6)fixes.push('PostalCode: '+c6+' copied');
+  }
 
- if(ck('f_sta')){
-  var c7=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(!g('STCurrentCountry')){el.setAttribute('STCurrentCountry','PH');c7++;}
-   if(!g('STCurrentProvince')){var pp=g('PermanentProvince');if(pp){el.setAttribute('STCurrentProvince',pp);c7++;}}
-  });
-  if(c7)fixes.push('ST Address: '+c7+' fields set');
- }
+  if(ck('f_sta')){
+    var c7=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(!g('STCurrentCountry')){el.setAttribute('STCurrentCountry','PH');c7++;}
+      if(!g('STCurrentProvince')){var pp=g('PermanentProvince');if(pp){el.setAttribute('STCurrentProvince',pp);c7++;}}
+    });
+    if(c7)fixes.push('ST Address: '+c7+' fields set');
+  }
 
- if(ck('f_stc')){
-  var c8=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(!g('STContactType1')){var ct=g('ContactType1'),cv=g('ContactValue1');if(ct&&cv&&['none','n/a'].indexOf(cv.toLowerCase())===-1){el.setAttribute('STContactType1',ct);el.setAttribute('STContactValue1',cv);c8++;}}
-  });
-  if(c8)fixes.push('ST Contact: '+c8+' copied');
- }
+  if(ck('f_stc')){
+    var c8=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(!g('STContactType1')){
+        var ct=g('ContactType1'),cv=g('ContactValue1');
+        if(ct&&cv&&['none','n/a'].indexOf(cv.toLowerCase())===-1){el.setAttribute('STContactType1',ct);el.setAttribute('STContactValue1',cv);c8++;}
+      }
+    });
+    if(c8)fixes.push('ST Contact: '+c8+' copied');
+  }
 
- if(ck('f_tin')){
-  var c9=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   ['TIN','SoleTraderTIN'].forEach(function(a){var v=(el.getAttribute(a)||'').trim();if(v){var cl=v.replace(/[^0-9]/g,'');if(cl!==v&&cl.length>=9&&cl.length<=12){el.setAttribute(a,cl);c9++;}}});
-  });
-  if(c9)fixes.push('TIN: '+c9+' cleaned');
- }
+  if(ck('f_tin')){
+    var c9=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      ['TIN','SoleTraderTIN'].forEach(function(a){
+        var v=(el.getAttribute(a)||'').trim();
+        if(v){var cl=v.replace(/[^0-9]/g,'');if(cl!==v&&cl.length>=9&&cl.length<=12){el.setAttribute(a,cl);c9++;}}
+      });
+    });
+    if(c9)fixes.push('TIN: '+c9+' cleaned');
+  }
 
- if(ck('f_id')){
-  var c10=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   for(var i=1;i<=3;i++){var t=(el.getAttribute('IDType'+i)||'').trim(),n=(el.getAttribute('IDNumber'+i)||'').trim();if((t&&!n)||(!t&&n)){['IDType','IDNumber','IDIssueDate','IDIssueCountry','IDExpiryDate'].forEach(function(f){el.setAttribute(f+i,'');});c10++;}}
-  });
-  if(c10)fixes.push('ID pairs: '+c10+' cleared');
- }
+  if(ck('f_id')){
+    var c10=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      for(var i=1;i<=3;i++){
+        var t=(el.getAttribute('IDType'+i)||'').trim(),n=(el.getAttribute('IDNumber'+i)||'').trim();
+        if((t&&!n)||(!t&&n)){
+          ['IDType','IDNumber','IDIssueDate','IDIssueCountry','IDExpiryDate'].forEach(function(f){el.setAttribute(f+i,'');});
+          c10++;
+        }
+      }
+    });
+    if(c10)fixes.push('ID pairs: '+c10+' cleared');
+  }
 
- if(ck('f_lpa')){
-  var c11=0;
-  doc.querySelectorAll('Installments').forEach(function(el){
-   var ph=el.getAttribute('ContractPhase')||'';
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(['AC','CL','CA'].indexOf(ph)>=0&&!g('LastPaymentAmount')){var m=g('MonthlyPaymentAmount');if(m){el.setAttribute('LastPaymentAmount',m);c11++;}}
-  });
-  if(c11)fixes.push('LastPaymentAmount: '+c11+' set');
- }
+  if(ck('f_lpa')){
+    var c11=0;
+    doc.querySelectorAll('Installments').forEach(function(el){
+      var ph=el.getAttribute('ContractPhase')||'';
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(['AC','CL','CA'].indexOf(ph)>=0&&!g('LastPaymentAmount')){
+        var m=g('MonthlyPaymentAmount');
+        if(m){el.setAttribute('LastPaymentAmount',m);c11++;}
+      }
+    });
+    if(c11)fixes.push('LastPaymentAmount: '+c11+' set');
+  }
 
- if(ck('f_addr')){
-  var c12=0;
-  doc.querySelectorAll('Individuals').forEach(function(el){
-   var g=function(k){return(el.getAttribute(k)||'').trim();};
-   if(!g('CurrentFullAddress')&&!g('CurrentCity')){var pf=g('PermanentFullAddress');if(pf){el.setAttribute('CurrentFullAddress',pf);c12++;}}
-  });
-  if(c12)fixes.push('CurrentAddress: '+c12+' copied');
- }
+  if(ck('f_addr')){
+    var c12=0;
+    doc.querySelectorAll('Individuals').forEach(function(el){
+      var g=function(k){return(el.getAttribute(k)||'').trim();};
+      if(!g('CurrentFullAddress')&&!g('CurrentCity')){
+        var pf=g('PermanentFullAddress');
+        if(pf){el.setAttribute('CurrentFullAddress',pf);c12++;}
+      }
+    });
+    if(c12)fixes.push('CurrentAddress: '+c12+' copied');
+  }
 
- if(!fixes.length){
-  document.getElementById('fixRes').innerHTML='<p style="color:var(--w)">No applicable fixes.</p>';
-  return;
- }
+  if(!fixes.length){document.getElementById('fixRes').innerHTML='<p style="color:var(--w)">No applicable fixes.</p>';return;}
 
- var html='<div class="la">';
- fixes.forEach(function(f){html+='<div class="lo">'+f+'</div>';lg('o',f);});
- html+='<div class="li" style="margin-top:.5rem">'+fixes.length+' fix categories applied</div></div>';
- html+='<div class="bg"><button class="btn bs" onclick="dlFile()">Download Corrected XML</button></div>';
- document.getElementById('fixRes').innerHTML=html;
+  var html='<div class="la">';
+  fixes.forEach(function(f){html+='<div class="lo">'+f+'</div>';lg('o',f);});
+  html+='<div class="li" style="margin-top:.5rem">'+fixes.length+' fix categories applied</div></div>';
+  html+='<div class="bg"><button class="btn bs" onclick="dlFile()">Download Corrected XML</button></div>';
+  document.getElementById('fixRes').innerHTML=html;
 
- /* FIX: Generate corrected XML and store globally */
- var ser=new XMLSerializer();
- _correctedXML='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'+ser.serializeToString(doc);
- lg('o','Corrected XML ready ('+(_correctedXML.length/1024).toFixed(1)+' KB)');
+  var ser=new XMLSerializer();
+  _correctedXML='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'+ser.serializeToString(doc);
+  lg('o','Corrected XML ready ('+(_correctedXML.length/1024).toFixed(1)+' KB)');
 }
 
-/* FIX: Improved download function that always works */
 function dlFile(){
- var content=_correctedXML||xmlStr;
- if(!content||!content.trim()){
-  alert('No XML content available to download. Please apply fixes first.');
-  return;
- }
- try{
-  var blob=new Blob([content],{type:'application/xml;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download=fName?fName.replace('.xml','_CORRECTED.xml'):'CORRECTED.xml';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(function(){URL.revokeObjectURL(url);},1000);
-  lg('o','Downloaded: '+a.download);
- }catch(err){
-  lg('e','Download failed: '+err.message);
-  alert('Download failed. Try right-clicking and Save As.\n\nError: '+err.message);
- }
+  var content=_correctedXML||xmlStr;
+  if(!content||!content.trim()){alert('No XML content available.');return;}
+  try{
+    var blob=new Blob([content],{type:'application/xml;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download=fName?fName.replace('.xml','_CORRECTED.xml'):'CORRECTED.xml';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    lg('o','Downloaded: '+a.download);
+  }catch(err){lg('e','Download failed: '+err.message);alert('Download failed: '+err.message);}
 }
 
-/* ================================================================
-   EXPORT REPORT
-   ================================================================ */
+/* ================================================================ EXPORT REPORT
+================================================================ */
 function exportReport(type){
- if(!type)type='excel';
- var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
- var tW=Object.values(warns).reduce(function(s,a){return s+a.length;},0);
- var now=new Date().toLocaleString();
+  if(!type)type='excel';
+  var tE=Object.values(errs).reduce(function(s,a){return s+a.length;},0);
+  var tW=Object.values(warns).reduce(function(s,a){return s+a.length;},0);
+  var now=new Date().toLocaleString();
 
- if(type==='excel'){
-  var csv='CSDF Validation Report\n';
-  csv+='File:,'+fName+'\nGenerated:,'+now+'\nTotal Lines:,'+xmlLines.length+'\n';
-  csv+='Total Errors:,'+tE+'\nTotal Warnings:,'+tW+'\nStatus:,'+(tE===0?'READY':'HAS ERRORS')+'\n\n';
-  csv+='Severity,Error Code,Line No,Column,Description,Details\n';
-  allIssues.forEach(function(issue){
-   var sev=issue.isWarn?'WARNING':'ERROR';
-   var desc=(ERR_DESC[issue.code]||issue.code).replace(/,/g,';');
-   var msg=String(issue.msg).replace(/,/g,';').replace(/"/g,"'");
-   csv+=sev+','+issue.code+','+(issue.line||'N/A')+','+(issue.col||'N/A')+',"'+desc+'","'+msg+'"\n';
-  });
-  try{
-   var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
-   var url=URL.createObjectURL(blob);
-   var a=document.createElement('a');
-   a.href=url;
-   a.download=fName?fName.replace('.xml','_ValidationReport.csv'):'ValidationReport.csv';
-   document.body.appendChild(a);
-   a.click();
-   document.body.removeChild(a);
-   setTimeout(function(){URL.revokeObjectURL(url);},1000);
-   lg('o','Exported CSV');
-  }catch(err){lg('e','CSV export failed: '+err.message);}
+  if(type==='excel'){
+    var csv='CSDF Validation Report (with VUG Appendix Codes)\n';
+    csv+='File:,'+fName+'\nGenerated:,'+now+'\nTotal Lines:,'+xmlLines.length+'\n';
+    csv+='Total Errors:,'+tE+'\nTotal Warnings:,'+tW+'\nStatus:,'+(tE===0?'READY':'HAS ERRORS')+'\n\n';
+    csv+='Severity,VUG Error Code,Line No,Column,Description,Details\n';
+    allIssues.forEach(function(issue){
+      var sev=issue.isWarn?'WARNING':'ERROR';
+      var desc=(ERR_DESC[issue.code]||issue.code).replace(/,/g,';');
+      var msg=String(issue.msg).replace(/,/g,';').replace(/"/g,"'");
+      csv+=sev+','+issue.code+','+(issue.line||'N/A')+','+(issue.col||'N/A')+',"'+desc+'","'+msg+'"\n';
+    });
+    try{
+      var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement('a');
+      a.href=url;
+      a.download=fName?fName.replace('.xml','_ValidationReport.csv'):'ValidationReport.csv';
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(url);},1000);
+      lg('o','Exported CSV');
+    }catch(err){lg('e','CSV export failed: '+err.message);}
 
- } else if(type==='html'){
-  var groups={};
-  allIssues.forEach(function(issue){if(!groups[issue.code])groups[issue.code]=[];groups[issue.code].push(issue);});
-  var rows='';
-  Object.keys(groups).forEach(function(code){
-   var issues=groups[code];
-   var isErr=!issues[0].isWarn;
-   rows+='<tr><td><span style="background:'+(isErr?'#fee2e2':'#fef3c7')+';color:'+(isErr?'#dc2626':'#d97706')+';padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700">'+(isErr?'ERROR':'WARN')+'</span></td><td style="font-family:monospace;font-weight:700">'+code+'</td><td>'+issues.length+'</td><td style="font-size:.78rem">'+(ERR_DESC[code]||code)+'</td><td style="font-size:.72rem;font-family:monospace">'+issues.slice(0,8).map(function(i){return '<div style="padding:2px 0;border-bottom:1px solid #f1f5f9"><span style="background:#1e293b;color:#60a5fa;padding:0 4px;border-radius:3px;font-size:.65rem;margin-right:4px">L'+(i.line||'?')+'</span>'+esc(i.msg)+'</div>';}).join('')+(issues.length>8?'<div style="color:#d97706">...+'+(issues.length-8)+' more</div>':'')+'</td></tr>';
-  });
-  var htmlReport='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CSDF Report</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:\'Segoe UI\',sans-serif;background:#f8fafc;padding:2rem;color:#1e293b}.header{background:linear-gradient(135deg,#1e3a8a,#1a56db);color:#fff;padding:1.5rem 2rem;border-radius:12px;margin-bottom:1.5rem}.header h1{font-size:1.2rem;margin-bottom:.5rem}.header p{font-size:.8rem;opacity:.85}table{width:100%;border-collapse:collapse;font-size:.8rem}th{background:#f8fafc;padding:.6rem 1rem;text-align:left;font-size:.68rem;text-transform:uppercase;color:#64748b;border-bottom:2px solid #dbeafe}td{padding:.55rem 1rem;border-bottom:1px solid #f1f5f9;vertical-align:top}.card{background:#fff;border-radius:10px;border:1px solid #dbeafe;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}.card h3{padding:.75rem 1.25rem;background:#f1f5f9;border-bottom:1px solid #dbeafe;font-size:.88rem}</style></head><body><div class="header"><h1>CSDF Validation Report</h1><p>File: <strong>'+esc(fName)+'</strong> | '+now+' | '+xmlLines.length+' lines | v7.1</p><p style="margin-top:.4rem">Status: '+(tE===0?'READY TO SUBMIT':'HAS ERRORS')+'</p></div><div class="card"><h3>Validation Issues - '+allIssues.length+' total</h3>'+(rows?'<table><thead><tr><th>Type</th><th>Code</th><th>Count</th><th>Description</th><th>Details</th></tr></thead><tbody>'+rows+'</tbody></table>':'<p style="padding:1rem;color:#059669">No issues found.</p>')+'</div></body></html>';
-  try{
-   var blob2=new Blob([htmlReport],{type:'text/html;charset=utf-8'});
-   var url2=URL.createObjectURL(blob2);
-   var a2=document.createElement('a');
-   a2.href=url2;
-   a2.download=fName?fName.replace('.xml','_ValidationReport.html'):'ValidationReport.html';
-   document.body.appendChild(a2);
-   a2.click();
-   document.body.removeChild(a2);
-   setTimeout(function(){URL.revokeObjectURL(url2);},1000);
-   lg('o','Exported HTML');
-  }catch(err){lg('e','HTML export failed: '+err.message);}
- }
+  } else if(type==='html'){
+    var groups={};
+    allIssues.forEach(function(issue){if(!groups[issue.code])groups[issue.code]=[];groups[issue.code].push(issue);});
+    var rows='';
+    Object.keys(groups).forEach(function(code){
+      var issues=groups[code];var isErr=!issues[0].isWarn;
+      rows+='<tr><td><span style="background:'+(isErr?'#fee2e2':'#fef3c7')+';color:'+(isErr?'#dc2626':'#d97706')+';padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700">'+(isErr?'ERROR':'WARN')+'</span></td><td style="font-family:monospace;font-weight:700">'+code+'</td><td>'+issues.length+'</td><td style="font-size:.78rem">'+(ERR_DESC[code]||code)+'</td><td style="font-size:.72rem;font-family:monospace">'+issues.slice(0,8).map(function(i){return '<div style="padding:2px 0;border-bottom:1px solid #f1f5f9"><span style="background:#1e293b;color:#60a5fa;padding:0 4px;border-radius:3px;font-size:.65rem;margin-right:4px">L'+(i.line||'?')+'</span>'+esc(i.msg)+'</div>';}).join('')+(issues.length>8?'<div style="color:#d97706">...+'+(issues.length-8)+' more</div>':'')+'</td></tr>';
+    });
+    var htmlReport='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CSDF Report</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:\'Segoe UI\',sans-serif;background:#f8fafc;padding:2rem;color:#1e293b}.header{background:linear-gradient(135deg,#1e3a8a,#1a56db);color:#fff;padding:1.5rem 2rem;border-radius:12px;margin-bottom:1.5rem}.header h1{font-size:1.2rem;margin-bottom:.5rem}.header p{font-size:.8rem;opacity:.85}table{width:100%;border-collapse:collapse;font-size:.8rem}th{background:#f8fafc;padding:.6rem 1rem;text-align:left;font-size:.68rem;text-transform:uppercase;color:#64748b;border-bottom:2px solid #dbeafe}td{padding:.55rem 1rem;border-bottom:1px solid #f1f5f9;vertical-align:top}.card{background:#fff;border-radius:10px;border:1px solid #dbeafe;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}.card h3{padding:.75rem 1.25rem;background:#f1f5f9;border-bottom:1px solid #dbeafe;font-size:.88rem}</style></head><body><div class="header"><h1>CSDF Validation Report (VUG Appendix Codes)</h1><p>File: <strong>'+esc(fName)+'</strong> | '+now+' | '+xmlLines.length+' lines | v8.0</p><p style="margin-top:.4rem">Status: '+(tE===0?'READY':'HAS ERRORS')+'</p></div><div class="card"><h3>Validation Issues - '+allIssues.length+' total</h3>'+(rows?'<table><thead><tr><th>Type</th><th>VUG Code</th><th>Count</th><th>Description</th><th>Details</th></tr></thead><tbody>'+rows+'</tbody></table>':'<p style="padding:1rem;color:#059669">No issues found.</p>')+'</div></body></html>';
+    try{
+      var blob2=new Blob([htmlReport],{type:'text/html;charset=utf-8'});
+      var url2=URL.createObjectURL(blob2);
+      var a2=document.createElement('a');
+      a2.href=url2;
+      a2.download=fName?fName.replace('.xml','_ValidationReport.html'):'ValidationReport.html';
+      document.body.appendChild(a2);a2.click();document.body.removeChild(a2);
+      setTimeout(function(){URL.revokeObjectURL(url2);},1000);
+      lg('o','Exported HTML');
+    }catch(err){lg('e','HTML export failed: '+err.message);}
+  }
 }
 </script>
 </body>
